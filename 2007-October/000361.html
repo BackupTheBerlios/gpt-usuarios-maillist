@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710160901r5025a02cg1433d9e745d21fde%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000348.html">
+   <LINK REL="Next"  HREF="000364.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710160901r5025a02cg1433d9e745d21fde%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 18:01:56 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000348.html">[gpt-usuarios] Alguém está recebendo as mensagens da lista ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000364.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Um loongo email...
+
+Considerando-se que, por enquanto, temos os seguintes tipos primitivos:
+
+-inteiro
+-real
+-caractere
+-lógico
+-literal
+-coringa
+
+E os seguintes tipos compostos:
+
+-matrizes
+-estruturas
+
+Eis algumas considerações (revisões e discussões do estado atual)....
+
+== Números ==
+
+
+Por trás dos panos, inteiro, caractere e lógico são números inteiros.
+Então, todos os operadores aritméticos e relacionais, assim como
+atribuições são válidos entre esses tipos. O mesmo vale para o tipo
+real, exceto que sua participação em operações com estes tipos implica
+na transformação do valor para inteiro (truncando).
+
+Eu adicionei o tipo &quot;coringa&quot;, na v2, para armazenar ponteiros e
+ajudar a trabalhar com &quot;mundo a fora&quot;. Como trata de números, está
+sujeitos as mesmas regras.
+
+
+== Literais ==
+
+
+Literais são proibidos de participar de operações aritméticas:
+
+&quot;ola&quot; * &quot;oi&quot;; //erro
+
+E são proibidos de participar em operações relacionais de grandeza:
+
+&quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+
+-Nota: no v1, isso é permitido, se bem me lembro.
+
+Mas podem ser comparados por igualdade:
+
+&quot;ola&quot; = &quot;oi&quot;; //ok
+&quot;ola&quot; &lt;&gt; &quot;oi&quot;; //ok
+
+Seus caracteres podem ser acessados:
+
+a := &quot;texto&quot;;
+a[0] //t
+
+...atribuições geram cópias:
+
+a := &quot;soma&quot;;
+b := a;
+a[0] = &quot;t&quot;;
+
+imprima(a); //toma
+imprima(b); //soma
+
+...e o operador &quot;+&quot; concatena, como discutimos, gerando um terceiro literal.
+
+s := &quot;ola &quot; + &quot;mundo&quot;;
+imprima(s); //ola mundo
+
+
+== Matrizes ==
+
+Como discutimos, omitir o tamanho das dimensões é altamente desejável
+em parâmetros de funções. Poderiamos, naturalmente, extender isso para
+retornos também:
+
+função f(k : matriz[][] de inteiros) : matriz[] de inteiros  ...
+
+O tamanho das dimensões pode ser adquirido em tempo de execução,
+acessando opcodes especificos:
+
+tamanho_matriz(k);
+tamanho_matriz(k[0]);
+
+Quanto às operações, matrizes não participam de operações aritméticas
+nem relacionais:
+
+m1 * m2; //erro de compilação
+m1 &gt; m2; //erro de compilação
+
+Atribuições também implicam em cópias de elementos.
+
+
+Agora, algo mais importante: o Alex havia sugerido que pudessemos
+declarar uma matriz da seguinte forma:
+
+variáveis
+ m1 : matriz[] de inteiros;
+ m2 : matriz[][] de inteiros;
+fim-variáveis
+
+Acho que não dei muito tempo para pensar nisso quando respondi
+anteriormente sobre esta sugestão.
+
+Refletindo agora, a declaração de uma função como &quot;f&quot; acima (com o
+parâmetro e retorno omitindo o tamanho das dimensões) implica na
+atribuição de matrizes no formato:
+
+m1 := m2;
+- onde m1 seja do tipo T[][] e m2 seja do tipo T[x][y]
+
+Poderiamos, então, utilizar uma matriz da seguinte forma?
+
+variáveis
+ m1 : matriz[] de inteiros;
+fim-variáveis
+
+início
+  m1[10] := 1; //m agora tem 11 elementos, onde [0-9] == 0 e [10] == 1
+fim
+
+Ou m1 só poderia ser utilizado no momento em que representasse uma
+matriz válida?
+
+variáveis
+ m1 : matriz[] de inteiros;
+ m2 : matriz[3] de inteiros;
+fim-variáveis
+
+início
+  imprima(m1[0]); //runtime error. Dimensão 1 de m1 tem tamanho 0
+  m1 := m2;
+  imprima(m1[0]); //ok, dimensão 1 de m1 tem tamanho 3
+fim
+
+E o seguinte, seria válido?
+
+variáveis
+ m1 : matriz[5] de inteiros;
+ m2 : matriz[3] de inteiros;
+fim-variáveis
+
+início
+  m1 := m2; //isso é um erro?
+fim
+
+
+== Estruturas ==
+
+
+Como as matrizes, estruturas não podem participar de operações
+aritméticas ou relacionais e atribuições implicam em cópia dos
+elementos.
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000348.html">[gpt-usuarios] Alguém está recebendo as mensagens da lista ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000364.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

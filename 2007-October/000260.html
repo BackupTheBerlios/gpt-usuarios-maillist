@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20G-Portugol%201.0%20UTF-8%20%28para%20Ubuntu%20e%20demais%0A%09distros%29&In-Reply-To=%3C92b9a8820710072347q72ba7b77m200e0359cb293d16%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000255.html">
+   <LINK REL="Next"  HREF="000263.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20G-Portugol%201.0%20UTF-8%20%28para%20Ubuntu%20e%20demais%0A%09distros%29&In-Reply-To=%3C92b9a8820710072347q72ba7b77m200e0359cb293d16%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Outubro  8 08:47:20 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000255.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000263.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Maravilha, Adorilson!
+
+On 10/6/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> Tou sumido, mas tou vivo.
+</I>&gt;<i>
+</I>&gt;<i> On 10/4/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+</I>&gt;<i> &gt; <A HREF="http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz">http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz</A>
+</I>&gt;<i>
+</I>&gt;<i> Usando este aí, tive a seguinte saída no make:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em genesis</A>:~/downloads/gpt-1.0$ make
+</I>&gt;<i> make[4]: *** Sem regra para processar o alvo
+</I>&gt;<i> `MismatchedUnicodeCharException.cpp', necessário por `all'.
+</I>
+Resolvido.
+
+&gt;<i> Já usando a versao do SVN, baixada agora pouco, a instalação foi um sucesso,
+</I>&gt;<i> seguindo o arquivo HACKING (apenas fiz uma correção nele, adicionando como
+</I>&gt;<i> instalar o subversion) , como pode ser comprovada abaixo:
+</I>
+Pode enviar a modificação para o repositório?
+
+&gt;<i> Porém, se inserirmos alguma erro, umas das mensagens ainda vai com caracter
+</I>&gt;<i> alienigina.
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt/exemplos# gpt
+</I>&gt;<i> olamundo.gpt
+</I>&gt;<i> olamundo.gpt:1 - Esperando &quot;algoritmo&quot;, encontrado a palavra-chave
+</I>&gt;<i> &quot;vari&#65533;veis&quot;.
+</I>&gt;<i> olamundo.gpt:1 - Esperando uma variável após &quot;variáveis&quot;.
+</I>
+Ah, agora consegui reproduzir este erro! Havia mais de um lugar onde o
+antlr não cooperava. Como não consegui pensar em nenhuma solução
+&quot;limpa&quot;, fiz um shell script para concertar o arquivo fonte na força,
+chamado pelo make automaticamente.
+
+&gt;<i> E tem mais (pelo q puder perceber) , isto só acontece se o erro for uma
+</I>&gt;<i> palavra reservada, porém ao testar com um palavra qq, me veio a seguinte
+</I>&gt;<i> dúvida: &quot;Se o gpt suporta palavras reservadas com acentos, pq nao posso usar
+</I>&gt;<i> meus identificadores assim tb?&quot;
+</I>
+Eu havia pensado nisso no início, mas como pretendia fazer traduções
+para outras linguagens, isso ficaria mais complicado pois eu teria que
+remover os acentos dos identificadores durante a tradução. Se
+quiserem, a gente pode ver isso (e eu espero que o antlr colabore).
+
+&gt;<i> Neste caso, nao seria mais adequado 1.0.1, já que ela nao contém nada
+</I>&gt;<i> de novo?
+</I>
+É, faz mais sentido :)
+
+&gt;<i> &gt; Feeedbacks são bem vindos :)
+</I>&gt;<i>
+</I>&gt;<i> Taí o meu. :)
+</I>
+Valeu, Adorilson!
+
+Criei novamente o pacote com as novas modificações no mesmo endereço:
+
+<A HREF="http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz">http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz</A>
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000255.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000263.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Estrutura de diretórios para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712170457t407690c7u86d8017bda17b245%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000694.html">
+   <LINK REL="Next"  HREF="000699.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Estrutura de diretórios para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712170457t407690c7u86d8017bda17b245%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Estrutura de diretórios para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Dezembro 17 13:57:57 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000694.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000699.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#697">[ date ]</a>
+              <a href="thread.html#697">[ thread ]</a>
+              <a href="subject.html#697">[ subject ]</a>
+              <a href="author.html#697">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; &gt; E, então, poderiamos ter o diretório das bibliotecas/bindings em si
+</I>&gt;<i> &gt; &gt; (bindings misturados com bibliotecas escritas em portugol):
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; gpt2/gptlib/
+</I>&gt;<i> &gt; &gt; gpt2/gptlib/syslib/*.sld, etc  //binding
+</I>&gt;<i> &gt; &gt; gpt2/gptlib/gtk+/*.sld, etc   //binding
+</I>&gt;<i> &gt; &gt; gpt2/gptlib/lib_X/* //uma lib qualquer escrita em portugol
+</I>&gt;<i> &gt; &gt; gpt2/gptlib/etc
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Concordo em um diretório separado como o gptlib, mas será que vários
+</I>&gt;<i> &gt; diretórios não irão atrapalhar a nossa vida ? Eu imagino que um
+</I>&gt;<i> diretório
+</I>&gt;<i> &gt; guarda os .sld e um diretório guarda o resultado disso tudo (.so).
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Acho que o resultado (.so) pode ser gerado no póprio diretorio dos
+</I>&gt;<i> .sld. Da mesma forma que os binários são gerados no mesmo diretório
+</I>&gt;<i> dos fontes...é só algo intermediário até o &quot;make install&quot; colocar tudo
+</I>&gt;<i> na árvore do sistema.
+</I>
+
+Isso sim. Porém, em um diretório teremos vários sld. Cada sld gera um
+Makefile e vários outros arquivos. Assim não teremos como gerar o source do
+bind de várias bibliotecas ao mesmo tempo. Temos que gerar um bind,
+compilar, gerar o próximo, compilar....
+
+Ou eu que não entendi a estrutura de diretórios ?
+
+&gt;<i>
+</I>&gt;<i> &gt; Sera que a gente não consegue montar uma estrutura similar a java, onde
+</I>&gt;<i> &quot;use
+</I>&gt;<i> &gt; java.*&quot; carrega tudo, &quot;use java.io.*&quot; carrega io, ... ? Eu acredito que
+</I>&gt;<i> &gt; teríamos que varrer os diretórios e carregar as libs (supondo que as
+</I>&gt;<i> libs
+</I>&gt;<i> &gt; estão em diretórios que representam a hierarquia).
+</I>&gt;<i>
+</I>&gt;<i> Não sei...não pensei nisso (java).
+</I>&gt;<i> Quanto a varrer o diretório, eu pensei em termos uma variável de
+</I>&gt;<i> ambiente mesmo, que indicasse o diretório das bibliotecas, mas que o
+</I>&gt;<i> &quot;use&quot; não implicasse em uma varredura em profundidade. Por ex:
+</I>
+
+Eu não gostaria de fazer varredura em profundidade, mas para o usuário
+facilitaria a vida...
+
+Um &quot;use *&quot;, por exemplo, carregaria todas as libs. Isso não é performático,
+mas para iniciar facilita a vida.
+
+Mas pensando bem nisso a gente não precisa ter uma estrutura de diretórios.
+
+sistema.sockets
+sistema.io
+sistema.xxx
+
+São arquivos em um mesmo diretório. Um &quot;use sistema.*&quot; varre o diretório
+para ver quais as libs para serem carregadas.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071217/3727746b/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071217/3727746b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000694.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000699.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#697">[ date ]</a>
+              <a href="thread.html#697">[ thread ]</a>
+              <a href="subject.html#697">[ subject ]</a>
+              <a href="author.html#697">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Estrutura de diretórios para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C92b9a8820712151435s697fb50fi76dc6baefe2085d5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000680.html">
+   <LINK REL="Next"  HREF="000688.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Estrutura de diretórios para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C92b9a8820712151435s697fb50fi76dc6baefe2085d5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Estrutura de diretórios para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 23:35:55 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000680.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000688.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 4:23 PM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi.
+</I>&gt;<i>
+</I>&gt;<i>  Qual a estrutura de diretórios que vamos utilizar para syslibs ???
+</I>&gt;<i>
+</I>&gt;<i>  Lembrando que temos os seguintes &quot;atores&quot; envolvidos nas syslibs:
+</I>&gt;<i>  * aplicativo que, a partir de um .h, gera um .sld (ou outra extensão
+</I>&gt;<i> qualquer, enfim.);
+</I>&gt;<i>  * um aplicativo (gerador de bindings realmente) que, a partir de um .sld,
+</I>&gt;<i> gera os arquivos que quando compilados gerarão o .so (.cpp, .hpp, Makefile,
+</I>&gt;<i> .glib);
+</I>&gt;<i>  * acho que um diretório para cada binding (cada .sld) porque tudo no mesmo
+</I>&gt;<i> vai virar bagunça.
+</I>&gt;<i>
+</I>&gt;<i>  Certamente tem mais coisas que esqueci agora.
+</I>&gt;<i>
+</I>&gt;<i>  Eu imagino um diretório syslib com um subdiretório para cada um dos
+</I>&gt;<i> &quot;atores&quot;. Algo como:
+</I>&gt;<i>
+</I>&gt;<i>  gpt2/syslib
+</I>&gt;<i>  gpt2/syslib/gerador_sld (sei la qual o nome do aplicativo)
+</I>&gt;<i>  gpt2/syslib/gerador_binding
+</I>&gt;<i>  gpt2/syslib/bindings/
+</I>&gt;<i>  gpt2/syslib/bindings/binding1
+</I>&gt;<i>  gpt2/syslib/bindings/binding2
+</I>&gt;<i>  ...
+</I>&gt;<i>  gpt2/syslib/bindings/bindingN
+</I>&gt;<i>
+</I>
+Eu acho que seria interessante batizar o projeto que representa os
+aplicativos geradores. Então, teriamos o subprojeto, digamos, &quot;X&quot;:
+
+
+gpt2/X
+gpt2/X/gerador_sld (nem eu)
+gpt2/X/gerador_sld/*.cpp, *.h, etc etc
+gpt2/X/gerador_binding/*.cpp ,*.h, etc etc
+
+E, então, poderiamos ter o diretório das bibliotecas/bindings em si
+(bindings misturados com bibliotecas escritas em portugol):
+
+gpt2/gptlib/
+gpt2/gptlib/syslib/*.sld, etc  //binding
+gpt2/gptlib/gtk+/*.sld, etc   //binding
+gpt2/gptlib/lib_X/* //uma lib qualquer escrita em portugol
+gpt2/gptlib/etc
+
+Ou, bibliotecas separadas de bindings:
+
+gpt2/gptlib/
+gpt2/gptlib/lib_X  //uma lib qualquer escrita em portugol
+
+gpt2/gptlib/bindings/
+gpt2/gptlib/bindings/syslib/*.sld, etc
+gpt2/gptlib/bindings/gtk+/*.sld, etc
+
+
+
+Finalmente, para a(s) biblioteca(s) principal(is) que representa(m) as
+funcionalidades do SO (IO, socket, etc), eu sugeriria algum nome em
+português. &quot;sistema&quot; é o melhor que eu consigo expremer da minha
+(falta de) criatividade.
+
+use &quot;sistema&quot;;
+
+ou então &quot;sistema operacional&quot;, mas fica muito grande...
+
+use &quot;sistema operacional&quot;;
+
+Mas isso, no caso de termos uma biblioteca geral para toda a
+parafernalia do SO. Por outro lado, poderiamos ter bindings
+específicos para socket, io, filesystem, cada um com um nome em
+português.
+
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000680.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000688.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

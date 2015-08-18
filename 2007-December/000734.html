@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Dependências para a geração de gptasm / boas festa
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FDepend%3DEAncias_para_a_gera%3DE7%3DE3o_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fe_gptasm_/_boas_festa%3F%3D&In-Reply-To=%3C92b9a8820712282135r3d2f5c3cr3fe7a6d933a2d57f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000735.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Dependências para a geração de gptasm / boas festa</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FDepend%3DEAncias_para_a_gera%3DE7%3DE3o_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fe_gptasm_/_boas_festa%3F%3D&In-Reply-To=%3C92b9a8820712282135r3d2f5c3cr3fe7a6d933a2d57f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Dependências para a geração de gptasm / boas festa">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 29 06:35:50 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000735.html">[gpt-usuarios] Criação do .deb
+</A></li>
+        
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#734">[ date ]</a>
+              <a href="thread.html#734">[ thread ]</a>
+              <a href="subject.html#734">[ subject ]</a>
+              <a href="author.html#734">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Antes de dar prosseguimento com a geração de código no gptc, eu
+gostaria de discutir e resolver algumas pendências e problemas que
+tenho enfrentado, da forma como os compreendi.
+
+
+1) Matrizes com dimensões limitadas.
+
+A idéia de gerar código para este esquema me desanima. Gostaria que a
+implementação de matrizes levasse em conta dimensões arbitrárias.
+
+
+2) Incapacidade de fazer cópia em profundidade com o tipo &quot;data&quot;.
+
+Até onde entendi, levando-se em consideração a passagem por valor e o
+fato de que uma atribuição gera uma cópia do valor em questão, o tipo
+&quot;data&quot;, como existe hoje, não possibilita fazer a cópia em
+profundidade, o que é necessário para estas duas atividades.
+
+Supondo o seguinte código:
+
+estrutura J
+  nome  : literal;
+fim-estrutura
+
+estrutura T
+  j : J;
+  k : inteiro;
+fim-estrutura
+
+variável t: T;
+
+E supondo que &quot;t&quot; seja expandido para um &quot;data[8]&quot;, que guarda o
+endereço para o objeto &quot;j&quot; e o inteiro &quot;k&quot;, se passarmos &quot;t&quot; como
+argumento para algum procedimento, o valor de &quot;k&quot; será copiado, mas
+apenas o endereço do membro &quot;j&quot; será copiado, e não, o objeto &quot;j&quot;.
+Isso significa que &quot;j&quot; será um membro compartilhado, &quot;passado por
+referência&quot;.
+
+
+3) Passagem de parâmetros por referência.
+
+como deve funcionar? Não entendi os exemplos do wikki (e, atualmente,
+não funcionam).
+
+
+4) alocação e limpeza do heap.
+
+Com matrizes de dimensões arbitrárias e uma implementação de &quot;data&quot;
+que permita a copia em profundidade, como ficaria os esquemas de
+alocação e limpeza de memória?
+
+
+-- Resoluções --
+
+Eu estou investigando os problemas mais relevantes (1 e 2) à minha
+maneira (leiga) e, sem ter tido sucesso em desenvolver idéias
+razoáveis no design atual, acabei elaborando algumas soluções um pouco
+radicais. Mas antes de apresentar elas, gostaria de saber, em
+especial, se o problema 2 é realmente um problema (ou se algo me
+passou despercebido) e, caso positivo, de que forma poderia ser
+solucionado.
+
+
+
+--- The end
+
+Ok, no mais, vou viajar na semana que vem e volto em 2 ou 3 semanas
+(estarei completamente offline).
+
+Então, boas festas para todos e um feliz ano novo :)
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000735.html">[gpt-usuarios] Criação do .deb
+</A></li>
+	
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#734">[ date ]</a>
+              <a href="thread.html#734">[ thread ]</a>
+              <a href="subject.html#734">[ subject ]</a>
+              <a href="author.html#734">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

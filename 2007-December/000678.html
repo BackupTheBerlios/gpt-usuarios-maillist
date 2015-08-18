@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Tamanho dos dados
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C9a3912af0712150951q149f19dbi9f253f7f1ca033e7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000674.html">
+   <LINK REL="Next"  HREF="000681.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Tamanho dos dados</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C9a3912af0712150951q149f19dbi9f253f7f1ca033e7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Tamanho dos dados">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 18:51:06 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000674.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000681.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#678">[ date ]</a>
+              <a href="thread.html#678">[ thread ]</a>
+              <a href="subject.html#678">[ subject ]</a>
+              <a href="author.html#678">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Algumas dúvidas:
+</I>&gt;<i>
+</I>&gt;<i> -Qual o motivo do flag no tipo string?
+</I>
+
+Inicialmente não exisita. A proposta era ter um ponteiro para um tipo string
+(quando variável) ou ter a constante em si. Porém, dessa forma, não teria
+como saber se os 4 primeiros bytes do endereço da string são uma constante
+ou variável. Por isso foi inserido a flag. Quanto constantes temos a flag e
+mais a constante terminada em NULL. Quando variável temos a flag e um
+ponteiro para um tipo std::string (não estou prevendo UTF8 por enquanto).
+
+Uma opção era diferenciar strings de constantes nos opcodes, mas achei que
+isso daria mais trabalho do que colocar a flag.
+
+Pensei também em sempre utilizar um pointer, ou seja, mesmo os dados
+constantes seriam armazenados por um ponteiro. Mas daí a VM quando
+inicializasse teria que saber quem seriam as contantes para criar o
+ponteiro, etc e tal. Não gostei da idéia...
+
+Se eu fiz uma boa escolha, bom, isso já é outra história hehehe.
+
+-Quando um &quot;data&quot; é empilhado, só o endereço é empilhado certo
+&gt;<i> (verifiquei em pushdrOpcode)?
+</I>
+
+Não. Os dados em si são empilhados. Vê se tu está com a última versão da VM.
+
+
+Aliás, esse opcode nem existe mais :-)
+
+Eu refiz algumas coisas de forma que não é mais necessário empilhar o espaço
+para o resultado antes de invocar a subrotina.
+
+-E quando uma matriz é empilhada?
+
+
+Matriz sempre é ponteiro. Quando empilhada é criada uma cópia da matriz e o
+ponteiro da cópia é empilhado. Sim, temos um memory leak aqui :-)
+
+Eu só consigo imaginar três alternativas para implementar o OR / AND lógico:
+&gt;<i>
+</I>&gt;<i> -Ou todos os dados na pilha tem 32 bits, e só precisamos dos dois
+</I>&gt;<i> opcodes: AND e OR lógico.
+</I>&gt;<i> -Ou a pilha armazena dados de tamanhos arbitrários, e precisamos de
+</I>&gt;<i> várias versões dos opcodes AND e OR lógicos, de acordo com os tipos
+</I>&gt;<i> dos operandos.
+</I>&gt;<i> -Ou todos os dados são &quot;tagueados&quot;, com um cabeçalho indicando seu
+</I>&gt;<i> tamanho na pilha.
+</I>&gt;<i>
+</I>&gt;<i> Vc tem alguma idéia?
+</I>
+
+Você está falando de AND / OR bitwise ou lógico ?
+
+Para bitwise eu só tinha previsto AND / OR para o tamanho de um inteiro. Se
+existir a necessidade de AND / OR bitwise para outros tipos de dados então
+teremos que ter uma variante de AND / OR para cada tipo de dado.
+
+Se você está falando de AND / OR lógico, não esqueça que os opcodes de
+comparação, maior que, menos e afins, testam dois valores e retornam um
+inteiro com o resultado da comparação. Por isso só temos AND / OR lógico
+sobre inteiros.
+
+Exemplo em GptAssembly (sem muito nexo, só para mostrar os opcodes):
+
+var s1 string
+var s2 string
+var t1 int
+var t2 int
+var t3 int
+
+...
+seq t1, s1, s2 // t1 recebe o resultado da comparação
+sle t2, s1, s2
+or t3, t1, t2
+...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/a969988e/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/a969988e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000674.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000681.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#678">[ date ]</a>
+              <a href="thread.html#678">[ thread ]</a>
+              <a href="subject.html#678">[ subject ]</a>
+              <a href="author.html#678">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

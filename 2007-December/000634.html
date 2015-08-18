@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712071706u2730b255x48c3c3130d6de67%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000633.html">
+   <LINK REL="Next"  HREF="000635.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712071706u2730b255x48c3c3130d6de67%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro  8 02:06:39 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000633.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000635.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#634">[ date ]</a>
+              <a href="thread.html#634">[ thread ]</a>
+              <a href="subject.html#634">[ subject ]</a>
+              <a href="author.html#634">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pequena correção:
+
+No arquivo teste.gpt do exemplo anterior, o código seria:
+
+------
+//teste.gpt
+algoritmo teste;
+use &quot;matemática&quot;;
+
+início
+  imprima(pow(3,3)); //nao eh &quot;potência&quot;
+fim
+------
+
+E um acrescimo:
+
+Supondo que temos o gerador e bindings &quot;gerador&quot;, e digamos que o
+protótipo da função &quot;pow&quot; esteja descrito no arquivo pow.desc,
+poderiamos executar o seguinte (um rascunho, apenas):
+
+$ gerador --target-desc=pow.desc --libname=libgptpow
+
+Acima, pow.desc seria apenas um arquivo que descrevesse os protótipos
+de funções C, gerados por alguma ferramenta como o gccxml ao ler
+cabeçalhos C.
+
+O comando acima significaria &quot;gere o binding para as funções descritas
+em pow.desc com o nome de biblioteca 'libgptpow'&quot;. Isso acabaria por
+gerar os dois arquivos do exemplo do email anterior. Digamos que ele
+gere com os nomes gpt_pow.c e pow.gpt.
+
+Compilariamos gpt_pow.c:
+
+$ gcc -shared -o libgptpow.so gpt_pow.c -lm
+
+E, agora, poderiamos usar o binding.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000633.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000635.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#634">[ date ]</a>
+              <a href="thread.html#634">[ thread ]</a>
+              <a href="subject.html#634">[ subject ]</a>
+              <a href="author.html#634">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

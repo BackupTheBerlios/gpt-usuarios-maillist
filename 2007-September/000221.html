@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Discussao sobre duvidas no wikki
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C9a3912af0709280735j621c9ea4qd1af95c86a8cccad%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000220.html">
+   <LINK REL="Next"  HREF="000223.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Discussao sobre duvidas no wikki</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C9a3912af0709280735j621c9ea4qd1af95c86a8cccad%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Discussao sobre duvidas no wikki">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Setembro 28 16:35:32 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000220.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000223.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Existe algum lugar (berlios ???) que podemos colocar as tarefas e
+</I>&gt;<i> &gt; subtarefas de cada fase do projeto para poder ter algum controle
+</I>&gt;<i> &gt; sobre elas ?
+</I>&gt;<i> &gt; Prazo não, mas pelo menos quem está fazendo e o % de conclusão...
+</I>&gt;<i>
+</I>&gt;<i> Eis o que tem no berlios, relacionado a isso:
+</I>&gt;<i> -Use Bug Tracker
+</I>&gt;<i> -Use Project/Task Manager
+</I>&gt;<i> -Use Task Dependency List
+</I>&gt;<i>
+</I>&gt;<i> Desses, o único que ja utilizei foi o Bug Tracker (mas foi no
+</I>&gt;<i> sourceforge. Assumo que sejam iguais). Todos eles estão desabilitados
+</I>&gt;<i> (devem ser habilitados na página de adminsitração
+</I>&gt;<i> <A HREF="https://developer.berlios.de/project/admin/?group_id=5791">https://developer.berlios.de/project/admin/?group_id=5791</A> ). Podemos
+</I>&gt;<i> instalar algo como o mantis, tambem.
+</I>
+
+Interessante. Eu nunca trabalhei com equipe &quot;dispersa&quot; então a maioria
+dessas coisas, no meu caso, sempre foi resolvida &quot;pessoalmente&quot; com o uso de
+uma planilha ou cronograma.
+
+Qualquer ferramenta para auxiliar será muito bem vinda :-)
+
+&gt;<i> Se o CTE não precisa se preocupar com tipos de dados,
+</I>&gt;<i> &gt; porque ele precisa fazer um pcall imprima para cada
+</I>&gt;<i> &gt; parâmetro de imprima ??? CTE deve ser algo elementar.
+</I>&gt;<i> &gt; Esse é o motivo do porque gerar um pcall para cada parâmetro de imprima.
+</I>&gt;<i>
+</I>&gt;<i> Algumas notas: para o v2 eu gostaria de ter as funções imprima() e
+</I>&gt;<i> leia() implementadas em portugol (fazendo uso de código inline em
+</I>&gt;<i> baixo nível para acesso ao kernel). Dessa forma, elas precisam ser
+</I>&gt;<i> revistas.
+</I>
+
+Você poderia explicar melhor ? Ou tentar criar um exemplo, mesmo que
+rudimentar ?
+
+Primeiro, devemos decidir se imprima() continuará recebendo uma lista
+&gt;<i> variável de argumentos.
+</I>
+
+Não vejo problema nisso. A questão que levantei quanto a gerar um pcall
+imprima para cada parêmetro é que, no CI (ou CTE), tudo tem que ser
+extremamente simples, nada de construções de linguagens complexas. O
+agravante, claro, é que o imprima, além de ter uma lista de argumentos
+variáveis, podem ser de tipos diferentes. Mas enfim, no caso do CTE, um
+pcall para cada argumento resolve o problema (minha opinião, claro).
+
+Se sim, devemos definir a sintaxe e semântica
+&gt;<i> para funções que utilizam parâmetros variáveis. Caso contrário,
+</I>&gt;<i> possibilitar overriding de funções baseado nos tipos de argumentos
+</I>&gt;<i> seria suficiente, na minha opnião:
+</I>&gt;<i>
+</I>&gt;<i> função imprima(i : inteiro) ...
+</I>&gt;<i> função imprima(s : literal) ...
+</I>&gt;<i> função imprima(r : real) ...
+</I>
+
+Isso mesmo. A idéia inicial era que, durante a geração do CTE, não seria
+necessário se preocupar com a função imprima a ser invocada
+(imprima_inteiro, imprima_caracterer, ...). Isso seria preocupação durante a
+geração do assembly.
+
+
+&gt;<i> imprima(&quot;2 + 2 = &quot;);
+</I>&gt;<i> imprima(2 + 2);
+</I>&gt;<i> imprima(&quot;\n&quot;);
+</I>&gt;<i> //Imprime: 2 + 2 = 4
+</I>
+
+Exato. Só que a gente pode deixar o usuário passar um número de parâmetros
+variáveis no imprima. O problema é resolvido invocando a função imprima para
+cada um dos argumentos.
+
+Para resolver a legibilidade, poderiamos utilizar um operador de
+&gt;<i> concatenação capaz de operar sobre qualquer tipo de dados. Então:
+</I>&gt;<i>
+</I>&gt;<i> imprima(&quot;2 + 2 = &quot; &gt;&gt; (2 + 2) &gt;&gt; &quot;\n&quot;); //O operador &gt;&gt; é apenas
+</I>&gt;<i> ilustrativo
+</I>
+
+Ai eu já não sei dizer o que é melhor.
+
+No caso da função leia(), que atualmente é um absurdo semântico, ela
+&gt;<i> se beneficia, automaticamente, da possibilidade de utilizar passagem
+</I>&gt;<i> por referência:
+</I>&gt;<i>
+</I>&gt;<i> função leia(ref i : inteiro) ...
+</I>&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> leia(x);
+</I>&gt;<i>
+</I>&gt;<i> Se adotarmos overriding, seria melhor ainda. Teriamos:
+</I>&gt;<i>
+</I>&gt;<i> leia(nome);
+</I>&gt;<i> leia(idade);
+</I>&gt;<i>
+</I>&gt;<i> Ao invés de sermos obrigados à:
+</I>&gt;<i>
+</I>&gt;<i> leia_literal(nome);
+</I>&gt;<i> leia_inteiro(idade);
+</I>
+
+Talvez não tenha ficado claro, mas o usuário do gpt não teria que invocar
+leia_literal, leia_inteiro, ... Ele invoca apenas leia, e durante a geração
+do CTE (ou assembly) a função leia é convertida para a função com seu tipo.
+
+&gt;<i> Strings são alocadas. E quando são desalocadas ? Vamos ter um Garbage
+</I>&gt;<i> Collector (GC) ?
+</I>&gt;<i>
+</I>&gt;<i> Em se tratanto de strings, acho que não é preciso. Vou dar uma olhada
+</I>&gt;<i> em como implementações de Pascal fazem isso. Chutando uma solução,
+</I>&gt;<i> acho que poderiamos criar uma estrutura interna com reference
+</I>&gt;<i> counting.
+</I>
+
+Podemos sim. Seria uma solução.
+
+Agora, se levarmos em consideração a utilização de bibliotecas
+&gt;<i> externas e bindings, não sei. Vou precisar estudar melhor os casos.
+</I>
+
+Eu também não me aprofundei neste assunto...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/f6f2a62c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/f6f2a62c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000220.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000223.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

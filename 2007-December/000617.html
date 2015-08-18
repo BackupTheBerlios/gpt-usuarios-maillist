@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D28V2%3D29_An%3DE1lise_Sem%3DE2ntica%3D2C_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Ftatus%3D2C_planos%3D2C_etc_--_%3D22relat%3DF3rio%3D22%3F%3D&In-Reply-To=%3C9a3912af0712060724g67b71647mef82784656514bb0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000615.html">
+   <LINK REL="Next"  HREF="000619.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D28V2%3D29_An%3DE1lise_Sem%3DE2ntica%3D2C_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Ftatus%3D2C_planos%3D2C_etc_--_%3D22relat%3DF3rio%3D22%3F%3D&In-Reply-To=%3C9a3912af0712060724g67b71647mef82784656514bb0%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Dezembro  6 16:24:57 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000615.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000619.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#617">[ date ]</a>
+              <a href="thread.html#617">[ thread ]</a>
+              <a href="subject.html#617">[ subject ]</a>
+              <a href="author.html#617">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> eu acabei de &quot;concluir&quot; o código geral da análise semântica.
+</I>
+
+Mas ah !!!!!!
+
+
+
+&gt;<i> Por
+</I>&gt;<i> &quot;concluir&quot;, eu quero dizer que eu espero que o código esteja cobrindo
+</I>&gt;<i> todos ou a maior parte dos aspectos da linguagem. Se está correto ou
+</I>&gt;<i> não e se está bem feito, isso já são outros quinhentos :)
+</I>
+
+Nem te estressa. Eu diria o mesmo sobre o GptASM e GptVM hehehe.
+
+
+
+&gt;<i> Como eu estava absorvido em uma intensa experimentação de códigos :D ,
+</I>&gt;<i> acabei não parando muito para conversar por aqui, então vou aproveitar
+</I>&gt;<i> este momento para levantar alguns pontos.
+</I>
+
+Ok.
+
+
+
+&gt;<i> Em primeiro lugar, eu sofri bastante com a organização geral das
+</I>&gt;<i> classes. O aspecto que mais me insultou foi a elaboração das classes
+</I>&gt;<i> que cuidam dos tipos da linguagem. Eu iniciei minhas experimentações
+</I>&gt;<i> fazendo uma hierarquia de tipos, como:
+</I>&gt;<i>
+</I>&gt;<i> class Type;
+</I>&gt;<i> class PrimitiveType : Type;
+</I>&gt;<i> class Matrixtype : Type;
+</I>&gt;<i> class StructType : Type;
+</I>&gt;<i> class SubprogramType : Type;
+</I>&gt;<i>
+</I>&gt;<i> Com o tempo, acabei aceitando que isso foi uma péssima idéia, pois
+</I>&gt;<i> toda a manipulação dos tipos por parte dos módulos ficaria a cargo de
+</I>&gt;<i> métodos polimórficos da hierarquia Type. Qualquer pergunta que se
+</I>&gt;<i> tenha sobre um objeto Type exige que a classe ancestral e todas as
+</I>&gt;<i> subclasses tenham o método virtual implementado, quer isso faça
+</I>&gt;<i> sentido ou não. A coisa se complicou ainda mais quando muitos dos
+</I>&gt;<i> métodos precisaram ser usados para &quot;redescobrir&quot; o tipo da instância
+</I>&gt;<i> original do parâmetro (um monte de métodos passando &quot;this&quot; como
+</I>&gt;<i> argumento). Depois, fiquei preocupado com o módulo de geração de
+</I>&gt;<i> código. Tentei ainda usar templates mas um detalhe me passou
+</I>&gt;<i> despercebido: templates de funções virtuais não fazem sentido....
+</I>&gt;<i>
+</I>&gt;<i> Então, minha segunda abordagem (a que está no repositório), foi fundir
+</I>&gt;<i> a hierarquia em apenas uma classe: Type. Grosso modo, os métodos que
+</I>&gt;<i> precisam ser &quot;virtuais&quot; chamam um método especifico de acordo com um
+</I>&gt;<i> atributo typeId, que indica se o objeto é um tipo primitivo, matriz,
+</I>&gt;<i> estrutura, subprograma ou erro.
+</I>
+
+Eu fiz algo semelhante com os símbolos da tabela de símbolos. Criei uma
+classe para cada tipo (variável, constante, procedimento, ...) mas acabei
+&quot;fundindo&quot; tudo em uma classe só.
+
+
+
+&gt;<i> O segundo ponto que batalhei um pouco foi no design da tabela de
+</I>&gt;<i> simbolos. No inicio ela estava bem descuidada. Agora, a interface
+</I>&gt;<i> geral dela faz mais sentido, mas ainda não me parece muito boa. Dei
+</I>&gt;<i> uma pesquisada e a literatura, quando fala deste aspecto, é muito
+</I>&gt;<i> vaga, dizendo que o design varia muito de acordo com o projeto geral
+</I>&gt;<i> do compilador. No fim, acaba por descrever uma implementação de
+</I>&gt;<i> tabelas hash. Também, sugere a utilização de várias tabelas de
+</I>&gt;<i> símbolos de acordo com o escopo, etc.
+</I>&gt;<i>
+</I>&gt;<i> O que eu fiz foi uma tabela de simbolos geral para registro de IDs
+</I>&gt;<i> (variáveis/constantes e procedimentos/funções) e tipos (estruturas, na
+</I>&gt;<i> verdade). Procurei facilitar a busca de simbolos, mas pelo que lembro,
+</I>&gt;<i> acho que essa parte não está tão tranquilo quanto eu gostaria.
+</I>
+
+Sem stress. A gente vai evoluíndo conforme a necessidade...
+
+
+
+&gt;<i> Agora, para a análise semântica eu fiz uma gramática de ASTs
+</I>&gt;<i> (treewalker) para percorrer os nós, e a classe BaseSemanticWalker,
+</I>&gt;<i> para a avaliação de tipos. Eu acho que completei a gramática, mas não
+</I>&gt;<i> me surpreenderia se algo estiver faltando. Várias coisas ainda
+</I>&gt;<i> precisam ser implementadas (com uns TODOs espalhados), como a
+</I>&gt;<i> verificação de valores repetidos na estrutura &quot;caso&quot;. Ainda, adicionei
+</I>&gt;<i> um campo na classe PortugolAST para armazenar o tipo do nó, mas fiz
+</I>&gt;<i> isso sem nenhuma disciplina, pois não pensei tão a fundo ainda nos
+</I>&gt;<i> requisitos do módulo de emissão de código.
+</I>
+
+Ok.
+
+Por falar em emissão de código, logo que possível vou inserir as chamadas ao
+Front-end para emissão de código GptAssembly. Sim, o termo tá muito bonito,
+mas o front-end em si não tá tão bonito assim hehehe. Mas vamos evoluindo,
+aos poucos....
+
+
+
+&gt;<i> No geral, eu fiz o possível para deixar as gramáticas (parser.g e
+</I>&gt;<i> semantic.g, especialmente) limpas no que tange à carga de código. Eu
+</I>&gt;<i> estava bastante satisfeito com a parser.g porque ela está com bastante
+</I>&gt;<i> espaço para respirar, e pensei que isso seria importante na hora de
+</I>&gt;<i> implementar a reportagem de erros, pois será algo que, possívelmente,
+</I>&gt;<i> exigirá bastante código. Porém, a parser.g, por hora, está com a
+</I>&gt;<i> reportagem de erros do próprio antlr.
+</I>&gt;<i>
+</I>&gt;<i> Com a semantic.g procurei fazer o mesmo, mas ela exige mais que as
+</I>&gt;<i> produções se comuniquem com retorno de valores e parâmetros. A coisa
+</I>&gt;<i> vai complicar na reportagem de erros semânticos porque semantic.g
+</I>&gt;<i> opera sobre a AST, e não sobre o texto. Fica mais difícil recuperar,
+</I>&gt;<i> por exemplo, o texto completo de um lvalue como &quot;a.b[3].c&quot;, pois só
+</I>&gt;<i> temos informações dos nós e tipos. Neste momento, por exemplo, um erro
+</I>&gt;<i> de atribuição tem a seguinte mensagem:
+</I>&gt;<i>
+</I>&gt;<i> linha 10 - ilegal: inteiro := real.
+</I>&gt;<i>
+</I>&gt;<i> Da forma como está, ela falta em informar os termos léxicos. Então,
+</I>&gt;<i> acho que vai ser um problema montar um reporter como eu gostaria, como
+</I>&gt;<i> o javac do jdk da Sun, por exemplo, e de forma disciplinada, o que
+</I>&gt;<i> julgaria bastante importante. No fim, eu estou procurando experimentar
+</I>&gt;<i> várias abordagens para manter ao máximo o código limpo e bem isolado.
+</I>
+
+Posso estar enganado, mas fiz algo simples antes que era funcional. Eu
+imagino que os nós da AST tenham a informação de linha e coluna no fonte
+original. Com isso não é necessário se preocupar (acho) porque a questão é
+exibir a linha original do arquivo e &quot;apontar&quot; para a coluna.
+
+Se falei besteira, desculpe-me, mas está na minha listinha de pendências
+entender o código do GptC que você está desenvolvendo...
+
+
+
+&gt;<i> É um luxo que temos [não nos preocuparmos com performance], e queria
+</I>&gt;<i> aproveitar.
+</I>
+
+Isso é verdade hehehe.
+
+
+
+&gt;<i> Falando em reportagem de erros, não estou focando nisso ainda, mas
+</I>&gt;<i> demorei um pouco em commitar minhas modificações porque queria
+</I>&gt;<i> conhecer as implicações de algumas abordagens. Também, o código pode
+</I>&gt;<i> estar deixando a desejar em relação as convenções que discutimos, e
+</I>&gt;<i> com certeza tem uma panela de memory leaks, mas é algo que decidi
+</I>&gt;<i> deixar para esta etapa seguinte, com mais calma, enquanto eu volto a
+</I>&gt;<i> me focar nos testes automatizados.
+</I>
+
+Eu também não devo ter seguido todas as normas que definimos, e também
+deixei alguns memory leaks (sinalizei alguns).
+
+
+
+&gt;<i> Além desse blá blá blá todo, queria obter algum feedback sobre a
+</I>&gt;<i> estrutura/modelagem do código do front-end que participa na geração de
+</I>&gt;<i> código, especialmente a classe Type/TypeList e Symbol/SymbolTable. Eu
+</I>&gt;<i> procurei fazer algo bem estúpido para a SymbolTable, e estou receoso
+</I>&gt;<i> de que, de fato, tenha feito um código estúpido :)
+</I>
+
+Vou ver quando possível...
+
+
+
+&gt;<i> Finalmente, estou de férias e praticamente graduado :)
+</I>
+
+Mas ah !!! Parabéns !!!!
+
+
+
+&gt;<i> Existem algumas pendências que preciso resolver em relação à outros
+</I>&gt;<i> projetos, mas espero poder dividir tranquilamente o tempo com o
+</I>&gt;<i> desenvolvimento do gpt. Não lembro se mencionei, mas vou estar
+</I>&gt;<i> disponível até o dia 2 de janeiro, pois vou viajar, só voltando 15
+</I>&gt;<i> dias depois.
+</I>
+
+Eu estarei de férias entre o dia 21/12 a 06/01, aproximadamente.
+
+
+
+&gt;<i> Nesse espaço de um mês, eu vou procurar dar um gás não só nos códigos
+</I>&gt;<i> como também ver o lance dos pacotes, arrumar o site e explorá-lo
+</I>&gt;<i> melhor. Por exemplo, além de procurar integrar os meios de comunicação
+</I>&gt;<i> e melhorar a cara geral, estava pensando em oferecer um repositório de
+</I>&gt;<i> códigos onde as pessoas pudessem submeter seus snippets, programas,
+</I>&gt;<i> etc. Coisas como esta, que aproximassem mais os usuários. Acho que
+</I>&gt;<i> eles já foram afastados e amedrontados de mais :)
+</I>
+
+Ótima idéia !!!!
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071206/58015dca/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071206/58015dca/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000615.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000619.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#617">[ date ]</a>
+              <a href="thread.html#617">[ thread ]</a>
+              <a href="subject.html#617">[ subject ]</a>
+              <a href="author.html#617">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

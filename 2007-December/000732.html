@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C92b9a8820712222107m436751c5sa7187e34703c0702%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000724.html">
+   <LINK REL="Next"  HREF="000725.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Teste de bind para fopen, fwrite e fclose</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C92b9a8820712222107m436751c5sa7187e34703c0702%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Teste de bind para fopen, fwrite e fclose">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Domingo Dezembro 23 06:07:50 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000724.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000725.html">[gpt-usuarios] Próximos passos...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#732">[ date ]</a>
+              <a href="thread.html#732">[ thread ]</a>
+              <a href="subject.html#732">[ subject ]</a>
+              <a href="author.html#732">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 21, 2007 8:46 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Segue abaixo o sld e os arquivos gerados pelo GptBind a partir deste sld:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $ cat file.sld
+</I>&gt;<i> &gt; ////
+</I>&gt;<i> &gt; options {
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; headers {
+</I>&gt;<i> &gt;    &quot;stdio.h&quot;;
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; function fopen(string name, string mode) : pointer &quot;FILE*&quot; ::= fopen(name,
+</I>&gt;<i> mode);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; function fputs(string text, pointer &quot;FILE*&quot; file) : int ::= fputs(text,
+</I>&gt;<i> file);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; function fclose(pointer &quot;FILE*&quot; file) : int ::= fclose(file);
+</I>&gt;<i> &gt; ////
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Vocês teriam alguma sugestão para melhorar o formato quanto ao tipo pointer
+</I>&gt;<i> ? De cara eu já diria que o &quot;*&quot; é desnecessário. Se é pointer, é óbvio que
+</I>&gt;<i> vai ter o &quot;*&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Ao invés de :
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> function fopen(string name, string mode) : pointer &quot;FILE*&quot; ::= fopen(name,
+</I>&gt;<i> mode);
+</I>&gt;<i>
+</I>&gt;<i> Eu pensei em algo como:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> function fopen(string name, string mode) : pointer[FILE] ::= fopen(name,
+</I>&gt;<i> mode);
+</I>&gt;<i>
+</I>&gt;<i> Ou ainda:
+</I>&gt;<i>
+</I>&gt;<i> function fopen(string name, string mode) : FILE ::= fopen(name, mode);
+</I>&gt;<i>
+</I>&gt;<i> Sugestões ?
+</I>&gt;<i>
+</I>
+
+Ok, agora que tive tempo de dar uma olhada nos bindings. Alguns pensamentos...
+
+
+Da forma acima, isso resolveria o problema para ponteiros, mas creio
+que precisamos de algo mais completo para o mapeamento de tipos.
+
+
+Abrindo parenteses, em se tratando do mapeamento da estrutura FILE, eu
+pensei em expandir seu tipo para uma estrutura portugol, mas pelo que
+vi do padrão, os campos dela não são padronizados, então, acho que
+deixariamos sua estrutura interna inacessível a nível de portugol
+mesmo. Por outro lado, para uma estrutura como Elf32_Ehdr (em elf.h)
+por exemplo, deveriamos fazer o mapeamento para um tipo &quot;estrutura&quot;.
+
+Prosseguindo, a meu ver, o arquivo sld poderia ter uma seção para
+lidar com a associação de tipos (possivelmente, poderia ser uma seção
+similar à &quot;options{}&quot;). Mas, pensando bem, em relação aos tipos, acho
+que lidamos com duas atividades distintas: criação de tipos portugol e
+associação de tipos gpt&lt;-&gt;C. Então, proporia termos locais específicos
+para lidar com estas duas tarefas.
+
+Um rascunho inicial:
+
+
+//file.sdl
+gpt_types {
+  //tipo FILE é ponteiro;
+  FILE=ponteiro;
+}
+
+type_mappings {
+
+  //C_type=GPT_type
+
+  const char*=literal;
+  char*=ref literal;
+  FILE*=FILE; //tipo gpt definido acima
+  int=inteiro;
+}
+
+
+&quot;gpt_types&quot; ajudaria a criar a tabela de símbolos da biblioteca.
+&quot;type_mappings&quot; ajuda no mapeamento de tipos gpt&lt;-&gt;c.
+
+
+Outra questão é o triplo propósito da assinatura de uma rotina no sld:
+
+
+function fopen(string name, string mode) : pointer[FILE]
+
+
+Esta declaração deve informar, principalmente:
+
+1) a assinatura da função/procedimento portugol para ser registrada na
+tabela de simbolos;
+2) a variável/tipo C/C++ que representará os valores na pilha
+(parâmetros e resultado);
+3)  o método da pilha que deve ser utilizado para recuperar/armazenar
+determinado parâmetro/resultado.
+
+Agora, supondo que os termos entre [] denotam o conjunto de métodos
+para as diferentes operações pop/push da pilha (popString, popInt,
+...), eu pensei no seguinte esquema:
+
+
+function fputs(cont char* text [popString], FILE* file [popint]) : int
+[pushInt];
+
+
+
+Com esta declaração e as informações de tipos nas seções acima,
+poderiamos derivar a assinatura gpt (problema 1) e demais definições
+de tipos, completando as informações necessárias no lado do portugol:
+
+
+tipo FILE é ponteiro;
+função fputs(literal, FILE) : inteiro
+
+
+E podemos gerar as variáveis e tipos C/C++ que representam o
+determinado parâmetro (problema 2), informar o método de push/pop
+(problema 3) e, por fim, gerar a operação:
+
+const char * ctext = dataStack.popString().c_str();
+FILE* cfile = (FILE*) dataStack.popInt();
+int result;
+result = fputs(ctext,cfile);
+dataStack.pushInt(result);
+
+
+Fatorando este esquema, poderiamos colocar as informações do método
+push/pop a serem utilizadas na seção type_mappings. Assim:
+
+type_mappings {
+  [string] const char*=literal;
+  [string] char*=ref literal;
+  [int] FILE*=FILE;
+  [int] int=inteiro;
+}
+
+Onde o que está entre [] indica o método push/pop. Agora, a nova
+definição de fputs:
+
+function fputs(cont char* text, FILE* file) : int;
+
+
+
+Estes exemplos acima lidam apenas com associação de tipos, mas ainda
+não lidam com construção. Supondo que a biblioteca C tenha  estruturas
+como:
+
+struct Point {
+ int x;
+ int y;
+};
+
+struct Rectangle {
+  Point topleft;
+  Point bottomright;
+}
+
+Para mapear estes tipos precisariamos de uma notação para construção
+de estrutura. Se a sintaxe do portugol for inconveniente, talvez algo
+como isso:
+
+gpt_types {
+
+  //mapeamentos
+
+  FILE=ponteiro;
+
+  //construções
+
+  struct(Point) = x:inteiro, y:inteiro;
+  struct(Rectangle) = topleft:Point, bottomright:Point;
+}
+
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000724.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000725.html">[gpt-usuarios] Próximos passos...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#732">[ date ]</a>
+              <a href="thread.html#732">[ thread ]</a>
+              <a href="subject.html#732">[ subject ]</a>
+              <a href="author.html#732">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

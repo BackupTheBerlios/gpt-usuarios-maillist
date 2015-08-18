@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C9a3912af0712150333u5434a7f7t675f5f53f6686398%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000658.html">
+   <LINK REL="Next"  HREF="000664.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Inserindo a tabela de simbolos no .gvm</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C9a3912af0712150333u5434a7f7t675f5f53f6686398%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Inserindo a tabela de simbolos no .gvm">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 12:33:22 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000658.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000664.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#660">[ date ]</a>
+              <a href="thread.html#660">[ thread ]</a>
+              <a href="subject.html#660">[ subject ]</a>
+              <a href="author.html#660">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Tendo em vista que gptassembly não retém todas as informações de tipos
+</I>&gt;<i> alto nível, de que forma a tabela de símbolos será passada do
+</I>&gt;<i> compilador para o gptasm até o .gvm?
+</I>
+
+Eu acharia mais interessante a gente seguir uma abordagem tradicional onde o
+compilador gera código para o montador, e o montador gera o binário, e ambos
+são independentes. Com isso o usuário pode programar em portugol ou
+GptAssembly diretamente.
+
+Todas as informações que o montador deve ter tem que estar no seu assembly,
+sem nenhuma interferência posterior do compilador. Sim, podem estar faltando
+coisas, mas dai a gente conversa e corrige.
+
+Dessa forma o montador gera novamente a sua tabela de símbolos baseado na
+declaração de dados (parâmetros, variáveis, procedimentos, ...)
+
+Eu me refiro à &quot;constness&quot; dos identificadores, nomes dos campos em
+&gt;<i> uma estrutura, assinatura de rotinas, etc. O gptc será linkado ao
+</I>&gt;<i> gptasm, e após este último gerar o gvm, o gptc injetará a tabela de
+</I>&gt;<i> simbolos?
+</I>
+
+O que seria a &quot;constness&quot; dos identificadores ? Dados constantes ???
+
+Estruturas não existem no GptASM, e pouco menos na VM. Uma estrutura, em
+GptASM, é representada por uma sequência de bytes (tipo data). Para acessar
+cada &quot;membro&quot; devem ser usados os mnemônicos como igetv, sgetv e afins que
+realizam acesso indexado.
+
+Algo como:
+
+// Portugol
+algoritmo teste;
+
+estrutura coordenada
+    x: inteiro;
+    y: inteiro;
+fim-estrutura
+
+variável c: coordenada;
+
+início
+    c.x := 10;
+    c.y := 20;
+    imprima( &quot;c.x=&quot;, c.x );
+    imprima( &quot;c.y=&quot;, c.y );
+fim
+
+
+// GptAssembly
+
+program exemplo
+
+var c data[8] // sizeof c
+
+proc main
+    var t1 int
+
+    // c.x := 10;
+    isetv c:0, 10 // *( c + 0 ) := 10
+
+    // c.y := 20
+    isetv c:4, 20 // *( c + 4 ) := 20
+
+    // imprima( &quot;c.x=&quot;, c.x );
+    igetv t1, c:0 // t1 := *( c + 0 )
+    pushiv t1
+    pushit
+    pushsv &quot;c.x=&quot;
+    pushst
+    push_2
+    lcall imprima
+
+    // imprima( &quot;c.y=&quot;, c.y );
+    igetv t1, c:4 // t1 := *( c + 4 )
+    pushiv t1
+    pushit
+    pushsv &quot;c.y=&quot;
+    pushst
+    push_2
+    lcall imprima
+
+    exit_0
+endproc
+
+endprogram
+
+
+Quanto a assinatura de métodos, como o GptASM praticamente não tem análise
+semântica, sempre que é invocado um procedimento assume-se que o usuário
+está chamando corretamente. Eu acredito que através do use (também tem o use
+em GptAssembly) e da tabela de símbolos o GptASM conseguirá fazer todas as
+consistências necessárias. Se bem que, em GptAssembly, para saber se o
+usuário passou os dados corretamente na invocação de uma subrotina não é tão
+fácil assim.
+
+Em uma assembly qualquer, eu acho que o montador não tem condições de fazer
+esse tipo de consistências. Ou tem ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/46782874/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/46782874/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000658.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000664.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#660">[ date ]</a>
+              <a href="thread.html#660">[ thread ]</a>
+              <a href="subject.html#660">[ subject ]</a>
+              <a href="author.html#660">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

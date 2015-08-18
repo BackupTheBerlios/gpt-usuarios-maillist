@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe do comando caso (case)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sintaxe%20do%20comando%20caso%20%28case%29&In-Reply-To=%3C92b9a8820709101559m3245e4a1pcd7f3a76a8c8ec%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000097.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe do comando caso (case)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sintaxe%20do%20comando%20caso%20%28case%29&In-Reply-To=%3C92b9a8820709101559m3245e4a1pcd7f3a76a8c8ec%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe do comando caso (case)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Setembro 11 00:59:31 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000097.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000105.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/10/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> On 9/10/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+</I>&gt;<i> &gt; On 9/10/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; Oi pessoal.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Como seria a sintaxe do caso ?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Não sei...Adorilson?
+</I>&gt;<i> &gt; Vou ver se pego algum livro na biblioteca de algoritmos e dou uma olhada.
+</I>&gt;<i>
+</I>&gt;<i> Pois eh,  fui  atras de um livro  (MANZANO) mas nao encontrei, para dar uma
+</I>&gt;<i> sugestao parecida com a dele. Vou pegar ele amanhã.
+</I>&gt;<i> Mas penso em ser algo com a gente raciocina.
+</I>&gt;<i>
+</I>&gt;<i> CASO variavel SEJA
+</I>&gt;<i>   v1: FAÇA
+</I>&gt;<i>   INICIO
+</I>&gt;<i>       comandos
+</I>&gt;<i>   FIM;
+</I>&gt;<i>   v2: FAÇA
+</I>&gt;<i>   INICIO
+</I>&gt;<i>        comandos
+</I>&gt;<i>    FIM;
+</I>&gt;<i>   V3: FAÇA
+</I>&gt;<i>   INICIO
+</I>&gt;<i>        comandos
+</I>&gt;<i>    FIM;
+</I>&gt;<i>   SENÃO
+</I>&gt;<i>   INICIO
+</I>&gt;<i>        comandos
+</I>&gt;<i>    FIM;
+</I>&gt;<i> FIM;
+</I>&gt;<i>
+</I>&gt;<i> Acho q daí poderiamos omitir esse FAÇA de cada valor. Muito redundancia.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Adorilson Bezerra
+</I>&gt;<i> Email/Google Talk: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>
+</I>&gt;<i> Jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em jwchat.org</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+O problema aqui é que demais estruturas como  se/enquanto/para no gpt
+não tem o par &quot;inicio/fim&quot;, só nisso já somos incompatíveis com a
+literatura, tbm. Numa mistura das propostas acima, esbocei o seguinte:
+
+caso var seja
+ 0:
+    imprima(&quot;zero&quot;);
+    fim
+ 1:
+    imprima(&quot;um&quot;);
+    fim
+  senão:
+    imprima(&quot;nenhum&quot;);
+    fim
+fim-caso
+
+Experimentando com &quot;casos&quot; aninhados, acho que o &quot;fim&quot; em cada caso
+pode ser opcional, sem maiores problemas:
+
+caso v1 seja
+  0:
+    caso v2 seja
+      10:
+        imprima(&quot;dez&quot;);
+      senão:
+        imprima(&quot;...&quot;);
+      fim-caso
+  senão:
+      imprima(&quot;nenhum&quot;);
+fim-caso
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000097.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000105.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

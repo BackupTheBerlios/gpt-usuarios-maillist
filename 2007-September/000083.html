@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Precisamos de AST no compilador ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Precisamos%20de%20AST%20no%20compilador%20%3F&In-Reply-To=%3C9a3912af0709100942m20ff5b2bi7a0bc788adc26dc7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000082.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Precisamos de AST no compilador ?</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Precisamos%20de%20AST%20no%20compilador%20%3F&In-Reply-To=%3C9a3912af0709100942m20ff5b2bi7a0bc788adc26dc7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Precisamos de AST no compilador ?">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Setembro 10 18:42:34 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000082.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000087.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; A pergunta que não quer calar é: vamos precisar gerar AST (Abstract
+</I>&gt;<i> Syntax
+</I>&gt;<i> &gt; Tree) no gpt ? O que a gente ganha ou perde com a AST ?
+</I>&gt;<i>
+</I>&gt;<i> Atualmente, o gpt gera AST. Ela é entrada para os módulos de tradução,
+</I>&gt;<i> compilação e interpretação.
+</I>
+
+Quanto a isso acho que não teremos problema, porque &quot;na teoria&quot; a entrada
+para os módulos de tradução, compilação e interpretação será o CI na versão
+2.
+
+
+
+&gt;<i> A gente ganha com clareza e facilidade de modificar/expandir o código.
+</I>
+
+Como nunca gerei AST a partir dos analisadores, não consigo visualizar isso
+hehehe.
+
+
+
+&gt;<i> Eu acho (ênfase no &quot;acho&quot;) que fazer tradução dirigida pela sintaxe
+</I>&gt;<i> deixa o parser muito acoplado com a geração, e isso deixa ele mais
+</I>&gt;<i> complicado. O parser já é meio complicado por si só pois tenta de
+</I>&gt;<i> várias formas saber onde um erro de parsing ocorreu. E estou querendo
+</I>&gt;<i> expandir isso para exibir um relatório parecido com o que o javac da
+</I>&gt;<i> Sun gera (exibindo código, e com uma seta, apontando a área do erro).
+</I>
+
+Acho que você tem BEM mais experiência com tratamento de erros do que eu.
+Por isso acho que devemos seguir a sua sugestão e manter a geração da AST.
+
+Eu não consegui visualizar muito bem o que a gente ganharia com a AST nos
+meus testes. Acho que o meu erro foi porque eu consegui obter o resultado
+que eu queria (CI) sem precisar da AST. Eu gerei a AST em alguns exemplos
+(não coloquei no wiki), mas a AST ficou uma cópia discarada do fonte
+original. Para gerar CI a AST não se mostrou necessária.
+
+Porém, em nenhum momento eu me preocupei com tratamento de erros.
+
+Bom, geramos a AST então :-)
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/ca398398/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/ca398398/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000082.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000087.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

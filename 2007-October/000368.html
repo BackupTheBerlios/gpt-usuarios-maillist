@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710161418n66b87cdbg7947b05ad8a78431%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000364.html">
+   <LINK REL="Next"  HREF="000370.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710161418n66b87cdbg7947b05ad8a78431%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 23:18:05 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000364.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000370.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Algumas coisas que eu andei fazendo em tirei &quot;por base&quot; a v1 do gpt e não
+</I>&gt;<i> questionei se seria ou não a mesma coisa na v2. Essa burrada foi minha :-)
+</I>&gt;<i>
+</I>&gt;<i> Bom, vamos corrigir a especificação da v2. Antes tarde do que nunca :-)
+</I>&gt;<i>
+</I>
+Pior que só fui pensar nessas coisas agora, também....
+Isso é o que dá, não formalizar a semântica :)
+
+&gt;<i> &gt; == Números ==
+</I>&gt;<i> &gt;
+</I>&gt;<i> Por exemplo, existe um iadd (integer add) e um cadd (char add). Porém, só
+</I>&gt;<i> existe o iset. A gente chegou a conversar sobre isso em outro e-mail, até
+</I>&gt;<i> que entrou a questão do UTF-8.
+</I>&gt;<i>
+</I>&gt;<i> Não existe opcode para somar um bool, nem para verificar se um booleano é ou
+</I>&gt;<i> não maior que outro. Isso é necessário ????
+</I>
+Não, não é necessário. Mas tbm me pergunto se é necessário ter um cadd
+(desculpe, ainda não entendi). Por que não um iadd, apenas? Seria um
+opcode que valeria para todos os estes tipos...
+
+
+&gt;<i> &gt; == Literais ==
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; E são proibidos de participar em operações relacionais de grandeza:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> A VM está planejada com suporte a isso.
+</I>
+Ok, mas acho que o compilador não deve deixar isso passar.
+
+&gt;<i> &gt; == Matrizes ==
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Como discutimos, omitir o tamanho das dimensões é altamente desejável
+</I>&gt;<i> &gt; em parâmetros de funções. Poderiamos, naturalmente, extender isso para
+</I>&gt;<i> &gt; retornos também:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; função f(k : matriz[][] de inteiros) : matriz[] de inteiros  ...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso seria legal. A questão é: o que acontece se as matrizes tem tamanhos
+</I>&gt;<i> diferentes ?
+</I>
+Bela pergunta. Eu realmente não sei.
+
+&gt;<i> Não tinha pensado nisso. Eu até estava pensando agora em propor suporte para
+</I>&gt;<i> isso, mas como g-portugol é para ser algo para os iniciantes aprenderem a
+</I>&gt;<i> programar, acho que o suporte a isso iria deixar tudo fácil demais hehehe.
+</I>&gt;<i> Se necessário a gente implementa com bibliotecas bem didáticas.
+</I>
+É o que penso tbm :)
+
+&gt;<i> &gt; Agora, algo mais importante: o Alex havia sugerido que pudessemos
+</I>&gt;<i> &gt; declarar uma matriz da seguinte forma:
+</I>&gt;<i>
+</I>&gt;<i> Eu só queria confirmar se vamos ou não investir nisso. Não sei se você
+</I>&gt;<i> enviou isso antes ou depois de ter lido o nosso último e-mail sobre a
+</I>&gt;<i> questão de matrizes de tamanhos indefinidos...
+</I>&gt;<i>
+</I>
+Sim, eu li antes de ter enviado.
+
+Esse assunto todo me fez parar para pensar melhor sobre tipos e
+matrizes. Cheguei a seguinte proposta:
+
+
+Para as declarações:
+
+a : matriz[2] de inteiros;
+b : matriz[2][2] de inteiros;
+
+Entendemos os tipos de &quot;a&quot; e &quot;b&quot; como:
+
+a -&gt; *(inteiro)
+b -&gt; *(*(inteiro))
+
+Onde * denota uma coleção, e *(T) denota uma coleção de valores do
+tipo T. Note que, aqui, o tamanho das dimensões não faz parte do tipo.
+
+Então, poderiamos declarar mais umas variáveis:
+
+c : matriz[5] de inteiros;
+d : matriz[] de inteiros;
+
+E seus tipos seriam:
+
+c -&gt; *(inteiro)
+d -&gt; *(inteiro)
+
+Sabendo que uma atribuição só pode ser feita para tipos compatíveis,
+as seguintes atribuições são válidas:
+
+
+b[1][0] := c[2]
+  -&gt; inteiro := inteiro //ok
+
+a := c;
+  -&gt; *(inteiro) := *(inteiro) // ok
+
+b[0] := a;
+  -&gt; *(inteiro) := *(inteiro) //ok
+
+d := b[1]
+  -&gt; *(inteiro) := *(inteiro) //ok
+
+
+E a seguinte é inválida:
+
+
+b := a;
+  -&gt; *(*(inteiros)) := *(inteiro) //erro!
+
+
+Então, acho que poderiamos concluir que o tamanho da dimensão, embora
+não caracterize tipo, indica apenas quanto de espaço o programa deve
+alocar para uso.
+
+Também, uma vez que um valor do tipo *(T) tenha tamanho N, ele não
+pode ser aumentado ou diminuido.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000364.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000370.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709070537i365ecde4tdbb529384bba10ea%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000077.html">
+   <LINK REL="Next"  HREF="000055.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709070537i365ecde4tdbb529384bba10ea%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Setembro  7 14:37:31 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000077.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000055.html">[gpt-usuarios] UTF-8, solução a frente
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Se todos toparem, eu não me incomodaria de colocar tudo no infinitivo.
+</I>
+
+Nos outros projetos que utilizam um &quot;portugol&quot;, eles também usam infinitivo
+?
+
+Sinceramente, fiquei na dúvida agora :-|
+
+&gt;<i> &gt; &gt; A única
+</I>&gt;<i> &gt; &gt; &gt; utilidade prática disse é para aplicar otimizações de código,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Achei que fosse para diminuir o número de instruções (e nem como estas
+</I>&gt;<i> &gt; &gt; duas abordagens afetam otimizações)...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Não entendi o que você quis dizer com &quot;e nem como estas duas :
+</I>&gt;<i> &gt; abordagens afetam otimizações&quot;...
+</I>&gt;<i>
+</I>&gt;<i> Bem, você disse que a unica utilidade dessa abordagem era aplicar
+</I>&gt;<i> otimizações de código. Eu quis dizer que não entendi como as duas
+</I>&gt;<i> opções influenciam na otimização...mas, detalhes.  Nem precisa
+</I>&gt;<i> responder :)
+</I>
+
+A thread já tá tão grande que eu estou esquecendo as coisas hehehe.
+
+Usar ld 1 geraria 2 bytes, um sendo o opcode do ld e o outro sendo um
+índice. Usar ld_1 geraria 1 byte só, o opcode do ld_1.
+
+Durante a execução, ld_1 seria mais rápido porque a VM, ao reconhecer ld_1,
+já saberia o que fazer (carregar 1 na pilha), enquanto que no caso do ld 1,
+ao reconhecer o ld, ela teria que carregar o valor apontado pelo índice
+(próximo byte dentro do bytecode). Isso certamente seria mais lento.
+
+No nosso caso desempenho não é uma meta. De qualquer forma podemos deixar
+esses opcodes defiinidos, mesmo que o nosso compilador não gere eles. Só não
+tenho certeza de quantos opcodes seriam. Na holovm são 6 porque, como ela é
+uma máquina simbólica, não existe o conceito de inteiro, real, ... número é
+numero e era isso, não tem variantes. Então na holovm existem opcodes para
+carregar os símbolos de 0 a 6 na pilha.
+
+Se não era essa a dúvida avisa....
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070907/2c6cf48c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070907/2c6cf48c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000077.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000055.html">[gpt-usuarios] UTF-8, solução a frente
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

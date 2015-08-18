@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Inicialização de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FInicializa%3DE7%3DE3o_de_estruturas%3F%3D&In-Reply-To=%3C92b9a8820711080811p1fd84803s22f05da43351de4f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000579.html">
+   <LINK REL="Next"  HREF="000577.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Inicialização de estruturas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FInicializa%3DE7%3DE3o_de_estruturas%3F%3D&In-Reply-To=%3C92b9a8820711080811p1fd84803s22f05da43351de4f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Inicialização de estruturas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Novembro  8 17:11:01 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000579.html">[gpt-usuarios] Inicialização de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000577.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#582">[ date ]</a>
+              <a href="thread.html#582">[ thread ]</a>
+              <a href="subject.html#582">[ subject ]</a>
+              <a href="author.html#582">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Nov 8, 2007 7:49 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Por mim prossegue.
+</I>&gt;<i>
+</I>&gt;<i> Não sei o que é ctor :-)
+</I>&gt;<i>
+</I>
+Ah, foi mal! ctor == construtor
+
+&gt;<i> O que eu tinha pensado era, no início da geração de código da procedure que
+</I>&gt;<i> declarou os dados (ou na procedure main no caso de dados globais), gerar
+</I>&gt;<i> código em GptAssembly para inicializar esses dados.
+</I>&gt;<i>
+</I>&gt;<i> Até daria para criar alguma otimização para dados globais. Como a gente vai
+</I>&gt;<i> alocar uma área, a gente pode inicializar esse área com os dados corretos.
+</I>&gt;<i> Com isso não é necessário gerar os comandos em GptAssembly.
+</I>&gt;<i>
+</I>&gt;<i> Porém, para dados locais (que vão ser alocados na pilha) não tem como a
+</I>&gt;<i> gente inicializar a área previamente. Com isso eu sugiro que a gente sempre
+</I>&gt;<i> gere código para inicializar os dados, sejam eles globais ou locais.
+</I>&gt;<i> Otimização não é meta do projeto por enquanto. Primeiro a gente deixa tudo
+</I>&gt;<i> funcionando corretamente, e depois a gente otimiza :-)
+</I>&gt;<i>
+</I>
+Beleza então :)
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000579.html">[gpt-usuarios] Inicialização de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000577.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#582">[ date ]</a>
+              <a href="thread.html#582">[ thread ]</a>
+              <a href="subject.html#582">[ subject ]</a>
+              <a href="author.html#582">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

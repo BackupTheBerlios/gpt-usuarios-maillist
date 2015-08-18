@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] ANTLR v3 - linguagem alvo
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710161334m27292606ta993b35e507d369c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000359.html">
+   <LINK REL="Next"  HREF="000301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] ANTLR v3 - linguagem alvo</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710161334m27292606ta993b35e507d369c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] ANTLR v3 - linguagem alvo">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 22:34:07 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000359.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000301.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#367">[ date ]</a>
+              <a href="thread.html#367">[ thread ]</a>
+              <a href="subject.html#367">[ subject ]</a>
+              <a href="author.html#367">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Só para sintonizar, na api do antlr (v2), o tratamento de erros era através
+</I>&gt;<i> de excessões ?
+</I>&gt;<i>
+</I>
+Isso. Na do v3, também. Por exemplo, MismatchedTokenException é
+lançado quando se espera um token e o lookahead não satisfaz.
+NoViableAltException é lançado quando não há produções que possam
+consumir o lookahead. E como cada produção é um método, é possível
+capturar uma excessão lançada em uma produção aninhada. Coisas super
+legais :)
+
+No V3, para o target C, cada excessão é identificada por um valor
+numerico definido com #define. Mas ainda não sei como é feito a
+&quot;desempilhação&quot; de chamadas.
+
+&gt;<i> Eu também acho interessante a AST. Eu só tentei deixar claro que para a
+</I>&gt;<i> geração do assembly a gente não precisa, então podemos deixar a AST para
+</I>&gt;<i> depois.
+</I>&gt;<i>
+</I>
+Blz.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000359.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000301.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#367">[ date ]</a>
+              <a href="thread.html#367">[ thread ]</a>
+              <a href="subject.html#367">[ subject ]</a>
+              <a href="author.html#367">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

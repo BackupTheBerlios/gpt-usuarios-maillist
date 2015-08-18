@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] [PATCH] gptvm / exemplo de lcall
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%5BPATCH%5D%20gptvm%20/%20exemplo%20de%20lcall&In-Reply-To=%3C92b9a8820712080441i14db6f61q55ab7160ed9dadbb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000731.html">
+   <LINK REL="Next"  HREF="000657.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] [PATCH] gptvm / exemplo de lcall</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%5BPATCH%5D%20gptvm%20/%20exemplo%20de%20lcall&In-Reply-To=%3C92b9a8820712080441i14db6f61q55ab7160ed9dadbb%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] [PATCH] gptvm / exemplo de lcall">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro  8 13:41:02 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000731.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000657.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#636">[ date ]</a>
+              <a href="thread.html#636">[ thread ]</a>
+              <a href="subject.html#636">[ subject ]</a>
+              <a href="author.html#636">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Fiz uma pequena modificação (rascunho) do que eu acho que seria o
+lcall (lcallOpcode) apenas para ilustrar.
+
+Em anexo, coloquei o patch da gptvm, um gasm que faz o lcall e um
+exemplo de biblioteca externa (mylib.c).
+
+Se quiser ver a coisa rodando, basta descompactar o pacote
+(dlopen.zip) no diretorio gpt2, cd dlopen, e seguir as instruções do
+readme (espero que funcione :)
+
+PS: Eu não cheguei a modificar o lexer.g/parser.g do gptasm para
+informar no lcall qual o .so que deve ser aberto.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+-------------- Próxima Parte ----------
+Um anexo não-texto foi limpo...
+Nome: dlopen.zip
+Tipo: application/zip
+Tamanho: 4765 bytes
+Descrição: não disponível
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071208/ddbac87d/attachment.zip">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071208/ddbac87d/attachment.zip</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000731.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000657.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#636">[ date ]</a>
+              <a href="thread.html#636">[ thread ]</a>
+              <a href="subject.html#636">[ subject ]</a>
+              <a href="author.html#636">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

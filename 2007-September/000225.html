@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FPesquisa_%3D22r%3DE1pida%3D22_sobre_algum%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fas_VM%3D27s_existentes%3F%3D&In-Reply-To=%3C92b9a8820709290325i181eb738m3c773285452fd273%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000222.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FPesquisa_%3D22r%3DE1pida%3D22_sobre_algum%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fas_VM%3D27s_existentes%3F%3D&In-Reply-To=%3C92b9a8820709290325i181eb738m3c773285452fd273%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Setembro 29 12:25:03 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000222.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+        
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#225">[ date ]</a>
+              <a href="thread.html#225">[ thread ]</a>
+              <a href="subject.html#225">[ subject ]</a>
+              <a href="author.html#225">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Great! :)
+
+On 9/28/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi pessoal.
+</I>&gt;<i>
+</I>&gt;<i> Fiz uma pesquisa rápida (4 horas) sobre algumas VM's existentes. A intenção
+</I>&gt;<i> desta pesquisa era averiguar o que está sendo desenvolvido atualmente.
+</I>&gt;<i>
+</I>&gt;<i> Quanto a tipagem, existem 2 tipos de VM's:
+</I>&gt;<i> * Fortemente tipadas, geralmente utilizadas para gerar código a partir de
+</I>&gt;<i> linguagens tipadas como pascal, java, C;
+</I>&gt;<i> * Fracamente tipadas, geralmente utilizadas por linguagens fracamente
+</I>&gt;<i> tipadas ou que possuem tipagem dinâmica como as linguagens scripts.
+</I>&gt;<i>
+</I>&gt;<i> Em geral, todas as VM's tem algum suporte a pilha de dados para poderem ter
+</I>&gt;<i> funções recursivas, passagem de parâmetros, entre outras coisas.
+</I>&gt;<i>
+</I>&gt;<i> Existe uma divisão clara entre as VM's stack-based (baseada em pilha) e as
+</I>&gt;<i> register-based (baseada em registradores). Atualmente parece haver uma
+</I>&gt;<i> tendência no desenvolvimento de VM's baseada em registradores. Os motivos
+</I>&gt;<i> basicamente são porque geram um bytecode menor e são mais eficientes. Porém,
+</I>&gt;<i> o número de opcodes dessas VM tende a ser maior.
+</I>&gt;<i>
+</I>&gt;<i> Outro ponto em que eu subdividiria as VM's é entre as que tem consciência
+</I>&gt;<i> dos tipos de dados que manipulam e as que não tem consciência disso. As que
+</I>&gt;<i> sabem os tipos de dados que manipulam são a maioria dentre as que olhei.
+</I>&gt;<i> Geralmente, as que tem consciência dos dados, tendem a ter um conjunto de
+</I>&gt;<i> operações (opcodes) maior.
+</I>&gt;<i>
+</I>&gt;<i> Quanto a utilizar código intermediário, pelo que notei, são poucas que
+</I>&gt;<i> utilizam. Em geral ou se gera o arquivo contendo o bytecode (processo mais
+</I>&gt;<i> trabalhoso) ou se gera um arquivo texto contendo assembly da VM e um
+</I>&gt;<i> montador (assemblador) transforma o assembly em bytecode.
+</I>&gt;<i>
+</I>&gt;<i> As VM's que eu vi utilizando código intermediário são projetos que tem, como
+</I>&gt;<i> meta, serem uma VM &quot;universal&quot; (talvez tenha exagerado na palavra). Nesses
+</I>&gt;<i> projetos a idéia é que outros compiladores, de variadas linguagens, poderiam
+</I>&gt;<i> gerar um CI e, a partir deste CI, as ferramentas disponibilizadas junto com
+</I>&gt;<i> a VM traduziriam esse CI para assembly e bytecode.
+</I>&gt;<i>
+</I>&gt;<i> Quanto a nossa VM, pelo que temos hoje, podemos dizer que:
+</I>&gt;<i> * Ela é parcialmente baseada em registradores (vamos ampliar isso, eu acho);
+</I>&gt;<i> * Tem pilha apenas para gerenciamento de funções e procedures;
+</I>&gt;<i> * Não tem consciência &quot;absoluta&quot; dos tipos de dados que está manipulando; a
+</I>&gt;<i> VM sabe o que é um int, mas se for gerado um código que tente atribuir um
+</I>&gt;<i> int para um tipo de dado string, ela vai executar;
+</I>&gt;<i> * Temo um CI definido.
+</I>&gt;<i>
+</I>&gt;<i> Vou colocar abaixo alguns itens para discussão:
+</I>&gt;<i>
+</I>&gt;<i> 1) Provavelmente o CI será retirado do projeto (minha opinião) porque não
+</I>&gt;<i> temos como meta, não que eu saiba, sermos uma VM &quot;universal&quot;. A gente quer
+</I>&gt;<i> dar suporte ao gpt apenas;
+</I>&gt;<i> 2) Quanto ao uso de registradores, provavelmente vamos ampliar isso para que
+</I>&gt;<i> o bytecode fique mais &quot;limpo&quot;;
+</I>&gt;<i> 3) Quanto a nossa VM ter ou não consciência dos dados que está manipulando,
+</I>&gt;<i> eu diria que inicialmente ela foi desenvolvida para ser uma VM sem
+</I>&gt;<i> consciência dos dados, mas atualmente não sei dizer se essa seria a melhor
+</I>&gt;<i> abordagem. Talvez seja interessante colocarmos um pouco mais de inteligência
+</I>&gt;<i> na VM.
+</I>&gt;<i>
+</I>&gt;<i> Por enquanto era isso :-)
+</I>&gt;<i>
+</I>&gt;<i> []'s
+</I>&gt;<i> Alex Sandro Garzão
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000222.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+	
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#225">[ date ]</a>
+              <a href="thread.html#225">[ thread ]</a>
+              <a href="subject.html#225">[ subject ]</a>
+              <a href="author.html#225">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

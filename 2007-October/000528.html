@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Início das normas de desenvolvimento
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FIn%3DEDcio_das_normas_de_desenvolvime%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fnto%3F%3D&In-Reply-To=%3C9a3912af0710250754n7ffac13kef45e51e7904a611%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000527.html">
+   <LINK REL="Next"  HREF="000529.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Início das normas de desenvolvimento</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FIn%3DEDcio_das_normas_de_desenvolvime%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fnto%3F%3D&In-Reply-To=%3C9a3912af0710250754n7ffac13kef45e51e7904a611%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Início das normas de desenvolvimento">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 25 16:54:48 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000527.html">[gpt-usuarios] Início das normas de desenvolvimento
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000529.html">[gpt-usuarios] Início das normas de desenvolvimento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#528">[ date ]</a>
+              <a href="thread.html#528">[ thread ]</a>
+              <a href="subject.html#528">[ subject ]</a>
+              <a href="author.html#528">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> * Regra: Os nomes dos métodos privados devem iniciar com um sublinha.
+</I>&gt;<i> * Regra: Os nomes dos atributos privados devem iniciar com um sublinha.
+</I>&gt;<i>
+</I>&gt;<i> Pra mim tá ok. Normalmente eu utilizava o prefixo &quot;m_&quot;, mas sublinhar tá
+</I>&gt;<i> bom...
+</I>
+
+Podemos colocar um prefixo além do sublinha.
+
+O &quot;m&quot; seria de que ? Método ???
+
+* Regra: A endentação é de 3 espaços. Não utilizar o caractere TAB.
+&gt;<i>
+</I>&gt;<i> Ok. Eu costumo utilizar 2 espaços, mas aceito qualquer coisa, menos TAB...
+</I>
+
+Ok.
+
+* Regra: Se necessário use mais de uma linha para desmembrar um
+&gt;<i> comando longo (endentação dupla a partir da segunda linha).
+</I>&gt;<i> * Regra: Se a lista de argumentos de uma função não couber em uma
+</I>&gt;<i> única linha continue na linha de baixo alinhando sob o primeiro
+</I>&gt;<i> argumento para facilitar a visualização.
+</I>&gt;<i>
+</I>&gt;<i> Sugeriria para não ultrapassar a margem de 80 caracteres por linha.
+</I>
+
+Ah sim. Bem lembrado :-)
+
+* Regra: Todo arquivo texto deve possuir um cabeçalho contendo as
+&gt;<i> informações básicas sobre o arquivo.
+</I>&gt;<i>
+</I>&gt;<i> Temos que discutir a licença que utilizaremos.
+</I>
+
+Podemos manter a licença atual... o que acham ???
+
+* Regra: Organize os arquivos de declaração e implementação da
+&gt;<i> seguinte forma: 1) Cabeçalho do módulo..[....]
+</I>&gt;<i>
+</I>&gt;<i> Ótimo. Além disso, sugiro procurar evitar fazer inclusões em
+</I>&gt;<i> cabeçalhos (.h). Dar preferência para &quot;forward declarations&quot;.
+</I>
+
+Bem lembrado :-)
+
+* Regra: Argumentos por referência (que retornem valores) devem estar
+&gt;<i> no início da lista de argumentos.
+</I>&gt;<i>
+</I>&gt;<i> Sério? Achei que fosse comum ao final.
+</I>
+
+Por mim pode ser no final, tanto faz. Desde que a gente tenha uma regra tá
+bom :-)
+
+Regra: Separe as palavras reservadas de estruturas de controle dos
+&gt;<i> parênteses por pelo menos um espaço em branco.
+</I>&gt;<i>
+</I>&gt;<i> E a expressão entre parênteses? sem espaços?
+</I>&gt;<i>
+</I>&gt;<i> if (x == 2)
+</I>&gt;<i>
+</I>&gt;<i> ou
+</I>&gt;<i>
+</I>&gt;<i> if ( x == 2 )
+</I>&gt;<i>
+</I>&gt;<i> Prefiro o primeiro.
+</I>
+
+Pode ser o primeiro. Acho que estava assim nos exemplos do final, mas vou
+revisar.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071025/62b17e77/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071025/62b17e77/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000527.html">[gpt-usuarios] Início das normas de desenvolvimento
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000529.html">[gpt-usuarios] Início das normas de desenvolvimento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#528">[ date ]</a>
+              <a href="thread.html#528">[ thread ]</a>
+              <a href="subject.html#528">[ subject ]</a>
+              <a href="author.html#528">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

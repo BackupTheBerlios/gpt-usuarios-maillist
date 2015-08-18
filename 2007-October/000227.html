@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] O que seria acesso aos serviços do kernel ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FO_que_seria_acesso_aos_servi%3DE7os_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fo_kernel_%3D3F%3F%3D&In-Reply-To=%3C92b9a8820710041633o7143b404xa4bcc6be8ee5a7a0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000226.html">
+   <LINK REL="Next"  HREF="000235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] O que seria acesso aos serviços do kernel ?</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FO_que_seria_acesso_aos_servi%3DE7os_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fo_kernel_%3D3F%3F%3D&In-Reply-To=%3C92b9a8820710041633o7143b404xa4bcc6be8ee5a7a0%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] O que seria acesso aos serviços do kernel ?">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Outubro  5 01:33:30 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000226.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000235.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#227">[ date ]</a>
+              <a href="thread.html#227">[ thread ]</a>
+              <a href="subject.html#227">[ subject ]</a>
+              <a href="author.html#227">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/4/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi pessoal.
+</I>&gt;<i>
+</I>&gt;<i> Estou com uma dúvida sobre a proposta para a nova versão da linguagem. Nessa
+</I>&gt;<i> proposta está dito &quot;Capacitar a linguagem para acessar serviços do kernel e
+</I>&gt;<i> bibliotecas externas...&quot;. O que seria acessar os serviços do kernel ? Que
+</I>&gt;<i> tipo de serviço ?
+</I>&gt;<i>
+</I>
+Escrevi &quot;serviços&quot; pois me faltou melhor palavra.
+
+Me referi a todas as &quot;portas de entrada&quot; para acesso ao hardware que o
+kernel oferece para os processos (e demais serviços).  No caso de
+linux, acessamos essas coisas com system calls.
+
+&quot;The system call is the fundamental interface between an application
+and the Linux kernel.&quot;
+
+Por exemplo, na v1.0 a linguagem só consegue oferecer, em alto nível,
+estas funções do linux: a de leitura de caracteres da entrada padrão
+(sys_read) e impressão de caracteres na saída padrão (sys_write).
+
+Então, em resumo, seria bom podermos escrever nossa biblioteca (que
+abstrai os serviços do kernel) em g-portugol, ao invés de esconder a
+implementação destas funções na implementação do runtime.
+
+A tarefa, então, de escrever a biblioteca não necessariamente recai
+sobre quem implementa a linguagem. Pode ser feito por qualquer um,
+escrevendo em g-portugol, e qualquer serviço de qualquer kernel pode
+ser acessado sem tocar na implementação da linguagem.
+
+E para isso, só conheço uma abordagem: possibilitar escrever código
+baixo nível inline, em um programa g-portugol, assim como se faz
+inline assembly em C.
+
+Além do mais, é desejável termos compatibilidade com a convenção de
+chamadas de C (não sei se é o caso, atualmente), e a
+interoperabilidade de dados deve ser analisada. Por exemplo, estava
+pensando em adicionar o tipo &quot;coringa&quot;, para possibilitar que
+variáveis referenciem dados arbitrários, como um ponteiro?
+
+//Rascunho de uso do GTK
+
+algoritmo teste_gtk;
+
+usando gtk; //importa a biblioteca do binding
+
+variáveis
+ janela : coringa;
+fim-variáveis
+
+início(argc : inteiro, argv: vetor[] de literais)
+  gtk_init (argc, argv);
+  janela = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_show (janela);
+  gtk_main();
+  retorne 0;
+fim
+
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000226.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000235.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#227">[ date ]</a>
+              <a href="thread.html#227">[ thread ]</a>
+              <a href="subject.html#227">[ subject ]</a>
+              <a href="author.html#227">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111129g39e8b833k572316e5b992cf9d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000284.html">
+   <LINK REL="Next"  HREF="000289.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111129g39e8b833k572316e5b992cf9d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 11 20:29:13 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000284.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000289.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#286">[ date ]</a>
+              <a href="thread.html#286">[ thread ]</a>
+              <a href="subject.html#286">[ subject ]</a>
+              <a href="author.html#286">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Estava pensando em tamanho dinâmico, e
+</I>&gt;<i> não, em tipagem dinâmica. Por exemplo, uma variável do tipo inteiro
+</I>&gt;<i> poderia ter os seguintes valores:
+</I>&gt;<i>
+</I>&gt;<i> 99 ou
+</I>&gt;<i> 983758604983758604983758604983758604983758604983758604
+</I>&gt;<i>
+</I>&gt;<i> sem que haja implicações. O mesmo para o tipo real, com precisão
+</I>&gt;<i> arbitrária, eu acho. Assim, creio que não precisariamos extender o
+</I>&gt;<i> acervo de tipos.
+</I>
+
+Pensando rapidamento sobre isso, eu acho teria implicações sobre a VM sim,
+mas não sei dizer o quanto agora sem uma análise maior.
+
+Saliento que a área de dados é uma estrutura simples, apenas uma sequência
+de bytes, similar a área de dados de um processador real. Por exemplo, se
+tivermos 1 variável caractere (c1) e duas variáveis inteiras (i1 e i2),
+teríamos  a seguinte representação na área de dados:
+
+0000: 00 // Endereço 0000, um byte, alocado para c1
+0001: 00 00 00 00 // Endereço 0001, 4 bytes, alocados para i1
+0005: 00 00 00 00 // Endereço 0005, 4 bytes, alocados para i2
+
+Por isso essa questão de tamanhos dinâmicos pode impactar bastante no que já
+está definido para a versão 2, tanto em termos de armazenamento como
+opcodes.
+
+Pensando um pouquinho mais, haveria algum problema se a gente sempre
+utilizasse o maior tipo disponível na arquitetura para armazenar uma
+determinada informação ? Por exemplo, real utilizaria double, int usaria
+int64, ...
+
+Eu só não sei dizer se isso resolveria completamente o problema que você
+relatou porque a minha solução só resolve para os casos onde seja possível
+mapear a informação para um tipo nativo da máquina.
+
+O 983758604983758604983758604983758604983758604983758604 que você colocou
+acima não dá pra mapear em um int64...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/e777ad98/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/e777ad98/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000284.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000289.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#286">[ date ]</a>
+              <a href="thread.html#286">[ thread ]</a>
+              <a href="subject.html#286">[ subject ]</a>
+              <a href="author.html#286">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

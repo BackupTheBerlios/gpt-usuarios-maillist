@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111047q7bfb9499xc9ac8d4390412d23%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000280.html">
+   <LINK REL="Next"  HREF="000284.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111047q7bfb9499xc9ac8d4390412d23%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 11 19:47:52 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000280.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000284.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#282">[ date ]</a>
+              <a href="thread.html#282">[ thread ]</a>
+              <a href="subject.html#282">[ subject ]</a>
+              <a href="author.html#282">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; A única ressalva para essa abordagem é se, dentro do código assembly, a
+</I>&gt;<i> &gt; gente precise fazer alguma manipulação antes de inserir no assembly.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Você acha que precisa? Pensando rapidinho aqui, eu não consegui pensar
+</I>&gt;<i> em nenhum caso.
+</I>
+
+Eu também não achei um motivo para isso.
+
+&gt;<i> 2) Como sempre me confundi e nunca decidi entre &quot;matriz&quot; e &quot;vetor&quot; para
+</I>&gt;<i> &gt; arrays, resolvi utilizar apenas &quot;vetor&quot;, em contraste com a v1.0
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A meu ver, vetor tem uma dimensão apenas, e matriz mais de uma dimensão.
+</I>&gt;<i> &gt; Pelo certo seriam duas definições, mas eu acho que ficaria horrível
+</I>&gt;<i> hehehe.
+</I>&gt;<i> &gt; O que algumas linguagens fazem é encarar os vetores como uma matriz de
+</I>&gt;<i> uma
+</I>&gt;<i> &gt; dimensão, ou seja, adotam matriz sempre.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Mas para mim indifere. Se você achar melhor vetor ou matriz, tanto faz
+</I>&gt;<i> :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Bom, vou deixar em aberto, porque eu realmente não sei :)
+</I>&gt;<i> Antigamente, vetor e matriz eram sinônimos na gramática. Não me lembro
+</I>&gt;<i> porque tirei isso.
+</I>
+
+Ok.
+
+&gt;<i> 3) Eu não sei se devemos ter &quot;procedimento&quot; e &quot;função&quot; ou apenas &quot;função&quot;.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Em termos de geração de código, assembly, e durante a execução na VM,
+</I>&gt;<i> tanto
+</I>&gt;<i> &gt; faz. A VM em si não tem consciência do que é um procedimento ou função.
+</I>&gt;<i> &gt; Aliás, nem o montador tem consciência disso.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Porém, em termos didáticos, eu acharia interessante termos procedimentos
+</I>&gt;<i> e
+</I>&gt;<i> &gt; funções porque qualquer livro para iniciante sempre aborda os dois
+</I>&gt;<i> &gt; conceitos. Eu mesmo (sabe como é burro véio rsrsrs) se estou utilizando
+</I>&gt;<i> uma
+</I>&gt;<i> &gt; linguagem que não tem procedures fico com a sensação de que &quot;está
+</I>&gt;<i> faltando
+</I>&gt;<i> &gt; algo&quot;...
+</I>&gt;<i>
+</I>&gt;<i> Bom, acho que é o mesmo caso do vetor/matriz. Vou deixar em aberto também.
+</I>
+
+Ok.
+
+&gt;<i> 5) Acho que temos que incorporar outros tipos, como double, long, short,
+</I>&gt;<i> &gt; byte, etc.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Interessante seria, mas você pensou nisso por algum motivo em especial ?
+</I>&gt;<i>
+</I>&gt;<i> Para ter um mapeamento de tipos e tamanhos de variáveis para usar
+</I>&gt;<i> bibliotecas externas. Em um email anterior, fiz um exemplo de gptasm
+</I>&gt;<i> que utiliza a função &quot;double cos(double)&quot; da biblioteca libm.so.
+</I>&gt;<i> Teremos um problema ao chamar esta função passando um tipo real e
+</I>&gt;<i> recebendo o retorno em uma variável do tipo real, se este tipo tiver
+</I>&gt;<i> 32 bits, numa arquitetura em que double tem 64 bits. É este tipo de
+</I>&gt;<i> problema que estou tentando resolver.
+</I>
+
+Ah entendo. Eu não tinha me preocupado com isso... até agora hehehehe.
+
+Se bem que, pensando um pouco agora. Talvez seja possível ter as
+&gt;<i> variáveis se ajustando ao valor que carregam, ao invés de determinar o
+</I>&gt;<i> tamanho dos tipos. Qual a implicação disso na VM e nos opcodes?
+</I>
+
+Se eu entendi bem a proposta, em uma análise rápida, eu diria que a
+implicação é grande na VM para termos tipagem dinâmica. Ou você está
+pensando em tamanho dinâmico ?
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/d4a5ac5a/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/d4a5ac5a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000280.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000284.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#282">[ date ]</a>
+              <a href="thread.html#282">[ thread ]</a>
+              <a href="subject.html#282">[ subject ]</a>
+              <a href="author.html#282">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

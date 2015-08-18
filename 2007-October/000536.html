@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710250815i63b6fea7x5f35ec74922c2fc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000533.html">
+   <LINK REL="Next"  HREF="000363.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710250815i63b6fea7x5f35ec74922c2fc%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 25 17:15:35 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000533.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000363.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#536">[ date ]</a>
+              <a href="thread.html#536">[ thread ]</a>
+              <a href="subject.html#536">[ subject ]</a>
+              <a href="author.html#536">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/25/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> On 10/25/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Nós tinhamos concordado que todos os tipos serão incompatíveis entre
+</I>&gt;<i> si*???
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Porque acordei pensando em expressões com reais e inteiros:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; a : inteiro;
+</I>&gt;<i> &gt; &gt; b : real;
+</I>&gt;<i> &gt; &gt; c : real
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; c := a / b; //Isso exigiria um cast? Ou haveria promoção?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu não lembro se a gente conversou sobre isso.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A princípio o usuário teria que explicitar o cast, mas nada impede que o
+</I>&gt;<i> compilador gere o cast também.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; O que vocês acham melhor ???
+</I>&gt;<i>
+</I>&gt;<i> Prefiro deixar por conta do compilador.
+</I>&gt;<i> Mas como seria nessa caso?
+</I>&gt;<i> Divisao real (a promovido a real) ou divisao inteira (b rebaixado a
+</I>&gt;<i> inteiro)? Ou outra coisa?
+</I>&gt;<i>
+</I>
+Inteiro promovido para real. Do contrário, informações são perdidas
+implicitamente, o que é indesejável.
+
+Se inteiro pode ser promovido automaticamente, numa expressão de
+reais....o que mais pode ser promovido? Quer dizer, vcs sabem de
+outros casos com outros tipos em que o cast explicito seria muito
+indesejável?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000533.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000363.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#536">[ date ]</a>
+              <a href="thread.html#536">[ thread ]</a>
+              <a href="subject.html#536">[ subject ]</a>
+              <a href="author.html#536">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

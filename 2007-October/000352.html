@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] ANTLR v3 - linguagem alvo
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710160536x56e7fb3cvde969d640e3165ab%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000335.html">
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] ANTLR v3 - linguagem alvo</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710160536x56e7fb3cvde969d640e3165ab%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] ANTLR v3 - linguagem alvo">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 14:36:23 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000335.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000355.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/15/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; Duvido muito que vc não aprenda rápido (~dois dias), a não ser que seu
+</I>&gt;<i> &gt; horror te atrapalhe
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> É uma possibilidade que o horror me atrapalhe hehehe.
+</I>&gt;<i>
+</I>&gt;<i> Eu comecei a programar +- em 1983.
+</I>
+Eu estava dormindo com brinquedos em meu berço nessa época... :P
+
+&gt;<i> Vou dar uma olhada (logo que possível) no target C.
+</I>&gt;<i>
+</I>
+Ok.
+
+&gt;<i> Quanto a respirar novos áres.... provavelmente desenvolver em Python seja
+</I>&gt;<i> mais rápido. Porém, eu tenho uma VM em C++ e algumas rotinas de back-end de
+</I>&gt;<i> um compilador e de um montador assembly em C++. O código da VM não tá a
+</I>&gt;<i> coisa mais linda do mundo, pelo que eu me lembre, mas aparando algumas
+</I>&gt;<i> arestas dá pra usar como um template inicial. E só não dá pra dizer que
+</I>&gt;<i> seria bem rápido desenvolver o montador em C++ porque o que eu tenho
+</I>&gt;<i> desenvolvido é em flex/bison; caso contrário seria só trocar os mnemônicos
+</I>&gt;<i> na tabela e gerar o formato gvm corretamente.
+</I>
+Se o montador puder ser feito rapidamente com flex/bison, ta valendo.
+
+&gt;<i> Diga-se de passagem, python tem uma VM certo ? Então teremos uma VM sobre
+</I>&gt;<i> outra VM ? Bootstrap ou não, na versão 2, nós precisamos do suporte de uma
+</I>&gt;<i> VM, então teremos uma VM dentro de outra, o que eu acho que vai ficar bem
+</I>&gt;<i> pesado...
+</I>
+Não não...o uso de python (ou não) é apenas para gerar gptasm/gvm.
+
+Vou tentar explicar mais detalhadamente. Temos a meta de fazer o
+compilador em g-portugol, mas qual o plano para isso?
+
+Minha proposta é composta de 3 fases:
+
+1) Criaremos um compilador gpt descartável, escrito em qualquer
+linguagem, que gere o gptassembly/gvm equivalente (ineficiente ou não,
+não importa)
+
+1a) Paralelamente, teremos a construção do montador, da VM e de
+bibliotecas básicas para I/O.
+
+2) Assim que a VM estiver funcionando, criaremos outro compilador para
+a linguagem, agora, escrevendo em g-portugol. Utilizaremos o
+compilador da fase 1 para compilar este código. O produto desta fase é
+um compilador g-portugol escrito em g-portugol, mas ineficiente.
+
+3) Utilizaremos o compilador do passo 2, para compilar a si mesmo,
+gerando código eficiente e tendo, ao final, o compilador oficial.
+
+Então, o primeiro compilador é o bootstrap. O segundo, é o compilador
+de transição. O terceiro é o oficial.
+
+A criação do compilador gpt (melhor chamá-lo de gptc, e chamar a vm de
+gpt, não?) em g-portugol é um &quot;harness&quot;, isso é, explora o potencial
+da linguagem. Rodar o gvm do compilador sobre a VM é um harness para a
+VM e para as bibliotecas básicas. Então, os próprios produtos do
+processo são entradas para outros produtos, de forma que temos um
+campo fértil para testes de vários aspectos daquilo que estamos
+desenvolvendo.
+
+Pois bem, para escrever o compilador de transição, em g-portugol (fase
+2), eu estava pensando em criar um target do antlr para g-portugol, o
+que facilitaria bastante a vida, mas ainda não considerei a
+facilidade/complexidade desta tarefa, e ainda estou avaliando o antlr
+v3.
+
+Lembrando que o motivo principal para a escolha do antlr é seu suporte
+à tratamento de erros. Isso é algo que exige bastante &quot;artesanato&quot;, e
+acho que o bison dificulta muito a nossa vida neste aspecto. De
+brinde, ganhamos algumas facilidades a mais utilizando o antlr, como
+criação automática de ast's, e gramáticas para percorrer ast's.
+
+A propósito, utilizar o antlr v2 ainda é uma opção.
+
+Os requisitos principais para um compiler-compiler são:
+
+a) Flexibilidade para tratamento de erros.
+b) Facilidade ao utilizar uma gramática UTF-8, com tokens no range
+desta codificação.
+
+
+&gt;<i> Como eu disse em outro e-mail, a princípio são 3 cabeças para desenvolver o
+</I>&gt;<i> projeto, e se duas querem Python, vai ser Python. Democracia é pra isso
+</I>&gt;<i> hehehe. Só não garanto que vou ajudar muito no desenvolvimento, mas posso
+</I>&gt;<i> continuar &quot;ativo&quot; no projeto/documentação no wiki...
+</I>
+Como eu disse acima, podemos até utilizar shellscript para criar o
+bootstrap. Pouco me importa, contanto que tenhamos algo gerando
+gptassembly/gvm corretamente, bem feito ou mal feito, mas sem maiores
+problemas.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000335.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000355.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

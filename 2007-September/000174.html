@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FNovas_modifica%3DE7%3DF5es_no_reposit%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF3rio_/_teste_no_kubuntu%3F%3D&In-Reply-To=%3C92b9a8820709191642y26dfd35dha0d3148826bbd9d5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000173.html">
+   <LINK REL="Next"  HREF="000175.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Novas modificações no repositório / teste no kubuntu</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FNovas_modifica%3DE7%3DF5es_no_reposit%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF3rio_/_teste_no_kubuntu%3F%3D&In-Reply-To=%3C92b9a8820709191642y26dfd35dha0d3148826bbd9d5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Novas modificações no repositório / teste no kubuntu">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Setembro 20 01:42:49 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000173.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000175.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/19/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> SHOW!
+</I>&gt;<i>
+</I>&gt;<i> 99%
+</I>&gt;<i>
+</I>&gt;<i> Só não eh 100%, pq na saida do make deu uns caracteres estranho.
+</I>&gt;<i>
+</I>
+Ah sim. Tem mais esses dois arquivos para converter: lib/base.gpt e
+lib/Makefile.am
+Quando chegar em casa, faço isso :)
+
+&gt;<i>
+</I>&gt;<i> E outra. Teria como tirar a dependência do nasm para compilação dos .gpt?
+</I>
+Ter tem...
+
+&gt;<i> Como o publico-alvo são iniciantes, isso pode atrapalhar, principalmente
+</I>&gt;<i> considerando qm usar conexão discada.
+</I>
+Bom, o nasm é super pequeno:
+
+$ du -h /usr/bin/nasm
+252K    /usr/bin/nasm
+
+Além dele, é provavel que o pacote venha com o manual (e outros
+pequenos arquivos de texto, no máximo) e o ndisasm:
+
+$ du -h /usr/bin/ndisasm
+92K     /usr/bin/ndisasm
+
+A soma disso deve dar, aproximadamente o tamanho do pacote.
+
+A título de curiosidade, o GPT, por outro lado, é bem maior. Fazendo
+um strip no executável final, linkando dinâmica e levando em
+consideração as bibliotecas linkadas dinamicamente:
+
+$ strip gpt
+$ ldd gpt
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libgcc_s.so.1 =&gt; /lib/libgcc_s.so.1 (0xb7f7c000)
+        libpcrecpp.so.0 =&gt; /usr/lib/libpcrecpp.so.0 (0xb7f74000)
+        libpcre.so.0 =&gt; /usr/lib/libpcre.so.0 (0xb7f56000)
+        libstdc++.so.6 =&gt; /usr/lib/libstdc++.so.6 (0xb7e88000)
+        libm.so.6 =&gt; /lib/tls/libm.so.6 (0xb7e65000)
+        libc.so.6 =&gt; /lib/tls/libc.so.6 (0xb7d36000)
+        /lib/ld-linux.so.2 (0xb7fa3000)
+
+Eis o resultado final:
+
+$ du -h gpt
+1.3M    gpt
+
+Pois bem, não acho que remover o nasm ajude na solução deste problema
+de transferência.
+
+Inclusive, eu não quis gerar o executável direto porque achei
+interessante poder mostrar o código assembly do algoritmo do usuário.
+Era algo que eu, pessoalmente, ia gostar muito de ver. O código gerado
+não tá bom porque eu não tive tempo de identar e deixar ele bonito,
+mas pelo menos tá aí. Acho que mostrar o código textual em assembly é
+melhor do que fazer um disasm do executável, caso o usuário queira ver
+no que o algoritmo dele é transformado.
+
+&gt;<i> Parabéns, Thiago por mais este trabalho.
+</I>&gt;<i>
+</I>
+Valeu :)
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000173.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000175.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

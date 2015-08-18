@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] coringa
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20coringa&In-Reply-To=%3C9a3912af0802120513q60c0371fnf3a0fbd220fcf7ee%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000742.html">
+   <LINK REL="Next"  HREF="000743.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] coringa</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20coringa&In-Reply-To=%3C9a3912af0802120513q60c0371fnf3a0fbd220fcf7ee%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] coringa">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Fevereiro 12 14:13:14 CET 2008</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000742.html">[gpt-usuarios] Retornando ao projeto...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000743.html">[gpt-usuarios] coringa
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#738">[ date ]</a>
+              <a href="thread.html#738">[ thread ]</a>
+              <a href="subject.html#738">[ subject ]</a>
+              <a href="author.html#738">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Oi....
+
+&gt;<i> Posso estar enganado, mas acho que a nível de gptassembly não temos
+</I>&gt;<i> problemas para implementar as atribuições.
+</I>&gt;<i>
+</I>
+|<i> &gt; Sério? Fazer um coringa receber uma estrutura, matriz, valor primitivo
+</I>|<i> &gt; qualquer (como real), enfim...não traz problemas para a VM?
+</I>
+Sinceramente, eu não lembro bem desse ponto, mas &quot;acho&quot; que a idéia erla que
+sempre o pointer seria um ponteiro, independente do tipo de dado. Mas não
+tenho certeza disso (isso que dá deixar threads pendentes há meses hehehe).
+
+&gt;<i> Quem sabe &quot;tipo janela é pointer;&quot; ? Já temos o pointer. Meu receio
+</I>&gt;<i> &gt; basicamente é que, por enquanto, não tem problema de aproximarmos um
+</I>&gt;<i> pointer
+</I>&gt;<i> &gt; para inteiro, mas vai que em alguma arquitetura isso não seja correto.
+</I>&gt;<i> &gt; Lembro que trabalhei com porte de aplicativos do IA32 para o IA64 em
+</I>&gt;<i> 2001 e
+</I>&gt;<i> &gt; uma das regras era essa (nunca aproximar um pointer para inteiro e
+</I>&gt;<i> &gt; vice-versa).
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Podemos ter um tipo &quot;ponteiro&quot; mapeando para pointer. Eu imagino que
+</I>&gt;<i> ele seria um &quot;coringa&quot; mas sem a capacidade de ser lvalue em portugol,
+</I>&gt;<i> já que não temos nenhum meio de adquirir os endereços das variáveis.
+</I>
+
+Isso mesmo.
+
+Isso me leva a outro ponto: precisamos resolver como faremos callbacks.
+
+
+Você poderia falar mais sobre isso ???
+
+&gt;<i> &gt; O motivo real, então, do operador &quot;tipo&quot;, é auxiliar a
+</I>&gt;<i> &gt; &gt; criação de tipos nos bindings, especialmente para bibliotecas que se
+</I>&gt;<i> &gt; &gt; utilizam muito de typedefs para ponteiros, de forma segura.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Esse ponto eu não entendi...
+</I>&gt;<i>
+</I>&gt;<i> Eu tentei fazer um resumo de tudo :)
+</I>&gt;<i> Quis dizer que o propósito do &quot;tipo&quot; é auxiliar os bindings. Imagine
+</I>&gt;<i> fazer um binding para gtk_window_set_title() e gtk_button_pressed():
+</I>&gt;<i>
+</I>&gt;<i> void gtk_window_set_title(GtkWindow *window, const gchar *title);
+</I>&gt;<i> void gtk_button_pressed(GtkButton *button);
+</I>&gt;<i>
+</I>&gt;<i> A tabela de símbolos da biblioteca teria:
+</I>&gt;<i>
+</I>&gt;<i> tipo GtkWindow é ponteiro;
+</I>&gt;<i> tipo GtkButton é ponteiro;
+</I>&gt;<i>
+</I>&gt;<i> procedimento gtk_window_set_title(GtkWindow window, literal titulo)
+</I>&gt;<i> procedimento gtk_button_pressed(GtkButton button)
+</I>&gt;<i> --------
+</I>&gt;<i>
+</I>&gt;<i> Dessa forma, o compilador pode capturar erros como:
+</I>&gt;<i>
+</I>&gt;<i> variável janela : GtkWindow;
+</I>&gt;<i>
+</I>&gt;<i> gtk_button_pressed(janela); //erro! esperando tipo GtkButton
+</I>
+
+Ah sim. Perfeito !!!!
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20080212/53d52f80/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20080212/53d52f80/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000742.html">[gpt-usuarios] Retornando ao projeto...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000743.html">[gpt-usuarios] coringa
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#738">[ date ]</a>
+              <a href="thread.html#738">[ thread ]</a>
+              <a href="subject.html#738">[ subject ]</a>
+              <a href="author.html#738">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

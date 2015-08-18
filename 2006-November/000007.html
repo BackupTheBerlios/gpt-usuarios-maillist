@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT no Ubuntu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C16d773090611101719n474eee37p8a4c3952e400e736%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000006.html">
+   <LINK REL="Next"  HREF="000010.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT no Ubuntu</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C16d773090611101719n474eee37p8a4c3952e400e736%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT no Ubuntu">thiago.silva em kdemail.net
+       </A><BR>
+    <I>Sábado Novembro 11 02:19:17 CET 2006</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000006.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000010.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá Adorilson,
+
+On 11/10/06, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> Olá Tiago,
+</I>&gt;<i>
+</I>&gt;<i> fantástica sua ferramenta, era algo assim mesmo que está procurando.
+</I>
+Bacana! :)
+
+&gt;<i> No Windows executei o gpt sem problemas, mas estou tendo dificuldade em
+</I>&gt;<i> instalar no Ubuntu.
+</I>&gt;<i>
+</I>&gt;<i> Na execucao do ./configure ele nao encontrou o antlr
+</I>&gt;<i>
+</I>&gt;<i> checking for antlr... no
+</I>&gt;<i> ./configure: line 19748: antlr-config: command not found
+</I>&gt;<i> ./configure: line 19749: antlr-config: command not found
+</I>&gt;<i> configure: error:
+</I>&gt;<i>     O programa &quot;antlr&quot; nao foi encontrado no seu sistema (PATH).
+</I>&gt;<i>     GPT precisa do ANTLR (versao 2.7.5) instalado.
+</I>&gt;<i>     Baixe em: <A HREF="http://www.antlr.org">http://www.antlr.org</A>
+</I>&gt;<i>
+</I>&gt;<i> então instalei diretamente do repositorio do Ubuntu, mas o erro continuou.
+</I>&gt;<i> Por algum motivo q desconheço, ele cria um arquivo runantlr em /usr/bin, qd
+</I>&gt;<i> o padrao seria antlr, entao apenas criei um link q funcionou. Talvez vc
+</I>&gt;<i> pudesse documentar isso em algum lugar.
+</I>
+Isso, eu notei o mesmo sintoma quando instalei em um Debian. Não estou
+no sistema agora, mas pelo que lembro, não adicionaram o antlr-config,
+e modificaram o nome do executável 'antlr' no pacote.
+
+&gt;<i> Na verdade, pra ser mais exato, a saída depois de criado o link foi essa:
+</I>&gt;<i>
+</I>&gt;<i> checking for antlr... /usr/bin/antlr
+</I>&gt;<i> ./configure: line 19748: antlr-config: command not found
+</I>&gt;<i> ./configure: line 19749: antlr-config: command not found
+</I>&gt;<i> checking for pcre-config... yes
+</I>&gt;<i> Usage: pcre-config [--prefix] [--exec-prefix] [--version] [--libs]
+</I>&gt;<i> [--libs-posix] [--cflags] [--cflags-posix]
+</I>&gt;<i> configure: creating ./config.status
+</I>&gt;<i> config.status: creating Makefile
+</I>&gt;<i> config.status: creating src/Makefile
+</I>&gt;<i> config.status: creating doc/Makefile
+</I>&gt;<i> config.status: creating doc/man/Makefile
+</I>&gt;<i> config.status: creating exemplos/Makefile
+</I>&gt;<i> config.status: creating lib/Makefile
+</I>&gt;<i> config.status: creating src/modules/Makefile
+</I>&gt;<i> config.status: creating src/modules/parser/Makefile
+</I>&gt;<i> config.status: creating src/modules/interpreter/Makefile
+</I>&gt;<i> config.status: creating src/modules/c_translator/Makefile
+</I>&gt;<i> config.status: creating src/modules/x86/Makefile
+</I>&gt;<i> config.status: creating config.h
+</I>&gt;<i> config.status: config.h is unchanged
+</I>&gt;<i> config.status: executing depfiles commands
+</I>&gt;<i> configure:
+</I>&gt;<i> Sumario:
+</I>&gt;<i>         antlr           : antlr
+</I>&gt;<i>         antlr includes  :
+</I>&gt;<i>         antr lib        :
+</I>&gt;<i>
+</I>&gt;<i>         pcre includes   :
+</I>&gt;<i>         pcre lib        : -L/usr/lib -lpcrecpp
+</I>&gt;<i>
+</I>&gt;<i>         CXXFLAGS        : -O2
+</I>&gt;<i>         MS Windows      : no
+</I>&gt;<i>
+</I>&gt;<i> Tudo certo? Ou temos problemas?
+</I>
+Até aqui, tudo certo, contanto que os includes do antlr estejam em um
+local padrão (ex. /usr/include/antlr), assim como a antlr.a (ex.
+/usr/lib/antlr.a). Acredito que não terá problemas com isso no Ubuntu:
+até onde eu sei, /usr é utilizado pra virtualmente tudo.
+
+&gt;<i> Considerando q está certo, executo o make, e tenho a seguinte saida:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em cti5</A>:~/uern/7_periodo/estudo_individualizado/gpt-1.0$
+</I>&gt;<i> make
+</I>&gt;<i> make  all-recursive
+</I>&gt;<i> make[1]: Entrando no diretório
+</I>&gt;<i> `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-
+</I>&gt;<i> 1.0'
+</I>&gt;<i> Making all in src
+</I>&gt;<i> make[2]: Entrando no diretório
+</I>&gt;<i> `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src'
+</I>&gt;<i> Making all in modules
+</I>&gt;<i> make[3]: Entrando no diretório
+</I>&gt;<i> `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-
+</I>&gt;<i> 1.0/src/modules'
+</I>&gt;<i> Making all in parser
+</I>&gt;<i> make[4]: Entrando no diretório
+</I>&gt;<i> `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src/modules/parser'
+</I>&gt;<i> antlr ./lexer.g
+</I>&gt;<i> Running java antlr.Tool $* with /usr/share/java/antlr.jar appended to the
+</I>&gt;<i> CLASSPATH variable
+</I>&gt;<i> ANTLR Parser Generator   Version 2.7.6 (20060511)   1989-2005
+</I>&gt;<i> error: Token stream error reading grammar(s):
+</I>&gt;<i> ./lexer.g:52:10: unexpected char: 'r'
+</I>&gt;<i> TokenStreamException: unexpected char: 0xFFFD
+</I>
+Isso é estranho...
+Vc está utilizando a versão 2.7.6. Não lembro se testei com esta
+versão.Darei uma olhada. Te posso adiantar duas coisas, no momento:
+
+1: este erro parece estar apontando para um caractere acentuado (linha
+52, coluna 10 do arquivo lexer.g). É um texto comentado, portanto, se
+quiser, pode remover o caractere e tentar novamente. Entretanto, a
+gramática da linguagem utiliza termos acentuados...talvez isso não de
+certo.
+
+2: Eu utilizo o antlr compilado pelos fontes (não utilizo pacotes).
+Tbm, há alguns meses, testei a compilação do GPT utilizando um Debian
+e o antlr do repositório do Debian. Pelo que lembro, funcionou, mas
+não me recordo que versão era. Te poderei informar isso semana que
+vem.
+
+Até eu ter em mãos um ubuntu (fiz pedidos de alguns CD's de kubuntu,
+devem estar chegando), não tenho como testar nesta distribuição. Mas
+investigarei melhor esse problema.
+
+&gt;<i> Esses erros tem relacao com o antlr, ou algum coisa no código?
+</I>
+O antlr parece estar reclamando de caracteres acentuados no código fonte.
+
+&gt;<i> Parabéns pelo projeto. Tem tudo para ser um sucesso.
+</I>
+Obrigado :)
+
+-- 
+Thiago Silva
++Blog: www.sourcecraft.info/blog
++Jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000006.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000010.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

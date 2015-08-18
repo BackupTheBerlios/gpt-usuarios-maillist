@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Vetores/matrizes no v2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C92b9a8820710160719n4bcbaab0j6c7806326703e6bf%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000340.html">
+   <LINK REL="Next"  HREF="000360.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Vetores/matrizes no v2</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C92b9a8820710160719n4bcbaab0j6c7806326703e6bf%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Vetores/matrizes no v2">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 16:19:57 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000340.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000360.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#357">[ date ]</a>
+              <a href="thread.html#357">[ thread ]</a>
+              <a href="subject.html#357">[ subject ]</a>
+              <a href="author.html#357">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/15/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; Podemos ter checagem de tamanho dos vetores matrizes (bound check)?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Claro que podemos ter... o problema é que isso não foi pensado e a
+</I>&gt;<i> documentação que temos não prevê isso até o momento...
+</I>&gt;<i>
+</I>
+Humm...acho que isso vai ser importante.
+
+&gt;<i> &gt; função f( v : matriz[10][2] de inteiros) ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Gostaria de poder definir assim:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; função f( v : matriz[][] de inteiros) ...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso seria BEM mais interessante (e fácil) para os iniciantes...
+</I>&gt;<i>
+</I>&gt;<i> Pensando sobre o impacto disso sobre o que temos hoje. Atualmente, as
+</I>&gt;<i> variáveis são apenas uma área de memória alocada (que a VM não tem
+</I>&gt;<i> consciência do que é), a idéia era que arrays e structs seguissem essa mesma
+</I>&gt;<i> idéia.
+</I>&gt;<i>
+</I>&gt;<i> A VM tem suporte a obter endereços de dados e fazer deslocamentos. Com isso
+</I>&gt;<i> ela tem capacidade de endereças structs e arrays (assumindo arrays de
+</I>&gt;<i> tamanho pré-definidos).
+</I>&gt;<i>
+</I>&gt;<i> Para termos arrays de tamanhos variáveis eu &quot;acho&quot; que precisamos de uma
+</I>&gt;<i> estrutura similar ao que está sendo planejado para strings. Strings na VM
+</I>&gt;<i> hoje nada mais são do que um ponteiro para um tipo de dado de C++ como
+</I>&gt;<i> std::string. Arrays teriam que ser um ponteiro para um tipo de dado (array)
+</I>&gt;<i> também.
+</I>&gt;<i>
+</I>
+Acho que isso daria a flexibilidade que estamos precisando. Estou
+montando um email sobre a semântica dos tipos e as relações entre
+elas, para discutirmos e deixar claro os requisitos e implicações de
+operações sobre os tipos.
+
+&gt;<i> Uma questão apenas: eu poderia ter a linha 1 com 10 colunas e a linha 2 com
+</I>&gt;<i> 12 colunas ?
+</I>
+Acho que não...
+
+&gt;<i> &gt; 2) O que significa matriz[][]? A omissão do tamanho das dimensões só é
+</I>&gt;<i> &gt; permitida em declaração de parâmetros? Ou variáveis globais/locais
+</I>&gt;<i> &gt; podem omitir o tamanho também?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Eu acharia interessante colocar esse suporte em tudo, inclusive na
+</I>&gt;<i> declaração.
+</I>
+Inclusive na declaração de variáveis?
+
+variáveis
+  v : matriz[][] de inteiros;
+fim-variáveis
+?
+
+Até este email, eu estava pensando em sempre especificar o tamanho nas
+declarações, exceto na lista de parâmetros. Pois assim, não seria
+necessário criar uma versão diferente da função para cada arranjo de
+tamanho da matriz
+
+função f(v : matriz[1] de inteiros) ...
+função f(v : matriz[2] de inteiros) ...
+função f(v : matriz[3] de inteiros) ...
+
+Bastaria
+
+função f(v : matriz[] de inteiros) ...
+
+E a função poderia, em tempo de execução, obter o tamanho da matriz.
+
+&gt;<i> &gt; 3) Vamos permitir que funções retornem vetores/matrizes? (atualmente,
+</I>&gt;<i> &gt; isso não é permitido)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso seria interessante...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; 4) Vamos permitir que vetores/matrizes sejam lvalues válidos?
+</I>&gt;<i> &gt; Atribuições fariam cópias profundas dos elementos?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Acho que se o item 3 funciona, o 4 &quot;é o de menos&quot; hehehe.
+</I>&gt;<i>
+</I>
+É, hehe, inverti a ordem.
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000340.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000360.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#357">[ date ]</a>
+              <a href="thread.html#357">[ thread ]</a>
+              <a href="subject.html#357">[ subject ]</a>
+              <a href="author.html#357">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

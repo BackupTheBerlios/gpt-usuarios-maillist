@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSugest%3DE3o_sobre_como_organizar_os_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fexemplos_de_tradu%3DE7%3DE3o%3F%3D&In-Reply-To=%3C92b9a8820709101044i298bc330ha570e2dafa208bd9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSugest%3DE3o_sobre_como_organizar_os_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fexemplos_de_tradu%3DE7%3DE3o%3F%3D&In-Reply-To=%3C92b9a8820709101044i298bc330ha570e2dafa208bd9%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Setembro 10 19:44:21 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000086.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000092.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/10/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi...
+</I>&gt;<i>
+</I>&gt;<i> Eu queria uma sugestão sobre como organizar os exemplo de tradução de gpt
+</I>&gt;<i> para CI, incluíndo aí a AST.
+</I>&gt;<i>
+</I>&gt;<i> Como gerar uma AST no wiki? Tem como gerar a estrutura de uma árvore a
+</I>&gt;<i> partir de comandos wiki, ou eu vou ter que gerar um desenho em algum editor
+</I>&gt;<i> gráfico para cada AST ??
+</I>&gt;<i>
+</I>&gt;<i> Sugestões serão muito bem vindas, inclusive ASCII arts (se não houver nada
+</I>&gt;<i> mais fácil e rápido) :-)
+</I>&gt;<i>
+</I>
+Pois é, acho que desenhar fica muito chato.
+
+Se você escrever a AST como se fosse Lisp, pra mim tá ótimo.  Para
+exemplificar, utilize ./configure --enable-debug=full na configuração
+do gpt. Após compilar, crie um algoritmo e utilize o gpt com a opção
+-D. Isso exibirá a AST. Se você identar o resultado, na minha opinião,
+fica bacana.
+
+Como exemplo, utilizei gpt -D em um algoritmo aqui, copiei a AST e
+identei ela. To passando o algoritmo e a ast como anexo, para ver se
+serve de inspiração.
+
+O dump da ast é algo bem informal, para nós seres humanos, portanto, a
+gente não vê o nome dos tokens, só a representação textual deles.
+Ainda, releve o fato de alguns tokens terminarem em  &quot;!&quot; (como
+primitivo!). Eu fiz isso antigamente para diferenciar tokens reais de
+tokens virtuais. E, também, nós de literais não aparecem cercados por
+&quot;&quot; (não lembro bem o porque disso), portanto, não é bem um exemplo a
+ser seguido neste caso ;)
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+-------------- Próxima Parte ----------
+Um anexo não-texto foi limpo...
+Nome: bottles.gpt
+Tipo: application/octet-stream
+Tamanho: 1708 bytes
+Descrição: não disponível
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/4fc63407/attachment.obj">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/4fc63407/attachment.obj</A>&gt;
+-------------- Próxima Parte ----------
+Um anexo não-texto foi limpo...
+Nome: bottles.ast
+Tipo: application/octet-stream
+Tamanho: 1501 bytes
+Descrição: não disponível
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/4fc63407/attachment-0001.obj">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/4fc63407/attachment-0001.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000086.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000092.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

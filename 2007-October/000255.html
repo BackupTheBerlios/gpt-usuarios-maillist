@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20G-Portugol%201.0%20UTF-8%20%28para%20Ubuntu%20e%20demais%0A%09distros%29&In-Reply-To=%3C76152eba0710061313u51fad76dk5e9ed7486a564d4f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000231.html">
+   <LINK REL="Next"  HREF="000260.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20G-Portugol%201.0%20UTF-8%20%28para%20Ubuntu%20e%20demais%0A%09distros%29&In-Reply-To=%3C76152eba0710061313u51fad76dk5e9ed7486a564d4f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)">adorilson em gmail.com
+       </A><BR>
+    <I>Sábado Outubro  6 22:13:08 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000231.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais distros)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000260.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#255">[ date ]</a>
+              <a href="thread.html#255">[ thread ]</a>
+              <a href="subject.html#255">[ subject ]</a>
+              <a href="author.html#255">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tou sumido, mas tou vivo.
+
+On 10/4/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Acabei de criar um pacote, baseado em UTF-8 para testar em sistemas
+</I>&gt;<i> como Ubuntu. Ele pode ser baixado em:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz">http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz</A>
+</I>
+
+Usando este aí, tive a seguinte saída no make:
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em genesis</A>:~/downloads/gpt-1.0$ make
+make  all-recursive
+make[1]: Entrando no diretório `/home/adorilson/downloads/gpt-1.0'
+Making all in src
+make[2]: Entrando no diretório `/home/adorilson/downloads/gpt-1.0/src'
+Making all in modules
+make[3]: Entrando no diretório `/home/adorilson/downloads/gpt-1.0
+/src/modules'
+Making all in parser
+make[4]: Entrando no diretório `/home/adorilson/downloads/gpt-1.0
+/src/modules/parser'
+make[4]: *** Sem regra para processar o alvo
+`MismatchedUnicodeCharException.cpp', necessário por `all'.  Pare.
+make[4]: Saindo do diretório `/home/adorilson/downloads/gpt-1.0
+/src/modules/parser'
+make[3]: ** [all-recursive] Erro 1
+make[3]: Saindo do diretório `/home/adorilson/downloads/gpt-1.0/src/modules'
+make[2]: ** [all-recursive] Erro 1
+make[2]: Saindo do diretório `/home/adorilson/downloads/gpt-1.0/src'
+make[1]: ** [all-recursive] Erro 1
+make[1]: Saindo do diretório `/home/adorilson/downloads/gpt-1.0'
+make: ** [all] Erro 2
+
+Já usando a versao do SVN, baixada agora pouco, a instalação foi um sucesso,
+seguindo o arquivo HACKING (apenas fiz uma correção nele, adicionando como
+instalar o subversion) , como pode ser comprovada abaixo:
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt# gpt -version
+GPT - Compilador G-Portugol
+Versão  : 1.0
+Website : <A HREF="http://gpt.berlios.de">http://gpt.berlios.de</A>
+Copyright (C) 2003-2006 Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">thiago.silva em kdemail.net</A>&gt;
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt/exemplos# gpt olamundo.gpt
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt/exemplos# ls
+Makefile  Makefile.am  Makefile.in  olamundo  olamundo.gpt
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt/exemplos# ./olamundo
+Olá Mundo!
+
+Porém, se inserirmos alguma erro, umas das mensagens ainda vai com caracter
+alienigina.
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em genesis</A>:/home/adorilson/trunk/gpt/exemplos# gpt olamundo.gpt
+olamundo.gpt:1 - Esperando &quot;algoritmo&quot;, encontrado a palavra-chave
+&quot;vari&#65533;veis&quot;.
+olamundo.gpt:1 - Esperando uma variável após &quot;variáveis&quot;.
+
+E tem mais (pelo q puder perceber) , isto só acontece se o erro for uma
+palavra reservada, porém ao testar com um palavra qq, me veio a seguinte
+dúvida: &quot;Se o gpt suporta palavras reservadas com acentos, pq nao posso usar
+meus identificadores assim tb?&quot;
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em genesis</A>:~/trunk/gpt/exemplos$ gpt olamundo.gpt
+olamundo.gpt:1 - Identificador &quot;variável&quot; não pode ter caracteres
+especiais..
+olamundo.gpt:1 - Esperando &quot;algoritmo&quot;, encontrado &quot;variável&quot;.
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em genesis</A>:~/trunk/gpt/exemplos$ gpt olamundo.gpt
+olamundo.gpt:1 - Identificador &quot;avião&quot; não pode ter caracteres especiais..
+olamundo.gpt:1 - Esperando &quot;algoritmo&quot;, encontrado &quot;avião&quot;.
+
+
+Se estiver tudo ok, faço um release 1.1.
+&gt;<i>
+</I>
+Neste caso, nao seria mais adequado 1.0.1, já que ela nao contém nada de
+novo?
+
+Feeedbacks são bem vindos :)
+
+
+Taí o meu. :)
+
+--
+&gt;<i> Thiago Silva,
+</I>
+
+
+-- 
+Adorilson Bezerra
+Organização do III EPSL: &quot;Além das Redes de Colaboração&quot;
+07 a 10 de novembro de 2007 - CEFET-RN (Unidade Sede)
+<A HREF="http://rn.softwarelivre.org">http://rn.softwarelivre.org</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071006/ce4175d4/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071006/ce4175d4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000231.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais distros)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000260.html">[gpt-usuarios] G-Portugol 1.0 UTF-8 (para Ubuntu e demais	distros)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#255">[ date ]</a>
+              <a href="thread.html#255">[ thread ]</a>
+              <a href="subject.html#255">[ subject ]</a>
+              <a href="author.html#255">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

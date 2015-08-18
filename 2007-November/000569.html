@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Comentários sobre os códigos / planejamento
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C92b9a8820711062057q29d670ddt8d1ebef95622c0c7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000568.html">
+   <LINK REL="Next"  HREF="000570.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Comentários sobre os códigos / planejamento</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C92b9a8820711062057q29d670ddt8d1ebef95622c0c7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Comentários sobre os códigos / planejamento">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Novembro  7 05:57:12 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000568.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000570.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#569">[ date ]</a>
+              <a href="thread.html#569">[ thread ]</a>
+              <a href="subject.html#569">[ subject ]</a>
+              <a href="author.html#569">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Nov 6, 2007 10:29 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Como disse anteriormente (e acho que discutimos há um tempo atrás),
+</I>&gt;<i> &gt; acho melhor criarmos a AST.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> A gente tinha conversado e, pelo que eu me lembre, a gente optou por criar a
+</I>&gt;<i> AST quando fosse necessário (visualização de fluxogramas ou outra ferramenta
+</I>&gt;<i> fora do escopo da V2). Como para a Gepeto isso não era necessário a gente
+</I>&gt;<i> cortou.
+</I>
+Acho que houve falha de comunicação. Citando um email seu:
+
+&quot;[...] Por isso acho que devemos seguir a sua sugestão e manter a
+geração da AST.&quot;
+
+Era nisso que eu estava me baseando...
+
+Sim, posteriormente, eu disse isso em outro email:
+
+&quot;Quanto a tradução dirigida pela sintaxe, não sei. Talvez possamos
+utilizá-la para gerar código rapidamente, mas no fim das contas, acho
+que será interessante termos a AST, especialmente para fazermos coisas
+como o fluxograma do algoritmo do usuário, de forma rápida.&quot;
+
+O que eu quis dizer é: se quiser prototipar algo rapidamente sem AST,
+ok. Mas com fluxograma ou não, acho que ast é importante no front-end
+e, no código oficial, ela deve estar presente.
+
+Depois, acho que vc comentou que queria deixar claro que geração de
+código não precisava de ast e eu respondi &quot;blz&quot;. Talvez esse &quot;blz&quot;
+tenha sido ambiguo.
+
+&gt;<i> &gt; O modelo seguiria, grosso modo, o flow do
+</I>&gt;<i> &gt; gpt 1.0, onde o parser cria a árvore, e gramáticas de ast diversas
+</I>&gt;<i> &gt; recebem ela como parâmetro para fins diversos (como análise semântica,
+</I>&gt;<i> &gt; geração de código, etc).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Parece ser uma estrutura legal. Só fico chateado por colocar algumas horas
+</I>&gt;<i> de trabalho fora (+- 20 horas). Mas, se é para o bem geral do projeto,
+</I>&gt;<i> reorganizamos então :-)
+</I>&gt;<i>
+</I>
+Perdão pelas coisas terem ficado um pouco &quot;soltas&quot;.
+
+&gt;<i> Eu só saliento que talvez seria uma boa você dar uma olhada na gramática da
+</I>&gt;<i> V2 por ela está quase completa. Pelo que eu me lembre falta o parser da
+</I>&gt;<i> inicialização de dados na declaração, matrizes e structs. Aliás, acho que
+</I>&gt;<i> para matrizes e structs o parser está ok, mas dá erro porque o compilador
+</I>&gt;<i> não tem suporte correto a isso. Eu acho que seria um desperdício colocar
+</I>&gt;<i> todo o parser da V2 fora :-)
+</I>
+Concordo. Estou juntando peças aqui e ali.
+
+&gt;<i> Pode deixar que da minha parte eu cuido hehehe. Muitas vezes eu prefiro
+</I>&gt;<i> comentar um código e deixar lá um tempo do que ter que refazê-lo
+</I>&gt;<i> posteriormente. Sim, eu sei que o svn guarda as versões antigas, mas nem
+</I>&gt;<i> sempre eu tenho acesso a internet...
+</I>
+Ok
+
+&gt;<i> Concordo sim. O que eu fiz é bem simples, mas funciona e já quebrou um galho
+</I>&gt;<i> hehehe. Cada alteração no compilador eu gastava uns 30 minutos para ver se a
+</I>&gt;<i> geração de código estava ok. Agora levo 30 segundos :-)
+</I>&gt;<i>
+</I>
+Ok. Eu vou dar uma olhada assim que puder em como algumas
+implementações de linguagens (PHP, spidermonkey, etc) utilizam e criam
+testes.
+
+&gt;<i> Teoricamente o lexer está ok. Falta implementar corretamente o asm..fim-asm
+</I>&gt;<i> que eu não consegui fazer sem inserir { e }. Além disso eu proponho
+</I>&gt;<i> começarmos a utilizar os identificadores em inglês quando possível.
+</I>&gt;<i>
+</I>
+Que identificadores? Variáveis C++?
+
+&gt;<i> De qualquer forma seria bom rever os tokens para ver se há coisas que podem
+</I>&gt;<i> ser retiradas ou melhoradas.
+</I>&gt;<i>
+</I>
+Eu dei uma limpa no lexer e refatorei algumas coisas. Assim que
+estiver contente, commito.
+
+&gt;<i> E temos boa parte das rotinas para emissão de mnemônicos (bytecodes) para o
+</I>&gt;<i> gptc. Quando você terminar a geração da AST eu já começo a inserir a geração
+</I>&gt;<i> dos mnemônicos novamente.
+</I>
+Ok.
+
+&gt;<i> Confesso que a abordagem que utilizei não era o que eu gostaria, mas
+</I>&gt;<i> sinceramente eu precisava ver algo funcional desse trabalho. Estamos na
+</I>&gt;<i> teoria e documentação há um bom tempo e eu precisava ver algo funcional para
+</I>&gt;<i> me motivar hehehe.
+</I>
+Hehe. Ok.
+
+&gt;<i> Eu não pretendo manter (obviamente não tem mais porque manter) mas eu vou
+</I>&gt;<i> continuar utilizando o compilador da V2 que temos porque programar em
+</I>&gt;<i> GptAssembly diretamente dá bastante trabalho. Com isso eu uso o GptC atual
+</I>&gt;<i> (enquanto não temos a sua versão funcional) para gerar testes para o GptASM
+</I>&gt;<i> e GptVM.
+</I>
+Ok.
+
+&gt;<i> De qualquer forma, só fiquei com dúvida em relação a estrutura de
+</I>&gt;<i> diretórios...
+</I>&gt;<i>
+</I>&gt;<i> gpt2
+</I>&gt;<i> gpt2/gptc/src
+</I>&gt;<i> gpt2/gptc/tests
+</I>&gt;<i> gpt2/gptasm/src
+</I>&gt;<i> gpt2/gptasm/tests
+</I>&gt;<i> gpt2/gptvm/src
+</I>&gt;<i> gpt2/gptvm/tests
+</I>&gt;<i> gpt2/common/src
+</I>&gt;<i> gpt2/common/tests   &lt;-- testes unitários eu acho...
+</I>&gt;<i>
+</I>&gt;<i> Ou seria algo como:
+</I>&gt;<i>
+</I>&gt;<i> gpt2
+</I>&gt;<i> gpt2/src
+</I>&gt;<i>
+</I>&gt;<i> gpt2/src/gptc
+</I>&gt;<i> gpt2/src/gptasm
+</I>&gt;<i> gpt2/src/gptvm
+</I>&gt;<i> gpt2/src/commongpt2/tests/
+</I>&gt;<i> gpt2/tests/gptc
+</I>&gt;<i> gpt2/tests/gptasm
+</I>&gt;<i> gpt2/tests/gptvm
+</I>&gt;<i> gpt2/tests/common
+</I>&gt;<i>
+</I>&gt;<i> Eu acho a segunda abordagem mais organizada, mas como disse antes, não sou
+</I>&gt;<i> muito bom em organizar essas coisas hehehe.
+</I>
+
+Não sei. Por mim tanto faz. Se o que escolhermos der dor de cabeça
+mais pra frente, a gente tenta outra coisa.
+
+Ainda, teriamos diretórios como &quot;doc&quot;, e precisariamos de um lugar
+para códigos fontes g-portugol (ex. gptlib).
+
+
+gpt2
+gpt2/gptc/src
+gpt2/gptc/doc
+gpt2/gptc/tests
+gpt2/gptasm/src
+gpt2/gptasm/doc
+gpt2/gptasm/tests
+gpt2/gptvm/src
+gpt2/gptvm/tests
+gpt2/gptlib/src
+gpt2/gptlib/doc
+gpt2/gptlib/tests
+gpt2/common/src
+gpt2/common/tests
+
+ou
+
+gpt2
+gpt2/src
+gpt2/src/gptc
+gpt2/src/gptasm
+gpt2/src/gptvm
+gpt2/src/gptlib
+gpt2/src/common
+gpt2/doc/
+gpt2/doc/gptc
+gpt2/doc/gptasm
+gpt2/doc/gptvm
+gpt2/doc/gptlib
+gpt2/tests/gptc
+gpt2/tests/gptasm
+gpt2/tests/gptvm
+gpt2/tests/gptlib
+gpt2/tests/common
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000568.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000570.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#569">[ date ]</a>
+              <a href="thread.html#569">[ thread ]</a>
+              <a href="subject.html#569">[ subject ]</a>
+              <a href="author.html#569">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

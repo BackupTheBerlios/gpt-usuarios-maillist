@@ -1,0 +1,77 @@
+From natanlp.lp em gmail.com  Sun May  6 05:02:56 2012
+From: natanlp.lp em gmail.com (Natan Lopes)
+Date: Sun, 6 May 2012 00:02:56 -0300
+Subject: [gpt-usuarios] GPT & GPTEditor
+Message-ID: <CAEupVUeoMA6eJZ-21ad6sDMVPzBbvSPkGGcjE8xC3_t46t1sFg@mail.gmail.com>
+
+Olá a Todos,
+
+Primeiramente gostaria de parabeniza-los pelo projeto G-Portugol...
+Mas estou com dificuldades na instalação do GPTEditor...
+Utilizo o Sistema Operacional Linux/Ubuntu Precise 12.04 i386...
+o gpt eu consegui instalar perfeitamente no mesmo, porém o GPTEditor eu
+não consigo instalar...
+sempre que executo o comando ./configure
+aparece a mensagem:
+
+checking for KDE... configure: error:
+in the prefix, you've chosen, are no KDE libraries installed. This will fail.
+So, check this please and use another prefix!
+
+Alguem sabe me responder??
+
+E pra qual sistema foi desenvolvido o GPTEditor?
+
+Qual sistema Linux/ que eu consigo instalar ele sem nenhuma dificuldade??
+
+Desde já agradeço a atenção de todos...
+Um Forte Abraço!!!
+
+From cabelotaina em gmail.com  Sun May  6 05:13:22 2012
+From: cabelotaina em gmail.com (cabelotaina)
+Date: Sun, 6 May 2012 00:13:22 -0300
+Subject: [gpt-usuarios] GPT & GPTEditor
+In-Reply-To: <CAEupVUeoMA6eJZ-21ad6sDMVPzBbvSPkGGcjE8xC3_t46t1sFg@mail.gmail.com>
+References: <CAEupVUeoMA6eJZ-21ad6sDMVPzBbvSPkGGcjE8xC3_t46t1sFg@mail.gmail.com>
+Message-ID: <CAMOUu9Jf-_qX4KUeWh1Ly4N8unkAN0iGLNW7ApG4L9Qhv+WGTQ@mail.gmail.com>
+
+Aparentemente vc precisa de instalar as bibliotecas do KDE.
+
+abs
+
+Maurilio Atila
+
+Em 6 de maio de 2012 00:02, Natan Lopes <natanlp.lp em gmail.com> escreveu:
+
+> Olá a Todos,
+>
+> Primeiramente gostaria de parabeniza-los pelo projeto G-Portugol...
+> Mas estou com dificuldades na instalação do GPTEditor...
+> Utilizo o Sistema Operacional Linux/Ubuntu Precise 12.04 i386...
+> o gpt eu consegui instalar perfeitamente no mesmo, porém o GPTEditor eu
+> não consigo instalar...
+> sempre que executo o comando ./configure
+> aparece a mensagem:
+>
+> checking for KDE... configure: error:
+> in the prefix, you've chosen, are no KDE libraries installed. This will
+> fail.
+> So, check this please and use another prefix!
+>
+> Alguem sabe me responder??
+>
+> E pra qual sistema foi desenvolvido o GPTEditor?
+>
+> Qual sistema Linux/ que eu consigo instalar ele sem nenhuma dificuldade??
+>
+> Desde já agradeço a atenção de todos...
+> Um Forte Abraço!!!
+> _______________________________________________
+> Gpt-usuarios mailing list
+> Gpt-usuarios em lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/gpt-usuarios
+>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: <https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20120506/38eab9f2/attachment.html>
+

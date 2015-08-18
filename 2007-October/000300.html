@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] ANTLR v3 - linguagem alvo
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710120642m4d4eb405pe5e94af51d380ab7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000327.html">
+   <LINK REL="Next"  HREF="000306.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] ANTLR v3 - linguagem alvo</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710120642m4d4eb405pe5e94af51d380ab7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] ANTLR v3 - linguagem alvo">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Outubro 12 15:42:31 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000327.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000306.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Primeiro um background:
+
+O antlr é uma ferramenta que gera codigo para compiladores. Dado uma
+gramatica escrita em uma linguagem própria (similar ao EBNF, mas
+extendida), o antlr gera o código para o lexer, parser e treewalkers.
+Um dos diferenciais é que ele gera código para diferentes linguagens
+(targets). Isso é, dada uma gramática T:
+
+//--------
+grammar T;
+programa : &quot;ola&quot; &quot;mundo&quot;;
+//--------
+
+O antlr pode gerar o código correspondente para diferentes linguagens,
+que representam esta gramática. Isso é relevante na escolha da
+linguagem porque, em geral, as gramáticas misturam código da linguagem
+do ANTLR e código da linguagem alvo:
+
+//--------
+grammar T;
+options {language = Python; }
+
+programa : &quot;ola&quot; &quot;mundo&quot;; { print &quot;finalizado&quot; }
+//--------
+
+O código entre chaves (print ) é código python. Então, o código da
+gramática acaba ficando muito ligado à linguagem alvo utilizada.
+
+Na versão 2, pode-se gerar código para c++, c#, Java e python, se não
+me engano. O gpt, atualmente, utiliza o antlr v2 gerando código C++, e
+provavelmente, continuará utilizando esta versão para o branch 1.x.
+
+
+Agora, estava dando uma olhada rápida na nova versão do antlr (v3) e
+notei que, por enquanto, eles suportam/citam os seguintes alvos: C,
+C#, Java, Objective-C, Python, Ruby.
+
+Ruby parece não estar completo. Python acho que está em beta.
+Objective-C eu não sei, e também não sei se é compatível com o
+gcc-objc, ou se é muito ligado à implementação do Mac. C#, acho que
+está maduro. C também. Java, acredito que seja o alvo principal, e
+referência para as outras.
+
+Com isso em vista, e sabendo que pretendo utilizar o antlr3 para o gpt
+v2, temos que decidir qual destas linguagens vamos utilizar para o
+novo compilador do gpt.
+
+Estava pensando em escolher, inicialmente, uma dessas linguagens
+apenas para bootstrap. Depois, poderiamos tentar criar um target do
+ANTLR para o g-portugol. Daí, escreveriamos o compilador com ANTLR
+gerando código g-portugol, e teriamos um &quot;self-host compiler&quot;. Acho
+que seria um bom exercício para a linguagem.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000327.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000306.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

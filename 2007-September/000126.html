@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_endere%3DE7amento_de_vari%3DE1v%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Feis_locais_%3D28procedimento_e_fun%3DE7%3DF5es%3D29%3F%3D&In-Reply-To=%3C92b9a8820709111757w480adbb5v514529219d4a9a40%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000124.html">
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_endere%3DE7amento_de_vari%3DE1v%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Feis_locais_%3D28procedimento_e_fun%3DE7%3DF5es%3D29%3F%3D&In-Reply-To=%3C92b9a8820709111757w480adbb5v514529219d4a9a40%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Setembro 12 02:57:48 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000124.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000129.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> // Exemplo em g-portugol
+</I>&gt;<i>
+</I>&gt;<i> algoritmo exemplo;
+</I>&gt;<i> início
+</I>&gt;<i>     soma( 2, 7 );
+</I>&gt;<i> fim
+</I>&gt;<i> procedimento soma( x: inteiro, y: inteiro )
+</I>&gt;<i> início
+</I>&gt;<i>     imprima( &quot;A soma é: &quot;, x + y );
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> // Exemplo em CI
+</I>&gt;<i>
+</I>&gt;<i> // soma( 2, 7 );
+</I>&gt;<i> param 2
+</I>&gt;<i> param 7
+</I>&gt;<i> pcall soma, 2
+</I>&gt;<i>
+</I>&gt;<i> stop
+</I>&gt;<i> proc soma
+</I>&gt;<i>  t1 := __SP + 0 // primeira variável
+</I>&gt;<i>  t1 := *t1
+</I>&gt;<i>  t2 := __SP + 4 // segunda variável
+</I>&gt;<i>  t2 := *t2
+</I>&gt;<i>
+</I>&gt;<i>  // imprima( &quot;A soma é: &quot;, x + y );
+</I>&gt;<i>  param &quot;A soma é: &quot;
+</I>&gt;<i>  t3 := t1 + t2
+</I>&gt;<i>  param t3
+</I>&gt;<i>  pcall imprima, 2
+</I>&gt;<i>
+</I>&gt;<i> end-proc
+</I>&gt;<i>
+</I>
+Somente 2 sugestões.
+
+A primeira está associada à um email anterior, sobre abstrair cálculos
+de endereçamento (em t2 := __SP + 4). Seria interessante __SP + 1,
+onde o &quot;1&quot; significaria posição abstrata (contagem à partir do 0,
+claro). Porém, não sei a viabilidade/complexidade disso.
+
+A segunda sugestão: batizar __SP como @SP, #SP, #SP, ou alguma
+convenção de caixa alta / baixa, visualmente mais atrativa =).
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000124.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000129.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

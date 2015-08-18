@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] v2 acesso ao kernel (ressurreição)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C92b9a8820710130537i2369f2a1xb15eb55770ea6f3a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000362.html">
+   <LINK REL="Next"  HREF="000441.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] v2 acesso ao kernel (ressurreição)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C92b9a8820710130537i2369f2a1xb15eb55770ea6f3a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] v2 acesso ao kernel (ressurreição)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Outubro 13 14:37:21 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000362.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000441.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Voltando a pendência do acesso ao kernel, gostaria de solucionar isso.
+
+Utilizando a função leia(literal) como exemplo, vejo as seguintes
+opções para implementá-la:
+
+-Nota: para evitar maiores confusões, suponha, para este email, que
+início-asm seja inline assembly, e início-gasm seja inline
+gptassembly.
+
+
+#1 - inline assembly
+
+função leia(ref lit : literal)
+ tam : inteiro
+início
+  início-asm
+    mov eax, 3
+    mov ebx, 0
+    mov ecx, [lit]
+    mov edx, [tam]
+    int 80h
+
+    mov ebx, [lit]
+    mov [ebx+eax-1], byte 0
+  fim-asm
+fim
+
+Implicações que observo:
+
+a) a VM teria que ser um pouco esperta na emissão de código para lidar
+com as referências à variáveis como &quot;lit&quot;, especialmente considerando
+que um literal provavelmente não seja mapeável diretamente para um
+char*.
+
+b) Acho que o código e a VM ficam muito sensíveis. Tem que se conhecer
+bem assembly, gptassembly e o casamento das duas para funcionar.
+
+c) Acho que colocar assembly direto pode impedir otimizações a nível
+de opcode, quando blocos de código asm estiverem envolvidos...
+
+Enfim, não estou muito certo dessa abordagem, embora seja a minha
+preferida no diz respeito a mostrar para o usuário a implementação de
+uma função &quot;até o talo&quot;.
+
+
+#2 - Sugestão anterior do Alex
+
+Num email anterior, vc tinha escrito isso:
+
+push &quot;cria&quot; // função
+push &quot;thread&quot; // &quot;classe&quot;
+libcall
+
+Poderia elaborar mais?
+
+
+#3 - Biblioteca de runtime
+
+Acho que é minha interpretação/entendimento da opção #2.
+
+Suponha a existência de uma biblioteca, libgptruntime.so, escrita em
+C, com as seguintes funções:
+
+readline
+getuid
+mkdir
+connect
+...etc
+
+(se em inglês, ou português, e que nomes serão, decidiriamos depois)
+
+A implementação (em C) de readline, por exemplo, poderia ser assim:
+
+gpt_literal readline(gpt_inteiro fd) {
+  //.....
+}
+
+Então, poderiamos escrever leia(literal), em g-portugol, da seguinte forma:
+
+função leia( ref lit : literal)
+início
+  início-gasm
+     push_int STDIN //constante declarada em algum lugar...
+     libcall libgptruntime.so, readline
+     pop lit
+  fim-gasm
+fim
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000362.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000441.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

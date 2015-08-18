@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709050656x5ce8840eyfc10a41dea235cf2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000042.html">
+   <LINK REL="Next"  HREF="000044.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709050656x5ce8840eyfc10a41dea235cf2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro  5 15:56:55 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000042.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000044.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Quanto as minhas idéias, bom, se a gente tiver um CI bem definido e
+</I>&gt;<i> &gt; especificado, com rotinas de front-end organizadas e documentadas
+</I>&gt;<i> &gt; (documentação pra desenvolvedor, claro), seria &quot;fácil&quot; para alguém pegar
+</I>&gt;<i> &gt; essa documentação e gerar um novo front-end para outra linguagem que
+</I>&gt;<i> gera o
+</I>&gt;<i> &gt; nosso CI. Após gerar CI, essa nova linguagem poderia usufruir de todo o
+</I>&gt;<i> &gt; nosso ambiente de execução como a nossa VM,  nosso debug, ...
+</I>&gt;<i>
+</I>&gt;<i> Só para eu ter certeza: entre utilizar uma vm como a jvm, ou criar uma
+</I>&gt;<i> nova, você prefere criar uma nova, correto?
+</I>
+
+
+Eu prefiro sim criar uma nova, mas, como disse, não necessariamente essa é a
+abordagem mais inteligente :-)
+
+Eu tenho um pouco de experiência em desenvolver VM's mas, os projetos que
+trabalhei (foram 2), seriam equivalentes ao gpt de hoje. Eu não sei dizer
+sem avaliar antes o quanto é fácil ou difícil inserir o uso de bibliotecas
+do sistema. Eu cheguei a fazer um esboço MUITO rudimentar sobre como inserir
+o uso de bibliotecas externas em outra VM que trabalhei, mas não saiu do
+papel. Aliás, nem sei aonde está esse esboço hehehe.
+
+Sim, eu entendo perfeitamente. Aliás, passei a última hora escrevendo
+&gt;<i> um email contanto minha história com o G-Portugol (já que estavam
+</I>&gt;<i> todos falando de seus backgrounds), mas acabei mandando pro endereço
+</I>&gt;<i> errado e fiquei com preguiça de re-enviá-lo. Na verdade, quero evitar
+</I>&gt;<i> criar confusão nas conversas, e resolvi ser mais pontual.
+</I>
+
+
+Outra hora que estiver &quot;afim&quot; manda para nós. Quem sabe eu me animo o mando
+o meu background também hehehe.
+
+Resumindo o conto de fadas (a parte mais relevante), eu entendo essa
+&gt;<i> postura, pois minha &quot;configuração default&quot; é essa também. De fato, o
+</I>&gt;<i> G-Portugol foi concebido assim: fiz o primeiro parser em C na unha
+</I>&gt;<i> (top-down, predictive recursive descent parser) pois repudiei a idéia
+</I>&gt;<i> de usar flex/bison (ou equivalentes). Somente quando consegui ver o
+</I>&gt;<i> processo de compilação na minha cabeça claramente, bit a bit, que
+</I>&gt;<i> procurei utilizar ferramentas do gênero para auxiliar nas tarefas
+</I>&gt;<i> chatas que, outrora, foram fontes de conhecimento e divertimento
+</I>&gt;<i> (neste caso, migrei o codigo para flex/bison mas, logo em seguida,
+</I>&gt;<i> adotei o antlr).
+</I>
+
+Tirando a parte do antlr, a minha trajetória em projetos de linguagens,
+compiladores e afins, foi praticamente idêntica :-)
+
+Então, eu entendo o que é deixar de lado ferramentas estabelecidas e
+&gt;<i> pular na lama para se sujar. Eu topo. Mas quero explorar e deixar
+</I>&gt;<i> claro o quadro de pós e contras. (Mais sobre isso no próximo email)
+</I>
+
+Ok.
+
+Eu prefiro mostrar o código em assembly do que não mostrar nada ou
+&gt;<i> mostrar algo que não seja a implementação da função em si. Se não
+</I>&gt;<i> mostrarmos a implementação de uma função, o usuário verá o código como
+</I>&gt;<i> uma caixa preta. E não há muito o que se possa aprender com uma caixa
+</I>&gt;<i> preta. Mostrar o código em assembly ainda é mostrar o que a função faz
+</I>&gt;<i> e isso tem um peso enorme. Indo além, imagine, por exemplo, ter o
+</I>&gt;<i> compilador do G-Portugol escrito em G-Portugol...
+</I>
+
+Cara, pode me chamar de mentiroso, mas eu pensei a mesma coisa hoje de manhã
+enquanto entava vindo pro trabalho....
+
+E posso estar errado, mas é viável sim usar G-Portugol para as rotinas e
+para o compilador. Bom, provavelmente isso seria uma meta &quot;de longo
+prazo&quot;...
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/8ecf5bfc/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/8ecf5bfc/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000042.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000044.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709061906i19c111a1he48bb37138600a0a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000066.html">
+   <LINK REL="Next"  HREF="000072.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709061906i19c111a1he48bb37138600a0a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Setembro  7 04:06:07 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000066.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000072.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Agora, imagina gerar o map acima e um método para cada função de cada
+</I>&gt;<i> &gt; biblioteca? É nessa hora que o gerador de binds vai ser útil :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Eis, então, uma pergunta: iremos também tradizir as funções das APIs?
+</I>&gt;<i>
+</I>&gt;<i> pthread_create -&gt; pthread_criar (infinitivo?)
+</I>&gt;<i> pthread_create -&gt; pthread_crie (imperativo?)
+</I>
+
+Hum... não sei o que seria melhor... acho que infinitivo, mas não tenho
+nenhum embasamento nessa escolha...
+
+&gt;<i> A JVM tem esses opcodes para os números de 0 a 5, se eu não me engano.
+</I>&gt;<i> &gt; Mas
+</I>&gt;<i> &gt; também é detalhe e se não tivermos ninguém vai morrer hehehe. A única
+</I>&gt;<i> &gt; utilidade prática disse é para aplicar otimizações de código,
+</I>&gt;<i>
+</I>&gt;<i> Achei que fosse para diminuir o número de instruções (e nem como estas
+</I>&gt;<i> duas abordagens afetam otimizações)...
+</I>
+
+Sim, você tem razão. Esses opcodes também servem para diminuir o tamanho do
+arquivo class, no caso do java. No java, qualquer informação (string,
+número, ...) também é colocada no que eles chamam de constant pool (acho que
+não errei o nome). Essa constant pool parece quase que com uma tabela de
+símbolos. Para gerar um LD 1, além de gerar 1 opcode e 1 operando, também
+geraria uma entrada na constant pool.
+
+Não entendi o que você quis dizer com &quot;e nem como estas duas abordagens
+afetam otimizações&quot;...
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/bd2f21ef/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/bd2f21ef/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000066.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000072.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] problemas com a estrutura repita/enquanto
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20problemas%20com%20a%20estrutura%20repita/enquanto&In-Reply-To=%3C92b9a8820711071930m45a9869did7ad7bcbe42fc544%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000582.html">
+   <LINK REL="Next"  HREF="000580.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] problemas com a estrutura repita/enquanto</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20problemas%20com%20a%20estrutura%20repita/enquanto&In-Reply-To=%3C92b9a8820711071930m45a9869did7ad7bcbe42fc544%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] problemas com a estrutura repita/enquanto">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Novembro  8 04:30:15 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000582.html">[gpt-usuarios] Inicialização de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000580.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#577">[ date ]</a>
+              <a href="thread.html#577">[ thread ]</a>
+              <a href="subject.html#577">[ subject ]</a>
+              <a href="author.html#577">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A estrutura repita/enquanto tem uma armadilha que está me aborrecendo.
+
+O seguinte código gera um erro de sintaxe (underline == identação):
+
+repita
+__//enunciados...
+enquanto x &lt; 10
+
+Levando em consideração que temos uma esturutra &quot;enquanto&quot; na
+gramática, este código é analisado da seguinte forma:
+
+repita
+__//enunciados
+__enquanto x &lt; 10
+
+Portanto, o parser acusa falta do &quot;faça&quot; logo após o &quot;10&quot;. Ele não vê
+o &quot;enquanto&quot; como término da estrutura &quot;repita&quot;, mas como o início de
+outra estrutura de repetição.
+
+Para resolver isso, imagino que temos que informar o parser para fazer
+um &quot;teste&quot;, verificando se existe um &quot;faça&quot; após a expressão da
+condição, e devemos verificar se o contexto do código atual se
+encontra dentro de um laço &quot;repita&quot;. Mas isso não é tão trivial de se
+fazer (acho até que requer uma pilha, para casos de loops dentro de
+loops) e polui desagradavelmente o código do parser, que já é difícil
+de deixar limpo. Pior, eu não sei o quão complexo ficará para
+reportagem de erros (tanto o código quanto mensagens) para os N casos
+de erros envolvendo estas duas estruturas.
+
+Estou pensando em descartar esta estrutura, deixando apenas a repita/até.
+Objeções?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000582.html">[gpt-usuarios] Inicialização de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000580.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#577">[ date ]</a>
+              <a href="thread.html#577">[ thread ]</a>
+              <a href="subject.html#577">[ subject ]</a>
+              <a href="author.html#577">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

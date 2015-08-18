@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] CI para uso de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709121141x394dea74se0326d067280b5d9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000134.html">
+   <LINK REL="Next"  HREF="000140.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] CI para uso de estruturas</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709121141x394dea74se0326d067280b5d9%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] CI para uso de estruturas">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 12 20:41:50 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000134.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000140.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Os ponteiros não acessam nada que não esteja dentro da VM, ou seja, não
+</I>&gt;<i> &gt; acessam áreas do sistema operacional, de bibliotecas que não foram
+</I>&gt;<i> &gt; desenvolvidas em gpt e afins.
+</I>&gt;<i>
+</I>&gt;<i> Humm, ok.
+</I>
+
+Qualquer coisa que vocês acharem que não está legal avisem. Eu,
+sinceramente, estou evoluindo as idéias conforme conversamos. Eu tenho
+experiência com máquinas de pilha com processamento simbólico, o que não
+passa muito perto do que estamos fazendo no momento. Então muita idéias
+estão sendo geradas on-the-fly, e não de um conhecimento prévio, e
+claramente posso estar errado :-)
+
+&gt;<i> Eu só me preocupo porque, dessa forma, a gente teria que ter algum tipo de
+</I>&gt;<i> &gt; alocação dinâmica de memória para estruturas. Em uma VM simples, criar
+</I>&gt;<i> uma
+</I>&gt;<i> &gt; estrutura nada mais é do que alocar um espaço na sua área de dados com
+</I>&gt;<i> &gt; tamanho de sizeof(estrutura). Com indireção teríamos que alocar a área
+</I>&gt;<i> da
+</I>&gt;<i> &gt; estrutura e uma outra área para onde os ponteiros da estrutura estariam
+</I>&gt;<i> &gt; apontando. Acho que esse item entraria naquele requisito de dar mais
+</I>&gt;<i> &gt; inteligência na VM, o que talvez não seja o momento agora.
+</I>&gt;<i>
+</I>&gt;<i> Tá certo. Agora, eu acho que tava viajando, pois estava com a cabeça
+</I>&gt;<i> em linguagens dinâmicas e misturei um pouco as coisas. Pensando em
+</I>&gt;<i> Java agora, que tem tipos estáticos e aloca objetos similarmente como
+</I>&gt;<i> alocariamos uma struct, eles definem de forma fixa o tamanho dos
+</I>&gt;<i> dados, para qualquer plataforma. Então é isso. Releve essa discussão
+</I>&gt;<i> :)
+</I>
+
+Ok. Não te preocupa que tá todo mundo viajando nas idéias hehehe.
+
+&gt;<i> Sim, claro que ajuda. A diferença seria que, se você quer empilhar o
+</I>&gt;<i> &gt; endereço de t2, ao invés de invocar param *t2 ou &amp;t2, você divide em 2
+</I>&gt;<i> &gt; comandos:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; tt := &amp;t2 // tt é um inteiro
+</I>&gt;<i> &gt; param tt
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Bom, fica a seu critério então. Os opcodes java tratam explicitamente
+</I>&gt;<i> de tipos ponteiro?
+</I>
+
+Não lembro. Eu &quot;acho&quot; que não. Vou tentar encontrar algo sobre isso.
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/452e9a75/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/452e9a75/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000134.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000140.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

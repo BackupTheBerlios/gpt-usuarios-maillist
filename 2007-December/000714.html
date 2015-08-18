@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Build System
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C92b9a8820712181950y41ff3c7es68fb51a8ac79a4ae%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000690.html">
+   <LINK REL="Next"  HREF="000715.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Build System</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C92b9a8820712181950y41ff3c7es68fb51a8ac79a4ae%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Build System">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Dezembro 19 04:50:20 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000690.html">[gpt-usuarios] Build System
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000715.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#714">[ date ]</a>
+              <a href="thread.html#714">[ thread ]</a>
+              <a href="subject.html#714">[ subject ]</a>
+              <a href="author.html#714">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 17, 2007 8:15 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Por mim ok.
+</I>&gt;<i>
+</I>&gt;<i> Só eu sugiro que você aguarde a gente definir e &quot;popular&quot; o diretório de
+</I>&gt;<i> syslibs. Mas se você acha que não faz diferença (é fácil alterar depois)
+</I>&gt;<i> pode &quot;tocar o baile&quot; agora mesmo hehehe.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+Bom, aproveitando o gás, acabei de fazer a integração dos subprojetos
+(common, gptasm, gptc e gptvm, por enquanto).
+
+Cada subdiretório tem um Makefile.boot, que instala os arquivos
+Makefile.in, configure, etc específicos para o subprojeto. O diretório
+raiz (gpt2) também tem esse arquivo, que faz o bootstrap do projeto
+inteiro.
+
+Para compilar tudo, basta fazer:
+
+$ cd gpt2; make -f Makefile.boot
+$ mkdir _build &amp;&amp; cd _build
+$ ../configure
+$ make
+
+Para fazer uma limpeza:
+$ make Makefile.boot distclean
+
+Para trabalhar em um subprojeto individualmente que dependa de
+&quot;common&quot;, é necessário construir a lib do subprojeto common antes de
+qualquer coisa.
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000690.html">[gpt-usuarios] Build System
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000715.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#714">[ date ]</a>
+              <a href="thread.html#714">[ thread ]</a>
+              <a href="subject.html#714">[ subject ]</a>
+              <a href="author.html#714">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

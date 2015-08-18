@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0712210446x16cfd7d7o50b3df1e8b8f03c4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000723.html">
+   <LINK REL="Next"  HREF="000732.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Teste de bind para fopen, fwrite e fclose</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0712210446x16cfd7d7o50b3df1e8b8f03c4%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Teste de bind para fopen, fwrite e fclose">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Dezembro 21 13:46:14 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000723.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000732.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#724">[ date ]</a>
+              <a href="thread.html#724">[ thread ]</a>
+              <a href="subject.html#724">[ subject ]</a>
+              <a href="author.html#724">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Segue abaixo o sld e os arquivos gerados pelo GptBind a partir deste sld:
+</I>&gt;<i>
+</I>&gt;<i> $ cat file.sld
+</I>&gt;<i> ////
+</I>&gt;<i> options {
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> headers {
+</I>&gt;<i>    &quot;stdio.h&quot;;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> function fopen(string name, string mode) : pointer &quot;FILE*&quot; ::= fopen(name,
+</I>&gt;<i> mode);
+</I>&gt;<i>
+</I>&gt;<i> function fputs(string text, pointer &quot;FILE*&quot; file) : int ::= fputs(text,
+</I>&gt;<i> file);
+</I>&gt;<i>
+</I>&gt;<i> function fclose(pointer &quot;FILE*&quot; file) : int ::= fclose(file);
+</I>&gt;<i> ////
+</I>&gt;<i>
+</I>
+Vocês teriam alguma sugestão para melhorar o formato quanto ao tipo pointer
+? De cara eu já diria que o &quot;*&quot; é desnecessário. Se é pointer, é óbvio que
+vai ter o &quot;*&quot;.
+
+Ao invés de :
+
+function fopen(string name, string mode) : pointer &quot;FILE*&quot; ::= fopen(name,
+mode);
+
+Eu pensei em algo como:
+
+function fopen(string name, string mode) : pointer[FILE] ::= fopen(name,
+mode);
+
+Ou ainda:
+
+function fopen(string name, string mode) : FILE ::= fopen(name, mode);
+
+Sugestões ?
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071221/3eccdb42/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071221/3eccdb42/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000723.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000732.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#724">[ date ]</a>
+              <a href="thread.html#724">[ thread ]</a>
+              <a href="subject.html#724">[ subject ]</a>
+              <a href="author.html#724">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

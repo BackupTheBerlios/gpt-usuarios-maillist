@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Algumas dúvidas sobre a gramática
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C92b9a8820710170408k75b73e65ma536d7cbbf904520%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000376.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Algumas dúvidas sobre a gramática</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C92b9a8820710170408k75b73e65ma536d7cbbf904520%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Algumas dúvidas sobre a gramática">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Outubro 17 13:08:17 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000376.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000381.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#378">[ date ]</a>
+              <a href="thread.html#378">[ thread ]</a>
+              <a href="subject.html#378">[ subject ]</a>
+              <a href="author.html#378">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt; &gt; Teoricamente isso gera uma ou outra, mas podemos ter as duas.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; A minha sugestão é que a gente &quot;imponha&quot; uma ordem como, por exemplos,
+</I>&gt;<i> &gt; &gt; constantes e depois variáveis, até porque as constantes podem ser
+</I>&gt;<i> utilizadas
+</I>&gt;<i> &gt; &gt; para inicializar as variáveis.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hmm, não sou muito fã de impor ordem. Acho que estariamos adicionando
+</I>&gt;<i> &gt; dores de cabeça em potencial para algumas pessoas :)
+</I>&gt;<i>
+</I>&gt;<i> Ok.
+</I>&gt;<i>
+</I>&gt;<i> Mas o usuário poderia definir uma variável e inicializá-la utilizando um
+</I>&gt;<i> dado constante que será definido posteriormente ?
+</I>
+Estou mudando de idéia, e passando a concordar em fixar ordem.....
+
+&gt;<i> &gt; &gt; 3) Enunciado pode derivar em &quot;;&quot; ? Com isso a gente pode ter algo como
+</I>&gt;<i> &gt; &gt; &quot;início
+</I>&gt;<i> &gt; &gt;     ;
+</I>&gt;<i> &gt; &gt; fim&quot;.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Era essa a idéia ???
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sim.
+</I>&gt;<i>
+</I>&gt;<i> Eu achei estranho... não seria melhor possibilitar que entre início e fim
+</I>&gt;<i> não tenha nada ?
+</I>
+Já é possível.
+
+A propósito, escreva isso, em C:
+
+int a;;;
+
+E tente compilar :)
+
+&gt;<i> &gt; E poderiamos fazer algo como:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt;   abrir_socket() e iniciar_loop();
+</I>&gt;<i> &gt; fim
+</I>&gt;<i>
+</I>&gt;<i> Isso não tava previsto...
+</I>&gt;<i>
+</I>&gt;<i> Para o exemplo acima o compilador tem que implementar short-circuit (acho
+</I>&gt;<i> que é esse o nome).
+</I>
+exato.
+
+&gt;<i> Atualmente, para o caso acima, o compilador iria avaliar o primeiro operando
+</I>&gt;<i> e depois o segundo. O certo seria ele avaliar o primeiro. Se ocorrer um erro
+</I>&gt;<i> ele nem deve tentar avaliar o segundo.
+</I>&gt;<i>
+</I>&gt;<i> Isso também é válido para o caso &quot;função1( ) ou função2( );&quot;, ou seja, se
+</I>&gt;<i> função1 ok, nem tenta avaliar função2.
+</I>&gt;<i>
+</I>&gt;<i> Colocamos isso no projeto então ???
+</I>&gt;<i>
+</I>
+Aham!
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000376.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000381.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#378">[ date ]</a>
+              <a href="thread.html#378">[ thread ]</a>
+              <a href="subject.html#378">[ subject ]</a>
+              <a href="author.html#378">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

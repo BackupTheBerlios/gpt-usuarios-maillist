@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712130633t1a8e6162u62282226839deb7e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000635.html">
+   <LINK REL="Next"  HREF="000643.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712130633t1a8e6162u62282226839deb7e%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Dezembro 13 15:33:28 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000635.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000643.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#640">[ date ]</a>
+              <a href="thread.html#640">[ thread ]</a>
+              <a href="subject.html#640">[ subject ]</a>
+              <a href="author.html#640">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Supondo que temos o gerador e bindings &quot;gerador&quot;, e digamos que o
+</I>&gt;<i> protótipo da função &quot;pow&quot; esteja descrito no arquivo pow.desc,
+</I>&gt;<i> poderiamos executar o seguinte (um rascunho, apenas):
+</I>&gt;<i>
+</I>&gt;<i> $ gerador --target-desc=pow.desc --libname=libgptpow
+</I>
+
+Pelo que eu tinha entendido, você tinha imaginado criar os bindings
+diretamente através do .h. Com essa história de pow.desc eu fiquei boiando
+agora hehehe.
+
+Mas sim, na minha opinião a gente precisa ter um arquivo que descreva os
+bindings.
+
+O comando acima significaria &quot;gere o binding para as funções descritas
+&gt;<i> em pow.desc com o nome de biblioteca 'libgptpow'&quot;. Isso acabaria por
+</I>&gt;<i> gerar os dois arquivos do exemplo do email anterior. Digamos que ele
+</I>&gt;<i> gere com os nomes gpt_pow.c e pow.gpt.
+</I>
+
+Acho bom termos os parâmetros de linha de comando, mas também acho
+conveniente termos esses parâmetros em uma seção de opções dentro do
+arquivo. Isso minimiza erros de usuário. Mas é questão de opinião, claro...
+
+Compilariamos gpt_pow.c:
+&gt;<i>
+</I>&gt;<i> $ gcc -shared -o libgptpow.so gpt_pow.c -lm
+</I>
+
+As bibliotecas a serem linkadas deveriam estar no arquivo de descrição
+também. Assim o gerador de bindings gera o Makefile para compilar os
+bindings. E como precisamos saber os .h que o .c gerado precisa, a gente
+coloca os headers necessários no arquivo de descrição também :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071213/5a67330c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071213/5a67330c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000635.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000643.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#640">[ date ]</a>
+              <a href="thread.html#640">[ thread ]</a>
+              <a href="subject.html#640">[ subject ]</a>
+              <a href="author.html#640">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

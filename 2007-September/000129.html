@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_endere%3DE7amento_de_vari%3DE1v%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Feis_locais_%3D28procedimento_e_fun%3DE7%3DF5es%3D29%3F%3D&In-Reply-To=%3C9a3912af0709120714h4dcedf8x5d3cdbc3991bb40%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000126.html">
+   <LINK REL="Next"  HREF="000132.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_endere%3DE7amento_de_vari%3DE1v%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Feis_locais_%3D28procedimento_e_fun%3DE7%3DF5es%3D29%3F%3D&In-Reply-To=%3C9a3912af0709120714h4dcedf8x5d3cdbc3991bb40%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 12 16:14:00 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000126.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000132.html">[gpt-usuarios] Qual o formato da AST que estamos utilizando ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Somente 2 sugestões.
+</I>&gt;<i>
+</I>&gt;<i> A primeira está associada à um email anterior, sobre abstrair cálculos
+</I>&gt;<i> de endereçamento (em t2 := __SP + 4). Seria interessante __SP + 1,
+</I>&gt;<i> onde o &quot;1&quot; significaria posição abstrata (contagem à partir do 0,
+</I>&gt;<i> claro). Porém, não sei a viabilidade/complexidade disso.
+</I>
+
+Pois é. Vou pensar com calma, mas acho que não é viável dentro do contexto
+atual.
+
+Imagine a seguinte situacao. Temos na pilha os seguintes dados:
+x1 : inteiro (4 bytes)
+x2 : real (8 bytes)
+x3 : caractere (1 byte)
+x4 : inteiro (4 bytes)
+
+Bom, precisamos de uma SP ou similar para endereçar dados que estão no
+registro de ativação[1] de funções e procedures.
+
+A VM não tem conhecimento do tipo das variáveis. Ela apenas tem posições na
+memória que foram reservadas. Algo como em um máquina real.
+
+Se @SP aponta para o endereço 10, qual seria o endereço de cada uma das
+variáveis acima ?
+
+Endereço x1 = 10
+Endereço x2 = 14
+Endereço x3 = 22
+Endereço x4 = 23
+
+Se a gente usar uma abstração como &quot;+1&quot; para todos os tipos de dados, a VM
+teria que saber o tipo de cada informação para pode saber que, no caso de um
+inteiro, +1 significa +4. Não digo que não seja possível fazer, mas dai a
+gente teria que carregar a VM com mais informações (deixar ela mais esperta)
+e possivelmente ajustar os comandos do CI.
+
+Bom, nós estamos criando uma VM que não utiliza apenas pilha, ou seja, essa
+VM não é uma máquina de pilha apenas. Ela tem posições de memória e alguns
+(poucos) registradores (PC e SP, por enquanto). Acho que aqui a gente chega
+no dilema entre criar uma máquina &quot;parecida&quot; com uma máquina real ou criar
+uma máquina &quot;mais inteligente&quot; que sabe o que está acontecendo. A
+gente teria que pensar o que seria melhor para nós, mas adianto que a
+primeira opção é bem mais viável (leia-se fácil) de ser implementada,
+mantida, etc e tal. Uma VM mais esperta implica em vários testes durante a
+execução do programa.
+
+Vamos pensar com calma, mas talvez fosse viável seguir a opção 1 (máquina
+mais parecida com uma máquina real) e, futuramente, expandir a VM.
+Claro, podemos mudar de idéia, mas acho que no momento atual uma VM &quot;mais
+burrinha&quot; serve para os nossos propósitos.
+
+|<i> A segunda sugestão: batizar __SP como @SP, #SP, #SP, ou alguma
+</I>|<i> convenção de caixa alta / baixa, visualmente mais atrativa =).
+</I>Achei a sua sugestão BEM mais atrativa hehehe. Eu gostei do @SP, mas se
+quiserem utilizar #SP por mim ok também.
+
+[1] Registro de ativação nada mais é do que o conjunto de dados (contexto)
+que devem ser salvos antes de invocar uma função ou procedure. Nesse
+registro também são armazenados parâmetros e variáveis locais.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/c764afa7/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/c764afa7/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000126.html">[gpt-usuarios] Sobre o endereçamento de variáveis locais (procedimento e funções)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000132.html">[gpt-usuarios] Qual o formato da AST que estamos utilizando ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#129">[ date ]</a>
+              <a href="thread.html#129">[ thread ]</a>
+              <a href="subject.html#129">[ subject ]</a>
+              <a href="author.html#129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

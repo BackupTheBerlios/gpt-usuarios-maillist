@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C92b9a8820710052109g2bf259d2y9fd61571acca9515%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000251.html">
+   <LINK REL="Next"  HREF="000253.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C92b9a8820710052109g2bf259d2y9fd61571acca9515%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Outubro  6 06:09:12 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000251.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000253.html">[gpt-usuarios] Exemplo com inline em GptAssembly
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok, eu experimentei um pouco aqui duas abordagens para resolver este problema.
+
+
+* Abordagem #1 - não dar suporte em alto nível para manipulação de
+argumentos variáveis
+
+Aqui, poderiamos aceitar a sintaxe:
+
+função imprima( ...)
+
+Mas não dariamos suporte, em alto nível, para manipular os argumentos
+passados. Isso significa que o corpo de &quot;imprima&quot; teria que ser
+escrito com gptassembly inline, para acessar a pilha de argumentos
+diretamente e checar os tipos de cada um manualmente.
+
+
+* Abordagem #2 - Oferecer meios especiais para manipular os argumentos variáveis
+
+Aqui, supús uma entidade &quot;ARGV&quot;, que seria um array contendo todos os
+argumentos. Então, ARGV[0] seria o número total de argumentos
+passados. Então, escrevi isso:
+
+função imprima( ... )
+ numargs : inteiro;
+ i       : inteiro;
+início
+  numargs := ARGV[0];
+  para i de 1 até numargs-1 faça
+    imprima(ARGV[i]);
+  fim-para
+fim
+
+função imprima(l:literal) //...
+função imprima(r:real)    //...
+função imprima(i:inteiro) //...
+
+
+Mas não me parece tão boa idéia, pois a complexidade para checar tipos
+e escolher a versão correta de &quot;imprima&quot; seria passada para o
+compilador, ou para os bytecodes.
+
+Então, procurando fazer a ligação estática de nomes, pensei em fazer
+com que ARGV fosse um array com elementos especiais. Cada elemento do
+array seria uma instância de uma estrutura com dois atributos &quot;tipo&quot; e
+&quot;valor&quot;:
+
+estrutura
+  tipo : literal;
+  valor : &lt;*&gt;;
+fim-estrutura
+
+O tipo do valor, aqui, não pode ser definido estaticamente, daí ser um
+caso especial. Então, re-escrevi &quot;imprima&quot; da seguinte forma:
+
+função imprima( ... )
+ numargs : inteiro;
+ i       : inteiro;
+
+ lit : literal;
+ r   : real;
+início
+  numargs := ARGV[0].valor;
+
+  para i de 1 até numargs-1 faça
+    caso ARGV[i].tipo seja
+      &quot;literal&quot;:
+         lit := ARGV[i].valor;
+         imprima(lit);
+         sair;
+      &quot;real&quot;:
+         r := := ARGV[i].valor;
+         imprima(r);
+         sair;
+      //etc
+    fim-caso
+  fim-para
+fim
+
+Dessa forma, todas as chamadas a &quot;imprima&quot; são resolvidas em tempo de
+compilação. Mas em termos de avaliação de tipos, isso é tão inseguro
+quanto em C. E eu ainda não sei qual seria a repercussão de uma
+atribuição incorreta envolvendo tipos incompatíveis, e nem como isso
+tudo se resolve durante a compilação e geração de bytecodes.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000251.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000253.html">[gpt-usuarios] Exemplo com inline em GptAssembly
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

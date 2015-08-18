@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710300716s73922b9vf6963b3e5fa96019%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000544.html">
+   <LINK REL="Next"  HREF="000505.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710300716s73922b9vf6963b3e5fa96019%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Outubro 30 15:16:53 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000544.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000505.html">[gpt-usuarios] Um exemplo de inicialização de matrizes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#548">[ date ]</a>
+              <a href="thread.html#548">[ thread ]</a>
+              <a href="subject.html#548">[ subject ]</a>
+              <a href="author.html#548">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> O único problema que vc observou da abordagem 2 foi o limite de
+</I>&gt;<i> dimensões em uma matriz? Acho que se tivermos m1,...,m5 não teremos
+</I>&gt;<i> grandes problemas.
+</I>
+
+Ok. Eu criei opcodes para 2 dimensoes apenas, mas nada impede que tenhamos
+mais.
+
+Eu pensei em outra abordagem aqui. Não é tão limpa, pois diverge mais
+&gt;<i> ainda o tratamento de dados, mas consegue abstrair totalmente as
+</I>&gt;<i> operações, sem gerar mais opcodes.
+</I>&gt;<i>
+</I>&gt;<i> Não pensei sobre suas limitações em casos especificos, nem se é viável
+</I>&gt;<i> para nós, mas vou colocar meus pensamentos, apenas pela discussão (e
+</I>&gt;<i> perdoem qualquer falha na explicação, especialmente, nos exemplos):
+</I>
+
+Qualquer idéia será muito bem vinda :-)
+
+[Abordagem extra]
+&gt;<i>
+</I>&gt;<i> Suponha que uma matriz de uma dimensão (e, possivelmente, uma
+</I>&gt;<i> estrutura) seja apenas uma tripa de área na memória contigua (um
+</I>&gt;<i> array), e isso é tudo o que a VM sabe a respeito. Não há opcodes para
+</I>&gt;<i> trabalhar com estes dados, e variáveis são apenas ponteiros para estas
+</I>&gt;<i> áreas.
+</I>
+
+A abordagem que foi definida para o gpt é similar a isso. Ao &quot;criar&quot; uma
+matriz o usuário indica (GptAssembly) o tamanho da informação que a matriz
+armanzenará, o número de dimensões e o tamanho inicial de cada dimensão.
+
+|<i> Uma matriz[3] de inteiros seria uma área contigua onde cada célula
+</I>|<i> amazenaria um dos inteiros.
+</I>
+Isso mesmo.
+
+|<i> Uma matriz[3] de literais seria uma área contigua capaz de armazenar 3
+</I>|<i> ponteiros, que referenciariam os respectivos literais. O mesmo
+</I>|<i> aconteceria para matrizes de estruturas e matrizes n-dimensionais (que
+</I>|<i> seriam apenas arrays que apontam para arrays ....)
+</I>
+Isso mesmo :-)
+
+|<i> De qualquer forma, uma matriz[10] de inteiros ocupa o mesmo espaço de
+</I>|<i> uma matriz[10] de literais e de uma matriz[10] de estruturas.
+</I>
+Exato !!! O que a matriz armazena é a mesma informação que uma variável
+inteira ou literal armazena. Isso facilita inclusive para comandos do tipo:
+
+meu_inteiro := matriz_inteira[10];
+
+Porque nesse caso a VM simplesmente executa uma variante de memcpy copiando
+os dados diretamente da posição 10 para o endereço da variável. Se é um
+inteiro, um literal, ou estrutura, não importa... O que importa é o tamanho
+do dado.
+
+|<i> A única diferença de matriz[10] de inteiros das demais matrizes é que
+</I>|<i> esta pode ter cada célula com o próprio valor, e não com um ponteiro
+</I>|<i> para o valor.
+</I>
+As nossas idéias estão sincronizadas hehehe. O que importa é como a VM
+originalmente armazena o tipo de dado.
+
+|<i> Toda a manipulação desta memória ficaria a cargo de funções escritas
+</I>|<i> no runtime, e chamadas utilizando libcall. Poderiamos definir que o
+</I>|<i> formato da área de memória de uma matriz e de uma estrutura tenha um
+</I>|<i> cabeçalho contendo informações sobre o dado, como tamanho e tipo, e
+</I>|<i> funções do runtime poderiam obter estas informações.
+</I>
+Existe um cabeçalho sim que contém o tamanho da área alocada, o número de
+dimensões, o tamanho de cada informação e o tamanho de cada dimensão. Porém
+tanto os dados quanto o cabeçalho são manipulados através de opcodes, ou
+seja, a VM tem suporte nativo a matrizes.
+
+// Exemplo em Portugol
+
+algoritmo teste;
+variáveis
+    m: matriz[10] do tipo inteiro;
+    i: inteiro;
+fim-variáveis
+início
+    para i de 1 até 10 faça
+        m[i] := i * 10;
+    fim-para
+    imprima( &quot;Valores das coordenadas:&quot; );
+    para i de 1 até 10 faça
+        imprima( m[i] );
+    fim-para
+fim
+
+
+
+// Convertido para GptAssembly
+
+
+
+program exemplo
+
+var m matrix
+var i int
+
+proc main
+    var t1 int
+
+    // aloca espaço para a matriz m (int tem 4 bytes nesse exemplo)
+    m1alloc m, 4, 10 // dado com 4 bytes, 10 elementos iniciais
+
+    // para i de 1 até 10 faça
+    iset i, 1
+    teste:
+    ile t1, i, 10
+    ifnot t1 próximo
+
+    // m[i] := i * 10;
+    imul t1, i, 10
+    m1set m, i, t1 // m1set (matriz de 1 dimensão), m2set (2 dimensões), ...
+
+    // fim-para
+    jmp teste
+    próximo:
+
+    // imprima( &quot;Valores armazenados:&quot; );
+    push_sp
+    push &quot;Valores armazenados:&quot;
+    push_string
+    push_1
+    pcall imprima
+    pop_sp
+
+    // para i de 1 até 10 faça
+    iset i, 1
+    teste2:
+    ile t1, i, 10
+    ifnot t1, próximo2
+
+    // imprima( m[i] );
+    push_sp
+    m1get t1, m, i // m1get é um memcpy disfarçado :-)
+    push t1
+    push_int
+    push_1
+    pcall imprima
+    pop_sp
+
+    // fim-para
+    jmp teste2
+    próximo2:
+
+    // desaloca espaço da matriz c
+    mfree c
+
+    exit_0
+end-proc
+
+end-program
+
+
+No wikki em
+<A HREF="http://gpt.berlios.de/wikki/index.php/Exemplos_de_Tradu%C3%A7%C3%A3o_de_Portugol_para_GptAssembly">http://gpt.berlios.de/wikki/index.php/Exemplos_de_Tradu%C3%A7%C3%A3o_de_Portugol_para_GptAssembly</A>
+tem
+mais exemplos com matrizes. Aproveitei e acrescentei esse exemplo no wikki
+também.
+
+Pelo que percebi as idéias estão sincronizadas. A diferença é que a proposta
+que está no wikki utiliza opcodes (VM implementa matrizes) e você tinha
+pensado em utilizar bibliotecas para implementar isso. Você vê algum
+problema nisso ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071030/47fc2a81/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071030/47fc2a81/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000544.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000505.html">[gpt-usuarios] Um exemplo de inicialização de matrizes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#548">[ date ]</a>
+              <a href="thread.html#548">[ thread ]</a>
+              <a href="subject.html#548">[ subject ]</a>
+              <a href="author.html#548">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

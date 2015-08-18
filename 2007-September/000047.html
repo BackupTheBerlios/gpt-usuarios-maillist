@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C76152eba0709051449u29e030e1j83f6bfa6a3b0b512%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000065.html">
+   <LINK REL="Next"  HREF="000048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT v2.0</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C76152eba0709051449u29e030e1j83f6bfa6a3b0b512%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT v2.0">adorilson em gmail.com
+       </A><BR>
+    <I>Quarta Setembro  5 23:49:26 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000065.html">[gpt-usuarios] GPT v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000048.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Vou comentar coisas de outros emails q me vem a cabeça agora, em uma ordem
+nao muito logica...
+
+On 9/5/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Então, os seguintes pontos foram levantados nos últimos e-mails para
+</I>&gt;<i> uma nova versão do G-Portugol:
+</I>&gt;<i>
+</I>&gt;<i> * Alterações na linguagem
+</I>&gt;<i>
+</I>&gt;<i>   - Uso de módulos (aka import/include/use/require/load);
+</I>&gt;<i>   - Sintaxe para novas instruções (repita, escolha, etc);
+</I>&gt;<i>   - Sintaxe para declaração e utilização de estruturas heterogêneas
+</I>&gt;<i> (aka struct);
+</I>&gt;<i>   - Sintaxe para passagem de parâmetros por referência;
+</I>&gt;<i>   - Revisão geral da sintaxe ;
+</I>&gt;<i>   - Revisão geral da semântica dos tipos;
+</I>&gt;<i>   - Unicode.
+</I>&gt;<i>
+</I>&gt;<i> Ok, acho que os items acima não precisam de muita explicação.
+</I>
+
+Diria que isto está mais para uma versao  1.5.
+
+* Virtual Machine
+
+
+Isso sim, seria a versão  2.0.
+
+Qd me referir a passos maiores, isso estava incluindo. Paradigma OO tb, e
+foi o q queriam q eu adicionasse ao gpt, mas como tinha essas pendencias,
+ficamos com elas mesmo.
+
+Na verdade temos que revolver um dilema. Fazer o bom e divertido? ou fazer o
+útil? E portanto a &quot;prioridade&quot; para o gpt e o queremos dele.
+
+O meu foco é: auxilio no ensino de programação/algoritmos. Ter um compilador
+para portugol. Por isso acho q devemos primeiro atacar essas alterações
+citadas acima.
+Nesse contexto, nao vejo  a acesso a recursos do sistema, alem de manipular
+arquivos, como prioridade. Se o cara ta precisando de algo alem disso, eh pq
+deve ser hora de passar para uma linguagem do mercado. E nao acho q seja
+intencao do gpt chegar a esse nivel.
+
+Acredito que nao devessemos mexer agora na infraestrutura do gpt. Ajustes e
+correcoes sim, mas a ponto de entrar a VM na jogada, acho q nao.
+Deveriamos evoluir sobre a infra atual, eliminando o q consideramos
+desnecessarios (conversao para outras linguagens, por exemplo), para termos
+uma solucao mais completa, e consequentemente mais usuarios. Eu quero dizer
+para os calouros &quot;olha, tem esse compilador e editor de portugol que roda no
+llinux&quot; o mais rapido possivel, inclusive usa-lo nas escolas publicas.
+Talves migrar a infra para uma VM perdessemos algum tempo ai,  mas ainda nao
+conheco o gpt a ponto de dizer isso (o unicode nao me permitiu :( ).
+Inclusive perderiamos todos o conhecimento que o Tiago tem hj sobre o codigo
+atual, por outro lado temos a experiencia do Alex com VM. De qq forma so qm
+pode dizer se eh  mais trabalhoso continuar como esta ou fazer esta mudanca
+eh o pai da crianca.
+Mas se acabarmos decidindo por usar uma VM ja existente, devemos considerar
+a Python, por ser livre de verdade (Java eh uma cobra de duas cabeca
+hehehehe) , deve ser mais facil o acesso aos byte/opcodes dela.
+
+Devido a conversao do g-portugol para o C++, eu achava q era usada essa
+saida como entrada pra o GCC gerar os binarios.
+
+Foi comentado em escrever o compilador do gpt em G-Portugol, isto eh um dos
+marcos de maturidade da linguagem.
+
+Bom, eh isso.
+
+-- 
+Adorilson Bezerra
+Email/Google Talk: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>
+Jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em jwchat.org</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/27f9e9e7/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/27f9e9e7/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000065.html">[gpt-usuarios] GPT v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000048.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

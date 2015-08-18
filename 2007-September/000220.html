@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Discussao sobre duvidas no wikki
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C92b9a8820709280343y5182ede3h4e0a0be74c5eaef2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000219.html">
+   <LINK REL="Next"  HREF="000221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Discussao sobre duvidas no wikki</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C92b9a8820709280343y5182ede3h4e0a0be74c5eaef2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Discussao sobre duvidas no wikki">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Setembro 28 12:43:49 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000219.html">[gpt-usuarios] Definição sobre o que é um compilador
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000221.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Existe algum lugar (berlios ???) que podemos colocar as tarefas e
+</I>&gt;<i> subtarefas de cada fase do projeto para poder ter algum controle
+</I>&gt;<i> sobre elas ?
+</I>&gt;<i> Prazo não, mas pelo menos quem está fazendo e o % de conclusão...
+</I>
+Eis o que tem no berlios, relacionado a isso:
+-Use Bug Tracker
+-Use Project/Task Manager
+-Use Task Dependency List
+
+Desses, o único que ja utilizei foi o Bug Tracker (mas foi no
+sourceforge. Assumo que sejam iguais). Todos eles estão desabilitados
+(devem ser habilitados na página de adminsitração
+<A HREF="https://developer.berlios.de/project/admin/?group_id=5791">https://developer.berlios.de/project/admin/?group_id=5791</A> ). Podemos
+instalar algo como o mantis, tambem.
+
+&gt;<i> Se o CTE não precisa se preocupar com tipos de dados,
+</I>&gt;<i> porque ele precisa fazer um pcall imprima para cada
+</I>&gt;<i> parâmetro de imprima ??? CTE deve ser algo elementar.
+</I>&gt;<i> Esse é o motivo do porque gerar um pcall para cada parâmetro de imprima.
+</I>
+Algumas notas: para o v2 eu gostaria de ter as funções imprima() e
+leia() implementadas em portugol (fazendo uso de código inline em
+baixo nível para acesso ao kernel). Dessa forma, elas precisam ser
+revistas.
+
+Primeiro, devemos decidir se imprima() continuará recebendo uma lista
+variável de argumentos. Se sim, devemos definir a sintaxe e semântica
+para funções que utilizam parâmetros variáveis. Caso contrário,
+possibilitar overriding de funções baseado nos tipos de argumentos
+seria suficiente, na minha opnião:
+
+  função imprima(i : inteiro) ...
+  função imprima(s : literal) ...
+  função imprima(r : real) ...
+  ...
+
+  imprima(&quot;2 + 2 = &quot;);
+  imprima(2 + 2);
+  imprima(&quot;\n&quot;);
+  //Imprime: 2 + 2 = 4
+
+Para resolver a legibilidade, poderiamos utilizar um operador de
+concatenação capaz de operar sobre qualquer tipo de dados. Então:
+
+  imprima(&quot;2 + 2 = &quot; &gt;&gt; (2 + 2) &gt;&gt; &quot;\n&quot;); //O operador &gt;&gt; é apenas ilustrativo
+
+
+No caso da função leia(), que atualmente é um absurdo semântico, ela
+se beneficia, automaticamente, da possibilidade de utilizar passagem
+por referência:
+
+  função leia(ref i : inteiro) ...
+  ...
+
+  leia(x);
+
+Se adotarmos overriding, seria melhor ainda. Teriamos:
+
+  leia(nome);
+  leia(idade);
+
+Ao invés de sermos obrigados à:
+
+  leia_literal(nome);
+  leia_inteiro(idade);
+
+
+&gt;<i> Strings são alocadas. E quando são desalocadas ? Vamos ter um Garbage Collector (GC) ?
+</I>
+Em se tratanto de strings, acho que não é preciso. Vou dar uma olhada
+em como implementações de Pascal fazem isso. Chutando uma solução,
+acho que poderiamos criar uma estrutura interna com reference
+counting.
+
+Agora, se levarmos em consideração a utilização de bibliotecas
+externas e bindings, não sei. Vou precisar estudar melhor os casos.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000219.html">[gpt-usuarios] Definição sobre o que é um compilador
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000221.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

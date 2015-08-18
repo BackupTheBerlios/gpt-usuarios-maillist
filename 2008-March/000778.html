@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] gpt 1.0 e editores no windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20gpt%201.0%20e%20editores%20no%20windows&In-Reply-To=%3C92b9a8820803151927l27f9ae87t6bf7c87557c14d58%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000782.html">
+   <LINK REL="Next"  HREF="000779.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] gpt 1.0 e editores no windows</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20gpt%201.0%20e%20editores%20no%20windows&In-Reply-To=%3C92b9a8820803151927l27f9ae87t6bf7c87557c14d58%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] gpt 1.0 e editores no windows">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Domingo Março 16 03:27:24 CET 2008</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000782.html">[gpt-usuarios] Instalador para windows
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000779.html">[gpt-usuarios] arquivo THANKS
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#778">[ date ]</a>
+              <a href="thread.html#778">[ thread ]</a>
+              <a href="subject.html#778">[ subject ]</a>
+              <a href="author.html#778">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hoje brinquei um pouco no Windows, tentando adaptar algum editor para
+usar com o GPT. Infelizmente, não tive muito sucesso. Pelo menos, não
+como eu esperava. Na lista, estão inclusos o Notepad++, JEdit,
+TextPad, Crimson e Programmers Notepad.
+
+-JEdit: não consegui encontrar, por padrão, nenhuma opção para
+executar comandos no console (nem mesmo plugins).
+-TextPad: não é free, e não encontrei suporte para utf-8.
+-Crimson: não é free, não consegui executar comandos satisfatoriamente.
+-Programmer's Notepad: não consegui executar comandos satisfatoriamente.
+
+O único editor que pareceu suportar o que eu esperava, de forma
+simples,  foi o notepad++. Criar sintaxe colorida para a linguagem foi
+tranquilo (o que eu não esperava, devido à linguagem ter acentos).
+Porém, o arquivo onde a definição criada da linguagem fica não é o
+caminho de instalação da aplicação, e sim o &quot;Dados de Aplicativos&quot;.
+Isso é ruim porque eu esperava poder distribuir um pacote com tudo
+configurado.
+
+O outro lado dessa situação é que não adianta alterar o arquivo xml
+que contém as definições padrão de sintaxe das várias linguagens e
+adicionar a definição da linguagem g-portugol, pois o menu de
+linguagens do programa é &quot;hardcoded&quot; (!!) no código fonte, em uma
+longa lista de #define's.
+
+Por outro lado, no que tange a criar comandos, eu consegui definir
+tranquilamente os comandos para compilar e executar os algoritmos,
+inclusive com shortcuts de teclado, .
+
+Voltando ao compilador, eu criei um novo build e enfrentei alguns
+problemas com a codificação do texto, pois agora está tudo em UTF-8.
+Sem ter conseguido encontrar nenhuma solução da API do Windows, acabei
+fazendo um método ad-hoc para converter UTF-8 para latin-1 (e daí,
+para o code page do console).
+
+Como andei corringindo alguns bugs desde o lançamento do 1.0, acho que
+jajá a gente lança uma revisão. Ao mesmo tempo, assim que eu ficar
+minimamente satisfeito, vou ver se faço um tutorial para usar o
+compilador com o notepad++.
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000782.html">[gpt-usuarios] Instalador para windows
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000779.html">[gpt-usuarios] arquivo THANKS
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#778">[ date ]</a>
+              <a href="thread.html#778">[ thread ]</a>
+              <a href="subject.html#778">[ subject ]</a>
+              <a href="author.html#778">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

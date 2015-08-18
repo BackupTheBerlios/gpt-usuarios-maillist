@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111156m6389eabdnb8c43feaa334d56d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000285.html">
+   <LINK REL="Next"  HREF="000292.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710111156m6389eabdnb8c43feaa334d56d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 11 20:56:55 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000285.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000292.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#288">[ date ]</a>
+              <a href="thread.html#288">[ thread ]</a>
+              <a href="subject.html#288">[ subject ]</a>
+              <a href="author.html#288">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Eu colocaria como obrigatório, mas mais por uma questão &quot;estética&quot;. Mas
+</I>&gt;<i> &gt; deixamos como está porque ser ou não obrigatório já entra no quesito
+</I>&gt;<i> &quot;gosto
+</I>&gt;<i> &gt; pessoal&quot;.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Eu coloquei como opcional tendo em vista as unidades escritas para
+</I>&gt;<i> serem bibliotecas. Inicialmente, achei estranho obrigar a declaração
+</I>&gt;<i> de algoritmo em tais arquivos.
+</I>
+
+Plagiando o pascal, as bibliotecas poderiam começar com &quot;unidade xxx&quot;, ou
+&quot;biblioteca xxx&quot;. Mas entendi o porque do opcional agora hehehe.
+
+&gt;<i> Entendi a questão do flexível.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A minha dúvida seria a seguinte:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; // Trecho em portugol...
+</I>&gt;<i> &gt; variáveis
+</I>&gt;<i> &gt;     x : inteiro;
+</I>&gt;<i> &gt;     y : inteiro;
+</I>&gt;<i> &gt; fim-variáveis
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt;     x := 10;
+</I>&gt;<i> &gt;     y := 20;
+</I>&gt;<i> &gt;     x + y; // o que faria esse trecho de código ????
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> A principio, faria a soma. Em um segundo momento, o respectivo código
+</I>&gt;<i> seria descartado, por não ter efeito colateral. É o mesmo que na
+</I>&gt;<i> linguagem C, imagino.
+</I>&gt;<i>
+</I>&gt;<i> Por outro lado, para ilustrar um caso prático, isso seria interessante
+</I>&gt;<i> se fizessemos um REPL (read eval print loop), como os populares shells
+</I>&gt;<i> do ruby ou python. Permitir expressões como enunciados é interessante
+</I>&gt;<i> para mostrar o resultado das expresssões na medida em que o usuário as
+</I>&gt;<i> escreve. Mas para termos este benefício, teriamos que projetar a VM e
+</I>&gt;<i> a linguagem para se adequarem bem a modificação/adição de códigos em
+</I>&gt;<i> tempo de execução, algo que não sei se é viável pela natureza rígida
+</I>&gt;<i> da linguagem. Para fazer essas adequações, acho que sairíamos do
+</I>&gt;<i> &quot;portugol canônico&quot;.
+</I>
+
+Você poderia colocar um exemplo de REPL ?
+
+Quanto a inserir código em tempo de execução, eu fiz algo similar antes, mas
+como você comentou, com o portugol não daria certo :-)
+
+caso x seja
+&gt;<i>    1:
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>    fim-opção
+</I>&gt;<i>    2:
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>    fim-opção
+</I>&gt;<i>    senão
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>    fim-opção
+</I>&gt;<i> fim-caso
+</I>
+
+Gostei dessa sintaxe :-)
+
+
+&gt;<i> Poderiamos adicionar a palavra-chave &quot;sair&quot; como análoga ao &quot;break&quot;. E
+</I>&gt;<i> serviria para laços também. Mas, claro, o problema da (in)coerência em
+</I>&gt;<i> relação às outras estruturas ainda persiste.
+</I>
+
+Quanto ao sair, poderia ser adicionado sim, e na maioria (senão todas) as
+estruturas de controle isso seria facilmente implementável. Isso porque, na
+maioria das estruturas de controle, já é gerado um label do tipo
+&quot;próximo_comando&quot; ou &quot;fim_do_comando&quot;. Então, sair seria traduzido
+para &quot;goto próximo_comando&quot;.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/ead39cfc/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/ead39cfc/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000285.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000292.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#288">[ date ]</a>
+              <a href="thread.html#288">[ thread ]</a>
+              <a href="subject.html#288">[ subject ]</a>
+              <a href="author.html#288">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

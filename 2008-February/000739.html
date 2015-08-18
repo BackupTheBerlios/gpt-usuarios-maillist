@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0802120549t4fa12fc6j5d81c4e5af3f4cf8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000743.html">
+   <LINK REL="Next"  HREF="000740.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Teste de bind para fopen, fwrite e fclose</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0802120549t4fa12fc6j5d81c4e5af3f4cf8%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Teste de bind para fopen, fwrite e fclose">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Fevereiro 12 14:49:39 CET 2008</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000743.html">[gpt-usuarios] coringa
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000740.html">[gpt-usuarios] Criação do .deb
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#739">[ date ]</a>
+              <a href="thread.html#739">[ thread ]</a>
+              <a href="subject.html#739">[ subject ]</a>
+              <a href="author.html#739">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Da forma acima, isso resolveria o problema para ponteiros, mas creio
+</I>&gt;<i> que precisamos de algo mais completo para o mapeamento de tipos.
+</I>&gt;<i>
+</I>&gt;<i> Abrindo parenteses, em se tratando do mapeamento da estrutura FILE, eu
+</I>&gt;<i> pensei em expandir seu tipo para uma estrutura portugol, mas pelo que
+</I>&gt;<i> vi do padrão, os campos dela não são padronizados, então, acho que
+</I>&gt;<i> deixariamos sua estrutura interna inacessível a nível de portugol
+</I>&gt;<i> mesmo. Por outro lado, para uma estrutura como Elf32_Ehdr (em elf.h)
+</I>&gt;<i> por exemplo, deveriamos fazer o mapeamento para um tipo &quot;estrutura&quot;.
+</I>
+
+Se possível eu tentaria evitar que código em Portugol (e consequentemente a
+VM) tivesse que lidar com as estruturas definidas em C. Em último caso que
+sejam criadas funções C que manipulam esses dados e a VM invoca essas
+funções. Eu acho que colocando manipulação de estruturas de C dentro da VM e
+do portugol vai sobrecarregar o projeto agora. Imagina que a gente vai ter
+que ter suporte a todos os tipos de C dentro do Portugol e da VM. Não quero
+dizer que não seja útil, mas eu tentaria evitar isso nesse momento.
+
+Minha sugestão: se realmente for a melhor forma, então que a gente deixa
+para a próxima versão, e colocamos na Gepeto o que for necessário para
+mascarar essa dependência.
+
+
+Prosseguindo, a meu ver, o arquivo sld poderia ter uma seção para
+&gt;<i> lidar com a associação de tipos (possivelmente, poderia ser uma seção
+</I>&gt;<i> similar à &quot;options{}&quot;). Mas, pensando bem, em relação aos tipos, acho
+</I>&gt;<i> que lidamos com duas atividades distintas: criação de tipos portugol e
+</I>&gt;<i> associação de tipos gpt&lt;-&gt;C. Então, proporia termos locais específicos
+</I>&gt;<i> para lidar com estas duas tarefas.
+</I>&gt;<i>
+</I>&gt;<i> Um rascunho inicial:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> //file.sdl
+</I>&gt;<i> gpt_types {
+</I>&gt;<i> //tipo FILE é ponteiro;
+</I>&gt;<i> FILE=ponteiro;
+</I>&gt;<i> }
+</I>
+
+Gostei da abordagem. Eu só ressalto que a associação FILE e ponteiro deve
+ser a mesma para todos os bindings... ou não ? Eu só gostaria de frizar que
+algumas associações podem (e devem) estar em um arquivo apenas, e não
+replicada em cada sdl. Inteiro para int é uma, por exemplo.
+
+type_mappings {
+&gt;<i>
+</I>&gt;<i> //C_type=GPT_type
+</I>&gt;<i>
+</I>&gt;<i> const char*=literal;
+</I>&gt;<i> char*=ref literal;
+</I>&gt;<i> FILE*=FILE; //tipo gpt definido acima
+</I>&gt;<i> int=inteiro;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &quot;gpt_types&quot; ajudaria a criar a tabela de símbolos da biblioteca.
+</I>&gt;<i> &quot;type_mappings&quot; ajuda no mapeamento de tipos gpt&lt;-&gt;c.
+</I>
+
+Ok. Mas acho que alguns mapeamentos são certos, então podem estar fixos em
+algum ponto. No exemplo acima, const char * = literal sempre será válido
+(pelo menos eu acho isso).
+
+Outra questão é o triplo propósito da assinatura de uma rotina no sld:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> function fopen(string name, string mode) : pointer[FILE]
+</I>
+
+Faltou a definição da função para mapeamento em C:
+
+function fopen(string name, string mode) : pointer[FILE] ::= fopen(name,
+mode);
+
+Esta declaração deve informar, principalmente:
+&gt;<i>
+</I>&gt;<i> 1) a assinatura da função/procedimento portugol para ser registrada na
+</I>&gt;<i> tabela de simbolos;
+</I>
+
+ok
+
+2) a variável/tipo C/C++ que representará os valores na pilha
+&gt;<i> (parâmetros e resultado);
+</I>
+
+ok
+
+3)  o método da pilha que deve ser utilizado para recuperar/armazenar
+&gt;<i> determinado parâmetro/resultado.
+</I>
+
+Fiquei com dúvida neste ponto. Isso realmente precisa ? Conforme o tipo de
+dado, tem-se o método de push/pop equivalente.
+
+Agora, supondo que os termos entre [] denotam o conjunto de métodos
+&gt;<i> para as diferentes operações pop/push da pilha (popString, popInt,
+</I>&gt;<i> ...), eu pensei no seguinte esquema:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> function fputs(cont char* text [popString], FILE* file [popint]) : int
+</I>&gt;<i> [pushInt];
+</I>
+
+Nessa abordagem, ao invés de colocar os tipos do Portugol, foram colocados
+os tipos da linguagem nativa do bind (nesse caso C). Ñão sei se foi
+intencional a troca, mas acho que essa troca foi válida sim.
+
+Porém o que me preocupa é a sintaxe de C. Se a gente deixar a definição do
+sld nos mapeamentos com tipos de C, a gente vai ter que lidar com static,
+const, pointer, ... enquanto que se os tipos forem os de Portugol, o parser
+é bem simples.
+
+function fputs(literal text, ponteiro file) : inteiro ::= fputs(text, file);
+
+
+Com esta declaração e as informações de tipos nas seções acima,
+&gt;<i> poderiamos derivar a assinatura gpt (problema 1) e demais definições
+</I>&gt;<i> de tipos, completando as informações necessárias no lado do portugol:
+</I>
+
+Até podemos derivar a assinatura, mas mesmo que seja opcional na sintaxe do
+sld, eu acharia melhor que fosse possível indicar a ordem dos parâmetros na
+chamada a uma função C. Se a função C recebe parâmetro A e B, mas a gente
+achar mais conveniente em portugol o usuário invocar com B e depois A, fica
+fácil a gente trocar. Isso também é válido caso a gente queira trocar o nome
+de uma ou mais callbacks...
+
+tipo FILE é ponteiro;
+&gt;<i> função fputs(literal, FILE) : inteiro
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> E podemos gerar as variáveis e tipos C/C++ que representam o
+</I>&gt;<i> determinado parâmetro (problema 2), informar o método de push/pop
+</I>&gt;<i> (problema 3) e, por fim, gerar a operação:
+</I>&gt;<i>
+</I>&gt;<i> const char * ctext = dataStack.popString().c_str();
+</I>&gt;<i> FILE* cfile = (FILE*) dataStack.popInt();
+</I>&gt;<i> int result;
+</I>&gt;<i> result = fputs(ctext,cfile);
+</I>&gt;<i> dataStack.pushInt(result);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Fatorando este esquema, poderiamos colocar as informações do método
+</I>&gt;<i> push/pop a serem utilizadas na seção type_mappings. Assim:
+</I>&gt;<i>
+</I>&gt;<i> type_mappings {
+</I>&gt;<i> [string] const char*=literal;
+</I>&gt;<i> [string] char*=ref literal;
+</I>&gt;<i> [int] FILE*=FILE;
+</I>&gt;<i> [int] int=inteiro;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Onde o que está entre [] indica o método push/pop. Agora, a nova
+</I>&gt;<i> definição de fputs:
+</I>&gt;<i>
+</I>&gt;<i> function fputs(cont char* text, FILE* file) : int;
+</I>
+
+Mesmo que seja opcional na gramática do sld, seria interessante podermos
+indicar a função em C ou em Portugol e indicar a ordem das chamadas.
+
+Estes exemplos acima lidam apenas com associação de tipos, mas ainda
+&gt;<i> não lidam com construção. Supondo que a biblioteca C tenha  estruturas
+</I>&gt;<i> como:
+</I>&gt;<i>
+</I>&gt;<i> struct Point {
+</I>&gt;<i> int x;
+</I>&gt;<i> int y;
+</I>&gt;<i> };
+</I>&gt;<i>
+</I>&gt;<i> struct Rectangle {
+</I>&gt;<i> Point topleft;
+</I>&gt;<i> Point bottomright;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Para mapear estes tipos precisariamos de uma notação para construção
+</I>&gt;<i> de estrutura. Se a sintaxe do portugol for inconveniente, talvez algo
+</I>&gt;<i> como isso:
+</I>&gt;<i>
+</I>&gt;<i> gpt_types {
+</I>&gt;<i>
+</I>&gt;<i> //mapeamentos
+</I>&gt;<i>
+</I>&gt;<i> FILE=ponteiro;
+</I>&gt;<i>
+</I>&gt;<i> //construções
+</I>&gt;<i>
+</I>&gt;<i> struct(Point) = x:inteiro, y:inteiro;
+</I>&gt;<i> struct(Rectangle) = topleft:Point, bottomright:Point;
+</I>&gt;<i> }
+</I>
+
+Eu tenho muito receio de tentarmos criar structs em Portugol equivalentes as
+de C, até porque a gente não tem hoje os mesmo tipos de C. Imagine que um
+dia a gente queira fazer bind com outra linguagem. Seguindo esse estilo, se
+não estou enganado, teremos que ter suporte em Portugol aos tipos de dados
+da outra linguagem também. Eu prefiro criar equivalências com Portugol do
+que ter suporte aos tipos de dados de C. O que não tem equivalência a gente
+mascara.
+
+A minha proposta fica em tentar simplificar e, se necessário uma estrutura,
+fazer algo como indicar o tamanho da estrutura. O que &quot;tem dentro&quot; fica
+abstraído em Portugol. A VM apenas precisaria saber o tamanho da estrutura
+para pode copiar os dados internos. E quanto ao indicar o tamanho, pode até
+ser algum código que quando a VM inicializa ela pega o sizeof da estrutura e
+mantém para saber lidar com a informação.
+
+Mas vamos conversando para podermos sincronizar as idéias....
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20080212/b37fb5cf/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20080212/b37fb5cf/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000743.html">[gpt-usuarios] coringa
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000740.html">[gpt-usuarios] Criação do .deb
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#739">[ date ]</a>
+              <a href="thread.html#739">[ thread ]</a>
+              <a href="subject.html#739">[ subject ]</a>
+              <a href="author.html#739">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710160509g42ec8835pe83761825fb7a21a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000372.html">
+   <LINK REL="Next"  HREF="000339.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710160509g42ec8835pe83761825fb7a21a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Outubro 16 14:09:35 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000372.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000339.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> 1) Matrizes e vetores.
+</I>&gt;<i> Nao concordo com tanto faz usar um ou outro. Chamar tudo de matriz não
+</I>&gt;<i> vejo problema, mas chamar tudo de vetor eh estranho. Deve continuar como
+</I>&gt;<i> está no v1.0. Ou, quem sabe, fazer uma distinção clara entre vetor e
+</I>&gt;<i> matriz.
+</I>&gt;<i>
+</I>&gt;<i> variaveis
+</I>&gt;<i>   v: vetor[10] de inteiro; // ok
+</I>&gt;<i>   m: matriz[4][4] de inteiro;  // ok
+</I>&gt;<i>   v1: vetor[2][3] de inteiro;  // erro de compilacao
+</I>&gt;<i>   m1: matriz[2] de inteiro; / /erro de compilacao
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i>
+</I>&gt;<i> O que acham?
+</I>
+
+Pois é... eu também prefiro matriz do que vetor... ou diferenciar como o
+Adorilson comentou...
+
+3) Repita.
+&gt;<i> Alienigina ficaram essas propostas do Alex :p
+</I>
+
+Eu também achei hehehe.
+
+Como ele mesmo disse, isso pode confundir e a ideia do repita é ter o
+&gt;<i> controle ao final do bloco.
+</I>&gt;<i> Não vejo  problema alguma, e nem pq discutir, a ausencia de um
+</I>&gt;<i> &quot;fim-repita&quot;. O &quot;até&quot; ou &quot;enquanto&quot; no fim do bloco faz este papel.
+</I>&gt;<i> A discussao que caberia era se o laço deveria ser interrompido qd
+</I>&gt;<i> &lt;condicao&gt; fosse verdadeira &quot;Repita..até&lt;condicao&gt;&quot; , como em Pascal, ou
+</I>&gt;<i> falsa, como em Java e C, &quot;Repita...enquanto&lt;condicao&gt;&quot;
+</I>&gt;<i>
+</I>&gt;<i> Fico com a primeira opção pois tratamos ela assim no início das discussoes
+</I>&gt;<i> e a literatura (MANZANO) tb trata assim. Apesar de ter vista agora na
+</I>&gt;<i> gramatica que foi definida com o &quot;enquanto&quot; :/
+</I>&gt;<i> Ou poderiamos até implementar as duas opções. Seria um recurso didático
+</I>&gt;<i> bem legal. :D O que acham?
+</I>
+
+Eu também acho o repita..até mais didático, mas sim, poderíamos implementar
+as duas opções, acho que sem grandes alterações.
+
+4) Tamanho dinamico de tipos.
+&gt;<i> Gostei da possibilidate de uma variavel inteira ter &quot;99 ou
+</I>&gt;<i> 983758604983758604983758604983758604983758604983758604&quot;. Esse negocio de ter
+</I>&gt;<i> byte, short, int, long... Mais atrapalha do q ajuda. Para os humanos, tanto
+</I>&gt;<i> faz 99 ou 983758604983758604983758604983758604983758604983758604, é tudo
+</I>&gt;<i> inteiro.
+</I>
+
+Eu acho que seria uma abordagem interessante. Mas como a gente faria quando
+o usuário quer limitar uma entrada ? Ele testaria depois para ver o dado é
+válido ?
+
+ Uma coisa  q me veia na cabeça agora, é a possibilidade de reproduzirmos os
+&gt;<i> conjuntos numericos. Numeros naturais, inteiros, reais... Viagem demais?
+</I>
+
+Eu não sou muito bom para novas abordagens hehehe. Seria melhor o Thiago dar
+pitaco nisso :-)
+
+O meu único receio é que a gente precisa, para facilitar a nossa vida,
+mapear os tipos de dados do g-portugol para tipos nativos de alguma
+linguagem.
+
+5) Caso...Escolha
+&gt;<i> O que mais me agrada é:
+</I>&gt;<i>
+</I>&gt;<i> caso &lt;variavel&gt; seja
+</I>&gt;<i>    1:
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>    fim-opção
+</I>&gt;<i>    2:
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    fim-opção
+</I>&gt;<i>    senão
+</I>&gt;<i>        &lt;comandos&gt;
+</I>&gt;<i>    fim-opção
+</I>&gt;<i> fim-caso
+</I>&gt;<i>
+</I>&gt;<i>
+</I>Foi a que mais me agradou também.
+
+Tenho uma certa tendencia a sugerir  a troca dos &quot;:&quot; por &quot;faça&quot;, mas seria
+&gt;<i> escrever demais. Tá ótimo desse jeito.
+</I>
+
+Eu também pensei algo nesse sentido. Algo como:
+
+caso &lt;variavel&gt; seja
+   opção 1:
+       &lt;comandos&gt;
+   fim-opção
+   opção 2:
+       &lt;comandos&gt;
+
+
+   fim-opção
+   senão
+       &lt;comandos&gt;
+   fim-opção
+fim-caso
+
+
+Outro questao é: quais os tipos permitivos para &lt;variavel&gt; ?
+
+
+Na teoria qualquer tipo nativo. Alías, acho que o mais correto seria &quot;caso
+&lt;expressão&gt; seja&quot;.
+
+Uma outra questão &quot;cosmética&quot;. &quot;caso &lt;expressão&gt; seja...&quot; ou &quot;caso
+&lt;expressão&gt; faça&quot;... ???
+
+6) Literais.
+&gt;<i> Para concatenacação, concordo com o Alex, sobre usar o bom e velho &quot;+&quot;.
+</I>&gt;<i> Acho q devemos permitir o acesso aos caracteres de um literal, sim. E nas
+</I>&gt;<i> duas versões. Alias, sempre q possível, e viavel, o q for feito em uma,
+</I>&gt;<i> fazer na outra tb.
+</I>
+
+Além do &quot;[]&quot; para acessar um caracter de um literal, também podemos
+disponibilizar um conjunto de funções para manipular literais. Se bem que
+isso provavelmente já será implementado em bibliotecas desenvolvidas com o
+próprio gpt.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/5afee97d/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/5afee97d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000372.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000339.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

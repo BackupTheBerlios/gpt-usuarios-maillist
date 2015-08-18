@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712071634x6b445b52w16f9a57cf9d78edd%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000628.html">
+   <LINK REL="Next"  HREF="000634.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712071634x6b445b52w16f9a57cf9d78edd%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro  8 01:34:41 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000628.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000634.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#633">[ date ]</a>
+              <a href="thread.html#633">[ thread ]</a>
+              <a href="subject.html#633">[ subject ]</a>
+              <a href="author.html#633">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 7, 2007 12:08 PM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi pessoal.
+</I>&gt;<i>
+</I>&gt;<i> Estou começando a formular algumas idéias sobre como a VM conseguirá
+</I>&gt;<i> utilizar as libs do sistemas (syslibs, neste e-mail).
+</I>
+Ótimo!
+
+&gt;<i> A minha primeira idéia é criar um gerador de bindings para a GptVM (já
+</I>&gt;<i> conversamos sobre isso na lista antes). Esse gerador recebe um arquivo
+</I>&gt;<i> contendo dados como nome da lib a ser gerada, header (.h) utilizados e a
+</I>&gt;<i> definição de cada uma das funções. Com esses dados o gerador cria os .hpp e
+</I>&gt;<i> .cpp contendo basicamente o mapeamento entre nome de funções em Portugol e
+</I>&gt;<i> syslibs, além de fazer as devidas conversões nos tipos de dados dos
+</I>&gt;<i> parâmetros e retorno de função.
+</I>
+Achei interessante essa abordagem e, enquanto lia, levantei algumas dúvidas.
+
+O arquivo sld seria gerado automáticamente, correto?
+
+Outra(s) dúvida(s) que tive foi olhando o código cpp/hpp gerado,
+notando que todas a funções utilizam a assinatura &quot;Parameters,
+Return&quot;. Supondo que esses códigos se tornassem libteste.so, fiquei
+pensando de que forma VM faria o carregamento/execução e recuperação
+do valor de retorno das funções desta lib.
+
+Eu supus que ela faria o dlopen inicial de libteste.so, certo? Depois
+disso, não consegui resolver como ela empacotaria os valores da pilha
+em um objeto Parameters. Pensei em algumas possibilidades.
+
+A primeira foi em ter a VM marcando a pilha de forma a saber quais
+valores dela fazem parte dos parâmetros de uma chamada que será feita
+a seguir (não me pareceu boa idéia tbm). Com isso, ela saberia que os
+últimos X valores, por ex, serão passados para a proxima chamada, e só
+precisaria empacotar estes. Mas, melhor seria fazer um push do número
+de argumentos que estão sendo passados. A outra possibilidade que
+imaginei foi ter a VM empacotando a pilha inteira em uma instância
+Parameters. A última, foi imaginar que Parameters fosse a própria
+pilha sendo passada para o método...
+
+A outra dúvida que tive foi em relação a resolução da chamada estática
+do método e nome da classe. Como a VM saberia da existência da classe
+CSyslib_test? Imaginei que seria uma convenção de nomes entre o nome
+da classe e o nome da lib. Talvez um exemplo contendo o código
+portugol que faça a chamada ao libteste.so me ajudasse :)
+
+Finalmente, como você vê a chamada no código portugol até a vm
+processando o dlopen e chamando a rotina externa?
+
+
+Quanto à sugestões, da forma que entendi, eu sugeriria não termos o
+arquivo sdl. Considere, por exemplo, a seguinte abordagem:
+
+Supondo que queremos criar um binging para as funções da biblioteca
+libm.so, especificamente, apenas a função &quot;double pow(double,double)&quot;.
+Pensei em termos o seguinte workflow (manual, para ilustrar):
+
+
+1) escreveriamos uma .so que faria a ponte entre o mundo C e o mundo GPT:
+
+------
+//gpt_pow.c
+#include &quot;gpt.h&quot;
+
+gpt_real gpt_pow(gpt_real base, gpt_real expoente) {
+  double native_base     = real_to_double(base);
+  double native_expoente = real_to_double(expoente);
+  double native_return   = pow(native_base, native_expoente);
+  return double_to_real(native_return);
+}
+------
+
+  $ # compilação ilustrativa
+  $ gcc -shared -o libgptpow.so gpt_pow.c -lm
+
+
+
+2) Com a libgptpow.so criada, escreveriamos a biblioteca gpt:
+
+------
+//pow.gpt
+função pow(base: real, expoente:real) : real
+início
+  asm
+    pushrr
+    pushrv expoente
+    pushrv base
+    libcall libgptpow.so, gpt_pow
+    poprv __result
+  fim-asm
+fim
+------
+
+3) e usariamos ela:
+
+------
+//teste.gpt
+algoritmo teste;
+use &quot;matemática&quot;;
+
+início
+  imprima(potência(3,3));
+fim
+------
+
+Então, o que temos ao final é uma tradução de tipos, para casos
+simples como este:
+
+double pow(double,double)
+-&gt; pow(real,real) : real
+
+Com um arquivo descrevendo o mapeamento de tipos, podemos ter o
+gerador criando gpt_pow() automaticamente, utilizando funções que
+relacionam e traduzem os dois mundos.
+
+
+Nota1: libcall, em matematica.gpt, faria o dlopen + a chamada da
+função &quot;gpt_pow&quot;. No final, armazenaria na pilha o valor de retorno,
+se houver.
+
+Nota2: libcall respeitaria a convenção de chamadas de função C, mas
+acho que ainda existiria o problema da passagem de argumentos.
+Pensando por alto, se tivermos o bloco asm (em matematica.gpt) fazendo
+um push à mais passando o total de argumentos, poderiamos ter libcall
+utilizando esse valor para montar a pilha do processo manualmente e,
+finalmente, realizando o call.
+
+Nota3: estou supondo que temos um gpt.h com as definições que criam
+uma ponte entre os dois mundos, com as representações de dados da
+linguagem portugol em C, funções de suporte, etc. Por ex:
+
+//gpt.h
+typedef/class  ...  real;
+typedef/class ...  inteiro;
+typedef/class ...  literal;
+typedef/class  ...  matriz;
+typedef/class  ...  estrutura;
+
+double real_to_double(real);
+float  real_to_float(real);
+etc...
+
+Acho que este arquivo seria uma reunião das estruturas/tipos que a VM
+utiliza para representar os dados em portugol + funções que mapeiam
+dados portugol para dados C e vice-versa.
+
+
+Ok, isso seria um walktrough manual para o caso simples, mas achei
+relativamente fácil pensar em como tudo seria automatizado pois,
+grosso modo, boa parte dos bindings seriam apenas traduções de tipos
+de dados, ou mapeamento entre protótipos e estruturas.
+
+No fim, imagino que teriamos, a principio, um gerador que recebe duas
+informações como entrada: as informações dos protótipos de funções
+alvo (math.h, por ex) e o mapeamento dos dados entre as linguagens C e
+gpt. Ele seria responsável, então, por criar as funções-ponte em C (o
+binding.so), escrevendo as conversões nescessarias nas funções, e
+seria responsável por criar os stubs portugol que apenas teriam código
+asm para chamar libcall.
+
+
+Virando a página, independente da abordagem, eu pensei em utilizarmos
+ferramentas como ctags, ou o gccxml
+(<A HREF="http://www.gccxml.org/HTML/Index.html">http://www.gccxml.org/HTML/Index.html</A>) para geração automática de
+código, de forma a obter uma descrição estruturada dos códigos C/c++
+(ex. math.h) que queremos utilizar como alvos de bindings.
+
+É isso. Muito aqui foi elaboração mental, então, desculpe (e me
+corrija :) se falei alguma besteira.
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000628.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000634.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#633">[ date ]</a>
+              <a href="thread.html#633">[ thread ]</a>
+              <a href="subject.html#633">[ subject ]</a>
+              <a href="author.html#633">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

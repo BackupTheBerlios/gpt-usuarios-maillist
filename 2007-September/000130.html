@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] CI para uso de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709120731h720e0b34g105a06669b1d6dd1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000127.html">
+   <LINK REL="Next"  HREF="000134.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] CI para uso de estruturas</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709120731h720e0b34g105a06669b1d6dd1%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] CI para uso de estruturas">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 12 16:31:37 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000127.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000134.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Não sei dizer se seria uma boa
+</I>&gt;<i> &gt; idéia nós termos o tipo ponteiro explicitamente (mesmo que só para uso
+</I>&gt;<i> da
+</I>&gt;<i> &gt; VM).
+</I>&gt;<i>
+</I>&gt;<i> Não sei. A ausência de ponteiro ajuda/atrapalha nos bindings com
+</I>&gt;<i> bibliotecas externas ou chamadas de sistema? A propósito, como estas
+</I>&gt;<i> coisas seriam feitas a nível de opcode?
+</I>
+
+Os ponteiros, a meu ver, nem ajudam nem atrapalham com os bindings. Eles são
+uma abstração dentro da VM. Por exemplo, um ponteiro apontando para 0
+significa a posição zero dentro da área de memória reservada para dados na
+VM.
+
+Os ponteiros não acessam nada que não esteja dentro da VM, ou seja, não
+acessam áreas do sistema operacional, de bibliotecas que não foram
+desenvolvidas em gpt e afins.
+
+&gt;<i> Como a gente geraria o &quot;deslocamento&quot; para acessar z ?
+</I>&gt;<i>
+</I>&gt;<i> Poderiamos adicionar um nível de indireção? Digamos que o formato de
+</I>&gt;<i> estruturas seja uniforme, independente do tipo de seus membros. Os
+</I>&gt;<i> indices da estrutura não contém o dado, e sim, um apontador para o
+</I>&gt;<i> dado. Dessa forma, os elementos internos da estrutura são ponteiros,
+</I>&gt;<i> com tamanho constante. Talvez isso preserve os opcodes de questões de
+</I>&gt;<i> endereçamento.
+</I>
+
+Entendi.
+
+//Releve as loucuras abaixo, pois é apenas uma ilustração:
+&gt;<i>
+</I>&gt;<i> t1 := &amp;t
+</I>&gt;<i> t1 := t1 + 2 //pointer para o segundo elemento
+</I>&gt;<i> *(*t1) := 10
+</I>&gt;<i>
+</I>&gt;<i> Acima, o calculo de endereçamento foi abstraído.
+</I>
+
+Entendi sim. Se eu entendi bem, eu só faria uma correção no código acima
+porque *(*t1) não seria algo válido no CI atualmente:
+
+t1 := &amp;t
+t1 := t1 + 2 //pointer para o segundo elemento
+t1 := *t1
+*t1 := 10
+
+Aliás, t1 + 2 não estaria acessando o terceiro elemento ?
+
+Eu só me preocupo porque, dessa forma, a gente teria que ter algum tipo de
+alocação dinâmica de memória para estruturas. Em uma VM simples, criar uma
+estrutura nada mais é do que alocar um espaço na sua área de dados com
+tamanho de sizeof(estrutura). Com indireção teríamos que alocar a área da
+estrutura e uma outra área para onde os ponteiros da estrutura estariam
+apontando. Acho que esse item entraria naquele requisito de dar mais
+inteligência na VM, o que talvez não seja o momento agora.
+
+Acho que temos que evoluir melhor as nossas idéias...
+
+&gt;<i> param &lt;inteiro&gt; é um comando...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Para termos param *t2, teriamos que ter uma outra variante de param que
+</I>&gt;<i> &gt; aceitasse ponteiros.
+</I>&gt;<i> &gt; [...]
+</I>&gt;<i>
+</I>&gt;<i> Ah, entendi! Ajuda se tratarmos como o mesmo tipo um ponteiro e um
+</I>&gt;<i> inteiro?
+</I>
+
+Sim, claro que ajuda. A diferença seria que, se você quer empilhar o
+endereço de t2, ao invés de invocar param *t2 ou &amp;t2, você divide em 2
+comandos:
+
+tt := &amp;t2 // tt é um inteiro
+param tt
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/aa74768e/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070912/aa74768e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000127.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000134.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

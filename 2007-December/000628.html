@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712070808w67a78630sdf9e720bf621ff4c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000637.html">
+   <LINK REL="Next"  HREF="000633.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712070808w67a78630sdf9e720bf621ff4c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Dezembro  7 17:08:17 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000637.html">[gpt-usuarios] CMS - Homepage
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000633.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#628">[ date ]</a>
+              <a href="thread.html#628">[ thread ]</a>
+              <a href="subject.html#628">[ subject ]</a>
+              <a href="author.html#628">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Estou começando a formular algumas idéias sobre como a VM conseguirá
+utilizar as libs do sistemas (syslibs, neste e-mail).
+
+Primeiramente eu gostaria de salientar alguns problemas relevantes que
+devemos resolver:
+
+1) Temos que, de alguma forma, mapear uma chamada a uma biblioteca na GptVM
+para uma chamada a uma syslib;
+
+2) Não temos como, para cada chamada, implementarmos um código para tal &quot;na
+munheca&quot;. Temos que ter em mente que serão muitas (mas muitas mesmo)
+chamadas de sistemas que teremos que mapear. Para mim fica claro que teremos
+que automatizar isso;
+
+3) As syslibs utilizam tipos de dados que não necessariamente são
+compatíveis com os tipos da GptVM, ou seja, temos que mapear os tipos para a
+syslib e o retorno para a GptVM;
+
+4) Não necessariamente uma chamada a uma syslib será simples como apenas
+traduzir o nome da função e pronto. Possivelmente parâmetros podem estar
+implícitos e não serem passados durante a chamada da syslib.
+
+Exemplo: funcao abre_arquivo invoca a syslib fopen com nome do arquivo
+apenas. Como o arquivo será aberto é um valor default passado a fopen que
+não é passado durante a chamada a abre_arquivo.
+
+Certamente existem vários outros problemas que nem imaginei. De qualquer
+forma estou tentando bolar uma proposta inicial.
+
+A minha primeira idéia é criar um gerador de bindings para a GptVM (já
+conversamos sobre isso na lista antes). Esse gerador recebe um arquivo
+contendo dados como nome da lib a ser gerada, header (.h) utilizados e a
+definição de cada uma das funções. Com esses dados o gerador cria os .hpp e
+.cpp contendo basicamente o mapeamento entre nome de funções em Portugol e
+syslibs, além de fazer as devidas conversões nos tipos de dados dos
+parâmetros e retorno de função.
+
+Exemplo de um arquivo de definição da lib &quot;test&quot;:
+
+$ cat test.sld
+// sld = syslib definition
+option {
+   libname   = &quot;test&quot;,
+   baseclass = &quot;CBaseSyslib&quot;,
+   linkerlib = &quot;math&quot;
+}
+
+header {
+   &quot;stdlib.h&quot;,
+   &quot;math.h&quot;,
+   &quot;iostream&quot;
+}
+
+procedure mensagem_padrao()
+{
+   puts(&quot;Hello !!!&quot;)
+}
+
+// Quando o mapeamento é bem simples o exemplo abaixo poderia ser uma
+&quot;otimização&quot; para o usuário digitar menos...
+procedure mensagem_personalizada(cstring msg) ::= puts(msg);
+
+function get_mensagem() : string
+{
+   string msg;
+   std::cin &gt;&gt; msg;
+   return msg;
+}
+
+function exponencial(double valor) : double
+{
+   return exp(valor);
+}
+
+A partir do arquivo acima o gerador de bindings criaria três arquivo: .hpp,
+.cpp e o Makefile.
+
+Abaixo vou listar o que seria o .hpp e o .cpp.
+
+$ cat syslib_test.hpp
+#include &lt;&quot;stdlib.h&quot;&gt;
+#include &lt;&quot;math.h&quot;&gt;
+#include &lt;&quot;iostream&quot;&gt;
+
+class CSyslib_test : public CBaseSyslib
+{
+public:
+   static void mensagem_padrao(Parameters parameters, Return return);
+   static void mensagem_personalizada(Parameters parameters, Return return);
+   static void get_mensagem(Parameters parameters, Return return);
+   static void exponencial(Parameters parameters, Return return);
+}
+
+
+$ cat syslib_test.cpp
+
+void CSyslib_test::mensagem_padrao(Parameters parameters, Return return)
+{
+   puts(&quot;Hello !!!&quot;);
+}
+
+void CSyslib_test::mensagem_personalizada(Parameters parameters, Return
+return)
+{
+   char* msg = parameters.getParString(0);
+   puts(msg);
+}
+
+void CSyslib::get_mensagem(Parameters parameters, Return return)
+{
+   std::string msg;
+   std::cin &gt;&gt; msg;
+
+   return.setString(msg);
+}
+
+void CSyslib::exponencial(Parameters parameters, Return return)
+{
+   double valor = parameters.getParDouble(0);
+
+   valor = exp(valor);
+
+   return.setDouble(valor);
+}
+
+
+Bom, as idéias iniciais são essas. E sim, deve haver uma dúzia e meia de
+problemas que eu não vi hehehe.
+
+Sugestões ????
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071207/357cd588/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071207/357cd588/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000637.html">[gpt-usuarios] CMS - Homepage
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000633.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#628">[ date ]</a>
+              <a href="thread.html#628">[ thread ]</a>
+              <a href="subject.html#628">[ subject ]</a>
+              <a href="author.html#628">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

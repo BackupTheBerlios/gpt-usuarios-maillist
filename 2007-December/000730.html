@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] coringa
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20coringa&In-Reply-To=%3C92b9a8820712220711l1b19b126v5b135d07b9b5218f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000727.html">
+   <LINK REL="Next"  HREF="000720.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] coringa</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20coringa&In-Reply-To=%3C92b9a8820712220711l1b19b126v5b135d07b9b5218f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] coringa">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 22 16:11:02 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000727.html">[gpt-usuarios] coringa
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000720.html">[gpt-usuarios] Dúvida sobre a geração de código GptAssembly no GptC
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#730">[ date ]</a>
+              <a href="thread.html#730">[ thread ]</a>
+              <a href="subject.html#730">[ subject ]</a>
+              <a href="author.html#730">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 22, 2007 7:57 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Mas internamente (VM e talvez GptAssembly) a gente continuaria tratando como
+</I>&gt;<i> um tipo inteiro ?
+</I>&gt;<i>
+</I>
+Internamente, pode ser o que quer que for melhor.
+
+&gt;<i> Posso estar enganado, mas acho que a nível de gptassembly não temos
+</I>&gt;<i> problemas para implementar as atribuições.
+</I>&gt;<i>
+</I>
+Sério? Fazer um coringa receber uma estrutura, matriz, valor primitivo
+qualquer (como real), enfim...não traz problemas para a VM?
+
+&gt;<i> Quem sabe &quot;tipo janela é pointer;&quot; ? Já temos o pointer. Meu receio
+</I>&gt;<i> basicamente é que, por enquanto, não tem problema de aproximarmos um pointer
+</I>&gt;<i> para inteiro, mas vai que em alguma arquitetura isso não seja correto.
+</I>&gt;<i> Lembro que trabalhei com porte de aplicativos do IA32 para o IA64 em 2001 e
+</I>&gt;<i> uma das regras era essa (nunca aproximar um pointer para inteiro e
+</I>&gt;<i> vice-versa).
+</I>&gt;<i>
+</I>
+Podemos ter um tipo &quot;ponteiro&quot; mapeando para pointer. Eu imagino que
+ele seria um &quot;coringa&quot; mas sem a capacidade de ser lvalue em portugol,
+já que não temos nenhum meio de adquirir os endereços das variáveis.
+
+Isso me leva a outro ponto: precisamos resolver como faremos callbacks.
+
+&gt;<i> &gt; O motivo real, então, do operador &quot;tipo&quot;, é auxiliar a
+</I>&gt;<i> &gt; criação de tipos nos bindings, especialmente para bibliotecas que se
+</I>&gt;<i> &gt; utilizam muito de typedefs para ponteiros, de forma segura.
+</I>&gt;<i>
+</I>&gt;<i> Esse ponto eu não entendi...
+</I>
+Eu tentei fazer um resumo de tudo :)
+Quis dizer que o propósito do &quot;tipo&quot; é auxiliar os bindings. Imagine
+fazer um binding para gtk_window_set_title() e gtk_button_pressed():
+
+void gtk_window_set_title(GtkWindow *window, const gchar *title);
+void gtk_button_pressed(GtkButton *button);
+
+A tabela de símbolos da biblioteca teria:
+
+tipo GtkWindow é ponteiro;
+tipo GtkButton é ponteiro;
+
+procedimento gtk_window_set_title(GtkWindow window, literal titulo)
+procedimento gtk_button_pressed(GtkButton button)
+--------
+
+Dessa forma, o compilador pode capturar erros como:
+
+variável janela : GtkWindow;
+
+gtk_button_pressed(janela); //erro! esperando tipo GtkButton
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000727.html">[gpt-usuarios] coringa
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000720.html">[gpt-usuarios] Dúvida sobre a geração de código GptAssembly no GptC
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#730">[ date ]</a>
+              <a href="thread.html#730">[ thread ]</a>
+              <a href="subject.html#730">[ subject ]</a>
+              <a href="author.html#730">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

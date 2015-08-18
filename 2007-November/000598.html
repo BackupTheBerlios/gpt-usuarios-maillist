@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C92b9a8820711121439m358ed61fu11ec0548a89c5c93%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000591.html">
+   <LINK REL="Next"  HREF="000600.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C92b9a8820711121439m358ed61fu11ec0548a89c5c93%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Novembro 12 23:39:38 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000591.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000600.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#598">[ date ]</a>
+              <a href="thread.html#598">[ thread ]</a>
+              <a href="subject.html#598">[ subject ]</a>
+              <a href="author.html#598">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Nov 12, 2007 9:01 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Eu imaginei algo como:
+</I>&gt;<i>
+</I>&gt;<i> // Portugol
+</I>&gt;<i> algoritmo vetor_na_pilha;
+</I>&gt;<i>
+</I>&gt;<i> variável resultado: matriz[3][4] do tipo inteiro;
+</I>&gt;<i> início
+</I>&gt;<i>  resultado[0][0] := 10;
+</I>&gt;<i>  resultado[1][2] := 20;
+</I>&gt;<i>  resultado[2][3] := resultado[0][0] + resultado[1][2];
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  // Exemplo em GptAssembly
+</I>&gt;<i> program vetor_na_pilha;
+</I>&gt;<i> var resultado matrix
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> proc main
+</I>&gt;<i>     m2alloc resultado, 4, 12 // 4 bytes, 12 elementos
+</I>&gt;<i>
+</I>
+Não seria necessário informar, nos bytecodes, o tamanho de cada
+dimensão? Por exemplo, no código abaixo
+
+    m2set resultado, 2, 3, t3
+
+como se sabe o tamanho da primeira dimensão, para calcular o offset?
+
+
+E, se trocassemos a declaração da matriz por:
+
+    variável resultado: matriz[2][6] do tipo inteiro;
+
+os bytecodes gerados não seriam os mesmos?
+
+   m2alloc resultado, 4, 12 // 4 bytes, 12 elementos
+    ...
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000591.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000600.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#598">[ date ]</a>
+              <a href="thread.html#598">[ thread ]</a>
+              <a href="subject.html#598">[ subject ]</a>
+              <a href="author.html#598">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

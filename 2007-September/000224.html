@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Discussao sobre duvidas no wikki
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C9a3912af0709281759s4cedf0bflab9491710275a3b6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000223.html">
+   <LINK REL="Next"  HREF="000222.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Discussao sobre duvidas no wikki</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C9a3912af0709281759s4cedf0bflab9491710275a3b6%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Discussao sobre duvidas no wikki">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Setembro 29 02:59:14 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000223.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000222.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Isso não é diferente do que acontece hoje [1], e meio que me
+</I>&gt;<i> desagrada, porque faz da função &quot;imprima&quot; uma função especial.
+</I>&gt;<i>
+</I>&gt;<i> Se o usuário quiser fazer uma função nos mesmos moldes, terá que mexer
+</I>&gt;<i> na implementação do ambiente...
+</I>
+
+Agora &quot;caiu a ficha&quot; hehehe. Entendi, e concordo com você sim. No projeto
+que trabalhei a equivalente a função imprima era tratada também como um
+&quot;caso especial&quot;, e também não gostava nada dessa abordagem.
+
+&gt;<i> Você poderia explicar melhor ? Ou tentar criar um exemplo, mesmo que
+</I>&gt;<i> &gt; rudimentar ?
+</I>&gt;<i>
+</I>&gt;<i> Agora, explicando como eu gostaria de oferecer a &quot;libc&quot; do G-Portugol:
+</I>&gt;<i>
+</I>&gt;<i> //Abordagem #1
+</I>&gt;<i> //Supondo que os bytecodes abstraem os serviços do SO
+</I>&gt;<i> //oferecendo pcodes para estes.
+</I>&gt;<i> //Neste caso, deve haver bytecodes para IO, threads,
+</I>&gt;<i> //processos, e tudo o mais.
+</I>&gt;<i>
+</I>&gt;<i> função imprima(i : inteiro)
+</I>&gt;<i> início
+</I>&gt;<i> @bytecode-início
+</I>&gt;<i>    push i
+</I>&gt;<i>    pcall print_integer
+</I>&gt;<i> @bytecode-fim
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> função imprima(l : literal)
+</I>&gt;<i> início
+</I>&gt;<i> @bytecode-início
+</I>&gt;<i>    push l
+</I>&gt;<i>    pcall print_literal
+</I>&gt;<i> @bytecode-fim
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>Eu gostei da questão de usar opcodes (assembly) da VM na abordagem 1. Porém,
+pelas idéias iniciais, a gente não tem um opcode que reflete cada
+funcionalidade do S.O. porque senão teríamos uma combinação gigantesca de
+opcodes, além de termos uma VM específica para um conjunto de bibliotecas do
+sistema.
+
+Eu acharia interessante utilizar a abordagem 1, mas ao invés de termos um
+opcode para cada funcionalidade de uma biblioteca, poderíamos ter um opcode
+genérico que consiga invocar as funções previamente mapeadas das bibliotecas
+do sistema. Algo como:
+
+push &quot;cria&quot; // função
+push &quot;thread&quot; // &quot;classe&quot;
+libcall
+
+De quaquer forma, quanto a essa questão de termos ou não opcodes específicos
+para threads, IO e afins, acho que temos que conversar melhor
+
+Para não termos uma VM específica para uma ou mais bibliotecas, a gente
+poderia ter um opcode que cria uma janela, por exemplo, independente da
+biblioteca gráfica que está sendo utilizada. Porém, de qualquer forma,
+teríamos uma combinação bem grande de opcodes, o que eu acho que não é uma
+boa abordagem. Apesar disso, acho que a gente deveria investigar melhor essa
+sugestão.
+
+
+&gt;<i> &lt;brincadeira&gt;Quem sabe, até, POSIX compliant&lt;/brincadeira&gt;
+</I>
+
+Hehehe. Seria interessante :-)
+
+PS: Em Smalltalk, o &quot;operador de concatenação&quot; é a vírgula (,). Isso
+&gt;<i> resolveria alguns problemas de forma bastante elegante, mantendo um
+</I>&gt;<i> pouco da compatibilidade com a literatura.
+</I>
+
+Podemos averiguar a viabilidade disso :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/1492439c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/1492439c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000223.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000222.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

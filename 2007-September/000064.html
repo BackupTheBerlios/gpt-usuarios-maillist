@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709061829r15a61717g9d21ffa63112917a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000056.html">
+   <LINK REL="Next"  HREF="000066.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0709061829r15a61717g9d21ffa63112917a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Setembro  7 03:29:32 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000056.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000066.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#64">[ date ]</a>
+              <a href="thread.html#64">[ thread ]</a>
+              <a href="subject.html#64">[ subject ]</a>
+              <a href="author.html#64">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Só para constar, o que chamas de &quot;biblioteca&quot; aqui, é uma lib externa?
+</I>&gt;<i> Então, B1, por exemplo, poderia ser pthread? E F1, poderia ser
+</I>&gt;<i> pthread_create? É isso?
+</I>
+
+Isso mesmo.
+
+&gt;<i> ld &quot;B1&quot;
+</I>&gt;<i> &gt; ld &quot;F1&quot;
+</I>&gt;<i> &gt; call
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Perdoe se meu raciocínio for falho:
+</I>&gt;<i> &quot;ld&quot; expandiria para algo, efetivamente, como &quot;dlopen&quot;, correto?
+</I>
+
+É uma abordagem utilizar dlopen. Outra possível abordagem seria o call, ao
+retirar os parâmetros de biblioteca e função da pilha (os 2 ld's) invocaria
+a função correta. Um rascunho de código seria algo como:
+
+map&lt;string,(*void)()&gt; call_opcodes;
+// pode ser hash_map ou alguma variante... não se preocupem muito com o
+código no momento porque é só um exemplo...
+
+call_opcodes[&quot;LIBC.FOPEN&quot;] = bind_LIBC_FOPEN;
+call_opcodes[&quot;B2_F2&quot;] = bind_B2_F2;
+
+void opcode_call( )
+{
+    string biblioteca = pilha.pop( );
+    string funcao = pilha.pop( );
+
+    (*void)() bind = call_opcodes[biblioteca+&quot;.&quot;+funcao];
+    (*bind)(); // se eu errei a sintaxe, desculpem-me, mas aqui eu estou
+invocando a funcao que está no ponteiro;
+}
+
+void bind_LIBC_FOPEN( )
+{
+    // Retira os seus parametros da pilha...
+    FILE* file = fopen( xxx, xxx );
+    // Insere o valor de retorno na pilha (file)...
+}
+
+void bind_B2_F2( )
+{
+    ...
+}
+
+E por ai vai. Podemos fazer um rascunho de código com dlopen também.
+
+Agora, imagina gerar o map acima e um método para cada função de cada
+biblioteca? É nessa hora que o gerador de binds vai ser útil :-)
+
+
+ A
+&gt;<i> unica diferença, então, entre as duas abordagens seria apenas o número
+</I>&gt;<i> de opcodes para realizar a operação (1 x 2), é isso?
+</I>
+
+Se só existir o opcode call, então teríamos algo como os seguintes
+opcodes internamente na VM:
+
+const int OPCODE_NOP = 0;
+const int OPCODE_LD = 1;
+const int OPCODE_ST = 2;
+const int OPCODE_CALL = 3;
+...
+
+Se, para cada função criarmos um opcode, então teríamos algo como:
+ const int OPCODE_NOP = 0;
+const int OPCODE_LD = 1;
+const int OPCODE_ST = 2;
+const int OPCODE_CALL_LIBC_FOPEN = 3;
+ const int OPCODE_CALL_B2_F2 = 4;
+const int OPCODE_CALL_B2_F3 = 5;
+const int OPCODE_CALL_B2_F4 = 6;
+...
+
+Ou seja, para cada nova função seria gerado um novo opcode. Com isso, para
+incluir uma função na linguagem, teríamos que alterar também a geração
+de´bytecode do compilador.
+
+De fato, acho melhor ter opcodes enxutos. Com um pequeno conjunto,
+&gt;<i> fica fácil aprender e brincar na VM, em todos os aspectos. Para
+</I>&gt;<i> performance, acho razoável deixar a cargo dos otimizadores, jitter,
+</I>&gt;<i> inlining, etc. E de qualquer forma, não acho que teriamos necessidade
+</I>&gt;<i> de criar opcodes para otimizar certas operações.
+</I>
+
+Até podemos criar um simples, do tipo:
+
+ Ao invés de LD 1, ter um opcode LD_1...
+Ao invés de LD 2, ter um opcode LD_2...
+Ao invés de LD 3, ter um opcode LD_3...
+
+A JVM tem esses opcodes para os números de 0 a 5, se eu não me engano. Mas
+também é detalhe e se não tivermos ninguém vai morrer hehehe. A única
+utilidade prática disse é para aplicar otimizações de código, ou você ver
+que, se gerasse o assembly &quot;na mão&quot;, faria melhor do que o seu compilador
+rsrsrs.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/5039c8a5/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/5039c8a5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000056.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000066.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#64">[ date ]</a>
+              <a href="thread.html#64">[ thread ]</a>
+              <a href="subject.html#64">[ subject ]</a>
+              <a href="author.html#64">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

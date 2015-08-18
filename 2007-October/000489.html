@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C9a3912af0710200827p669a8ch6e77be981c8abda2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000488.html">
+   <LINK REL="Next"  HREF="000495.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C9a3912af0710200827p669a8ch6e77be981c8abda2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Outubro 20 17:27:30 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000488.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000495.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#489">[ date ]</a>
+              <a href="thread.html#489">[ thread ]</a>
+              <a href="subject.html#489">[ subject ]</a>
+              <a href="author.html#489">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Atualmente, pelo que eu me lembre, temos a seguinte sintaxe para definição
+</I>&gt;<i> &gt; de constantes e variáveis locais:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt;     y: inteiro;
+</I>&gt;<i> &gt;     constante z: inteiro = 99;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Vocês não acham que fica um pouco estranho explicitar as constantes mas
+</I>&gt;<i> &gt; não as variáveis ?
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Sim, é estranho. Já tá certo a utilizacao do := para inicialização, né?
+</I>&gt;<i>
+</I>
+Ops, tá sim. Errei no exemplo :-)
+
+Eu sugiro algo bem simples para uniformizar isso:
+&gt;<i> &gt;
+</I>&gt;<i> &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt;     variável y: inteiro;
+</I>&gt;<i> &gt;     constante z: inteiro = 99;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Neste caso, teria q escrever variavel ou constante para cada uma?
+</I>&gt;<i>
+</I>
+Neste caso sim.
+
+Ou ainda utilizar a mesma sintaxe para definição de constantes e variáveis
+&gt;<i> &gt; globais:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt;     variáveis
+</I>&gt;<i> &gt;         y: inteiro;
+</I>&gt;<i> &gt;     fim-variáveis
+</I>&gt;<i> &gt;     constantes
+</I>&gt;<i> &gt;         z: inteiro = 99;
+</I>&gt;<i> &gt;     fim-constantes
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Isso. Apesar de escrever muito, pelo menos o sujeito nao tem q ter duas
+</I>&gt;<i> formas de declaracao em mente.
+</I>&gt;<i>
+</I>
+Concordo... sintaxe que o cara tem que pensar muito é só para complicar a
+vida :-)
+
+Eu optaria por deixar as duas últimas sintaxes, ou seja, ele tanto pode
+&gt;<i> &gt; utilizar variável e constante como variáveis..fim-variáveis e
+</I>&gt;<i> &gt; constantes..fim-constantes. Com isso o usuário usa a que mais lhe agradar ou
+</I>&gt;<i> &gt; for conveniente.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Sim, sim. Concordo. Ele passaria a escrever variavel e constante qd
+</I>&gt;<i> tivesse a outra forma bem fixada, e cheio dela tb. :D
+</I>
+
+Isso.
+
+O que você acha Thiago ?
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071020/e0fc1df3/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071020/e0fc1df3/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000488.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000495.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#489">[ date ]</a>
+              <a href="thread.html#489">[ thread ]</a>
+              <a href="subject.html#489">[ subject ]</a>
+              <a href="author.html#489">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

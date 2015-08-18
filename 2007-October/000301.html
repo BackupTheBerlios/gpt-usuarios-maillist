@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Vetores/matrizes no v2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C92b9a8820710120713x3014aec2hd92fa0bba36da3eb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000367.html">
+   <LINK REL="Next"  HREF="000340.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Vetores/matrizes no v2</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C92b9a8820710120713x3014aec2hd92fa0bba36da3eb%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Vetores/matrizes no v2">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Outubro 12 16:13:15 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000367.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000340.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Podemos ter checagem de tamanho dos vetores matrizes (bound check)?
+
+Estou achando muito asfixiador ter que definir o tamanho das dimensões
+dos vetores, parâmetros de funções. ex:
+
+função f( v : matriz[10][2] de inteiros) ...
+
+Gostaria de poder definir assim:
+
+função f( v : matriz[][] de inteiros) ...
+
+Caso isso vá pra frente, algumas implicações:
+
+1) Devemos poder obter o tamanho das dimensões em tempo de execução
+
+início
+  tam_i  := tamanho_vetor(matriz); //10
+  tam_j  := tamanho_vetor(matriz[0]); //2
+fim
+
+onde tamanho_vetor() utilizaria gptasm para executar bytecodes
+especificos para obter estes valores.
+
+2) O que significa matriz[][]? A omissão do tamanho das dimensões só é
+permitida em declaração de parâmetros? Ou variáveis globais/locais
+podem omitir o tamanho também?
+
+3) Vamos permitir que funções retornem vetores/matrizes? (atualmente,
+isso não é permitido)
+
+4) Vamos permitir que vetores/matrizes sejam lvalues válidos?
+Atribuições fariam cópias profundas dos elementos?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000367.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000340.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

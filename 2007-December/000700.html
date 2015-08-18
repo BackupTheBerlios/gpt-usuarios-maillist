@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Estrutura de diretórios para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712170508s23c10d7cp32bf6576c3c2bc63%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000699.html">
+   <LINK REL="Next"  HREF="000684.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Estrutura de diretórios para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712170508s23c10d7cp32bf6576c3c2bc63%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Estrutura de diretórios para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Dezembro 17 14:08:09 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000699.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000684.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#700">[ date ]</a>
+              <a href="thread.html#700">[ thread ]</a>
+              <a href="subject.html#700">[ subject ]</a>
+              <a href="author.html#700">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Isso sim. Porém, em um diretório teremos vários sld. Cada sld gera um
+</I>&gt;<i> &gt; Makefile e vários outros arquivos. Assim não teremos como gerar o source
+</I>&gt;<i> do
+</I>&gt;<i> &gt; bind de várias bibliotecas ao mesmo tempo. Temos que gerar um bind,
+</I>&gt;<i> &gt; compilar, gerar o próximo, compilar....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Ou eu que não entendi a estrutura de diretórios ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Acho que eu que não entendi o processo todo. Que tal deixar pra
+</I>&gt;<i> resolver isso quando tivermos alguns bindings sendo gerados? :)
+</I>
+
+Ok, sem problemas. As vezes eu esqueço que é fácil mover as coisas no svn
+hehehe.
+
+&gt;<i> Eu não gostaria de fazer varredura em profundidade, mas para o usuário
+</I>&gt;<i> &gt; facilitaria a vida...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Um &quot;use *&quot;, por exemplo, carregaria todas as libs. Isso não é
+</I>&gt;<i> performático,
+</I>&gt;<i> &gt; mas para iniciar facilita a vida.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Mas pensando bem nisso a gente não precisa ter uma estrutura de
+</I>&gt;<i> diretórios.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; sistema.sockets
+</I>&gt;<i> &gt; sistema.io
+</I>&gt;<i> &gt; sistema.xxx
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; São arquivos em um mesmo diretório. Um &quot;use sistema.*&quot; varre o diretório
+</I>&gt;<i> &gt; para ver quais as libs para serem carregadas.
+</I>&gt;<i>
+</I>&gt;<i> Eu gostei disso. E se deixarmos &quot;sistema&quot; como implícito (assim como
+</I>&gt;<i> &quot;lang&quot; em java), poderiamos fazer
+</I>&gt;<i>
+</I>&gt;<i> use &quot;matematica&quot;;
+</I>&gt;<i> use &quot;x.y.z&quot;;
+</I>&gt;<i> use &quot;redes.*&quot;;
+</I>
+
+Por mim tá ok.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071217/8498e1eb/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071217/8498e1eb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000699.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000684.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#700">[ date ]</a>
+              <a href="thread.html#700">[ thread ]</a>
+              <a href="subject.html#700">[ subject ]</a>
+              <a href="author.html#700">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

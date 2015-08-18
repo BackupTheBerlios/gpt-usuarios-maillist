@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710170449t674cdf3bmd61f4cf11f629203%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000377.html">
+   <LINK REL="Next"  HREF="000382.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710170449t674cdf3bmd61f4cf11f629203%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Outubro 17 13:49:12 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000377.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000382.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt;  Não é que precise, mas, no meu entendimento (que obviamente pode estar
+</I>&gt;<i> bem
+</I>&gt;<i> &gt; desatualizado), caractere varia de 0 a 255. Ou seja, se c1 tem 0 e você
+</I>&gt;<i> &gt; decrementar ele em 1, ele passa a ter 255, e não o tamanho máximo de um
+</I>&gt;<i> &gt; inteiro. Um opcode iadd não tem condições de saber que o dado era
+</I>&gt;<i> caracter e
+</I>&gt;<i> &gt; que os limites dele estão entre 0 e 255.
+</I>&gt;<i>
+</I>&gt;<i> Não podemos ter caracteres no range 0-255. Caracteres precisam de, no
+</I>&gt;<i> mínimo, 4 bytes. A letra &quot;á&quot;, em utf-8, ocupa 16 bits, vai muito além
+</I>&gt;<i> do valor 255. Por isso, acho que tratar todas essas coisas com iadd
+</I>&gt;<i> está bom.
+</I>
+
+Ok. Então vou retirar os opcodes específicos de char. Também posso retirar
+os específicos para bool (vou revisar os bool para ter certeza).
+
+&gt;<i> &gt; &gt; &gt; == Literais ==
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; E são proibidos de participar em operações relacionais de
+</I>&gt;<i> grandeza:
+</I>&gt;<i> &gt; &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &gt; &quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; A VM está planejada com suporte a isso.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Ok, mas acho que o compilador não deve deixar isso passar.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Você poderia aprofundar mais isso ? Para mim comparar duas strings para
+</I>&gt;<i> &gt; identificar qual é maior ou menor do que outra é um recurso bem útil.
+</I>&gt;<i> Qual o
+</I>&gt;<i> &gt; problema que você vê nisso ??
+</I>&gt;<i>
+</I>&gt;<i> É, concordo...quando escrevi isso pensei em duas coisas:
+</I>&gt;<i> 1) Essa operação, para strings, não é tão clara: estamos comparando o
+</I>&gt;<i> tamanho, ou comparando ordem alfabética? Eu imagino que estamos
+</I>&gt;<i> comparando o tamanho, mas o operador não é óbvio, na minha opinião.
+</I>
+
+Eu faria algo semelhante ao strcmp do C. Entendi o que você quis dizer com
+&quot;não é tão clara&quot; e concordo. Talvez seja questão da gente deixar bem claro
+o que é o que não é comparação de strings.
+
+2) Meu lado &quot;não faça a linguagem fazer muita coisa que bibliotecas
+&gt;<i> poderiam fazer também&quot; apitou.
+</I>
+
+Entendi. Mas acho que esse recurso deixa a vida do usuário iniciante mais
+produtiva. Quanto mais rápido o cara conseguir fazer um programinha
+funcionar (por mais simples que seja) maior a chance da gente motivar o cara
+a continuar usando e entender razoavelmente como é programar em uma
+&quot;linguagem de computador&quot;.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071017/3db3e0ad/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071017/3db3e0ad/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000377.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000382.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

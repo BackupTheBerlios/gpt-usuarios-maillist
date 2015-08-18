@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Erro na compilação gpt
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FErro_na_compila%3DE7%3DE3o_gpt%3F%3D&In-Reply-To=%3C20061106134214.14936.qmail%40web53401.mail.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Erro na compilação gpt</H1>
+    <B>SpiderSlack slack</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FErro_na_compila%3DE7%3DE3o_gpt%3F%3D&In-Reply-To=%3C20061106134214.14936.qmail%40web53401.mail.yahoo.com%3E"
+       TITLE="[gpt-usuarios] Erro na compilação gpt">spiderslack em yahoo.com.br
+       </A><BR>
+    <I>Segunda Novembro  6 14:42:14 CET 2006</I>
+    <P><UL>
+        
+        <LI>Próxima mensagem: <A HREF="000006.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá lista,
+
+Encontrei o compilador de G-portugol e achei muito interessante vou ministrar um curso de algoritmo e achei ele excelente para esse proposito resolvi testa-ló, quando fui gerar o Makefile via configure ele me acusou falta do antlr, baixei e instalei ele com o parametro ./configure --disable-csharp --disable-python ele compilou blz, mas na hora do gpt, ele dá o seguinte erro.
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em Capsula</A> gpt-1.0]# make
+make  all-recursive
+make[1]: Entering directory `/tmp/algoritmo/gpt-1.0'
+Making all in src
+make[2]: Entering directory `/tmp/algoritmo/gpt-1.0/src'
+Making all in modules
+make[3]: Entering directory `/tmp/algoritmo/gpt-1.0/src/modules'
+Making all in parser
+make[4]: Entering directory `/tmp/algoritmo/gpt-1.0/src/modules/parser'
+antlr ./lexer.g
+ANTLR Parser Generator   Version 2.7.5 (20061105)   1989-2005 jGuru.com
+error: Token stream error reading grammar(s):
+./lexer.g:52:10: unexpected char: 'r'
+TokenStreamException: unexpected char: 0xFFFD
+make[4]: *** [PortugolLexer.cpp] Error 1
+make[4]: Leaving directory `/tmp/algoritmo/gpt-1.0/src/modules/parser'
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory `/tmp/algoritmo/gpt-1.0/src/modules'
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory `/tmp/algoritmo/gpt-1.0/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/tmp/algoritmo/gpt-1.0'
+make: *** [all] Error 2
+[<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em Capsula</A> gpt-1.0]#
+
+
+Alguém tem alguma idéia do que possa estar ocorrendo, desde já agradeço.
+
+Atenciosamente.
+
+
+.___.
+       /     \
+      | O _ O |         kakaroto
+      /  \_/  \         Slackware 10.2 - Kernel 2.6.16.5
+    .' /     \ `.       E-mail: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">spiderslack em yahoo.com.br</A>
+   / _|       |_ \      MSN: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">predacom em pop.com.br</A>
+  (_/ |       | \_)     No filme Independence Day não foi vírus
+      \       /         que os americanos colocaram no computador
+     __\_&gt;-&lt;_/__        da nave mãe... eles instalaram o Windows 98!! :P
+     ~;/     \;~
+ 		
+---------------------------------
+ Yahoo! Search
+ Música para ver e ouvir: You're Beautiful, do James Blunt
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061106/6770d0a9/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061106/6770d0a9/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Próxima mensagem: <A HREF="000006.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

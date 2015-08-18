@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT no Ubuntu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C76152eba0611201509m2fa1bd8cl616de44d9fb4738b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000007.html">
+   <LINK REL="Next"  HREF="000008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT no Ubuntu</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C76152eba0611201509m2fa1bd8cl616de44d9fb4738b%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT no Ubuntu">adorilson em gmail.com
+       </A><BR>
+    <I>Terça Novembro 21 00:09:41 CET 2006</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000007.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000008.html">[gpt-usuarios] Erro na compilação gpt
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Opa Thiago, tive compilei o gpt :) , mas ele nao interpretou &quot;Ola mundo&quot; :(.
+
+Em 10/11/06, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">thiago.silva em kdemail.net</A>&gt; escreveu:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; config.status: executing depfiles commands
+</I>&gt;<i> &gt; configure:
+</I>&gt;<i> &gt; Sumario:
+</I>&gt;<i> &gt;         antlr           : antlr
+</I>&gt;<i> &gt;         antlr includes  :
+</I>&gt;<i> &gt;         antr lib        :
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         pcre includes   :
+</I>&gt;<i> &gt;         pcre lib        : -L/usr/lib -lpcrecpp
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         CXXFLAGS        : -O2
+</I>&gt;<i> &gt;         MS Windows      : no
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Tudo certo? Ou temos problemas?
+</I>&gt;<i>
+</I>&gt;<i> Até aqui, tudo certo, contanto que os includes do antlr estejam em um
+</I>&gt;<i> local padrão (ex. /usr/include/antlr), assim como a antlr.a (ex.
+</I>&gt;<i> /usr/lib/antlr.a). Acredito que não terá problemas com isso no Ubuntu:
+</I>&gt;<i> até onde eu sei, /usr é utilizado pra virtualmente tudo.
+</I>
+
+Pior q nao.  Tive mesmo q baixar os fonte do antlr. Baixei do repositorio do
+Ubuntu mesmo. E depois ./configure; make; make install.
+Mas ele colocou o includes em /usr/local/include/antlr, entao criei um link
+em /usr/include apontando pra lah.
+
+&gt;<i> Considerando q está certo, executo o make, e tenho a seguinte saida:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em cti5</A>:~/uern/7_periodo/estudo_individualizado/gpt-1.0$
+</I>&gt;<i> &gt; make
+</I>&gt;<i> &gt; make  all-recursive
+</I>&gt;<i> &gt; make[1]: Entrando no diretório
+</I>&gt;<i> &gt; `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-
+</I>&gt;<i> &gt; 1.0'
+</I>&gt;<i> &gt; Making all in src
+</I>&gt;<i> &gt; make[2]: Entrando no diretório
+</I>&gt;<i> &gt; `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src'
+</I>&gt;<i> &gt; Making all in modules
+</I>&gt;<i> &gt; make[3]: Entrando no diretório
+</I>&gt;<i> &gt; `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-
+</I>&gt;<i> &gt; 1.0/src/modules'
+</I>&gt;<i> &gt; Making all in parser
+</I>&gt;<i> &gt; make[4]: Entrando no diretório
+</I>&gt;<i> &gt; `/home/adorilson/uern/7_periodo/estudo_individualizado/gpt- 1.0
+</I>&gt;<i> /src/modules/parser'
+</I>&gt;<i> &gt; antlr ./lexer.g
+</I>&gt;<i> &gt; Running java antlr.Tool $* with /usr/share/java/antlr.jar appended to
+</I>&gt;<i> the
+</I>&gt;<i> &gt; CLASSPATH variable
+</I>&gt;<i> &gt; ANTLR Parser Generator   Version 2.7.6 (20060511)   1989-2005
+</I>&gt;<i> &gt; error: Token stream error reading grammar(s):
+</I>&gt;<i> &gt; ./lexer.g:52:10: unexpected char: 'r'
+</I>&gt;<i> &gt; TokenStreamException: unexpected char: 0xFFFD
+</I>&gt;<i>
+</I>&gt;<i> Isso é estranho...
+</I>&gt;<i> Vc está utilizando a versão 2.7.6. Não lembro se testei com esta
+</I>&gt;<i> versão.Darei uma olhada.
+</I>
+
+Esse erro nao ocorreu mais, mas tb tenho uma mudança em relacao a tentativa
+anterior. Estava no Ubuntu e agora estou no Kubuntu. Tb precisei definir a
+CLASSPATH para /usr/share/java/antlr.jar
+
+Depois desse longo caminho, finalmente, lah esta o gpt.
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">aluno em Panorama</A>:~/download/gpt-1.0$ gpt -v
+GPT - Compilador G-Portugol
+Vers&#65533;  : 1.0
+Website : <A HREF="http://gpt.berlios.de">http://gpt.berlios.de</A>
+Copyright (C) 2003-2006 Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">thiago.silva em kdemail.net</A>&gt;
+
+Entao fomos pra o bom e velho &quot;Ola mundo&quot;, o q tem manual do gpt, mas nao
+deu certo.
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">aluno em Panorama</A>:~/download/gpt-1.0$ gpt -o olamundo  olamundo.gpt
+olamundo.gpt:3 - Identificador &quot;in&#65533; no pode ter caracteres especiais..
+olamundo.gpt:3 - Esperando &quot;variveis&quot; ou &quot;incio&quot; aps declarao de algoritmo,
+encontrado &quot;in&#65533;.
+
+Esses &#65533; sao da saida mesmo.
+
+Até eu ter em mãos um ubuntu (fiz pedidos de alguns CD's de kubuntu,
+&gt;<i> devem estar chegando), não tenho como testar nesta distribuição. Mas
+</I>&gt;<i> investigarei melhor esse problema.
+</I>
+
+Eu tenho  uns  CDs do Kubuntu e  do Edubuntu, se vc quizer  pode lhe enviar.
+E soh dizer pra onde.
+
+
+
+-- 
+Adorilson Bezerra
+Email/Google Talk/MSN: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>
+Celular: 9922-2544
+Fone com: 4005-2603
+Fone res: 3614-4794
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061120/3efac1e1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061120/3efac1e1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000007.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000008.html">[gpt-usuarios] Erro na compilação gpt
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

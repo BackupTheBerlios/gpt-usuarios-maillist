@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] O que seria acesso aos serviços do kernel ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FO_que_seria_acesso_aos_servi%3DE7os_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fo_kernel_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0710050800r134edc67ib25217f4f4b77edf%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000227.html">
+   <LINK REL="Next"  HREF="000238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] O que seria acesso aos serviços do kernel ?</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FO_que_seria_acesso_aos_servi%3DE7os_d%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fo_kernel_%3D3F%3F%3D&In-Reply-To=%3C9a3912af0710050800r134edc67ib25217f4f4b77edf%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] O que seria acesso aos serviços do kernel ?">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Outubro  5 17:00:56 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000227.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000238.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Me referi a todas as &quot;portas de entrada&quot; para acesso ao hardware que o
+</I>&gt;<i> kernel oferece para os processos (e demais serviços).  No caso de
+</I>&gt;<i> linux, acessamos essas coisas com system calls.
+</I>
+
+Ah ok. De qualquer forma, usualmente a gente utiliza uma biblioteca para
+acessar esses serviços certo ? Se tivermos como utilizar bibliotecas do
+sistema, faltaria mais alguma coisa ?
+
+Então, em resumo, seria bom podermos escrever nossa biblioteca (que
+&gt;<i> abstrai os serviços do kernel) em g-portugol, ao invés de esconder a
+</I>&gt;<i> implementação destas funções na implementação do runtime.
+</I>&gt;<i>
+</I>&gt;<i> A tarefa, então, de escrever a biblioteca não necessariamente recai
+</I>&gt;<i> sobre quem implementa a linguagem. Pode ser feito por qualquer um,
+</I>&gt;<i> escrevendo em g-portugol, e qualquer serviço de qualquer kernel pode
+</I>&gt;<i> ser acessado sem tocar na implementação da linguagem.
+</I>&gt;<i>
+</I>&gt;<i> E para isso, só conheço uma abordagem: possibilitar escrever código
+</I>&gt;<i> baixo nível inline, em um programa g-portugol, assim como se faz
+</I>&gt;<i> inline assembly em C.
+</I>
+
+Ah sim. Inline em gptassembly é viável e está nas nossas metas. Vamos
+colocar isso oficialmente na documentação da V2.
+
+Além do mais, é desejável termos compatibilidade com a convenção de
+&gt;<i> chamadas de C (não sei se é o caso, atualmente), e a
+</I>&gt;<i> interoperabilidade de dados deve ser analisada. Por exemplo, estava
+</I>&gt;<i> pensando em adicionar o tipo &quot;coringa&quot;, para possibilitar que
+</I>&gt;<i> variáveis referenciem dados arbitrários, como um ponteiro?
+</I>&gt;<i>
+</I>&gt;<i> //Rascunho de uso do GTK
+</I>&gt;<i>
+</I>&gt;<i> algoritmo teste_gtk;
+</I>&gt;<i>
+</I>&gt;<i> usando gtk; //importa a biblioteca do binding
+</I>&gt;<i>
+</I>&gt;<i> variáveis
+</I>&gt;<i> janela : coringa;
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i>
+</I>&gt;<i> início(argc : inteiro, argv: vetor[] de literais)
+</I>&gt;<i> gtk_init (argc, argv);
+</I>&gt;<i> janela = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+</I>&gt;<i> gtk_widget_show (janela);
+</I>&gt;<i> gtk_main();
+</I>&gt;<i> retorne 0;
+</I>&gt;<i> fim
+</I>
+
+Entendo. Eu acho que estamos no caminho certo. Eu tinha escrito todo um
+e-mail com pós e contras dessa abordagem, mas quando terminei vi que cheguei
+a mesma conclusão que você rsrsrs.
+
+Eu pensei em criar uma camada de abstração diretamente na VM para o uso de
+bibliotecas mas isso geraria um grande overhead no projeto. Plagiando o que
+você disse, a gente disponibiliza os bindings para as bibliotecas de sistema
+e, com isso, usuários podem criar, em gpt, uma camada de abstração sobre
+essas libs. Perfeito (minha opinião) :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/90f7fbf1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/90f7fbf1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000227.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000238.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

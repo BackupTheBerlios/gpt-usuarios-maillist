@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712140516w580ecaa3sc3bbccba2a02b84%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000646.html">
+   <LINK REL="Next"  HREF="000650.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712140516w580ecaa3sc3bbccba2a02b84%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Dezembro 14 14:16:21 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000646.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000650.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#649">[ date ]</a>
+              <a href="thread.html#649">[ thread ]</a>
+              <a href="subject.html#649">[ subject ]</a>
+              <a href="author.html#649">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 14, 2007 7:42 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; Acho que podemos ter as duas formas (linkagem dinamica e estatica das
+</I>&gt;<i> &gt; libs). Eu pensei na linkagem dinamica porque possibilitaria a
+</I>&gt;<i> &gt; distribuição de bindings em pacotes separados, independentes.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Eu não tinha pensado em linkagem estática agora. Pelo que eu me lembre tem
+</I>&gt;<i> como exportar os símbolos de um .so de forma que, para invocar uma
+</I>&gt;<i> subrotina, a forma de chamada é a mesma de uma subrotina que não esteja em
+</I>&gt;<i> um .so, ou seja, a gente não precisa de dlopen e afins.
+</I>&gt;<i>
+</I>
+Aiai, falei besteira sobre as linkagens. Mas, vc quer dizer que a VM
+não será linkada ao .so? E existe um meio, que não utiliza dlopen, de
+chamar as subrotinas do .so, sem usar dlopen e sem ter a VM linkada ao
+.so?
+
+
+&gt;<i> &gt; Eu acho que este código é necessário para a análise sintática e
+</I>&gt;<i> &gt; semântica. Se não houver esse código, o gptc vai acusar que &quot;pow&quot; não
+</I>&gt;<i> &gt; foi declarada.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Não necessariamente. Durante a geração dos bindings pode ser gerado um
+</I>&gt;<i> arquivo que contenha os bindings, quase como um .h. Algo como o pascal fazia
+</I>&gt;<i> com as units. Seria interessante a gente criar um arquivo de lib com todas
+</I>&gt;<i> as informações necessárias para o GptC, GptASM e GptVM. Gerar vários
+</I>&gt;<i> arquivos pode ser um tiro no pé hehehe.
+</I>&gt;<i>
+</I>&gt;<i> Na minha opinião, tanto os bindings quanto as libs em portugol devem gerar
+</I>&gt;<i> um arquivo (.glib, por exemplo) que o usuário explicitamente diz que vai
+</I>&gt;<i> utilizar através do &quot;use lib1;&quot;. Assim, com o use, o GptC popula a tabela de
+</I>&gt;<i> símbolos e sabe como invocar cada subrotina (pcall ou lcall).
+</I>&gt;<i>
+</I>
+Eu estava imaginando que o &quot;use lib&quot; abriria um arquivo .gvm e
+carregaria a tabela de simbolos. Assim, posso ter dois algoritmos em
+um diretório, e um deles pode ter um &quot;use XXX&quot; que carregaria o outro
+algoritmo. Bastante simples.
+
+Se precisarmos diferenciar um algoritmo de uma lib, criando um novo
+arquivo (.glib por exemplo), acho que isso vai aumentar os
+pre-requisitos para utilizar &quot;use&quot;. A não ser que &quot;use&quot; faça uma busca
+a procura de .gvm e .glib. Pra mim, um .glib está bom para bindings.
+Mas para bibliotecas em portugol, não estou certo.
+
+
+&gt;<i> Acho que a gente deveria pensar melhor sobre isso porque o código vai ficar
+</I>&gt;<i> &quot;massante&quot; eu acho. Por exemplo, para invocar a função pow em gpt a gente
+</I>&gt;<i> vai ter que empilhar os parâmetros e desempinhar o retorno. A função pow
+</I>&gt;<i> também fará a mesma coisa para invocar a pow do sistema, só que com
+</I>&gt;<i> conversão dos dados. O código me parece estar só duplicado.
+</I>&gt;<i>
+</I>
+Realmente...
+
+&gt;<i> A minha sugestão seria simplificar as coisas agora (gerar o menor código
+</I>&gt;<i> possível) e quando possível a gente reformula isso. Eu acho que para mostrar
+</I>&gt;<i> as &quot;entranhas&quot; do troço a gente precisa de uma libc feita em g-portugol, e
+</I>&gt;<i> ai implementar as funções em portugol usando essa &quot;nossa&quot; libc. O código
+</I>&gt;<i> acima para mim só parece ser redundante.
+</I>&gt;<i>
+</I>
+Ok. &quot;use&quot; pra mim já é bom o suficiente para mostrar para o usuário,
+caso se trate de um binding, de onde a função vem. O que eu julgava
+importante naquele código que coloquei era o primeiro operando do
+lcall, justamente o nome do .so. Mas o &quot;use matematica&quot; já está bom,
+se o usuário pode ver que existe um &quot;matematica.so&quot; ou coisa do tipo.
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000646.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000650.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#649">[ date ]</a>
+              <a href="thread.html#649">[ thread ]</a>
+              <a href="subject.html#649">[ subject ]</a>
+              <a href="author.html#649">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

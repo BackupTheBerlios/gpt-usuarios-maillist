@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C92b9a8820710300542s32ddd4b2pc2619942f7cdb552%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000513.html">
+   <LINK REL="Next"  HREF="000548.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C92b9a8820710300542s32ddd4b2pc2619942f7cdb552%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 30 13:42:57 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000513.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000548.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#544">[ date ]</a>
+              <a href="thread.html#544">[ thread ]</a>
+              <a href="subject.html#544">[ subject ]</a>
+              <a href="author.html#544">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/19/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Observações: malloc (matrix alloc) define que, para uma variável x, ela irá
+</I>&gt;<i> suportar um tipo de tamanho Y, com Z elementos iniciais. Teoricamente, com
+</I>&gt;<i> isso, podemos ter matriz composta de estruturas definidas pelo usuário.
+</I>&gt;<i>
+</I>&gt;<i> As minhas impressões sobre isso...
+</I>&gt;<i>
+</I>&gt;<i> Com a abordagem 1 (a que gerava mais opcodes) eu achei a geração &quot;chata&quot; e
+</I>&gt;<i> &quot;cheia de detalhes&quot;. O tipo da coisa que para alguém programar em
+</I>&gt;<i> GptAssembly depois vai ter que ter uma &quot;lista de regras&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Já com a abordagem 2, o código gerado está mais legível para nós, meros
+</I>&gt;<i> mortais :-)
+</I>&gt;<i>
+</I>&gt;<i> Além do que, com a abordagem 2, podemos estender (teoricamente facilmente) o
+</I>&gt;<i> suporte para termos matrizes de tamanhos variáveis...
+</I>&gt;<i>
+</I>&gt;<i> Claro, m1 significa &quot;uma dimensão&quot;. Teríamos que ter o m2, m3, .... mas vou
+</I>&gt;<i> tentar ver alguma forma de simplificar isso... Se a gente não conseguir
+</I>&gt;<i> simplificar a gente limita o número máximo de dimensões (2 o 3).
+</I>&gt;<i>
+</I>&gt;<i> Bom, claramente o meu voto vai para a abordagem 2 :-)
+</I>
+O único problema que vc observou da abordagem 2 foi o limite de
+dimensões em uma matriz? Acho que se tivermos m1,...,m5 não teremos
+grandes problemas.
+
+Eu pensei em outra abordagem aqui. Não é tão limpa, pois diverge mais
+ainda o tratamento de dados, mas consegue abstrair totalmente as
+operações, sem gerar mais opcodes.
+
+Não pensei sobre suas limitações em casos especificos, nem se é viável
+para nós, mas vou colocar meus pensamentos, apenas pela discussão (e
+perdoem qualquer falha na explicação, especialmente, nos exemplos):
+
+[Abordagem extra]
+
+Suponha que uma matriz de uma dimensão (e, possivelmente, uma
+estrutura) seja apenas uma tripa de área na memória contigua (um
+array), e isso é tudo o que a VM sabe a respeito. Não há opcodes para
+trabalhar com estes dados, e variáveis são apenas ponteiros para estas
+áreas.
+
+Uma matriz[3] de inteiros seria uma área contigua onde cada célula
+amazenaria um dos inteiros.
+
+Uma matriz[3] de literais seria uma área contigua capaz de armazenar 3
+ponteiros, que referenciariam os respectivos literais. O mesmo
+aconteceria para matrizes de estruturas e matrizes n-dimensionais (que
+seriam apenas arrays que apontam para arrays ....)
+
+De qualquer forma, uma matriz[10] de inteiros ocupa o mesmo espaço de
+uma matriz[10] de literais e de uma matriz[10] de estruturas.
+
+A única diferença de matriz[10] de inteiros das demais matrizes é que
+esta pode ter cada célula com o próprio valor, e não com um ponteiro
+para o valor.
+
+Toda a manipulação desta memória ficaria a cargo de funções escritas
+no runtime, e chamadas utilizando libcall. Poderiamos definir que o
+formato da área de memória de uma matriz e de uma estrutura tenha um
+cabeçalho contendo informações sobre o dado, como tamanho e tipo, e
+funções do runtime poderiam obter estas informações.
+
+Exemplo de uso:
+
+//gpt
+m : matriz[10] do tipo inteiro;
+m[0] := 1
+
+//gptasm
+push m
+push 0
+push 1
+libcall gptruntime.so, &quot;mset&quot;
+
+//gptruntime.c
+
+gpt_coringa mset(void* matriz, gpt_inteiro idx, gpt_coringa valor) {
+ //seta o &quot;valor&quot; para matriz[idx]
+}
+
+
+//Exemplo 2
+//gpt
+m : matriz[10][5] do tipo literal;
+x : literal;
+x := m[1][2];
+
+//gptasm
+var t1 int //t1 é um ponteiro. declara-se como int mesmo?
+
+push m
+push 1
+libcall gptruntime.so, &quot;mget&quot;
+pop t1           //t1 aponta para uma matriz matriz[5]
+
+push t1
+push 2
+libcall gptruntime.so, &quot;mlitget&quot;
+pop x
+
+//gptruntime.c
+gpt_coringa mget(void* matriz, gpt_inteiro idx) {
+  //retorna o valor em matriz[idx]
+}
+
+gpt_literal mlitget(void* matriz, gpt_inteiro idx) {
+ //retorna o literal apontado por matriz[idx]
+}
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000513.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000548.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#544">[ date ]</a>
+              <a href="thread.html#544">[ thread ]</a>
+              <a href="subject.html#544">[ subject ]</a>
+              <a href="author.html#544">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

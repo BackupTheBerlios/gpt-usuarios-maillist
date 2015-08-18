@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Algumas dúvidas sobre a gramática
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C9a3912af0710161716o4c5b0017l9c3b3d5e5069170f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000366.html">
+   <LINK REL="Next"  HREF="000378.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Algumas dúvidas sobre a gramática</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C9a3912af0710161716o4c5b0017l9c3b3d5e5069170f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Algumas dúvidas sobre a gramática">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Outubro 17 02:16:59 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000366.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000378.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#376">[ date ]</a>
+              <a href="thread.html#376">[ thread ]</a>
+              <a href="subject.html#376">[ subject ]</a>
+              <a href="author.html#376">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Teoricamente isso gera uma ou outra, mas podemos ter as duas.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A minha sugestão é que a gente &quot;imponha&quot; uma ordem como, por exemplos,
+</I>&gt;<i> &gt; constantes e depois variáveis, até porque as constantes podem ser
+</I>&gt;<i> utilizadas
+</I>&gt;<i> &gt; para inicializar as variáveis.
+</I>&gt;<i>
+</I>&gt;<i> Hmm, não sou muito fã de impor ordem. Acho que estariamos adicionando
+</I>&gt;<i> dores de cabeça em potencial para algumas pessoas :)
+</I>
+
+Ok.
+
+Mas o usuário poderia definir uma variável e inicializá-la utilizando um
+dado constante que será definido posteriormente ?
+
+&gt;<i> 3) Enunciado pode derivar em &quot;;&quot; ? Com isso a gente pode ter algo como
+</I>&gt;<i> &gt; &quot;início
+</I>&gt;<i> &gt;     ;
+</I>&gt;<i> &gt; fim&quot;.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Era essa a idéia ???
+</I>&gt;<i>
+</I>&gt;<i> Sim.
+</I>
+
+Eu achei estranho... não seria melhor possibilitar que entre início e fim
+não tenha nada ?
+
+&gt;<i> 4) Tem outro ponto que cheguei a comentar algo, pelo que eu me lembre. Se
+</I>&gt;<i> &gt; enunciado deriva por expressão, e expressão deriva, entre outras coisas,
+</I>&gt;<i> em
+</I>&gt;<i> &gt; &quot;expressão ou expressão&quot;, isso quer dizer que o usuário pode digitar
+</I>&gt;<i> algo
+</I>&gt;<i> &gt; como:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt;     v1 ou v2;
+</I>&gt;<i> &gt; fim.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Acho que, atualmente, isso não seria válido. Ou seria ???
+</I>&gt;<i>
+</I>&gt;<i> Tive que garimpar minha resposta sobre isso :P
+</I>&gt;<i>
+</I>&gt;<i> &quot;Sim. Agora, eu não lembro se tive alguma justificativa forte pra fazer
+</I>&gt;<i> isso. No v1.0, a unica expressão que pode ser avaliada como enunciado
+</I>&gt;<i> é chamada de função (fcall). É mais rídigo, nesse sentido. Como não sou
+</I>&gt;<i> muito
+</I>&gt;<i> fã de restringir, acho que poderia ser uma boa idéia ser mais flexível.&quot;
+</I>&gt;<i>
+</I>&gt;<i> E poderiamos fazer algo como:
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i>   abrir_socket() e iniciar_loop();
+</I>&gt;<i> fim
+</I>
+
+Isso não tava previsto...
+
+Para o exemplo acima o compilador tem que implementar short-circuit (acho
+que é esse o nome).
+
+Atualmente, para o caso acima, o compilador iria avaliar o primeiro operando
+e depois o segundo. O certo seria ele avaliar o primeiro. Se ocorrer um erro
+ele nem deve tentar avaliar o segundo.
+
+Isso também é válido para o caso &quot;função1( ) ou função2( );&quot;, ou seja, se
+função1 ok, nem tenta avaliar função2.
+
+Colocamos isso no projeto então ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/5e77d998/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/5e77d998/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000366.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000378.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#376">[ date ]</a>
+              <a href="thread.html#376">[ thread ]</a>
+              <a href="subject.html#376">[ subject ]</a>
+              <a href="author.html#376">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

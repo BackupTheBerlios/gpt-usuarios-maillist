@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Vetores/matrizes no v2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C9a3912af0710151042i1c1bf8eageff2b0eb09934f1f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000301.html">
+   <LINK REL="Next"  HREF="000357.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Vetores/matrizes no v2</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Vetores/matrizes%20no%20v2&In-Reply-To=%3C9a3912af0710151042i1c1bf8eageff2b0eb09934f1f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Vetores/matrizes no v2">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Outubro 15 19:42:20 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000301.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000357.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Podemos ter checagem de tamanho dos vetores matrizes (bound check)?
+</I>
+
+Claro que podemos ter... o problema é que isso não foi pensado e a
+documentação que temos não prevê isso até o momento...
+
+
+
+&gt;<i> Estou achando muito asfixiador ter que definir o tamanho das dimensões
+</I>&gt;<i> dos vetores, parâmetros de funções. ex:
+</I>
+
+Isso é horrível mesmo... em pascal usa-se um typedef (não lembro bem se é
+esse o nome da palavra reservada) para evitar de sempre ter que especificar
+o tamanho da matriz.
+
+
+
+&gt;<i> função f( v : matriz[10][2] de inteiros) ...
+</I>&gt;<i>
+</I>&gt;<i> Gostaria de poder definir assim:
+</I>&gt;<i>
+</I>&gt;<i> função f( v : matriz[][] de inteiros) ...
+</I>
+
+Isso seria BEM mais interessante (e fácil) para os iniciantes...
+
+Pensando sobre o impacto disso sobre o que temos hoje. Atualmente, as
+variáveis são apenas uma área de memória alocada (que a VM não tem
+consciência do que é), a idéia era que arrays e structs seguissem essa mesma
+idéia.
+
+A VM tem suporte a obter endereços de dados e fazer deslocamentos. Com isso
+ela tem capacidade de endereças structs e arrays (assumindo arrays de
+tamanho pré-definidos).
+
+Para termos arrays de tamanhos variáveis eu &quot;acho&quot; que precisamos de uma
+estrutura similar ao que está sendo planejado para strings. Strings na VM
+hoje nada mais são do que um ponteiro para um tipo de dado de C++ como
+std::string. Arrays teriam que ser um ponteiro para um tipo de dado (array)
+também.
+
+ Uma questão apenas: eu poderia ter a linha 1 com 10 colunas e a linha 2 com
+12 colunas ? Se sim, isso deixaria a manipulação de vetores um recurso caro
+computacionalmente na VM. Sei que desempenho (pelo que eu saiba) não é uma
+das metas do projeto. De qualquer forma isso é uma decisão que todos devem
+dar pitaco :-)
+
+Assumindo que cada linha pode ter um número variável de colunas, como não
+temos arrays de tamanhos variáveis na STL (pelo que eu saiba) a gente teria
+que implementar algo nesse sentido ou conseguir uma lib que faça isso. Além
+disso, é claro, teríamos que implementar alguns opcodes, mas acho que nada
+muito absurdo.
+
+A gente teria que fazer uns testes para averiguar isso melhor...
+
+
+
+&gt;<i> Caso isso vá pra frente, algumas implicações:
+</I>&gt;<i>
+</I>&gt;<i> 1) Devemos poder obter o tamanho das dimensões em tempo de execução
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i> tam_i  := tamanho_vetor(matriz); //10
+</I>&gt;<i> tam_j  := tamanho_vetor(matriz[0]); //2
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> onde tamanho_vetor() utilizaria gptasm para executar bytecodes
+</I>&gt;<i> especificos para obter estes valores.
+</I>
+
+Isso mesmo.
+
+
+
+&gt;<i> 2) O que significa matriz[][]? A omissão do tamanho das dimensões só é
+</I>&gt;<i> permitida em declaração de parâmetros? Ou variáveis globais/locais
+</I>&gt;<i> podem omitir o tamanho também?
+</I>
+
+Eu acharia interessante colocar esse suporte em tudo, inclusive na
+declaração.  Mas claro que isso tem implicações de desempenho na VM (caso o
+número de colunas seja variável).
+
+
+&gt;<i> 3) Vamos permitir que funções retornem vetores/matrizes? (atualmente,
+</I>&gt;<i> isso não é permitido)
+</I>
+
+Isso seria interessante...
+
+
+
+&gt;<i> 4) Vamos permitir que vetores/matrizes sejam lvalues válidos?
+</I>&gt;<i> Atribuições fariam cópias profundas dos elementos?
+</I>
+
+Acho que se o item 3 funciona, o 4 &quot;é o de menos&quot; hehehe.
+
+Não sei se a meta era arrays com número de linhas/colunas de tamanho
+variável, mas talvez podemos avaliar se termos arrays apenas com número de
+linhas variáveis já não seria o suficiente. Teoricamente são bem mais fáceis
+de implementar e rápidos de indexar.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071015/e47757cf/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071015/e47757cf/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000301.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000357.html">[gpt-usuarios] Vetores/matrizes no v2
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

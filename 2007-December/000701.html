@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Operações lógicas (mensagem do Thiago)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FOpera%3DE7%3DF5es_l%3DF3gicas_%3D28mensagem%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_do_Thiago%3D29%3F%3D&In-Reply-To=%3C9a3912af0712180331ja4e8c68g380da69c7424eac%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000692.html">
+   <LINK REL="Next"  HREF="000702.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Operações lógicas (mensagem do Thiago)</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FOpera%3DE7%3DF5es_l%3DF3gicas_%3D28mensagem%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_do_Thiago%3D29%3F%3D&In-Reply-To=%3C9a3912af0712180331ja4e8c68g380da69c7424eac%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Operações lógicas (mensagem do Thiago)">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Dezembro 18 12:31:51 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000692.html">[gpt-usuarios] Uma nova mailing list e hospedagem de código
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000702.html">[gpt-usuarios] Operações lógicas (mensagem do Thiago)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>From: Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva.br em gmail.com</A>&gt;
+
+Ok, vamos rever e discutir um pouco as operaçõs lógicas.
+
+Bitwise não há mistério (&amp;, |, ^, ~). Os operandos são do tipo inteiro
+e o resultado é sempre do tipo inteiro.
+
+Mas e as operações lógicas (e, ou, não), como devem funcionar?
+
+Eu imagino que podemos escolher 3 opções:
+
+1-Os operandos podem ser de qualquer tipo, e podem ser de tipos
+diferentes um do outro:
+
+x : real;
+y : string;
+z : lógico
+
+z := x ou y; //ok
+z := não y; //ok
+
+2-Os operandos devem ser do mesmo tipo:
+
+x : real;
+y : real;
+k : string;
+z : lógico;
+
+z := x ou y; //ok
+z := não k; //ok
+z := x ou k; //erro
+
+
+3-Os operandos só podem ser do tipo &quot;lógico&quot;:
+
+x : lógico;
+y : lógico
+z : lógico;
+
+z := x ou y; //ok
+z := não x; //ok
+
+Vc tem alguma opnião sobre como deve ser?
+
+--
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071218/1b11c165/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071218/1b11c165/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000692.html">[gpt-usuarios] Uma nova mailing list e hospedagem de código
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000702.html">[gpt-usuarios] Operações lógicas (mensagem do Thiago)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Suporte a UTF-8 em testes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Suporte%20a%20UTF-8%20em%20testes&In-Reply-To=%3C92b9a8820709151027y659e2a9by98bf2f5776f55646%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000159.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Suporte a UTF-8 em testes</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Suporte%20a%20UTF-8%20em%20testes&In-Reply-To=%3C92b9a8820709151027y659e2a9by98bf2f5776f55646%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Suporte a UTF-8 em testes">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Setembro 15 19:27:42 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000155.html">[gpt-usuarios] Suporte a UTF-8 em testes
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000159.html">[gpt-usuarios] Suporte a UTF-8 em testes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/15/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt; Vou deixar de lado o suporte à ISO-8859-1/latin-1, já que a) vai dar
+</I>&gt;<i> &gt; trabalho manter os dois  e b) UTF-8 parece estar quase virando padrão
+</I>&gt;<i> &gt; para as distros.
+</I>&gt;<i>
+</I>&gt;<i> Vc tinha pergutando isso em outro email. Ia dizer para, se nao desse
+</I>&gt;<i> muuuuuuito trabalho, mantermos os dois, já que vc usa slack.
+</I>
+Eu andei pesquisando e parece que o slack continua com iso-8859-1 para
+manter compatibilidade com algumas coisas. Bom, azar...
+
+&gt;<i> Ou ele tb tá
+</I>&gt;<i> adotando o UTF-8, ou vc vai alterar isso na sua instalacao?
+</I>
+Nem preciso alterar a configuração do sistema. Apenas utilizar esta
+codificação no meu editor de textos e no terminal, quando for utilizar
+o gpt.
+
+&gt;<i> Ou migrar para
+</I>&gt;<i> uma distro mais moderna? :P
+</I>
+Haha, não. Eu realmente não consigo utilizar outra disto....já tentei.
+
+&gt;<i> &gt; Sendo assim, transformei todos os códigos fontes com o iconv, e
+</I>&gt;<i> &gt; adicionei um scanner diferenciado para lidar com esta codificação.
+</I>&gt;<i>
+</I>&gt;<i> Poderia passar mais detalhes de como foi essa migração?
+</I>
+O que acontece: O Antlr gera um mapa (dict) de palavras-chave que foi
+definido no lexer.g. É um mapa de string (palavra chave) e int (token
+correspondente a palavra chave). O nome deste mapa é &quot;literals&quot;. Ele é
+utilizado para fazer comparações com o texto do algoritmo do usuário
+para encontrar o token correspondente das palavras chave. No
+PortugolLexer ele é inicializado assim:
+
+literals[&quot;algoritmo&quot;] = 3;
+literals[&quot;início&quot;]    = 4;
+....etc
+
+
+Uma vez que estas palavras chave utilizam acento e o lexer.g (onde
+elas são definidas) está em iso-8859-1, se o usuário passar um
+algoritmo em utf-8, a comparação de strings com acento vai falhar,
+pois a codificação de &quot;início&quot; no algoritmo e &quot;início&quot; do lexer é
+diferente.
+
+Daí, eu tinha passado a madrugada tentando manter os dois encodings.
+Consegui achar funções para descobrir o encoding do sistema
+[nl_langinfo(CODESET)], testei aqui no slack e no kubuntu, e deu
+certo. Depois, penei tentando utilizar as funções da libconv para
+fazer conversão de textos.
+
+Como o PortugolLexer chama &quot;initLiterals&quot; no construtor, que cria o
+mapa &quot;literals&quot;, eu tinha criado um &quot;initLiterals_utf8&quot;, que cria mais
+entradas no dicionário, de palavras convertidas. Mais ou menos isso,
+em pseudocodigo:
+
+foreach keyword, token in literals
+  literals[to_utf8(keyword)] = token;
+
+O que criaria, na tabela, duas entradas para cada palavra chave: uma
+em iso-8859-1 (que é o encoding do código fonte), e outra em utf8,
+ambos com o mesmo valor de token.
+
+Mas isso não foi suficiente. Além de ter que produzir uma tabela de
+literais na codificação que o usuário está utilizando, o processo do
+scanner tem que ser diferente para utf-8. Foi ai que utilizei o
+UnicodeCharScanner, dos exemplos do antlr.
+
+Eu utilizei este scanner tendo o PortugolLexer como subclasse dele. O
+problema é que se o usuário passar um algoritmo em iso-8859-1, este
+scanner não vai funcionar. Ele teria que passar o trabalho para o
+CharScanner, e utilizar o InputBuffer ao invés de UnicodeCharBuffer.
+
+Então, eu tenho que resolver qual vai ser a superclasse de
+PortugolLexer em tempo de execução (CharScanner ou
+UnicodeCharScanner). Até que dá pra fazer isso com c++ templates (e
+talvez, isso desdobraria em outros problemas), mas eu defino
+PortugolLexer na gramática lexer.g, e não dá pra fazer isso lá.
+
+Além de tudo isso, o GPTDisplay também teria que ser modificado (mas
+algo bem mais simples) para exibir erros e informações no encoding do
+sistema.
+
+Depois dessa novela toda, joguei fora todas essas modificações e
+simplesmente passei o iconv em todos os códigos fontes do GPT,
+convertendo eles para utf-8. Isso, somado a utilização do
+UnicodeCharScanner como superclasse do PortugolLexer permitiu que
+algoritmos utf-8 fossem processados. Mais detalhes sobre as
+modificações comitadas, é só ver o diff da revisão anterior com a
+revisão atual.
+
+
+&gt;<i> &gt; Tendo dito tudo isso, fiz apenas testes preliminares, portanto
+</I>&gt;<i> &gt; feedbacks são mais que bem vindos.
+</I>&gt;<i>
+</I>&gt;<i> Vou concluir umas coisas ak e testar isso o mais rápido possível.
+</I>&gt;<i>
+</I>
+Massa!
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000155.html">[gpt-usuarios] Suporte a UTF-8 em testes
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000159.html">[gpt-usuarios] Suporte a UTF-8 em testes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre os bindings das bibliotecas na VM
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20os%20bindings%20das%20bibliotecas%20na%20VM&In-Reply-To=%3C9a3912af0710050946x7edd514djb087898b1ce62b5e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000239.html">
+   <LINK REL="Next"  HREF="000245.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre os bindings das bibliotecas na VM</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20os%20bindings%20das%20bibliotecas%20na%20VM&In-Reply-To=%3C9a3912af0710050946x7edd514djb087898b1ce62b5e%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre os bindings das bibliotecas na VM">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Outubro  5 18:46:56 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000239.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000245.html">[gpt-usuarios] Sobre os bindings das bibliotecas na VM
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#240">[ date ]</a>
+              <a href="thread.html#240">[ thread ]</a>
+              <a href="subject.html#240">[ subject ]</a>
+              <a href="author.html#240">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi.
+
+Já ficou decidido que teremos um binding para cada função de uma biblioteca,
+ou seja, uma relação 1 para 1.
+
+Porém, se cada binding for representado por um opcode, o que me preocupa é o
+grande conjunto de opcodes que teremos na VM.
+
+Com opcodes específicos teremos o seguinte conjunto de opcodes para algumas
+funções da GTK:
+
+gtk_init
+gtk_window_new
+gtk_widget_show
+gtk_main
+
+Ou seja, 4 funções geraram 4 opcodes para serem implementados na VM.
+
+Pensei em algumas abordagens para minimizar isso. A mais viável seria termos
+um opcode (libcall) que informa a biblioteca e o nome da função a ser
+invocada. Com isso teríamos:
+
+ libcall gtk init // executa a função init da lib gtk libcall gtk
+window_new // executa a função window_new da lib gtk
+ libcall gtk widget_show // executa a função widget_show da lib gtk
+ libcall gtk main // executa a função main da lib gtk
+
+Desta forma, 1 opcode implementaria o binding a bibliotecas do sistema.
+
+ As 2 abordagens tem vantagens e desvantagens. Porém, a meu ver, a segunda
+abordagem seria mais tranquila para o projeto por algumas razões:
+
+1) Cada opcode implica em um novo mnemônico que tanto o compilador como o
+montador assembly do projeto terão que lidar em algum momento. Um binding
+para uma nova biblioteca implicaria em, no mínimo, recompilar o compilador e
+o montador para que eles entendam e gerem os novos opcodes [1];
+
+2) Facilita a incorporação de bibliotecas desenvolvidas em gpt porque
+podemos utilizar esse mesmo opcode (libcall) para invocar essas bibliotecas;
+
+3) Se tivermos ferramentas de debug, desassemblador e afins, eles também
+sofrerão modificações caso novos opcodes sejam inseridos.
+
+E o pessoal da lista, que vocês acham que seria melhor ? Porque ?
+
+[1] Daria para usarmos alguns arquivos que tanto o montador como o
+compilador poderiam ler durante a inicialização, mas talvez só estamos
+complicando o que pode ser mais fácil :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/01ee1977/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/01ee1977/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000239.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000245.html">[gpt-usuarios] Sobre os bindings das bibliotecas na VM
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#240">[ date ]</a>
+              <a href="thread.html#240">[ thread ]</a>
+              <a href="subject.html#240">[ subject ]</a>
+              <a href="author.html#240">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

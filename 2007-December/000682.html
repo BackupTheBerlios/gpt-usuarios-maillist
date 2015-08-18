@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Alguns probleminhas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Alguns%20probleminhas&In-Reply-To=%3C92b9a8820712151256h3d9d853ag462b6ea799231712%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000679.html">
+   <LINK REL="Next"  HREF="000663.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Alguns probleminhas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Alguns%20probleminhas&In-Reply-To=%3C92b9a8820712151256h3d9d853ag462b6ea799231712%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Alguns probleminhas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 21:56:21 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000679.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000663.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#682">[ date ]</a>
+              <a href="thread.html#682">[ thread ]</a>
+              <a href="subject.html#682">[ subject ]</a>
+              <a href="author.html#682">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 4:00 PM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>  Lembro que uma vez a gente conversou em sempre utilizar o maior tipo
+</I>&gt;<i> disponível na arquitetura para que o usuário não tivesse que se preocupar
+</I>&gt;<i> muito com tipos de dados. Podemos usar long ao invés de int. Como desempenho
+</I>&gt;<i> não é meta no projeto...
+</I>
+Pois é. Minha preocupação aqui é na interoperabilidade com bibliotecas
+externas. Não estou muito certo de como resolver isso. Talvez,
+procurar utilizar o maior tipo disponível seja o melhor, mas pra ser
+sincero, não pensei muito quando propus isso :)
+
+Pensando alto....
+
+Se mapearmos &quot;long&quot; ou 'long long' para um &quot;inteiro&quot;, os bindings
+farão a tradução, cortando o valor &quot;inteiro&quot; que vem da VM para o tipo
+C esperado pela função, se esta recebe um int, por exemplo. Pensando
+rapidamente, acho que isso é aceitável.
+
+Mas se mapeamos um &quot;int&quot; para &quot;inteiro&quot; (como é hoje) e se um binding
+tem uma função que retorna um &quot;long&quot;, acho que temos um problema.
+Cortar o &quot;long&quot; mapeando-o para &quot;inteiro&quot; não me parece legal. A
+última opção que pensei foi em mapear o long retornado para uma
+estrutura específica, retornando-a. O problema disso é que o usuário
+não vai poder somar, subtrair, etc o valor utilizando os operadores +,
+- etc. O binding teria que fornecer funções portugol para fazer essas
+operações. E isso tudo, tbm não me soa bem.
+
+
+&gt;<i>  Ou, para inserirmos um long, teremos realmente que implementar novos
+</I>&gt;<i> opcodes. Problema também não seria.
+</I>&gt;<i>
+</I>
+Tendo dois tipos para inteiros? Naah :)
+
+&gt;<i>  Pois é. Eu acho que tipos primitivos tem que ser algo simples de utilizar,
+</I>&gt;<i> senão a gente assusta os usuários hehehe.
+</I>&gt;<i>
+</I>
+Definitivamente.
+
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000679.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000663.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#682">[ date ]</a>
+              <a href="thread.html#682">[ thread ]</a>
+              <a href="subject.html#682">[ subject ]</a>
+              <a href="author.html#682">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

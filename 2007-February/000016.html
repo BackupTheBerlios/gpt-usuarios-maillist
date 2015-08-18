@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT no (k)ubuntu (solução temporária)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGPT_no_%3D28k%3D29ubuntu_%3D28solu%3DE7%3DE3o%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_tempor%3DE1ria%3D29%3F%3D&In-Reply-To=%3C16d773090702050815q64476275kd2b09a9724663526%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT no (k)ubuntu (solução temporária)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGPT_no_%3D28k%3D29ubuntu_%3D28solu%3DE7%3DE3o%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_tempor%3DE1ria%3D29%3F%3D&In-Reply-To=%3C16d773090702050815q64476275kd2b09a9724663526%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT no (k)ubuntu (solução temporária)">thiago.silva em kdemail.net
+       </A><BR>
+    <I>Segunda Fevereiro  5 17:15:35 CET 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Muito bem,
+
+Examinei o problema mais de perto e encontrei uma solução temporária
+para utilizar o GPT no (k)ubuntu e outros sistemas que tenham
+codificação de textos incompatíveis com a latin-1 (ISO-8859-1).
+
+Primeiro, o problema está no locale do sistema e com o gerador antlr.
+O (k)ubuntu, até onde sei, utiliza UTF-8 como o mapa de caracteres
+padrão. O GPT utiliza ISO-8859-1 (latin1), e os caracteres acentuados
+em ambos os mapas tem codificação diferente.
+
+Pois bem, descobri que o gerador do antlr (feito em java) cria os
+identificadores da linguagem (&quot;algoritmo&quot;, &quot;início&quot;, &quot;se&quot;, &quot;para&quot;,
+&quot;variáveis&quot;, etc) de acordo com o locale do sistema. Se o sistema está
+em UTF-8, o GPT será compilado com os caracteres acentuados
+&quot;truncados&quot;, digamos. Por isso, se o GPT for compilado em um ambiente
+UTF-8, o seu analizador sintático ficará &quot;quebrado&quot;, pois ao invés de
+reconhecer palavras chave como &quot;variáveis&quot; e &quot;início&quot;, ele tentará
+reconhecer &quot;variveis&quot; e &quot;incio&quot;, por exemplo.
+
+Então, para compilar corretamente, é necessário mudar o locale do
+sistema na hora da compilação. Eu fiz isso setando a variável de
+ambiente LANG para &quot;en_US.ISO-8859-1&quot; (en_US porque meu kubuntu é
+ingles. Poderia ser &quot;pt_BR.ISO-8859-1&quot; para um sistema com locale em
+português do Brasil).
+
+Como o antlr reclamou porque não achou o dito locale na hora da
+compilação, eu tive que executar o localedef  para utilizar ISO-8859-1
+(eu ainda não sei bem o que ele faz...me parece que instala/define um
+novo locale no sistema).
+
+No fim, eis o que fiz para compilar o GPT no meu kubuntu:
+
+$ sudo localedef -c -i en_US -f ISO-8859-1 en_US.ISO-8859-1
+$ export LANG=&quot;en_US -f ISO-8859-1&quot;
+$ cd gpt-1.0
+$ ./configure
+$ make
+$ sudo make install
+
+
+Isso deve instalar corretamente o GPT.
+
+Ainda assim, para utilizá-lo, provavelmente terá que utilizar esta
+mesma codificação (ISO-8859-1) no editor de textos (para criar os
+algoritmos em uma codificação que o GPT compreenda) e console/terminal
+(para que as mensagens de erro do GPT sejam exibidas com os acentos
+corretamente).
+
+-- 
+Thiago Silva
+Blog: <A HREF="http://www.sourcecraft.info/blog">http://www.sourcecraft.info/blog</A>
+Jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C9a3912af0709060904w39e79400rdb58af1530d1f79b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000054.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C9a3912af0709060904w39e79400rdb58af1530d1f79b%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Setembro  6 18:04:58 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000049.html">[gpt-usuarios] GPT v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000054.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; &gt; b) desenvolver wrappers em português/g-portugol para a API do Java.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Acho que é possível automatizar bem essa tarefa,
+</I>&gt;<i>
+</I>&gt;<i> É, entendo que muitas pessoas utilizam geradores, por outro lado,
+</I>&gt;<i> existe a etapa de tradução de inglês para portugês :(
+</I>
+
+Boiei agora rsrsrs.
+
+Talvez eu não tenha explicado corretamente ou eu realmente não entendi o que
+você disse. Vou tentar explicar melhor então.
+
+A minha idéia é que a gente pode desenvolver um gerador de código para
+bindings de bibliotecas C (simples, a princípio) que ele receba como entrada
+um mapeamento gpt &lt;-&gt; lib e o template para geração de código, se
+necessário. Baseado nisso ele gera o código C/C++ necessário para validar os
+tipos, converter, e invocar a biblioteca de sistema. Esse código gerado a
+gente acrescentaria na VM.
+
+Vou mostrar um exemplo assumindo que a VM terá apenas um opcode para invocar
+qualquer função de qualquer qualquer biblioteca. Mesmo que tenhamos um
+opcode para cada função de cada biblioteca, nós teremos um problema similar.
+
+algoritmo teste;
+use B1,B2; // chutei uma sintaxe
+início
+    F1( ); // Essa função está na biblioteca B1
+    F2( ); // Essa função está na biblioteca B2
+fim
+
+Se errei a sintaxe do gpt, desculpem-me :-)
+
+Esse trecho de código geraria o seguinte trecho em assembly:
+
+ld &quot;B1&quot;
+ld &quot;F1&quot;
+call
+
+ld &quot;B2&quot;
+ld &quot;F2&quot;
+call
+
+Neste exemplo existiria apenas um opcode (call) para invocar qualquer função
+de qualquer biblioteca.
+
+A princípio, nós teríamos que escrever código C++ (no braço) para validar os
+tipos (conforme a função sendo invocada), chamar a função correta da
+biblioteca, entre outros (pode ser uma tabela com mapeamentos). Agora
+imagine a quantidade de funções que a gente terá que implementar. Além
+disso, em alguns casos, uma função do gpt pode invocar várias funções de uma
+lib. Fazer tudo isso na &quot;munheca&quot; vai dar muito trabalho.
+
+A gente poderia ter um arquivo que contivesse os mapeamentos entre gpt e as
+libs. O gerador de &quot;bindings&quot; para bibliotecas lê esse arquivo e gera o
+código C++ que será acrescentado ao código da VM.
+
+Exemplo de arquivo para os bindings:
+
+inteiro abre_arquivo (string nome) ::= int open(string nome, &quot;r+&quot;)
+
+inteiro fecha_arquivo(inteiro arquivo) ::= int close(arquivo)
+
+
+E por ai vai.... claro, certamente a sintaxe será mais complexa do que essa
+acima, mas a idéia geral seria essa. Parece que python (e algumas outras
+linguagens) fazem algo semelhante. Vou dar uma olhada nisso quando
+possível...
+
+Aliás, você teria alguma idéia de como gerar esses bindings ? Talvez eu
+esteja literalmente &quot;viajando&quot; nessa história agora....
+
+&gt;<i> De qualquer forma imagino que seja viável desde que a gente escolha uma
+</I>&gt;<i> &gt; biblioteca para GUI e pronto. Nada de deixar o usuário escolher qual
+</I>&gt;<i> &gt; biblioteca ele quer. Não que isso não possa ser feito posteriormente,
+</I>&gt;<i> mas a
+</I>&gt;<i> &gt; nossa meta seria a biblioteca X. Quem quer outra sinta-se a vontade de
+</I>&gt;<i> &gt; alterar hehehe.
+</I>&gt;<i>
+</I>&gt;<i> Eu não sei se fariamos isso a nível de bindings. Supondo que sim,
+</I>&gt;<i> creio que a coisa fica mais fácil, neste aspecto. Podemos investigar
+</I>&gt;<i> melhor, posteriormente.
+</I>
+
+Acho que aqui a gente teria que trocar mais idéias. Não tenho certeza de
+qual seria a melhor forma de implementarmos isso.
+
+Entendo. Bom, acho que já podemos ir para o próximo passo. Vou
+&gt;<i> instalar um wikki no site do gpt e colocar um sumário das atividades
+</I>&gt;<i> propostas e discutidas aqui. Organizando isso, a gente pode decompor e
+</I>&gt;<i> discutir demais tópicos e subtópicos à medida do necessário. Adianto
+</I>&gt;<i> que serão dois branches independentes de atividades (mas com
+</I>&gt;<i> interceções, visto que o projeto &quot;v2.0&quot; depende de aspectos do
+</I>&gt;<i> &quot;v1.5&quot;).
+</I>
+
+Quanto ao wiki, ótima idéia. E parece ser mais viável sim termos dois
+branches.
+
+Tendo em vista a dualidade das áreas de trabalho, o pequeno número de
+&gt;<i> voluntários e a &quot;fragilidade&quot; do comprometimento que temos para com a
+</I>&gt;<i> realização das tarefas e do projeto como um todo, penso que o melhor
+</I>&gt;<i> que posso fazer é oferecer um menu de atividades para todos nós. A
+</I>&gt;<i> justificativa e importância de cada trabalho está razoavelmente
+</I>&gt;<i> justificada e debatida (e podemos voltar a elas a qualquer momento,
+</I>&gt;<i> bastando gritar), então deixo a cargo de todos nós escolhermos com
+</I>&gt;<i> nosso próprio juízo aquilo que estaremos trabalhando e ajudando,
+</I>&gt;<i> afinal, ninguém melhor para gerenciar nosso tempo livre e no que
+</I>&gt;<i> podemos ser úteis do que nós mesmos.
+</I>
+
+Ok.
+
+Fora isso, não há responsabilidade sobre esta ou aquela atividade*, o
+&gt;<i> que temos é apenas uma &quot;flat list&quot; de afazeres. Óbviamente, ajudas e
+</I>&gt;<i> cross-development são sempre bem vindos, basta gritar.
+</I>
+
+Ok.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/57c124bf/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070906/57c124bf/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000049.html">[gpt-usuarios] GPT v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000054.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

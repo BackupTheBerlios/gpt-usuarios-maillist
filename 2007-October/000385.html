@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170502g30951a1eh9de26e10b60b575a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000383.html">
+   <LINK REL="Next"  HREF="000387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170502g30951a1eh9de26e10b60b575a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Outubro 17 14:02:18 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000383.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000387.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/17/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Pois é... vou tentar repensar para ver se consigo alguma solução &quot;rápida e
+</I>&gt;<i> limpa&quot;...
+</I>
+Ok.
+
+&gt;<i> &gt; E o que temos, por enquanto? Passagem de matrizes para funções que
+</I>&gt;<i> &gt; recebem &quot; m : matriz[] de ....&quot;? E atribuição de matrizes?
+</I>&gt;<i> &gt; Possibilitariamos isso?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> A princícpio seria isso que teríamos, mas vou tentar achar algo &quot;prático&quot;
+</I>&gt;<i> para ser implementado :-)
+</I>
+E quanto à atribuição? Acho que ela só valeria para matrizes de mesmo
+tipo, com o mesmo número de dimensões, e com todas as dimensões tendo
+o mesmo tamaho:
+
+m1 : matriz[1] de inteiros;
+m2 : matriz[1][2] de inteiros;
+m3 : matriz[2] de inteiros;
+m4 : natriz[1] de literais;
+
+Nenhuma combinação de atribuição entre as matrizes acima é compatível. Correto?
+
+
+E o seguinte, seria válido?
+
+m1 : matriz[1][2] de inteiros;
+m2 : matriz[1][2] de inteiros;
+
+m1 := m2;
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000383.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000387.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

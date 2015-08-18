@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Início do gerador de bindings
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FIn%3DEDcio_do_gerador_de_bindings%3F%3D&In-Reply-To=%3C9a3912af0712181007l55b3ade4o76ac0d4603e8d820%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000712.html">
+   <LINK REL="Next"  HREF="000716.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Início do gerador de bindings</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FIn%3DEDcio_do_gerador_de_bindings%3F%3D&In-Reply-To=%3C9a3912af0712181007l55b3ade4o76ac0d4603e8d820%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Início do gerador de bindings">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Dezembro 18 19:07:36 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000712.html">[gpt-usuarios] Operações lógicas (mensagem do Thiago)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000716.html">[gpt-usuarios] Início do gerador de bindings
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#713">[ date ]</a>
+              <a href="thread.html#713">[ thread ]</a>
+              <a href="subject.html#713">[ subject ]</a>
+              <a href="author.html#713">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal,
+
+Iniciei o gerador de bindings (GptBind). Obviamente não está funcional
+ainda...
+
+Teoricamente o parser está percorrendo todo o arquivo, mas não está
+validando nada e muitas informações (como os options) não estão sendo
+utilizadas. Faltam várias coisas como definição de funções (só gera código
+para procedures por enquanto), mapear todos os tipos de dados entre
+G-Portugol e Syslibs, empilhar resultado de funções, entre outras coisitas
+mais :-)
+
+Segue abaixo um exemplo de .sld e o .hpp e .cpp gerados pelo GptBind:
+
+$ cat test.sld
+options {
+   libname        = &quot;math&quot;;
+   functionprefix = &quot;math_&quot;; // poderia ser libname + &quot;_&quot;
+   linkerlib      = &quot;math&quot;;
+}
+
+headers {
+   &quot;stdlib.h&quot;;
+   &quot;math.h&quot;;
+   &quot;iostream&quot;;
+}
+
+procedure mensagem_padrao() ::= puts(&quot;Hello !!!&quot;);
+
+procedure mensagem_personalizada(string msg) ::= puts(msg);
+
+// Acho que esse formato eh o foto da versao .1 do gerador
+procedure outra_mensagem_personalizada(string msg) ::= puts(msg);
+
+function sqrt(real value) : real ::= puts(msg);
+
+function exponencial(real valor) : real ::= exp(valor);
+
+
+
+$ cat test.hpp
+#ifndef GPTBIND_teste_HPP
+#define GPTBIND_teste_HPP
+
+extern &quot;C&quot; {
+        void gptbind_mensagem_padrao( CDataStack &amp;dataStack );
+        void gptbind_mensagem_personalizada( CDataStack &amp;dataStack );
+        void gptbind_outra_mensagem_personalizada( CDataStack &amp;dataStack );
+}
+
+#endif
+
+
+
+$ cat test.cpp
+#include &quot;teste.hpp&quot;
+
+#include &quot;CDataStack.hpp&quot;
+#include &quot;CSymbol.hpp&quot;
+
+
+void gptbind_mensagem_padrao( CDataStack &amp;dataStack )
+{
+        puts(&quot;Hello !!!&quot;);
+}
+
+void gptbind_mensagem_personalizada( CDataStack &amp;dataStack )
+{
+        const char * cmsg=dataStack.popString().c_str();
+        puts(cmsg);
+}
+
+void gptbind_outra_mensagem_personalizada( CDataStack &amp;dataStack )
+{
+        const char * cmsg=dataStack.popString().c_str();
+        puts(cmsg);
+}
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071218/ac8882c3/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071218/ac8882c3/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000712.html">[gpt-usuarios] Operações lógicas (mensagem do Thiago)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000716.html">[gpt-usuarios] Início do gerador de bindings
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#713">[ date ]</a>
+              <a href="thread.html#713">[ thread ]</a>
+              <a href="subject.html#713">[ subject ]</a>
+              <a href="author.html#713">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

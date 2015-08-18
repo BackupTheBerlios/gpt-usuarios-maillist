@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710190657h30cc60edo3d6718b1bad6c9c5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000503.html">
+   <LINK REL="Next"  HREF="000485.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710190657h30cc60edo3d6718b1bad6c9c5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Outubro 19 15:57:59 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000503.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000485.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#484">[ date ]</a>
+              <a href="thread.html#484">[ thread ]</a>
+              <a href="subject.html#484">[ subject ]</a>
+              <a href="author.html#484">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Eu tentei avaliar uma forma de darmos suporte a matrizes de tamanho
+indefinido.
+
+Primeiramente uma visão da VM hoje...
+
+Na VM as variáveis int, char, bool e real, bem como as structs e arrays
+possuem alocação estática. Apenas strings possuem alocação dinâmica.
+
+Para manipular structs e arrays a gente utiliza endereçamento (como se
+fossem ponteiros em C/C++). Algo como:
+
+// Portugol
+x[2] := 20;
+
+// GptAssembly
+isetv x:8, 20 // 8 porque é a posição * tamanho do dado
+
+
+Para structs também utilizamos a mesma instrução isetv para endereçar os
+dados da struct.
+
+Esse é o panorama da VM hoje...
+
+Porém essa abordagem não suporta matrizes de tamanho variável/indefinido.
+
+Para solucionar isso em pensei em 2 abordagens:
+
+[1a Abordagem]
+
+Para resolver isso eu pensei em unificar o tratamento de structs, arrays e
+strings. Com isso esses dados seriam alocados dinamicamente sempre e seriam
+manipulados com o isetv e afins. Antes da área alocada seriam armazenadas
+informações relativas ao tipo de dado alocado como tamanho da área alocada,
+tamaho de cada dimensão, entre outros.
+
+Porém eu encontrei problemas nessa abordagem...
+
+Primeiro: o tratamento desses dados varia (alguns variam o tamanho, outros
+não, alguns tem operações especiais como &gt;, &lt;, ...). Acho até que esses
+itens podem ser resolvidos, mas teria que ser pensado com calma...
+
+Segundo: o que aconteceria se o usuário tentasse &quot;setar&quot; uma posição
+inexistente em um vetor ??? A instrução isetv, como lida com 3 tipos de
+dados diferente (arrays, structs e strings) não tem como saber se tem ou não
+espaço, ou se precisa ou não alocar.
+
+Pensei em, antes da instrução isetv, gerar uma instrução específica para
+arrays que garantisse que o array teria espaço para executar o isetv. Algo
+como:
+
+// portugol
+m: matriz[] de inteiros;
+m[10] := 100;
+
+// gptassembly
+misize m, 10 // m de matriz, e i de inteiros
+geta t1, m
+iinc t1, X // X seria o tamanho da área com informações da matriz
+isetv t1:10, 100
+
+Uma coisa que eu não gostei dessa abordagem é que gerou muitos opcodes para
+uma instrução &quot;simples&quot; em gpt.
+
+Outra coisa é que fiquei com a impressão que a gente está abstraíndo o tipo
+string e implementando ele sem suporte da VM. Não que isso seja ruim, mas
+gera um número maior de opcodes. Bom, podemos implementar subrotinas que
+fazem a manipulação necessária nos dados...
+
+
+
+[2a Abordagem]
+
+Não unificar o tratamento de strings, arrays e structs. Para arrays a gente
+criaria opcodes específicos para tratamento de arrays.
+
+// portugol
+m: matriz[] de inteiros;
+m[10] := 100;
+
+// gptassembly
+miset m:10, 100 // m de matriz, e i de inteiros
+
+Essa versão ficou bem mais limpa em termos de opcodes.
+
+Porém, o opcode acima seria para arrays de 1 dimensão. E com duas ? Três ?
+Quatro ???
+
+mi1set // 1 dimensão
+mi2set // 2 dimensões
+mi3set // 3 dimensões...
+
+A sensação que fiquei, com essa abordagem, é que a VM está ficando
+especialista em alguns tipos de dados, e sempre que precisarmos algo
+diferente teremos que implementar opcodes para lidar com esses novos
+dados...
+
+[Sobre as abordagens]
+
+Apesar da abordagem 2 ser &quot;mais limpa&quot;, o que eu achei interessante da 1 é
+que a VM estaria trabalhando &quot;quase&quot; como um processador real (em termos de
+tipos de dados) porque ela teria um conjunto básico de instruções e a
+manipulação de dados &quot;complexos&quot; como strings e arrays teriam que ser
+implementados através de alocação de memória, endereçamento e afins. Mas
+claro que, como disse antes, essa abordagem gera um número maior de opcodes,
+até porque, como disse antes, no início de cada área alocada seriam
+colocadas informações específicas para cada tipo que devem ser ajustadas; se
+for um opcode específico para aquele tipo de dado, esse mesmo opcode ajusta,
+mas caso contrário terá que ser gerado opcodes para ajustar isso...
+
+A abordagem 1 parece mais didática também (apesar de mais trabalhosa)...
+
+O que vocês acham disso tudo ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071019/cd05bb0d/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071019/cd05bb0d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000503.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000485.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#484">[ date ]</a>
+              <a href="thread.html#484">[ thread ]</a>
+              <a href="subject.html#484">[ subject ]</a>
+              <a href="author.html#484">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

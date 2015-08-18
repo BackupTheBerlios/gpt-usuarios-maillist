@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C9a3912af0711120507r2c649fe6m2a05de91b4154ba4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000586.html">
+   <LINK REL="Next"  HREF="000597.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C9a3912af0711120507r2c649fe6m2a05de91b4154ba4%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro 12 14:07:14 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000586.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000597.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Dado a seguinte estrutura:
+</I>&gt;<i>
+</I>&gt;<i> estrutura Argumento
+</I>&gt;<i> tipo   : literal;
+</I>&gt;<i> valor : coringa;
+</I>&gt;<i> fim-estrutura
+</I>&gt;<i>
+</I>&gt;<i> E considerando-se que todo subprograma tem duas propriedades:
+</I>&gt;<i> &quot;argumentos&quot; e &quot;argumento&quot; denotado pelos seguintes tipos:
+</I>&gt;<i>
+</I>&gt;<i> argumentos  : inteiro;
+</I>&gt;<i> argumento    : matriz[] de Argumento;
+</I>&gt;<i>
+</I>&gt;<i> Dado um procedimetno p:
+</I>&gt;<i>
+</I>&gt;<i> procedimento p( ... )
+</I>&gt;<i> início
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> podemos dizer que as seguintes propriedades existem:
+</I>&gt;<i>
+</I>&gt;<i> f.argumentos
+</I>&gt;<i> f.argumento
+</I>&gt;<i>
+</I>&gt;<i> cujos valores são sensíveis ao contexto, só tendo valores válidos
+</I>&gt;<i> dentro da própria função. Sendo assim, podemos escrever:
+</I>&gt;<i>
+</I>&gt;<i> procedimento p( ... )
+</I>&gt;<i> i : inteiro;
+</I>&gt;<i> início
+</I>&gt;<i> imprima(&quot;Total de argumentos passados: &quot; + p.argumentos);
+</I>&gt;<i>
+</I>&gt;<i> para i de 0 até f.argumentos faça
+</I>&gt;<i>   imprima(&quot;Tipo do argumento &quot; + i + &quot; : &quot; + f.argumento[i].tipo;
+</I>&gt;<i>   imprima(&quot;Valor do argumento &quot; + i + &quot; : &quot; + f.argumento[i].valor;
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> e a chamada p(&quot;ola&quot;, 10) imprimiria:
+</I>&gt;<i>
+</I>&gt;<i> Tipo do argumento 0 : literal
+</I>&gt;<i> Valor do argumento 0 : ola
+</I>&gt;<i> Tipo do argumento 1 : inteiro
+</I>&gt;<i> Valor do argumento 1 : 10
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Acho que essa abordagem ficou mais atraente.
+</I>&gt;<i> Comentários?
+</I>
+
+Eu gostei dessa abordagem. Só não sei dizer se seria necessário usar o nome
+da subrotina como prefixo (f.argumentos ou p.argumentos, por exemplo). Isso
+deixa a imagem que uma subrotina poderia acessar os argumentos de outra
+subrotina, o que eu acho que não ficaria legal.
+
+Tirando esse detalhe o resto para mim está ótimo :-)
+
+E sobre o exemplo eu fiquei na dúvida se seria sempre &quot;p.xxx&quot; ou &quot;f.xxx&quot; (no
+exemplo tem os dois).
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/f95b625a/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/f95b625a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000586.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000597.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C76152eba0710200818ncc8f244ya023469e409a5059%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000481.html">
+   <LINK REL="Next"  HREF="000489.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C76152eba0710200818ncc8f244ya023469e409a5059%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais">adorilson em gmail.com
+       </A><BR>
+    <I>Sábado Outubro 20 17:18:59 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000481.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000489.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#488">[ date ]</a>
+              <a href="thread.html#488">[ thread ]</a>
+              <a href="subject.html#488">[ subject ]</a>
+              <a href="author.html#488">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Vige, falei nisso sobre outro email.
+
+On 10/19/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Oi.
+</I>&gt;<i>
+</I>&gt;<i> Atualmente, pelo que eu me lembre, temos a seguinte sintaxe para definição
+</I>&gt;<i> de constantes e variáveis locais:
+</I>&gt;<i>
+</I>&gt;<i> procedimento p1( x: inteiro )
+</I>&gt;<i>     y: inteiro;
+</I>&gt;<i>     constante z: inteiro = 99;
+</I>&gt;<i> início
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> Vocês não acham que fica um pouco estranho explicitar as constantes mas
+</I>&gt;<i> não as variáveis ?
+</I>&gt;<i>
+</I>
+Sim, é estranho. Já tá certo a utilizacao do := para inicialização, né?
+
+Eu sugiro algo bem simples para uniformizar isso:
+&gt;<i>
+</I>&gt;<i> procedimento p1( x: inteiro )
+</I>&gt;<i>     variável y: inteiro;
+</I>&gt;<i>     constante z: inteiro = 99;
+</I>&gt;<i> início
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>
+Neste caso, teria q escrever variavel ou constante para cada uma?
+
+Ou ainda utilizar a mesma sintaxe para definição de constantes e variáveis
+&gt;<i> globais:
+</I>&gt;<i>
+</I>&gt;<i> procedimento p1( x: inteiro )
+</I>&gt;<i>     variáveis
+</I>&gt;<i>         y: inteiro;
+</I>&gt;<i>     fim-variáveis
+</I>&gt;<i>     constantes
+</I>&gt;<i>         z: inteiro = 99;
+</I>&gt;<i>     fim-constantes
+</I>&gt;<i> início
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>
+Isso. Apesar de escrever muito, pelo menos o sujeito nao tem q ter duas
+formas de declaracao em mente.
+
+Eu optaria por deixar as duas últimas sintaxes, ou seja, ele tanto pode
+&gt;<i> utilizar variável e constante como variáveis..fim-variáveis e
+</I>&gt;<i> constantes..fim-constantes. Com isso o usuário usa a que mais lhe agradar ou
+</I>&gt;<i> for conveniente.
+</I>&gt;<i>
+</I>
+Sim, sim. Concordo. Ele passaria a escrever variavel e constante qd tivesse
+a outra forma bem fixada, e cheio dela tb. :D
+
+
+-- 
+Adorilson Bezerra
+Organização do III EPSL: &quot;Além das Redes de Colaboração&quot;
+07 a 10 de novembro de 2007 - CEFET-RN (Unidade Sede)
+<A HREF="http://rn.softwarelivre.org">http://rn.softwarelivre.org</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071020/6e96f203/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071020/6e96f203/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000481.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000489.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#488">[ date ]</a>
+              <a href="thread.html#488">[ thread ]</a>
+              <a href="subject.html#488">[ subject ]</a>
+              <a href="author.html#488">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

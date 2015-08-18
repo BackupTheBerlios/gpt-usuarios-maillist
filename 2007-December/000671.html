@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Libs dinâmicas em C++
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150552s308a1f07i27d9eddc4b287299%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000669.html">
+   <LINK REL="Next"  HREF="000673.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Libs dinâmicas em C++</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150552s308a1f07i27d9eddc4b287299%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Libs dinâmicas em C++">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 14:52:53 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000669.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000673.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Outra opção...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  <A HREF="http://www.linuxjournal.com/article/3687">http://www.linuxjournal.com/article/3687</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Pelo que eu entendi o que ele faz é, no .so, ter um extern para um map
+</I>&gt;<i> onde
+</I>&gt;<i> &gt; ele registra os métodos. Esse map estaria no programa que carregou o
+</I>&gt;<i> .so.
+</I>&gt;<i> &gt; Com isso a gente teria que ter apenas uma função que registrasse todos
+</I>&gt;<i> os
+</I>&gt;<i> &gt; métodos de uma classe dentro do .so.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Pareceu um pouco mais sociável...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Pareceu mesmo! Agora, eu ainda estou receoso em ter as libs em C++.
+</I>&gt;<i> Mas vamos ver...
+</I>
+
+Eu também tinha pensado em fazer em C (facilitar a vida) mas eu fico
+imaginando que teremos que replicar muita coisa que já temos feito em C++
+com rotinas equivalentes em C.
+
+Por exemplo, uma função de um binding recebe a pilha real de execução, que é
+uma estrutura toda implementada em C++. Essa função teria que manipular essa
+estrutura (retirar dados, converter, inserir retorno, ...).
+
+Ops... Nada impede que um código C utilize as classes C++ que já temos.
+
+Acho que eu to rateando nessa (isso que dá cair da cama para frente do
+micro) hehehe.
+
+Vou pensar melhor...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/609627b0/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/609627b0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000669.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000673.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

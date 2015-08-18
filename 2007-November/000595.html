@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sistema de tipos
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C9a3912af0711121205l72a1227q51fab460ab67a51d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000594.html">
+   <LINK REL="Next"  HREF="000596.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sistema de tipos</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C9a3912af0711121205l72a1227q51fab460ab67a51d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sistema de tipos">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro 12 21:05:58 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000594.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000596.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#595">[ date ]</a>
+              <a href="thread.html#595">[ thread ]</a>
+              <a href="subject.html#595">[ subject ]</a>
+              <a href="author.html#595">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; f : F(matriz(K), literal) -&gt; lógico
+</I>&gt;<i> &gt; f : F(literal, matriz(K)) -&gt; real
+</I>&gt;<i> &gt; Ali diz que P é sobrecarregada  e F é ambígua... P ok, mas F eu não
+</I>&gt;<i> &gt; entendi...
+</I>&gt;<i>
+</I>&gt;<i> Lá diz que subprogramas são sobrecarregados pela lista de parâmetros,
+</I>&gt;<i> apenas.
+</I>
+
+Pois é. Tem uma F que tem um parametro matriz e um literal... a outra F tem
+um literal e uma matriz... isso são duas assinaturas correto ? Então porque
+são ambíguas ??? A ordem dos parâmetros importa para identificar
+ambiguidade.
+
+
+ Considere estas três funções:
+&gt;<i>
+</I>&gt;<i> função f(i : inteiro) : inteiro
+</I>&gt;<i> função f(i: literal)   : literal
+</I>&gt;<i> função f(l : literal)  : real
+</I>&gt;<i>
+</I>&gt;<i> E considere estas chamadas:
+</I>&gt;<i>
+</I>&gt;<i> f(10);
+</I>&gt;<i> f(&quot;ola&quot;);
+</I>&gt;<i>
+</I>&gt;<i> A primeira chamada está ok, mas a segunda, não sabemos ao certo qual
+</I>&gt;<i> versão da função f() devemos chamar. Sei que C++, da mesma forma, não
+</I>&gt;<i> permite essa sobrecarga. Eu queria resolver este problema, pesquisando
+</I>&gt;<i> uma forma de permitir a sobrecarga por retorno também. Mas, agora, não
+</I>&gt;<i> conheço nenhuma solução.
+</I>
+
+Pelo que eu saiba, tanto C como C++ geram a assinatura através de um símbolo
+
+que representa a função. Algo como:
+
+função f(i : inteiro) : inteiro =&gt; __funcao_f_inteiro
+função f(i: literal)   : literal  =&gt; __funcao_f_literal
+
+Uma solução simples seria acrescentar o retorno também na assinatura:
+
+função f(i : inteiro) : inteiro =&gt; __funcao_f_inteiro_inteiro
+função f(i: literal)   : literal  =&gt; __funcao_f_literal_literal
+
+Mas isso está longe de ser perfeito porque pode existir ambiguidade no
+retorno:
+
+função f(i: inteiro) : inteiro;
+função f(i:inteiro) : char;
+
+variável x : real;
+
+x := f(10); // qual invocar, ja que existe cast de inteiro para real e char
+para real ???
+
+Não sei bem porque C/C++ não inserem o retorno na assinatura. &quot;Acho&quot; que um
+dos motivos
+é que em C/C++ o usuário pode ignorar o retorno da função e isso geraria
+ambiguidade na chamada.
+
+
+&gt;<i> No resto, valeu por tirar minhas dúvidas :)
+</I>
+
+Disponha :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/2a0516c8/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/2a0516c8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000594.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000596.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#595">[ date ]</a>
+              <a href="thread.html#595">[ thread ]</a>
+              <a href="subject.html#595">[ subject ]</a>
+              <a href="author.html#595">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

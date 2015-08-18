@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sistema de tipos
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C92b9a8820711121154l774289ffh39a1eebcae982091%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000593.html">
+   <LINK REL="Next"  HREF="000595.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sistema de tipos</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C92b9a8820711121154l774289ffh39a1eebcae982091%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sistema de tipos">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Novembro 12 20:54:16 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000593.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000595.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#594">[ date ]</a>
+              <a href="thread.html#594">[ thread ]</a>
+              <a href="subject.html#594">[ subject ]</a>
+              <a href="author.html#594">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Nov 12, 2007 9:29 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Sobre o trecho no wikki:
+</I>&gt;<i>
+</I>&gt;<i> p : P(inteiro, matriz(T)))
+</I>&gt;<i> p : P(matriz(T), inteiro)
+</I>&gt;<i>
+</I>&gt;<i> f : F(matriz(K), literal) -&gt; lógico
+</I>&gt;<i> f : F(literal, matriz(K)) -&gt; real
+</I>&gt;<i> Ali diz que P é sobrecarregada  e F é ambígua... P ok, mas F eu não
+</I>&gt;<i> entendi...
+</I>
+Lá diz que subprogramas são sobrecarregados pela lista de parâmetros,
+apenas. Considere estas três funções:
+
+função f(i : inteiro) : inteiro
+função f(i: literal)   : literal
+função f(l : literal)  : real
+
+E considere estas chamadas:
+
+f(10);
+f(&quot;ola&quot;);
+
+A primeira chamada está ok, mas a segunda, não sabemos ao certo qual
+versão da função f() devemos chamar. Sei que C++, da mesma forma, não
+permite essa sobrecarga. Eu queria resolver este problema, pesquisando
+uma forma de permitir a sobrecarga por retorno também. Mas, agora, não
+conheço nenhuma solução.
+
+&gt;<i> &gt; Se puderem, gostaria que avaliassem e comentassem, em especial ao que
+</I>&gt;<i> &gt; se refere a matrizes, pois ainda não está claro pra mim quais os
+</I>&gt;<i> &gt; limites de operações e, atualmente, de que forma podemos fazer
+</I>&gt;<i> &gt; atribuições entre matrizes, declarar matrizes sem definir o tamanho
+</I>&gt;<i> &gt; das dimensões e onde podemos fazer isso (area global? local? lista
+</I>&gt;<i> &gt; parâmetros? qualquer lugar?). Vi exemplos de omissão do tamanho da
+</I>&gt;<i> &gt; dimensão em lista de parâmetros, mas gostaria de ter uma idéia melhor
+</I>&gt;<i> &gt; do é possível e do que não é.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Pelo que temos definido no wikki, matrizes podem ser passadas para
+</I>&gt;<i> subrotinas, com ou sem tamanho definido. Matrizes podem ser criadas com ou
+</I>&gt;<i> sem tamanho definido, tanto na área local como na global. A única coisa que
+</I>&gt;<i> não está flexível no momento é que, quando definido uma matriz, o número de
+</I>&gt;<i> dimensões que ela tem deve ser informado e, consequentemente, não é possível
+</I>&gt;<i> mudar o seu número de dimensões durante a execução.
+</I>&gt;<i>
+</I>
+Ok. Tá ótimo. É isso mesmo.
+
+No resto, valeu por tirar minhas dúvidas :)
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000593.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000595.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#594">[ date ]</a>
+              <a href="thread.html#594">[ thread ]</a>
+              <a href="subject.html#594">[ subject ]</a>
+              <a href="author.html#594">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C92b9a8820709042029m48eae419q54ec205f220a32b5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000038.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C92b9a8820709042029m48eae419q54ec205f220a32b5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Setembro  5 05:29:42 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000038.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000046.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Então, os seguintes pontos foram levantados nos últimos e-mails para
+uma nova versão do G-Portugol:
+
+* Alterações na linguagem
+
+  - Uso de módulos (aka import/include/use/require/load);
+  - Sintaxe para novas instruções (repita, escolha, etc);
+  - Sintaxe para declaração e utilização de estruturas heterogêneas
+(aka struct);
+  - Sintaxe para passagem de parâmetros por referência;
+  - Revisão geral da sintaxe ;
+  - Revisão geral da semântica dos tipos;
+  - Unicode.
+
+Ok, acho que os items acima não precisam de muita explicação.
+
+* Virtual Machine
+
+Muito bem. Aqui, a discussão inicial que gostaria de ter é sobre a
+utilização de uma VM existente (ex. JVM) e a criação de uma nova.
+Gostaria, então, de pontuar as possibilidades e benefícios de cada uma
+das opções (reconheço, no entanto, que estas opções não são mutuamente
+exclusivas).
+
+Tendo em vista as novas metas (em especial, o uso de módulos externos
+e uso de bibliotecas de sistema) e sintetizando a conversa até agora
+sobre VMs, existem vários benefícios ao escolher a JVM como host para
+programas g-portugol. Pensando rapidamente, creio que o trabalho se
+dividiria entre:
+
+a) modificar o compilador e criar um target para os bytecodes da JVM e;
+b) desenvolver wrappers em português/g-portugol para a API do Java.
+
+Os benefícios de utilizar a JVM seriam:
+
+-Portabilidade (embora isso seja discutível, como já debatemos);
+-Disposição da API Java e demais bibliotecas escritas em Java &quot;out of the box&quot;;
+-Rapidez com que teriamos um produto pronto ou &quot;facilidade&quot; de implementação.
+
+É...não consigo elaborar outras. Acho que o segundo benefício, aqui,
+seria o maior prêmio, tendo em vista as metas. Por outro lado,
+levantei os seguintes pontos desfavoráveis:
+
+-Possivelmente engloba tarefas chatas;
+-Muito do código do ambiente (Java API) estaria em termos de caixa preta.
+
+Sobre este último, o usuário não consegue ir muito longe se quiser
+saber como uma função é implementada. Ultrapassando os wrappers, ele
+teria que ter o código fonte da API Java (nada tão complicado até
+aqui). Mas, mesmo com o código fonte Java, e mesmo sabendo ler Java,
+não conseguiria ver como certas coisas são implementadas. Só este
+ponto tem um peso grande, na minha opinião.
+
+Sobre a outra opção (uma nova VM), eis os benefícios levantados:
+
+-Mais divertido de se implementar;
+-Maior controle sobre a arquitetura;
+-Permite oferecer uma plataforma para experiência e aprendizado;
+-Se for viável, permitir assembly inline.
+
+Com este último ponto, poderiamos ter qualquer função de biblioteca
+aberta para que o usuário saiba como as coisas funcionam. Se ele
+quiser saber além, teria que ir pra outro contexto, e estudar sistemas
+operacionais. Obviamente, fazer isso não faria com que o código que
+roda na VM seja portável (mas, acho que não nos importamos tanto com
+isso. E se nos importarmos, podemos criar bibliotecas especificas para
+um dado SO).
+
+Se estiver faltando algo, por favor, refresquem minha memória.
+
+Continuando, como pontos desfavoráveis:
+
+-Trabalho mais complexo (exige mais tempo, erros e acertos);
+-As chamadas aos serviços do SO devem ser implementados, um a um;
+-Programação de GUIs por meio de bindings (não há padrão ou concenso.
+Além do mais, o usuário deve ter as bibliotecas correspondentes
+instaladas)
+
+Aqui, o segundo ponto é, também, um ponto positivo. O terceiro ponto
+vale também para o uso da JVM (pois, é claro, exige a JVM instalada).
+
+Então, isso é uma tentativa de ver o quadro geral das opções. Se não
+estiver em sintonia, sintam-se livre para discordar/corrigir. Para o
+que quer que seja escolhido, eu gostaria de saber o que estamos
+ganhando e o que estamos perdendo.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000038.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000046.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

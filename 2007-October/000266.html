@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] tentativa de instalacao
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20tentativa%20de%20instalacao&In-Reply-To=%3C92b9a8820710081743r185021a7i97f8d8d39404994%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000267.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] tentativa de instalacao</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20tentativa%20de%20instalacao&In-Reply-To=%3C92b9a8820710081743r185021a7i97f8d8d39404994%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] tentativa de instalacao">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro  9 02:43:54 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000265.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000267.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/8/07, rubens suhet &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">rubensadicto em gmail.com</A>&gt; wrote:
+&gt;<i>  e por fim erros do make
+</I>
+Os mesmos erros? Ou são outros erros?
+
+&gt;<i> isso é no kurumin da empresa. no ubuntu fiz e nao deu certo
+</I>&gt;<i> estou baixando o SlackWare 12 pra ver o que dá.
+</I>&gt;<i> OBrigado a todos
+</I>&gt;<i>
+</I>
+Para o slackware, utilize a versão 1.0 disponível na página do
+projeto, pois é mais complicado fazer o utf8 funcionar legal nele.
+
+A proposito, ontem coloquei um novo pacote, com correções, em:
+
+<A HREF="http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz">http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz</A>
+
+Eis o processo que acabei de fazer no Ubuntu (livecd), com o novo pacote:
+
+$ sudo aptitude install g++ make antlr libantlr-dev libpcre3-dev nasm
+
+$ wget <A HREF="http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz">http://sourcecraft.info/mystuff/gpt/gpt-1.0-utf.tar.gz</A>
+$ tar xvf gpt-1.0-utf.tar.gz
+$ cd gpt-1.0
+$ ./configure
+$ make
+$ sudo make install
+
+$ gpt -i exemplos/olamundo.gpt
+Olá mundo!
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000265.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000267.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

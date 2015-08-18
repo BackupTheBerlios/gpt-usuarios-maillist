@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FS%3DEDmbolos_que_podem_ou_n%3DE3o_estar%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_na_tabela_de_s%3DEDmbolos%3F%3D&In-Reply-To=%3C9a3912af0711051040i86a30f5g36c262de835488%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000560.html">
+   <LINK REL="Next"  HREF="000566.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FS%3DEDmbolos_que_podem_ou_n%3DE3o_estar%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_na_tabela_de_s%3DEDmbolos%3F%3D&In-Reply-To=%3C9a3912af0711051040i86a30f5g36c262de835488%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro  5 19:40:19 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000560.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000566.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#563">[ date ]</a>
+              <a href="thread.html#563">[ thread ]</a>
+              <a href="subject.html#563">[ subject ]</a>
+              <a href="author.html#563">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A gente já tem +- 70% da emissão de código pronta, sem a AST. Acho que vai
+dar trabalho refazer agora...
+
+Quanto a questão dos símbolos na tabela, para não popular a tabela de
+símbolos seria só conseguir repassar (e criar) um RefToken (antlr) nas
+regras de derivação. Passar RefToken é fácil. Criar é que me pareceu um
+pouco estranho porque quem deveria criar RefToken era o analisador léxico, e
+não o parser. Mas se for fácil criar é uma solução.
+
+De qualquer forma, no GptASM, a gente vai precisar de uma tabela de símbolos
+completa porque esses símbolos tem que ser gerados dentro do arquivo gvm na
+seção SymboTable...
+
+On 11/5/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On Nov 5, 2007 12:28 PM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Ao gerar um mnemônico, não basta saber que eu vou gerar um &quot;set&quot;, mas
+</I>&gt;<i> sim se
+</I>&gt;<i> &gt; é iset, rset, sset, ... O mesmo vale para todos os mnemônicos que tem
+</I>&gt;<i> alguma
+</I>&gt;<i> &gt; dependência com o tipo de informação que estão manipulando.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Então...
+</I>&gt;<i> acho que seria melhor já criarmos a AST, decorando ela posteriormente.
+</I>&gt;<i> Assim, o código de emissão de bytecodes estaria em uma gramática de
+</I>&gt;<i> AST, trabalhando sobre nós que já teriam todas as informações
+</I>&gt;<i> necessárias.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Thiago Silva,
+</I>&gt;<i> mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+</I>&gt;<i> jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+</I>&gt;<i> <A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071105/1f820b78/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071105/1f820b78/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000560.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000566.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#563">[ date ]</a>
+              <a href="thread.html#563">[ thread ]</a>
+              <a href="subject.html#563">[ subject ]</a>
+              <a href="author.html#563">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

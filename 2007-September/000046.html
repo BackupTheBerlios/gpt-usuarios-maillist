@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C9a3912af0709050856w572d7a5v6f93bdac97aa1487%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000043.html">
+   <LINK REL="Next"  HREF="000049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C9a3912af0709050856w572d7a5v6f93bdac97aa1487%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro  5 17:56:22 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000043.html">[gpt-usuarios] GPT v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000049.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi.
+
+
+&gt;<i> * Virtual Machine
+</I>&gt;<i>
+</I>&gt;<i> Tendo em vista as novas metas (em especial, o uso de módulos externos
+</I>&gt;<i> e uso de bibliotecas de sistema) e sintetizando a conversa até agora
+</I>&gt;<i> sobre VMs, existem vários benefícios ao escolher a JVM como host para
+</I>&gt;<i> programas g-portugol. Pensando rapidamente, creio que o trabalho se
+</I>&gt;<i> dividiria entre:
+</I>&gt;<i>
+</I>&gt;<i> a) modificar o compilador e criar um target para os bytecodes da JVM e;
+</I>
+
+Imaginando que a gente utilizem um jasm (java assembly) ou algo parecido, a
+responsabilidade de criar o arquivo class seria do montador jasm, e não
+nossa, o que facilitaria a nossa vida. Até devo ter rotinas que geram .class
+em algum lugar lá em casa, mas estão uma bagunça, foram feitas em Java (o
+professor obrigou) e elas só geram o básico (o que eu precisava na época).
+Sendo assim, se o jasm não vem no pacote da jvm, deve ser instalado a parte.
+Mas acho que isso não seria um grande problema.
+
+Mesmo que a gente invente de gerar o class diretamente, acredito que hoje em
+dia isso já é bem mais fácil. Quando eu tive que fazer isso a gente tinha a
+documentação da SUN (nada didática) e 2 artigos da C++ Users Journal (que
+salvaram o nosso coro na época rsrsrs).
+
+A JVM é uma máquina de pilha, então gerar código para ela é &quot;mais fácil&quot;
+porque não precisamos nos preocupar com alocação de registradores, por
+exemplo.
+
+Um outro ponto que levanto aqui é que, talvez, seja mais interessante a
+gente gerar um IC próprio, antes de gerar o assembly java. Com isso a gente
+ganha a possibilidade de criar um IC em português (assim como o gpt), e esse
+IC pode ser traduzido para bytecode java, dotnet, C, C++, Pascal, ... Esse
+IC pode ser considerado o nosso assembly, ou seja, poderíamos ter um
+assembly em português que, se necessário, poderia ser inserido diretamente
+dentro do código gpt. O fator negativo é que temos mais uma etapa no
+processo de compilação. Eu já fiz isso em um projeto anterior e, apesar do
+&quot;trabalho extra&quot;, valeu a pena, porque como eu tenho um montador assembly
+para a minha VM, outras linguagens podem gerar bytecode para a minha VM.
+Dessa forma a gente gera a possibilidade de utilizarmos a jvm, o dotnet, ou
+gerar bytecode para uma VM própria. Arquitetura bem mais flexível, porém, um
+pouco mais complexa. Se bem que expandir uma arquitetura não necessariamente
+a deixa mais complexa e, no nosso caso, estaremos dividindo mais as etapas
+do compilador, o que deixaria cada etapa um pouco menos complexa.
+
+
+&gt;<i> b) desenvolver wrappers em português/g-portugol para a API do Java.
+</I>
+
+Acho que é possível automatizar bem essa tarefa, seja usando a jvm ou outra
+VM qualquer. Um gerador de código, lendo templates que mostrem a
+equivalência, certamente resolveria os nossos problemas (minha opinião).
+Expandimos mais essa idéias quando necessário.
+
+
+&gt;<i> Os benefícios de utilizar a JVM seriam:
+</I>&gt;<i>
+</I>&gt;<i> -Portabilidade (embora isso seja discutível, como já debatemos);
+</I>&gt;<i> -Disposição da API Java e demais bibliotecas escritas em Java &quot;out of the
+</I>&gt;<i> box&quot;;
+</I>&gt;<i> -Rapidez com que teriamos um produto pronto ou &quot;facilidade&quot; de
+</I>&gt;<i> implementação.
+</I>
+
+Concordo com você sim. Só não sei como ficaria a questão de utilizar libs em
+que não fosse possível ver código em português, mas milagre a gente também
+não consegue fazer rsrsrs.
+
+|<i> É...não consigo elaborar outras. Acho que o segundo benefício, aqui,
+</I>|<i> seria o maior prêmio, tendo em vista as metas. Por outro lado,
+</I>|<i> levantei os seguintes pontos desfavoráveis:
+</I>
+|<i> -Possivelmente engloba tarefas chatas;
+</I>
+Acho que para gerar os wrappers, haveria bastante trabalho do tipo &quot;cria um
+teste em java, compila, desassembla e vê o bytecode gerado&quot;.
+
+Tem muita coisa da jvm que a gente não utilizaria diretamente, mas a gente
+teria que conviver. Lembro de ter pensado várias vezes &quot;mas se tivesse tal
+coisa, seria bem mais fácil fazer isso com a jvm&quot;, e na jvm a gente
+obviamente não pode alterar nada.
+
+-Muito do código do ambiente (Java API) estaria em termos de caixa preta.
+
+
+Isso é verdade. E mesmo que a gente desassemble, estará com opcodes em
+inglês.
+
+Sobre este último, o usuário não consegue ir muito longe se quiser
+&gt;<i> saber como uma função é implementada. Ultrapassando os wrappers, ele
+</I>&gt;<i> teria que ter o código fonte da API Java (nada tão complicado até
+</I>&gt;<i> aqui). Mas, mesmo com o código fonte Java, e mesmo sabendo ler Java,
+</I>&gt;<i> não conseguiria ver como certas coisas são implementadas. Só este
+</I>&gt;<i> ponto tem um peso grande, na minha opinião.
+</I>
+
+Eu acho que também pesa a falta de controle que a gente teria sobre a VM.
+Se, futuramente, a gente alterar algo na linguagem, e acharmos conveniente
+colocar um suporte direto na VM, a gente altera e pronto. Com a jvm a gente
+dança conforme a música da SUN e era isso :-)
+
+Esse foi um dos motivos pelo qual, na época, a gente (eu e o meu orientador
+de TCC) optamos por implementar uma VM própria ao invés de utilizar a JVM.
+Com suporte nativo ao que a gente queria, muitas coisas ficaram fáceis de
+serem feitas. Mas claro que nada é perfeito :-)
+
+Sobre a outra opção (uma nova VM), eis os benefícios levantados:
+&gt;<i>
+</I>&gt;<i> -Mais divertido de se implementar;
+</I>&gt;<i> -Maior controle sobre a arquitetura;
+</I>&gt;<i> -Permite oferecer uma plataforma para experiência e aprendizado;
+</I>
+
+Nem tinha lembrado desse item. A VM em si já é um projeto didático. Tem
+algumas faculdades que usam VM's desenvolvidas em projetos de pesquisa para
+ensinar o básico sobre arquitetura de sistemas e de máquinas.
+
+-Se for viável, permitir assembly inline.
+
+
+Isso é totalmente viável. Eu só não coloquei isso no trabalho que desenvolvi
+porque ninguém pediu. Seria algo para ser feito em poucas horas. Alias, o
+pessoal que usava a minha VM (holovm) utilizava o compilador e era isso.
+Eles não estavam muito interessados em ver o assembly por trás de tudo isso.
+
+Com este último ponto, poderiamos ter qualquer função de biblioteca
+&gt;<i> aberta para que o usuário saiba como as coisas funcionam. Se ele
+</I>&gt;<i> quiser saber além, teria que ir pra outro contexto, e estudar sistemas
+</I>&gt;<i> operacionais. Obviamente, fazer isso não faria com que o código que
+</I>&gt;<i> roda na VM seja portável (mas, acho que não nos importamos tanto com
+</I>&gt;<i> isso. E se nos importarmos, podemos criar bibliotecas especificas para
+</I>&gt;<i> um dado SO).
+</I>
+
+Concordo.
+
+Teria também o fato de ser bem mais fácil criar um debugger sobre uma VM que
+a gente desenvolveu, e integrá-lo com um editor de textos. A gente também
+poderia desenvolver um ambiente de visualização interno da VM onde, durante
+a execução, opcode a opcode, o usuário poderia ver o que estaria acontecendo
+nas &quot;entranhas&quot; da VM (situação da pilha, próximo opcode a ser executado,
+conteúdo de variáveis, entre outros).
+
+
+&gt;<i> Continuando, como pontos desfavoráveis:
+</I>&gt;<i>
+</I>&gt;<i> -Trabalho mais complexo (exige mais tempo, erros e acertos);
+</I>
+
+É verdade, mas eu já tenho um pouco de experiência, o que facilitaria um
+pouco as coisas (acho).
+
+-As chamadas aos serviços do SO devem ser implementados, um a um;
+
+
+Assim como para a jvm, a gente pode montar um gerador de código que faça o
+trabalho &quot;chato&quot; para nós.
+
+-Programação de GUIs por meio de bindings (não há padrão ou concenso.
+&gt;<i> Além do mais, o usuário deve ter as bibliotecas correspondentes
+</I>&gt;<i> instaladas)
+</I>
+
+Aqui a minha experiência é mínima. Desenvolvo pouquíssimas coisas que tenham
+interface com o usuário. Na época em que desenvolvia várias GUIs era DOS,
+então não tem compativo com os recursos de hoje :-)
+
+De qualquer forma imagino que seja viável desde que a gente escolha uma
+biblioteca para GUI e pronto. Nada de deixar o usuário escolher qual
+biblioteca ele quer. Não que isso não possa ser feito posteriormente, mas a
+nossa meta seria a biblioteca X. Quem quer outra sinta-se a vontade de
+alterar hehehe.
+
+Aqui, o segundo ponto é, também, um ponto positivo. O terceiro ponto
+&gt;<i> vale também para o uso da JVM (pois, é claro, exige a JVM instalada).
+</I>&gt;<i>
+</I>&gt;<i> Então, isso é uma tentativa de ver o quadro geral das opções. Se não
+</I>&gt;<i> estiver em sintonia, sintam-se livre para discordar/corrigir. Para o
+</I>&gt;<i> que quer que seja escolhido, eu gostaria de saber o que estamos
+</I>&gt;<i> ganhando e o que estamos perdendo.
+</I>
+
+Eu tentei ser o mais imparcial possível, mas certamente vou &quot;tender&quot; sobre
+nós implementarmos a nossa própria VM :-)
+
+Como eu já tenho a implementação de uma VM (holovm) funcional, com mais
+recursos do que o gpt tem hoje, e portável entre Linux, Windows e MAC, nada
+impede que a gente remodele os opcodes, acrescente, etc e tal, e utilize o
+código dela como base. Ela é GPL então não teria problemas de fazermos isso.
+Claro, trocaríamos o nome também, sem problemas, e retiraríamos muito lixo
+que tem por lá :-)
+
+Também podemos iniciar uma &quot;from scratch&quot;, mas certamente eu copiaria um ou
+outro código da holovm para podermos ter algo funcional mais rapidamente.
+
+O ideal seria que a gente centrasse esforços em um único plano &quot;de combate&quot;,
+mas nada impede que a gente trabalhe junto até a geração do CI, e depois
+disso um time vai para geração de bytecode java e outro para implementação
+de uma VM própria. Porém acho que , com pouca gente pra trabalhar, ainda
+dividir esforços, seria ruim...
+
+De forma alguma estou querendo dizer que não vou contribuir se você decidir
+por outro caminho, ou que uma ou outra idéia que dei é melhor que outra.
+Como lhe disse antes, só estou naquele conflito do &quot;mais certo&quot; e o &quot;mais
+legal&quot; hehehe.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/b80f57b5/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070905/b80f57b5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000043.html">[gpt-usuarios] GPT v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000049.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

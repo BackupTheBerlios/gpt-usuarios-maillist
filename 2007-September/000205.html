@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_c%3DF3digo_intermedi%3DE1rio_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D28CTE%3D29%3D2C_assembly%3D2C_%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0709260556g6463ba49wcee73e5386e406c5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000202.html">
+   <LINK REL="Next"  HREF="000206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_o_c%3DF3digo_intermedi%3DE1rio_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3D28CTE%3D29%3D2C_assembly%3D2C_%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0709260556g6463ba49wcee73e5386e406c5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 26 14:56:38 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000202.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000206.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Dessa forma a gente tinha as seguintes etapas:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Portugol -&gt; Transformado em AST -&gt; Gera CI -&gt; Gera assembly -&gt; Gera
+</I>&gt;<i> bytecode
+</I>&gt;<i>
+</I>&gt;<i> 3 tipos de codigo diferentes? O que seria o assembly? Assembly assembly,
+</I>&gt;<i> mesmo?
+</I>
+
+O assembly seria um assembly da VM. Porém, como o CI está muito próximo do
+assembly, não há a necessidade real disso. Porém, futuramente, quando
+&quot;desassemblarmos&quot; o nosso código para mostrar ao usuário &quot;as entranhas&quot; do
+que está acontecendo, fica estranho mostrar um CI.
+
+Eu acho que leituras sobre estes assuntos estao ficando urgentes para
+&gt;<i> mim....
+</I>&gt;<i> No geral, pra mim esta bom, mas apenas porque eu nao estou entendendo
+</I>&gt;<i> bem os problemas que vc esta tentando resolver. Eu sempre pensei,
+</I>&gt;<i> simploriamente talvez, que era apenas um caso de gerar a ast e, dela,
+</I>&gt;<i> o bytecode (opcionalmente com um CI entre os dois).
+</I>
+
+É possível sim fazer isso. O dilema é exatamente esse. Não está sendo
+necessário gerar o assembly, porque o CI está muito próximo do assembly da
+VM. Porém, para fins didáticos, seriam bem interessante termos o assembly.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070926/8fc10d6c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070926/8fc10d6c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000202.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000206.html">[gpt-usuarios] Sobre o código intermediário (CTE), assembly, ...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

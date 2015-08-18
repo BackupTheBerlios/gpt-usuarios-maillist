@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Status do GptASM e GptVM
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Status%20do%20GptASM%20e%20GptVM&In-Reply-To=%3C9a3912af0711230521w44cbb08nc216857b4742d068%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000606.html">
+   <LINK REL="Next"  HREF="000609.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Status do GptASM e GptVM</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Status%20do%20GptASM%20e%20GptVM&In-Reply-To=%3C9a3912af0711230521w44cbb08nc216857b4742d068%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Status do GptASM e GptVM">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Novembro 23 14:21:25 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000606.html">[gpt-usuarios] Commit da versão inicial do GptASM e GptVM
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000609.html">[gpt-usuarios] Status do GptASM e GptVM
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#608">[ date ]</a>
+              <a href="thread.html#608">[ thread ]</a>
+              <a href="subject.html#608">[ subject ]</a>
+              <a href="author.html#608">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Ainda faltam inúmeras melhorias no código do GptASM e GptVM, mas aos
+poucos a gente vai evoluíndo :-)
+
+Quanto as funcionalidades, o GptASM está assemblando quase todos os
+códigos gerados pelo compilador. Falta endereçamento (ponteiros) e os
+mnemônicos de matrizes, se eu não me engano. Claro, falta gerar um
+report de erros descente, mas esse eu vou copiar do compilador quando
+der tempo hehehe.
+
+Quanto a GptVM, os opcodes referentes a inteiros estão ok. Saltos
+condicionais ou não também estão funcionando. Chamada de procedimentos
+da linguagem somente o &quot;imprima&quot; funciona, e ainda não é a versão
+final (imprima será uma chamada a biblioteca de sistemas futuramente).
+Como a VM não tem pilha de execução, ainda não temos suporte a
+procedimentos definidos pelo usuário. Claro, também falta suporte aos
+outros tipos de dados (string, matrix, real, ...)
+
+Segue abaixo alguns exemplos em GptAssembly e a saída gerada pela GptVM:
+
+***** EXEMPLO 1 *****
+
+$ cat invocando_subrotinas_linguagem_1.gasm
+
+program exemplo
+
+proc main
+    push_sp
+    push &quot;Olá mundo !!!&quot;
+    push_string
+    push 1
+    pcall imprima
+    pop_sp
+
+    exit 0
+endproc
+
+endprogram
+
+$./gptvm invocando_subrotinas_linguagem_1
+
+GptVM, release 0.1.0 (development release)
+Olá mundo !!!
+
+***** EXEMPLO 2 *****
+
+$ cat variaveis_1.gasm
+
+program exemplo
+
+var x int
+var y int
+
+proc main
+    var t1 int
+    var t2 int
+
+    // x := 10;
+    iset x, 10
+
+    // y := 20;
+    iset y, 20
+
+    // imprima( &quot;x*y+4=&quot;, x*y+4 );
+    push_sp
+    imul t1, x, y
+    isum t2, t1, 4
+    push t2
+    push_int
+    push &quot;x*y+4=&quot;
+    push_string
+    push 2
+    pcall imprima
+    pop_sp
+
+    exit 0
+endproc
+
+endprogram
+
+$ ./gptvm variaveis_1
+
+GptVM, release 0.1.0 (development release)
+x*y+4=204
+
+***** EXEMPLO 3 *****
+
+$ cat estruturas_repeticao_1.gasm
+
+program exemplo
+
+var x int
+var t1 int
+
+proc main
+//    var t1 int
+
+    // para x de 1 até 10 faça
+    iset x, 1
+    teste:
+    ile t1, x, 10
+    ifnot t1, proximo
+
+    // imprima( x );
+    push_sp
+    push x
+    push_int
+    push 1
+    pcall imprima
+    pop_sp
+
+    // fim-para
+    iinc x, 1
+    jmp teste
+
+    proximo:
+
+    exit 0
+endproc
+
+endprogram
+
+$ ./gptvm estruturas_repeticao_1
+
+GptVM, release 0.1.0 (development release)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+***** EXEMPLO 4 *****
+
+$ cat estruturas_condicionais_1.gasm
+
+program exemplo
+
+var x int
+
+proc main
+    var t1 int
+
+    // x := 10;
+    iset x, 10
+
+    // se x &gt;= 20 entao
+    ige t1, x, 20
+    ifnot t1, senao
+
+    // x := 2;
+    iset x, 2
+
+    jmp proximo
+    senao:
+
+    // x := 1;
+    iset x, 1
+
+    proximo:
+
+    // imprima( x );
+    push_sp
+    push x
+    push_int
+    push 1
+    pcall imprima
+    pop_sp
+
+    exit 0
+endproc
+
+endprogram
+
+$ ./gptvm estruturas_condicionais_1
+
+GptVM, release 0.1.0 (development release)
+1
+
+
+***** EXEMPLO 5 *****
+
+$ cat expressoes_matematicas_1.gasm
+
+program exemplo
+
+proc main
+    var t1 int
+    var t2 int
+
+    // imprima( &quot;2+5*3=&quot;, 2+5*3 );
+    push_sp
+    imul t1, 5, 3
+    isum t2, 2, t1
+    push t2
+    push_int
+    push &quot;2+5*3=&quot;
+    push_string
+    push 2
+    pcall imprima
+    pop_sp
+
+    exit 0
+endproc
+
+endprogram
+
+
+$ ./gptvm expressoes_matematicas_1
+
+GptVM, release 0.1.0 (development release)
+2+5*3=17
+
+[]'s
+Alex Sandro Garzão
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000606.html">[gpt-usuarios] Commit da versão inicial do GptASM e GptVM
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000609.html">[gpt-usuarios] Status do GptASM e GptVM
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#608">[ date ]</a>
+              <a href="thread.html#608">[ thread ]</a>
+              <a href="subject.html#608">[ subject ]</a>
+              <a href="author.html#608">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

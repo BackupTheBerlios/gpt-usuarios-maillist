@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C92b9a8820709041935t38c9a621jc2842399ad725c9f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000040.html">
+   <LINK REL="Next"  HREF="000045.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C92b9a8820709041935t38c9a621jc2842399ad725c9f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Setembro  5 04:35:06 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000040.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000045.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/4/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> eu imagino que a gente até pode investir em tradução novamente
+</I>&gt;<i> no futuro, mas não seria o foco no momento.
+</I>
+Perfeito.
+
+&gt;<i> Eu acho que você Thiago e o Adorilson já deram várias idéias de como o
+</I>&gt;<i> projeto deveria evoluir. Resumindo seriam evoluções na linguagem (Repita,
+</I>&gt;<i> caso, estruturas), uso de módulos externos e uso de bibliotecas de sistema.
+</I>&gt;<i>
+</I>&gt;<i> Alguém teria mais algum item a acrescentar ? Ou podemos evoluir as idéias
+</I>&gt;<i> nesse escopo então ?
+</I>
+Por mim, estes itens citados fecham a meta.
+
+&gt;<i> Quanto as minhas idéias, bom, se a gente tiver um CI bem definido e
+</I>&gt;<i> especificado, com rotinas de front-end organizadas e documentadas
+</I>&gt;<i> (documentação pra desenvolvedor, claro), seria &quot;fácil&quot; para alguém pegar
+</I>&gt;<i> essa documentação e gerar um novo front-end para outra linguagem que gera o
+</I>&gt;<i> nosso CI. Após gerar CI, essa nova linguagem poderia usufruir de todo o
+</I>&gt;<i> nosso ambiente de execução como a nossa VM,  nosso debug, ...
+</I>
+Só para eu ter certeza: entre utilizar uma vm como a jvm, ou criar uma
+nova, você prefere criar uma nova, correto?
+
+
+&gt;<i> Quanto ao ato de compilar, talvez eu tenha me expressado erroneamente, mas a
+</I>&gt;<i> idéia não é abandonar o ato de compilar.
+</I>
+Na verdade, eu achei que o Adorilson desejava ter apenas um ambiente
+interpretado. Foi confusão minha.
+
+
+&gt;<i> Bom, eu citei o GCC como exemplo. Eu já pensei em gerar um front-end para o
+</I>&gt;<i> gcc da hololinguagem, mas não foi algo que se enquadrava com o que eu
+</I>&gt;<i> gostaria de explorar/aprender na época. Eu, sempre que possível, gosto de
+</I>&gt;<i> criar ao contrário de utilizar tecnologias existentes. Não me importo de
+</I>&gt;<i> aprender com o gcc, mas não de ter que utilizá-lo como parte da nossa
+</I>&gt;<i> infraestrutura.
+</I>&gt;<i> [...]
+</I>&gt;<i> Tecnicamente falando, eu acho que utilizar o GCC seria mais sensato. Porém,
+</I>&gt;<i> eu que gosto de brincar com linguagens, compiladores, máquinas virtuais e
+</I>&gt;<i> afins, acho que seria um pouco chato usar o GCC para isso. Acho que aqui
+</I>&gt;<i> entra aquele conflito entre o &quot;mais correto&quot; e o que o cara quer fazer
+</I>&gt;<i> rsrsrsrs.
+</I>&gt;<i>
+</I>
+Sim, eu entendo perfeitamente. Aliás, passei a última hora escrevendo
+um email contanto minha história com o G-Portugol (já que estavam
+todos falando de seus backgrounds), mas acabei mandando pro endereço
+errado e fiquei com preguiça de re-enviá-lo. Na verdade, quero evitar
+criar confusão nas conversas, e resolvi ser mais pontual.
+
+Resumindo o conto de fadas (a parte mais relevante), eu entendo essa
+postura, pois minha &quot;configuração default&quot; é essa também. De fato, o
+G-Portugol foi concebido assim: fiz o primeiro parser em C na unha
+(top-down, predictive recursive descent parser) pois repudiei a idéia
+de usar flex/bison (ou equivalentes). Somente quando consegui ver o
+processo de compilação na minha cabeça claramente, bit a bit, que
+procurei utilizar ferramentas do gênero para auxiliar nas tarefas
+chatas que, outrora, foram fontes de conhecimento e divertimento
+(neste caso, migrei o codigo para flex/bison mas, logo em seguida,
+adotei o antlr).
+
+Então, eu entendo o que é deixar de lado ferramentas estabelecidas e
+pular na lama para se sujar. Eu topo. Mas quero explorar e deixar
+claro o quadro de pós e contras. (Mais sobre isso no próximo email)
+
+&gt;<i>  &gt;&gt; &lt;AG&gt;    socket := criaSocket( &quot;x.x.x.x&quot; );
+</I>&gt;<i>
+</I>&gt;<i> &gt; &lt;TS&gt; Definitivamente. Porém, contudo e todavia, é aí que outra preocupação
+</I>&gt;<i> &gt; minha aparece. É muito frustrante a experiência de querer saber o que
+</I>&gt;<i> &gt; &quot;criaSocket&quot; faz e, ao abrir o arquivo que a contém, ver uma série de
+</I>&gt;<i> &gt; códigos (ou uma pequena linha críptica) que não estão escritos em
+</I>&gt;<i> &gt; portugol (ou assembly, que seria bem melhor).
+</I>&gt;<i>
+</I>&gt;<i> Não tinha pensado nisso antes. Acho que a gente consegue evoluir bastante
+</I>&gt;<i> nisso. De qualquer forma as libs de sistema também não conseguem ser
+</I>&gt;<i> implementadas totalmente em uma linguagem de alto nível como C, e parte
+</I>&gt;<i> delas acabam sendo implementadas em assembly.
+</I>
+Eu prefiro mostrar o código em assembly do que não mostrar nada ou
+mostrar algo que não seja a implementação da função em si. Se não
+mostrarmos a implementação de uma função, o usuário verá o código como
+uma caixa preta. E não há muito o que se possa aprender com uma caixa
+preta. Mostrar o código em assembly ainda é mostrar o que a função faz
+e isso tem um peso enorme. Indo além, imagine, por exemplo, ter o
+compilador do G-Portugol escrito em G-Portugol...
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000040.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000045.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

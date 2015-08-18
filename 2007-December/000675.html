@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Alguns probleminhas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Alguns%20probleminhas&In-Reply-To=%3C92b9a8820712150643r5b021b31ld38d19ec7f652794%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000662.html">
+   <LINK REL="Next"  HREF="000679.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Alguns probleminhas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Alguns%20probleminhas&In-Reply-To=%3C92b9a8820712150643r5b021b31ld38d19ec7f652794%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Alguns probleminhas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 15:43:19 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000662.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000679.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#675">[ date ]</a>
+              <a href="thread.html#675">[ thread ]</a>
+              <a href="subject.html#675">[ subject ]</a>
+              <a href="author.html#675">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 7:52 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt; -Preciso de mais alguns opcodes: bitwise OR, bitwise AND, e os
+</I>&gt;<i> &gt; operadores de bit shift.
+</I>&gt;<i>
+</I>&gt;<i>  Realmente, acho que eles não existem. Alguns opcodes que eu não estava
+</I>&gt;<i> utilizando eu nem defini quando estava fazendo aquele rascunho de
+</I>&gt;<i> compilador.
+</I>&gt;<i>
+</I>
+O &quot;and&quot; e &quot;or&quot; implementados atualmente fazem operação lógica, e não
+bitwise. Tbm, eu acho que eles não vão funcionar, da forma como estão,
+para operandos de tipos arbitrários (como double).
+
+&gt;<i> &gt; -O fato de estarmos usando double pode criar um probleminha se um tipo
+</I>&gt;<i> &gt; real for um dos operandos de &quot;and&quot; ou &quot;or&quot;, pois somente 32 bits do
+</I>&gt;<i> &gt; valor double são comparados.
+</I>&gt;<i>
+</I>&gt;<i>  And e or que você diz são os de expressões lógicas ? Se sim, eu só diria
+</I>&gt;<i> que eu sabia que existia algum problema com  doubles, mas não sabia qual
+</I>&gt;<i> era...
+</I>&gt;<i>
+</I>
+Isso, expressões lógicas. AND e OR bitwise, por outro lado, são mais
+simples porque só podem ser aplicados sobre operandos do tipo inteiro.
+
+&gt;<i>  Um char vai de -127 a +128. Um unsigned char vai de 0 a 255. Não tá no
+</I>&gt;<i> limite, É que em alguns pontos está sendo usado char ao invés de unsigned
+</I>&gt;<i> char. Isso já tá corrigido na última versão comitada ontem. É só um warning
+</I>&gt;<i> chato do compilador que não deve ocorrre mais hehehe.
+</I>&gt;<i>
+</I>
+Ahh, ok. hehe
+
+&gt;<i>  Acho que não é necessário.  Nós temos ainda aproximadamente 100 opcodes
+</I>&gt;<i> disponíveis, e acho que serão mais do que suficientes. Se não forem então a
+</I>&gt;<i> gente tem que sentar e reformular porque certamente fizemos alguma besteira
+</I>&gt;<i> hehehe.
+</I>&gt;<i>
+</I>
+Ok.
+
+&gt;<i> &gt; Se precisarmos de longs ou doubles, poderiamos criar
+</I>&gt;<i> &gt; estruturas e funções para lidar com estes valores.
+</I>&gt;<i>
+</I>&gt;<i>  Bom, não sei exatamente onde você está falando (bytecode, dados em tempo de
+</I>&gt;<i> execução, ...) mas já temos suporte para inteiros, real, ...
+</I>&gt;<i>
+</I>
+Sim, e não temos para long :)
+Mas eu imaginei que eles podem ser implementados utilizando estruturas:
+
+estrutura InteiroGrande
+  high : inteiro;
+  low   : inteiro;
+fim-estrutura
+
+função soma(op1 : InteiroGrande, op2 : InteiroGrande) : InteiroGrande ....
+
+(eu sei, nome horrível).
+
+Eu tinha aplicado esse mesmo raciocínio para doubles, se precisassemos
+mapear o tipo real para float, no fim das contas.
+
+Mas só pensei em mapear o tipo real para float se isso uniformizasse
+todos os dados na pilha para 32 bits, o que possibilitaria que
+tivessemos apenas uma versão para os opcodes OR lógico e AND lógico.
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000662.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000679.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#675">[ date ]</a>
+              <a href="thread.html#675">[ thread ]</a>
+              <a href="subject.html#675">[ subject ]</a>
+              <a href="author.html#675">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

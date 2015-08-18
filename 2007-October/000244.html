@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C9a3912af0710051243n4c0579c6ub00fb105e9503121%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000247.html">
+   <LINK REL="Next"  HREF="000249.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FProposta_para_procedimentos/fun%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DF5es_com_n%3DFAmero_de_argumentos_vari%3DE1veis%3F%3D&In-Reply-To=%3C9a3912af0710051243n4c0579c6ub00fb105e9503121%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Outubro  5 21:43:54 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000247.html">[gpt-usuarios] Sugestão de nomes para os &quot;componentes&quot; do projeto
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000249.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Como o Thiago comentou em outro e-mail, o ideal seria termos suporte a
+funções/procedures com número de argumentos (parâmetros) variáveis.
+
+Para uma procedure com número fixo de argumentos, quando esta procedure for
+invocada em algum ponto do código, o compilador gera o seguinte código em
+assembly:
+
+// Código em GPT
+...
+procedure p1 (x: inteiro, y: inteiro)
+...
+
+...
+p1(10,20);
+...
+
+
+// Código em GptAssembly
+push 20 // empilha argumentos na ordem inversa
+push 10
+pcall p1
+
+
+
+Para lidar com o caso de número de argumentos variáveis eu teria a seguinte
+proposta...
+
+Sempre que o compilador for invocar uma função/procedure que tenha o número
+de argumentos variável, o compilador teria que, além de empilhar cada
+argumento, empilhar também o tipo de cada argumento e o número total de
+argumentos.
+
+// Código em GPT
+...
+procedure p2 (x: inteiro, ...) // chutei &quot;...&quot; como a forma de especificar
+que tem argumentos variáveis....
+...
+
+...
+p2(1, 10, &quot;20&quot;, 30.00);
+...
+
+
+// Código em GptAssembly
+push 30.00 // empilha argumentos na ordem inversa
+push real
+push &quot;20&quot;
+push string
+push 10
+push int
+push 1 // não precisa tipo porque tá explicito na definição da procedure
+push 4 // número de argumentos total, inclusive os não variáveis
+pcall p1
+
+
+Esse metodologia serviria também para o caso da procedure &quot;imprima&quot; de forma
+que ela não seja mais tratada como &quot;um caso especial&quot;.
+
+Sugestões ? Reclamações ? Dicas ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/8727013a/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071005/8727013a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000247.html">[gpt-usuarios] Sugestão de nomes para os &quot;componentes&quot; do projeto
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000249.html">[gpt-usuarios] Proposta para procedimentos/funções com número de argumentos variáveis
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

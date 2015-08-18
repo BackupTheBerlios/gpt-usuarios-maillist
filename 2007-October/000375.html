@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710161740g3160ad42y4bdcd9d2cefe2b8d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000374.html">
+   <LINK REL="Next"  HREF="000377.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710161740g3160ad42y4bdcd9d2cefe2b8d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Outubro 17 02:40:44 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000374.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000377.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#375">[ date ]</a>
+              <a href="thread.html#375">[ thread ]</a>
+              <a href="subject.html#375">[ subject ]</a>
+              <a href="author.html#375">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; &gt; == Números ==
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; Por exemplo, existe um iadd (integer add) e um cadd (char add). Porém,
+</I>&gt;<i> só
+</I>&gt;<i> &gt; existe o iset. A gente chegou a conversar sobre isso em outro e-mail,
+</I>&gt;<i> até
+</I>&gt;<i> &gt; que entrou a questão do UTF-8.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Não existe opcode para somar um bool, nem para verificar se um booleano
+</I>&gt;<i> é ou
+</I>&gt;<i> &gt; não maior que outro. Isso é necessário ????
+</I>&gt;<i>
+</I>&gt;<i> Não, não é necessário. Mas tbm me pergunto se é necessário ter um cadd
+</I>&gt;<i> (desculpe, ainda não entendi). Por que não um iadd, apenas? Seria um
+</I>&gt;<i> opcode que valeria para todos os estes tipos...
+</I>
+
+Não é que precise, mas, no meu entendimento (que obviamente pode estar bem
+desatualizado), caractere varia de 0 a 255. Ou seja, se c1 tem 0 e você
+decrementar ele em 1, ele passa a ter 255, e não o tamanho máximo de um
+inteiro. Um opcode iadd não tem condições de saber que o dado era caracter e
+que os limites dele estão entre 0 e 255.
+
+Mas isso pode ser besteira minha. Em C/C++ e Pascal as coisas funcionam
+assim, mas também não quer dizer que temos que implementar da mesma forma.
+
+&gt;<i> &gt; == Literais ==
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; E são proibidos de participar em operações relacionais de grandeza:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A VM está planejada com suporte a isso.
+</I>&gt;<i>
+</I>&gt;<i> Ok, mas acho que o compilador não deve deixar isso passar.
+</I>
+
+Você poderia aprofundar mais isso ? Para mim comparar duas strings para
+identificar qual é maior ou menor do que outra é um recurso bem útil. Qual o
+problema que você vê nisso ??
+
+&gt;<i> &gt; == Matrizes ==
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Como discutimos, omitir o tamanho das dimensões é altamente desejável
+</I>&gt;<i> &gt; &gt; em parâmetros de funções. Poderiamos, naturalmente, extender isso para
+</I>&gt;<i> &gt; &gt; retornos também:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; função f(k : matriz[][] de inteiros) : matriz[] de inteiros  ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Isso seria legal. A questão é: o que acontece se as matrizes tem
+</I>&gt;<i> tamanhos
+</I>&gt;<i> &gt; diferentes ?
+</I>&gt;<i>
+</I>&gt;<i> Bela pergunta. Eu realmente não sei.
+</I>
+
+Uma opção seria gerar uma excessão (gerar um erro de runtime).
+
+Esse assunto todo me fez parar para pensar melhor sobre tipos e
+&gt;<i> matrizes. Cheguei a seguinte proposta:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Para as declarações:
+</I>&gt;<i>
+</I>&gt;<i> a : matriz[2] de inteiros;
+</I>&gt;<i> b : matriz[2][2] de inteiros;
+</I>&gt;<i>
+</I>&gt;<i> Entendemos os tipos de &quot;a&quot; e &quot;b&quot; como:
+</I>&gt;<i>
+</I>&gt;<i> a -&gt; *(inteiro)
+</I>&gt;<i> b -&gt; *(*(inteiro))
+</I>&gt;<i>
+</I>&gt;<i> Onde * denota uma coleção, e *(T) denota uma coleção de valores do
+</I>&gt;<i> tipo T. Note que, aqui, o tamanho das dimensões não faz parte do tipo.
+</I>&gt;<i>
+</I>&gt;<i> Então, poderiamos declarar mais umas variáveis:
+</I>&gt;<i>
+</I>&gt;<i> c : matriz[5] de inteiros;
+</I>&gt;<i> d : matriz[] de inteiros;
+</I>
+
+Matriz sem tamanho definido, a essas alturas do campeonato, complica um
+pouco as coisas pelos motivos que conversamos em outro e-mail...
+
+E seus tipos seriam:
+&gt;<i>
+</I>&gt;<i> c -&gt; *(inteiro)
+</I>&gt;<i> d -&gt; *(inteiro)
+</I>&gt;<i>
+</I>&gt;<i> Sabendo que uma atribuição só pode ser feita para tipos compatíveis,
+</I>&gt;<i> as seguintes atribuições são válidas:
+</I>&gt;<i>
+</I>&gt;<i> a := c;
+</I>&gt;<i>   -&gt; *(inteiro) := *(inteiro) // ok
+</I>
+
+a tem 2 elementos e c tem 5. O que aconteceria nesse caso ???
+
+d := b[1]
+&gt;<i>   -&gt; *(inteiro) := *(inteiro) //ok
+</I>
+
+d não tinha um tamanho inicial, e nesse caso vai ter que ser alocado durante
+a  execução...
+
+Então, acho que poderiamos concluir que o tamanho da dimensão, embora
+&gt;<i> não caracterize tipo, indica apenas quanto de espaço o programa deve
+</I>&gt;<i> alocar para uso.
+</I>
+
+Isso eu concordo...
+
+Também, uma vez que um valor do tipo *(T) tenha tamanho N, ele não
+&gt;<i> pode ser aumentado ou diminuido.
+</I>
+
+A questão não é se ele muda ou não de tamanho, mas se ele tem um tamanho
+inicial ou não. Se ele não tem um tamanho inicial, quando ele receber um
+dado, é como se ele tivesse mudado de tamanho (de zero para alguma coisa).
+
+Se ele não tem um tamanho inicial definido, a gente tem que criar toda uma
+abstração (assim como para as strings) . O que tinha sido pensado até o
+momento tratava arrays como structs, o que não implicava em nenhum recurso
+especial nem no assembly e nem na VM.
+
+O que faremos ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/49a6f5a0/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/49a6f5a0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000374.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000377.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#375">[ date ]</a>
+              <a href="thread.html#375">[ thread ]</a>
+              <a href="subject.html#375">[ subject ]</a>
+              <a href="author.html#375">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

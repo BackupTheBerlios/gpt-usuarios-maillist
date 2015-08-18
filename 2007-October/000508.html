@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Um exemplo de inicialização de matrizes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_exemplo_de_inicializa%3DE7%3DE3o_de_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fmatrizes%3F%3D&In-Reply-To=%3C9a3912af0710230426y3b08108ft7dcf43677b1b99b0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000507.html">
+   <LINK REL="Next"  HREF="000509.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Um exemplo de inicialização de matrizes</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_exemplo_de_inicializa%3DE7%3DE3o_de_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fmatrizes%3F%3D&In-Reply-To=%3C9a3912af0710230426y3b08108ft7dcf43677b1b99b0%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Um exemplo de inicialização de matrizes">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Outubro 23 13:26:35 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000507.html">[gpt-usuarios] Um exemplo de inicialização de matrizes
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000509.html">[gpt-usuarios] Sobre a sentença &quot;caso&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#508">[ date ]</a>
+              <a href="thread.html#508">[ thread ]</a>
+              <a href="subject.html#508">[ subject ]</a>
+              <a href="author.html#508">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; &gt; Tendo o seguinte código:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; &gt; x: matriz[3] do tipo inteiro;
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Como poderia ser feita a inicialização desta matriz na declaração ?
+</I>&gt;<i> Podem
+</I>&gt;<i> &gt; ser utilizados o índice nessa inicialização ?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Olhando a gramática me parece ser algo como:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; x: matriz[3] do tipo inteiro := [ 0 := 9, 2 := 29, 1 := 19];
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Nao, melhor nao. Complicou muito.
+</I>
+
+Eu também achei complicado. &quot;Acho&quot; que era isso que estava na gramática, por
+isso a pergunta...
+
+&gt;<i>
+</I>&gt;<i> &gt;  x: matriz[3] do tipo inteiro := [ 0,2,1];
+</I>&gt;<i>
+</I>&gt;<i> Realmente, assim é melhor...
+</I>
+
+Concordo plenamente hehehe.
+
+&gt;<i> imprima (x); // [0,2,1]   teremos suporte a isso?
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Somente se pudermos fazer algo similar a isso:
+</I>&gt;<i>
+</I>&gt;<i> função imprima(matriz[] do tipo inteiro)
+</I>&gt;<i> início
+</I>&gt;<i> //...
+</I>&gt;<i> fim
+</I>
+
+Eu mandei uma proposta para implementação de matrizes para a lista. A idéia
+não estava muito elaborada (leia-se inteligente) mas como foi a única que
+surgiu eu vou ajustar a documentação utilizando a proposta de termos opcodes
+específicos para manipular matrizes como m1alloc, m1free, ...
+
+Se futuramente surgir uma idéia melhor a gente ajusta. Acho que o importante
+é não ficarmos parados ou indecisos :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071023/59d31453/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071023/59d31453/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000507.html">[gpt-usuarios] Um exemplo de inicialização de matrizes
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000509.html">[gpt-usuarios] Sobre a sentença &quot;caso&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#508">[ date ]</a>
+              <a href="thread.html#508">[ thread ]</a>
+              <a href="subject.html#508">[ subject ]</a>
+              <a href="author.html#508">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Comentários sobre os códigos / planejamento
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C92b9a8820711051940u1726d9fsac092ae934daf3b2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000558.html">
+   <LINK REL="Next"  HREF="000568.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Comentários sobre os códigos / planejamento</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C92b9a8820711051940u1726d9fsac092ae934daf3b2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Comentários sobre os códigos / planejamento">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Novembro  6 04:40:13 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000558.html">[gpt-usuarios] Sobre as alteracoes no repositorio
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000568.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#567">[ date ]</a>
+              <a href="thread.html#567">[ thread ]</a>
+              <a href="subject.html#567">[ subject ]</a>
+              <a href="author.html#567">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tive um tempinho aqui (raridade, pois vou apresentar minha monografia
+em breve) pra ver o código do branch gpt2 , e reuni alguns
+pensamentos.
+
+Como disse anteriormente (e acho que discutimos há um tempo atrás),
+acho melhor criarmos a AST. O modelo seguiria, grosso modo, o flow do
+gpt 1.0, onde o parser cria a árvore, e gramáticas de ast diversas
+recebem ela como parâmetro para fins diversos (como análise semântica,
+geração de código, etc).
+
+Olhando o diretório do gpt2, penso que, em geral (e pessoalmente),
+prefiro começar do zero, de forma limpa, e ir copiando coisas
+existentes na medida do necessário. Por isso, acho que o diretório
+gpt2 está muito poluído e devemos excluir tudo o que é desnecessário
+no momento, possivelmente até excluindo o build system. Esse mesmo
+pensamento vale para códigos, especialmente no que diz respeito ao
+v1.0, pois boa parte do código dele é ad-hoc.
+
+Neste caso, prefiro pecar por falta do que por excesso.
+
+Minha sugestão atual (e venho pensando isso há bastante tempo, mas não
+tive oportunidade de elaborar melhor as idéias) é para dividirmos as
+tarefas. Pelo menos, estipularmos certas responsabilidades.
+
+Alex, suponho que vc está mais motivado para trabalhar na VM e na
+geração de código. Se for o caso, proponho que siga a linha
+&quot;bottom-up&quot;, produzindo o montador e a VM enquanto eu confecciono o
+parser e o analisador sintático (top-down). Com isso, nos
+encontraríamos no meio do caminho, com a geração do gptasm. Essa
+sugestão é minha resposta à proposta em Etapas_do_projeto.
+
+O build system do projeto ficaria pro final. Portanto, nada impede que
+cada subprojeto tenha apenas simples makefiles, para começar. Mas peço
+que sejam diligentes em relação à resíduos inutilizados na árvore do
+projeto e nos códigos. É mais fácil ver o que falta do que identificar
+o que sobra.
+
+Quanto aos testes automatizados, acho que preciamos definir uma
+infraestrutura antes de avançarmos o sinal.
+
+No mais, estou replanejando aos poucos a estrutura do front-end em
+relação ao v1.0. Pretendo, então, seguir as seguintes tarefas:
+
+-terminar o lexer/parser (que envolve as tarefas abaixo)
+-avaliar o formato da AST (e os exemplos do wiki) para fechar o que
+será produzido pelo front-end.
+-Implementar a geração da AST
+-planejar e implementar o analisador semântico
+-Implementar a reportagem de erros
+
+Ao final, para o gptc, restará o módulo de emissão de bytecodes.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000558.html">[gpt-usuarios] Sobre as alteracoes no repositorio
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000568.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#567">[ date ]</a>
+              <a href="thread.html#567">[ thread ]</a>
+              <a href="subject.html#567">[ subject ]</a>
+              <a href="author.html#567">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre as etapas do projeto
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20as%20etapas%20do%20projeto&In-Reply-To=%3C9a3912af0709191004l53f8b9f6lf9f85e102cbea6a1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000171.html">
+   <LINK REL="Next"  HREF="000167.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre as etapas do projeto</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20as%20etapas%20do%20projeto&In-Reply-To=%3C9a3912af0709191004l53f8b9f6lf9f85e102cbea6a1%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre as etapas do projeto">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 19 19:04:18 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000171.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000167.html">[gpt-usuarios] Sobre as etapas do projeto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#165">[ date ]</a>
+              <a href="thread.html#165">[ thread ]</a>
+              <a href="subject.html#165">[ subject ]</a>
+              <a href="author.html#165">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá pessoal.
+
+Precisamos definir o que seriam as etapas (releases menores) do projeto.
+
+Eu coloquei uma sugestão no wiki que colo abaixo. Estou assumindo que o CI
+será feito no projeto, o que não necessariamente é verdade. Enfim...
+
+Fases do projeto
+O projeto pode ficar dividido nas seguintes subversões:
+
+1) Escopo desta versão:
+- Mesma BNF
+- Gerando AST com o CI
+- Se CI for binário, opção para gerar texto a partir do CI binário
+
+2) Escopo desta versão:
+- Conversão de CI em assembly
+- Assemblador que gera bytecode
+- Desassemblador de bytecode
+
+3) Escopo desta versão:
+- VM que executa o bytecode gerado pelo montador
+
+** A partir da versão 3 teríamos uma release funcional da versão 2 **
+
+4) Escopo desta versão:
+- &quot;Melhorias&quot; na BNF com estruturas como caso, faça..enquanto, ...
+
+5) Escopo desta versão:
+- Suporte a arrays e structs
+
+6) Escopo desta versão:
+- Chamada de procedimentos e funções definidos pelo usuário
+- Variáveis locais e passagem de parâmetros (por valor e por referência)
+
+7) Escopo desta versão:
+- Uso de bibliotecas externas
+
+8) Escopo desta versão:
+- Módulos em gpt
+
+Quando possível compartilhem suas idéias...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/ca4960f7/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/ca4960f7/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000171.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000167.html">[gpt-usuarios] Sobre as etapas do projeto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#165">[ date ]</a>
+              <a href="thread.html#165">[ thread ]</a>
+              <a href="subject.html#165">[ subject ]</a>
+              <a href="author.html#165">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

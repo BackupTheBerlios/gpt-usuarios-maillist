@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FS%3DEDmbolos_que_podem_ou_n%3DE3o_estar%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_na_tabela_de_s%3DEDmbolos%3F%3D&In-Reply-To=%3C9a3912af0711050828s4deab4fep2550a20dabcea7ba%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000556.html">
+   <LINK REL="Next"  HREF="000560.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FS%3DEDmbolos_que_podem_ou_n%3DE3o_estar%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_na_tabela_de_s%3DEDmbolos%3F%3D&In-Reply-To=%3C9a3912af0711050828s4deab4fep2550a20dabcea7ba%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro  5 17:28:52 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000556.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000560.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#559">[ date ]</a>
+              <a href="thread.html#559">[ thread ]</a>
+              <a href="subject.html#559">[ subject ]</a>
+              <a href="author.html#559">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; A tabela de símbolos normalmente contém variáveis, funções,
+</I>&gt;<i> procedimentos,
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Algo impede que eu coloquei inteiros, literais e afins nessa tabela ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu posso estar enganado mas popular a tabela de símbolos com esses dados
+</I>&gt;<i> &gt; facilita (e muito) a geração de código GptAssembly...
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> De que forma facilita??
+</I>
+
+Ao gerar um mnemônico, não basta saber que eu vou gerar um &quot;set&quot;, mas sim se
+é iset, rset, sset, ... O mesmo vale para todos os mnemônicos que tem alguma
+dependência com o tipo de informação que estão manipulando.
+
+Durante a geração de código no parser fica bem mais &quot;limpo&quot; eu executar um
+&quot;gera_mnemonico( &quot;set&quot;, xxx )&quot; do que, no parser, eu testar qual seria o set
+correto.
+
+Onde eu acho que facilita bem mais a nossa vida é durante a geração de
+temporárias. Como o compilador não &quot;é esperto&quot; e consequentemente não
+otimiza nada do que está gerando, ao reconhecer código como
+
+x := 2 * 6 + 9;
+
+o compilador gera o seguinte código:
+
+imul __temp1, 2, 6
+isum __temp2, __temp1, 9
+iset x, __temp2
+
+Durante a geração do mul, o front-end recebe dois símbolos e, conforme o
+símbolo, ele decide qual mnemônico gerar (imul, rmul). Porém ficou um saco
+no parser repassar o tipo de cada símbolo junto com o símbolo. O mais fácil
+foi repassar a string contendo as temporárias ou símbolos. Porém, o
+front-end quando recebe &quot;2&quot; e &quot;6&quot; não sabe o que esses símbolos são.
+
+O que eu fiz foi, ao reconhecer esses símbolos no parser, eu acrescento eles
+na tabela de símbolos. Durante a geração do mnemônico o front-end verifica
+na tabela de símbolos o tipo deles e gera o opcode correto.
+
+Eu acho que o mais correto ainda seria repassar o tipo no parser, mas eu
+acabei tomando um laço do antlr e não consegui fazer. De qualquer forma
+colocar todos os símbolos na tabela de símbolos facilitou a geração de
+outras coisas como push_int, push_string, ...
+
+É mais ou menos isso...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071105/c9530e68/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071105/c9530e68/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000556.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000560.html">[gpt-usuarios] Símbolos que podem ou não estar na tabela de símbolos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#559">[ date ]</a>
+              <a href="thread.html#559">[ thread ]</a>
+              <a href="subject.html#559">[ subject ]</a>
+              <a href="author.html#559">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

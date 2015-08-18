@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710131028t40780d21xe6269687ad022ce2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000318.html">
+   <LINK REL="Next"  HREF="000337.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710131028t40780d21xe6269687ad022ce2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Outubro 13 19:28:34 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000318.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000337.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#325">[ date ]</a>
+              <a href="thread.html#325">[ thread ]</a>
+              <a href="subject.html#325">[ subject ]</a>
+              <a href="author.html#325">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/13/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Caracteres, como serão representados por um inteiro, será utilizado 4 bytes.
+</I>&gt;<i> Quanto aos literais eu não tinha pensado nisso. Na verdade eu não tinha
+</I>&gt;<i> pensado em UTF-8, pra ser bem sincero :-)
+</I>&gt;<i>
+</I>&gt;<i> A idéia do que estava sendo feito é bem simples. As strings da VM (literais)
+</I>&gt;<i> nada mais são do que 4 bytes (um ponteiro para um std::string ou
+</I>&gt;<i> assemelhado).
+</I>
+Ok. Até onde sei no momento, acho que não há problema em utilizar
+std::string para armazenar literais, se não formos utilizar métodos
+como  length() e outros. O problema está no processamento, e não no
+armazenamento:
+
+//teste.cpp
+int main() {
+  std::string s = &quot;Olá&quot;;
+  std::cout &lt;&lt; s.length() &lt;&lt; &quot; &quot; &lt;&lt; s &lt;&lt; std::endl;
+}
+
+bash-3.1$ g++ teste.cpp
+bash-3.1$ ./a.out
+4 Olá
+
+Mas vou dar uma olhada melhor nisso.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000318.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000337.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#325">[ date ]</a>
+              <a href="thread.html#325">[ thread ]</a>
+              <a href="subject.html#325">[ subject ]</a>
+              <a href="author.html#325">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

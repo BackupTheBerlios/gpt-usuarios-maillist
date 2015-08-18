@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710110844y259feaa7r88b8b0a2ef2b847%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000278.html">
+   <LINK REL="Next"  HREF="000282.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710110844y259feaa7r88b8b0a2ef2b847%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 11 17:44:26 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000278.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000282.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#280">[ date ]</a>
+              <a href="thread.html#280">[ thread ]</a>
+              <a href="subject.html#280">[ subject ]</a>
+              <a href="author.html#280">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> 1) &quot;Ainda não foi definido a gramática para opcodes (gptassembly)&quot;
+</I>&gt;<i>
+</I>&gt;<i> Posso estar enganado, mas acho que a gente poderia tratar o código em
+</I>&gt;<i> assembly como uma &quot;string&quot; (bloco de texto). O compilador simplesmente copia
+</I>&gt;<i> e cola isso no arquivo assembly que está sendo gerado (tirando o
+</I>&gt;<i> asm..fim-asm, claro). O montador, quando for executado, faz as validações
+</I>&gt;<i> necessárias.
+</I>&gt;<i>
+</I>
+Yep. Essa é a idéia :)
+
+&gt;<i> A única ressalva para essa abordagem é se, dentro do código assembly, a
+</I>&gt;<i> gente precise fazer alguma manipulação antes de inserir no assembly.
+</I>&gt;<i>
+</I>
+Você acha que precisa? Pensando rapidinho aqui, eu não consegui pensar
+em nenhum caso.
+
+&gt;<i> 2) Como sempre me confundi e nunca decidi entre &quot;matriz&quot; e &quot;vetor&quot; para
+</I>&gt;<i> arrays, resolvi utilizar apenas &quot;vetor&quot;, em contraste com a v1.0
+</I>&gt;<i>
+</I>&gt;<i> A meu ver, vetor tem uma dimensão apenas, e matriz mais de uma dimensão.
+</I>&gt;<i> Pelo certo seriam duas definições, mas eu acho que ficaria horrível hehehe.
+</I>&gt;<i> O que algumas linguagens fazem é encarar os vetores como uma matriz de uma
+</I>&gt;<i> dimensão, ou seja, adotam matriz sempre.
+</I>&gt;<i>
+</I>&gt;<i> Mas para mim indifere. Se você achar melhor vetor ou matriz, tanto faz :-)
+</I>&gt;<i>
+</I>
+Bom, vou deixar em aberto, porque eu realmente não sei :)
+Antigamente, vetor e matriz eram sinônimos na gramática. Não me lembro
+porque tirei isso.
+
+Adorilson, ce tem alguma opnião sobre isso?
+
+&gt;<i> 3) Eu não sei se devemos ter &quot;procedimento&quot; e &quot;função&quot; ou apenas &quot;função&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Em termos de geração de código, assembly, e durante a execução na VM, tanto
+</I>&gt;<i> faz. A VM em si não tem consciência do que é um procedimento ou função.
+</I>&gt;<i> Aliás, nem o montador tem consciência disso.
+</I>&gt;<i>
+</I>&gt;<i> Porém, em termos didáticos, eu acharia interessante termos procedimentos e
+</I>&gt;<i> funções porque qualquer livro para iniciante sempre aborda os dois
+</I>&gt;<i> conceitos. Eu mesmo (sabe como é burro véio rsrsrs) se estou utilizando uma
+</I>&gt;<i> linguagem que não tem procedures fico com a sensação de que &quot;está faltando
+</I>&gt;<i> algo&quot;...
+</I>
+Bom, acho que é o mesmo caso do vetor/matriz. Vou deixar em aberto também.
+
+&gt;<i> 4) A produção &quot;en_repita&quot; está um pouco alienígena em relação às outras
+</I>&gt;<i> construções da linguagem (não tem &quot;fim-repita&quot;, por exemplo).
+</I>&gt;<i>
+</I>&gt;<i> Logo que começamos a falar sobre as novas estruturas da V2 eu pensei sobre
+</I>&gt;<i> isso mas não achei nenhuma abordagem legal também. O que outras linguagens
+</I>&gt;<i> que utilizam essa idéia de &quot;if..end-if&quot; utilizam para a sentença repeat ???
+</I>&gt;<i>
+</I>&gt;<i> Uma abordagem que pensei agora:
+</I>&gt;<i>
+</I>&gt;<i> repita enquanto x &lt;= 10
+</I>&gt;<i> ...
+</I>&gt;<i> fim-repita
+</I>&gt;<i>
+</I>&gt;<i> e
+</I>&gt;<i>
+</I>&gt;<i> repita até x &gt; 10
+</I>&gt;<i> ...
+</I>&gt;<i> fim-repita
+</I>&gt;<i>
+</I>&gt;<i> Porém eu acho que isso pode confundir o usuário porque, em uma sentença
+</I>&gt;<i> repita, o teste é feito no final, mas no código aparece no início...
+</I>
+Mas valeu a tentativa :)
+
+&gt;<i> 5) Acho que temos que incorporar outros tipos, como double, long, short,
+</I>&gt;<i> byte, etc.
+</I>&gt;<i>
+</I>&gt;<i> Interessante seria, mas você pensou nisso por algum motivo em especial ?
+</I>
+Para ter um mapeamento de tipos e tamanhos de variáveis para usar
+bibliotecas externas. Em um email anterior, fiz um exemplo de gptasm
+que utiliza a função &quot;double cos(double)&quot; da biblioteca libm.so.
+Teremos um problema ao chamar esta função passando um tipo real e
+recebendo o retorno em uma variável do tipo real, se este tipo tiver
+32 bits, numa arquitetura em que double tem 64 bits. É este tipo de
+problema que estou tentando resolver.
+
+Se bem que, pensando um pouco agora. Talvez seja possível ter as
+variáveis se ajustando ao valor que carregam, ao invés de determinar o
+tamanho dos tipos. Qual a implicação disso na VM e nos opcodes?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000278.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000282.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#280">[ date ]</a>
+              <a href="thread.html#280">[ thread ]</a>
+              <a href="subject.html#280">[ subject ]</a>
+              <a href="author.html#280">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

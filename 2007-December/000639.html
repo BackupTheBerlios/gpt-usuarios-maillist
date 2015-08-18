@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712130626r20f1405bme815c006c570855a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000643.html">
+   <LINK REL="Next"  HREF="000642.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712130626r20f1405bme815c006c570855a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Dezembro 13 15:26:09 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000643.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000642.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#639">[ date ]</a>
+              <a href="thread.html#639">[ thread ]</a>
+              <a href="subject.html#639">[ subject ]</a>
+              <a href="author.html#639">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> O arquivo sld seria gerado automáticamente, correto?
+</I>
+
+Até podemos ter um programa que, a partir de um &quot;.h&quot;, gere um &quot;.sld&quot;. De
+qualquer forma eu gostaria que quem estivesse gerando os bindings tivesse o
+controle de quais funções serão ou não mapeadas.
+
+Outra possibilidade que tinha vindo a minha mente era a de poder criar
+parâmetros implícitos (default) ou trocar a posição de argumentos. Mas
+pensando melhor sobre isso agora, eu acho que eu &quot;misturei tudo&quot; no mesmo
+bolo. Uma coisa são os bindings, outra são as melhorias que serão feitas
+sobre as bibliotecas de sistema criando bibliotecas em G-Portugol.
+
+Outra(s) dúvida(s) que tive foi olhando o código cpp/hpp gerado,
+&gt;<i> notando que todas a funções utilizam a assinatura &quot;Parameters,
+</I>&gt;<i> Return&quot;. Supondo que esses códigos se tornassem libteste.so, fiquei
+</I>&gt;<i> pensando de que forma VM faria o carregamento/execução e recuperação
+</I>&gt;<i> do valor de retorno das funções desta lib.
+</I>&gt;<i>
+</I>&gt;<i> Eu supus que ela faria o dlopen inicial de libteste.so, certo? Depois
+</I>&gt;<i> disso, não consegui resolver como ela empacotaria os valores da pilha
+</I>&gt;<i> em um objeto Parameters. Pensei em algumas possibilidades.
+</I>&gt;<i>
+</I>&gt;<i> A primeira foi em ter a VM marcando a pilha de forma a saber quais
+</I>&gt;<i> valores dela fazem parte dos parâmetros de uma chamada que será feita
+</I>&gt;<i> a seguir (não me pareceu boa idéia tbm). Com isso, ela saberia que os
+</I>&gt;<i> últimos X valores, por ex, serão passados para a proxima chamada, e só
+</I>&gt;<i> precisaria empacotar estes. Mas, melhor seria fazer um push do número
+</I>&gt;<i> de argumentos que estão sendo passados. A outra possibilidade que
+</I>&gt;<i> imaginei foi ter a VM empacotando a pilha inteira em uma instância
+</I>&gt;<i> Parameters. A última, foi imaginar que Parameters fosse a própria
+</I>&gt;<i> pilha sendo passada para o método...
+</I>
+
+Quanto a Parameters, podemos utilizar várias abordagens. Parameters poderia
+ser criado pela VM antes de invocar a subrotina e teria os N parâmetros
+necessários a execução da subrotina. Ou poderia ser a pilha toda e a gente
+utilizaria métodos para acessar os parâmetros quando necessário. Bom, logo a
+gente vê o que é melhor.
+
+Quanto a como as coisas iriam funcionar, eu imagino que, para cada subrotina
+que será feito o binding, o gerador de bindings teria que gerar código C++
+que desempilhasse os parâmetros, convertesse para o tipo correto C++,
+invocasse a subrotina (lib do sitema), recuperasse o retorno e convertesse o
+retorno para o tipo em G-Portugol. Esse código gerado seria compilado e
+&quot;anexado&quot; a VM através de um .so. Acho que, se bem configurado durante a
+compilação, a gente nem precisa do dlopen e podemos utilizar as funções
+diretamente (acho que é a opção export no compilador ou algo semelhante...)
+mesmo sendo um .so.
+
+A outra dúvida que tive foi em relação a resolução da chamada estática
+&gt;<i> do método e nome da classe. Como a VM saberia da existência da classe
+</I>&gt;<i> CSyslib_test?
+</I>
+
+Eu imagino que o código gerado será compilado com a VM.
+
+Imaginei que seria uma convenção de nomes entre o nome
+&gt;<i> da classe e o nome da lib. Talvez um exemplo contendo o código
+</I>&gt;<i> portugol que faça a chamada ao libteste.so me ajudasse :)
+</I>
+
+Vou tentar montar algo. Meu tempo anda curto, mas vou dar um jeito :-)
+
+Finalmente, como você vê a chamada no código portugol até a vm
+&gt;<i> processando o dlopen e chamando a rotina externa?
+</I>
+
+O gerador de bindings gera, para cada binding em uma syslib, código que será
+compilado junto com a VM. O gerador gera os seguintes trechos de código:
+* Insere um mapeamento &quot;nome_lib + nome_funcao&quot; para um ponteiro de função
+que tratará essa chamada de sistema. Esse mapeamento será utilizado no
+opcode lcall.
+* Em outro arquivo (nome_lib.cpp e .hpp) gera a classe com métodos
+estáticos, onde todos os métodos tem a mesma assinatura (Parameters e
+Return).
+* Gera os métodos estáticos onde os parâmetros são convertidos para tipos
+nativos de C e o retorno é convertido para o tipo nativo da VM. Claro,
+invoca a função da libsys.
+
+Quanto à sugestões, da forma que entendi, eu sugeriria não termos o
+&gt;<i> arquivo sdl. Considere, por exemplo, a seguinte abordagem:
+</I>&gt;<i>
+</I>&gt;<i> Supondo que queremos criar um binging para as funções da biblioteca
+</I>&gt;<i> libm.so, especificamente, apenas a função &quot;double pow(double,double)&quot;.
+</I>&gt;<i> Pensei em termos o seguinte workflow (manual, para ilustrar):
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 1) escreveriamos uma .so que faria a ponte entre o mundo C e o mundo GPT:
+</I>&gt;<i>
+</I>&gt;<i> ------
+</I>&gt;<i> //gpt_pow.c
+</I>&gt;<i> #include &quot;gpt.h&quot;
+</I>&gt;<i>
+</I>&gt;<i> gpt_real gpt_pow(gpt_real base, gpt_real expoente) {
+</I>&gt;<i> double native_base     = real_to_double(base);
+</I>&gt;<i> double native_expoente = real_to_double(expoente);
+</I>&gt;<i> double native_return   = pow(native_base, native_expoente);
+</I>&gt;<i> return double_to_real(native_return);
+</I>&gt;<i> }
+</I>&gt;<i> ------
+</I>&gt;<i>
+</I>&gt;<i> $ # compilação ilustrativa
+</I>&gt;<i> $ gcc -shared -o libgptpow.so gpt_pow.c -lm
+</I>
+
+Não sei se eu entendi direito, mas codificar esse arquivo, para cada
+binding, daria muito trabalho.
+
+A idéia do .sld é que, através do .sld.  o gerador de bindings gere esse
+código que você mostrou acima &quot;tomaticamente&quot;.
+
+2) Com a libgptpow.so criada, escreveriamos a biblioteca gpt:
+&gt;<i>
+</I>&gt;<i> ------
+</I>&gt;<i> //pow.gpt
+</I>&gt;<i> função pow(base: real, expoente:real) : real
+</I>&gt;<i> início
+</I>&gt;<i> asm
+</I>&gt;<i>    pushrr
+</I>&gt;<i>    pushrv expoente
+</I>&gt;<i>    pushrv base
+</I>&gt;<i>    libcall libgptpow.so, gpt_pow
+</I>&gt;<i>    poprv __result
+</I>&gt;<i> fim-asm
+</I>&gt;<i> fim
+</I>&gt;<i> ------
+</I>
+
+Acho que esse trecho só seria necessário se o usuário quiser modificar a
+assinatura da subrotina.
+
+3) e usariamos ela:
+&gt;<i>
+</I>&gt;<i> ------
+</I>&gt;<i> //teste.gpt
+</I>&gt;<i> algoritmo teste;
+</I>&gt;<i> use &quot;matemática&quot;;
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i> imprima(potência(3,3));
+</I>&gt;<i> fim
+</I>&gt;<i> ------
+</I>
+
+Isso sim. Internamente o compilador poderia gerar um lcall e invocar
+potência diretamente. Lembre que, nos métodos estáticos que mapeiam dados e
+invocam a libsys, o nome dos métodos pode ser qualquer um (conforme o
+mapeamento), ou seja, você pode ter um mapeamento de &quot;potência&quot; para o
+método &quot;potencia&quot; que, internamente, invoca &quot;pow&quot;.
+
+Então, o que temos ao final é uma tradução de tipos, para casos
+&gt;<i> simples como este:
+</I>&gt;<i>
+</I>&gt;<i> double pow(double,double)
+</I>&gt;<i> -&gt; pow(real,real) : real
+</I>&gt;<i>
+</I>&gt;<i> Com um arquivo descrevendo o mapeamento de tipos, podemos ter o
+</I>&gt;<i> gerador criando gpt_pow() automaticamente, utilizando funções que
+</I>&gt;<i> relacionam e traduzem os dois mundos.
+</I>
+
+Isso mesmo !!!!
+
+Alias, acho que o mapeamento de tipos pode ser estático por enquanto. Se
+necessário a gente acrescenta mapeamento dinâmico depois.
+
+Em um .sld, para criar o mapeamento de pow seria algo como:
+
+/////////////////////
+
+option {
+   libname   = &quot;test&quot;,
+   baseclass = &quot;CBaseSyslib&quot;,
+   linkerlib = &quot;math&quot;
+}
+
+header {
+   &quot;math.h&quot;,
+}
+
+function potência(base: real, expoente: real) ::= pow(base, expoente);
+
+/////////////////
+
+Claro, esse .sld é grandinho para um binding apenas, mas se tivermos vários
+bindings de uma mesma biblioteca dai fica bem funcional...
+
+
+
+&gt;<i> Nota3: estou supondo que temos um gpt.h com as definições que criam
+</I>&gt;<i> uma ponte entre os dois mundos, com as representações de dados da
+</I>&gt;<i> linguagem portugol em C, funções de suporte, etc. Por ex:
+</I>&gt;<i>
+</I>&gt;<i> //gpt.h
+</I>&gt;<i> typedef/class  ...  real;
+</I>&gt;<i> typedef/class ...  inteiro;
+</I>&gt;<i> typedef/class ...  literal;
+</I>&gt;<i> typedef/class  ...  matriz;
+</I>&gt;<i> typedef/class  ...  estrutura;
+</I>&gt;<i>
+</I>&gt;<i> double real_to_double(real);
+</I>&gt;<i> float  real_to_float(real);
+</I>&gt;<i> etc...
+</I>
+
+Eu também &quot;assumi&quot; algo deste gênero...
+
+Acho que este arquivo seria uma reunião das estruturas/tipos que a VM
+&gt;<i> utiliza para representar os dados em portugol + funções que mapeiam
+</I>&gt;<i> dados portugol para dados C e vice-versa.
+</I>
+
+Isso mesmo.
+
+Ok, isso seria um walktrough manual para o caso simples, mas achei
+&gt;<i> relativamente fácil pensar em como tudo seria automatizado pois,
+</I>&gt;<i> grosso modo, boa parte dos bindings seriam apenas traduções de tipos
+</I>&gt;<i> de dados, ou mapeamento entre protótipos e estruturas.
+</I>
+
+Concordo...
+
+No fim, imagino que teriamos, a principio, um gerador que recebe duas
+&gt;<i> informações como entrada: as informações dos protótipos de funções
+</I>&gt;<i> alvo (math.h, por ex) e o mapeamento dos dados entre as linguagens C e
+</I>&gt;<i> gpt. Ele seria responsável, então, por criar as funções-ponte em C (o
+</I>&gt;<i> binding.so), escrevendo as conversões nescessarias nas funções, e
+</I>&gt;<i> seria responsável por criar os stubs portugol que apenas teriam código
+</I>&gt;<i> asm para chamar libcall.
+</I>
+
+Quanto a ler diretamente o .h, meu receio fica em, ao ler um .h, o gerador
+não conseguir identificar o tipo de um parâmetro (typedef ou qualquer outra
+coisa que possa estar em outro arquivo). Eu tenho a impressão que usando um
+.h diretamente a gente fica vulnerável a vários problemas. Mas claro que
+posso estar errado :-)
+
+Uma sugestão seria termos um passo intermediário onde um utilitário nosso lê
+um .h e gera um .sld. Nesse .sld a gente corrige o que está errado e roda o
+gerador de bindings. Assim a gente tem mais controle do que está
+acontecendo. Talvez nesse utilitário seja interessante ter o mapeamento
+entre tipos de dados, se necessário.
+
+Virando a página, independente da abordagem, eu pensei em utilizarmos
+&gt;<i> ferramentas como ctags, ou o gccxml
+</I>&gt;<i> (<A HREF="http://www.gccxml.org/HTML/Index.html">http://www.gccxml.org/HTML/Index.html</A>) para geração automática de
+</I>&gt;<i> código, de forma a obter uma descrição estruturada dos códigos C/c++
+</I>&gt;<i> (ex. math.h) que queremos utilizar como alvos de bindings.
+</I>
+
+Não conheço essas ferramentas. Vou dar uma olhada nelas. Mas sim, tudo que
+for para facilitar a nossa vida, vamos utilizar. Eu tenho que cuidar porque
+eu tendo a sempre fazer tudo que preciso, o que muitas vezes só gera stress
+desnecessário hehehe.
+
+É isso. Muito aqui foi elaboração mental, então, desculpe (e me
+&gt;<i> corrija :) se falei alguma besteira.
+</I>
+
+Faço das suas palavras as minhas palavras hehehe.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071213/916298eb/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071213/916298eb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000643.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000642.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#639">[ date ]</a>
+              <a href="thread.html#639">[ thread ]</a>
+              <a href="subject.html#639">[ subject ]</a>
+              <a href="author.html#639">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

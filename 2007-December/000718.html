@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Build System
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C9a3912af0712191030m5e02ea6bme6d78aaaeff48036%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000715.html">
+   <LINK REL="Next"  HREF="000685.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Build System</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C9a3912af0712191030m5e02ea6bme6d78aaaeff48036%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Build System">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Dezembro 19 19:30:30 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000715.html">[gpt-usuarios] Build System
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000685.html">[gpt-usuarios] Uma nova mailing list e hospedagem de código
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#718">[ date ]</a>
+              <a href="thread.html#718">[ thread ]</a>
+              <a href="subject.html#718">[ subject ]</a>
+              <a href="author.html#718">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mas ah !!!!
+
+Como diria um professor da minha faculdade: &quot;Que espetáculo !!!&quot; hehehe
+
+
+On 12/19/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On Dec 17, 2007 8:15 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Por mim ok.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Só eu sugiro que você aguarde a gente definir e &quot;popular&quot; o diretório de
+</I>&gt;<i> &gt; syslibs. Mas se você acha que não faz diferença (é fácil alterar depois)
+</I>&gt;<i> &gt; pode &quot;tocar o baile&quot; agora mesmo hehehe.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Bom, aproveitando o gás, acabei de fazer a integração dos subprojetos
+</I>&gt;<i> (common, gptasm, gptc e gptvm, por enquanto).
+</I>&gt;<i>
+</I>&gt;<i> Cada subdiretório tem um Makefile.boot, que instala os arquivos
+</I>&gt;<i> Makefile.in, configure, etc específicos para o subprojeto. O diretório
+</I>&gt;<i> raiz (gpt2) também tem esse arquivo, que faz o bootstrap do projeto
+</I>&gt;<i> inteiro.
+</I>&gt;<i>
+</I>&gt;<i> Para compilar tudo, basta fazer:
+</I>&gt;<i>
+</I>&gt;<i> $ cd gpt2; make -f Makefile.boot
+</I>&gt;<i> $ mkdir _build &amp;&amp; cd _build
+</I>&gt;<i> $ ../configure
+</I>&gt;<i> $ make
+</I>&gt;<i>
+</I>&gt;<i> Para fazer uma limpeza:
+</I>&gt;<i> $ make Makefile.boot distclean
+</I>&gt;<i>
+</I>&gt;<i> Para trabalhar em um subprojeto individualmente que dependa de
+</I>&gt;<i> &quot;common&quot;, é necessário construir a lib do subprojeto common antes de
+</I>&gt;<i> qualquer coisa.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Thiago Silva,
+</I>&gt;<i> mailto: tsilva at sourcecraft info
+</I>&gt;<i> jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+</I>&gt;<i> <A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071219/34bcacd6/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071219/34bcacd6/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000715.html">[gpt-usuarios] Build System
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000685.html">[gpt-usuarios] Uma nova mailing list e hospedagem de código
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#718">[ date ]</a>
+              <a href="thread.html#718">[ thread ]</a>
+              <a href="subject.html#718">[ subject ]</a>
+              <a href="author.html#718">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre as etapas do projeto
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20as%20etapas%20do%20projeto&In-Reply-To=%3C9a3912af0709191209j54dd3b66l4e1b8c5dbbf18d40%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000167.html">
+   <LINK REL="Next"  HREF="000172.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre as etapas do projeto</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20as%20etapas%20do%20projeto&In-Reply-To=%3C9a3912af0709191209j54dd3b66l4e1b8c5dbbf18d40%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre as etapas do projeto">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 19 21:09:23 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000167.html">[gpt-usuarios] Sobre as etapas do projeto
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000172.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; 1) Escopo desta versão:
+</I>&gt;<i> &gt; - Mesma BNF
+</I>&gt;<i> &gt; - Gerando AST com o CI
+</I>&gt;<i> &gt; - Se CI for binário, opção para gerar texto a partir do CI binário
+</I>&gt;<i>
+</I>&gt;<i> Ok. Geração de texto é gerar os opcodes com seus minemônicos textuais?
+</I>
+
+Isso mesmo. Internamente durante as etapas de compilação, alguns projetistas
+de compilador optam por guardar o CI em uma representação binária para que,
+em determinadas etapas do compilador como a otimização, não seja necessário
+um parser para o CI.
+
+A geração de um CI textual, no nosso caso, seria para fins didáticos e debug
+(se optarmos por gerar um CI binário).
+
+&gt;<i> 2) Escopo desta versão:
+</I>&gt;<i> &gt; - Conversão de CI em assembly
+</I>&gt;<i> &gt; - Assemblador que gera bytecode
+</I>&gt;<i> &gt; - Desassemblador de bytecode
+</I>&gt;<i>
+</I>&gt;<i> Ok. Existe um motivo especial para ter um desassemblador?
+</I>
+
+Eu fiz isso em outro projeto e ajudou em alguns pontos. Para testes
+automatizados, foi muito bom um desassemblador, porque eu rodava todo o
+compilador e comparava o bytecode desassemblado da versão antiga com a nova.
+Com o vimdiff ficava claro as diferenças (possíveis bugs). Ficou prático e
+funcional. Também serviu para gerar documentação sobre o formato do arquivo,
+bytecodes, como gerar, ...
+
+Mas claro que não é algo urgente, e pode sim ser postergado. Mas mesmo que a
+gente empurre essa tarefa, provavelmente eu farei uma versão do
+desassemblador (mesmo que bem simples) para me auxiliar durante o
+desenvolvimento. Eu sempre tento montar logo um ambiente para testes
+automatizados (bem simples). Um desassemblador, nesse caso, seria uma &quot;mão
+na roda&quot;...
+
+
+&gt;<i> A propósito, sobre a dúvida no wiki:
+</I>&gt;<i> - Seria interessante &quot;aproximar&quot; os tipos inteiro, caractere e lógico
+</I>&gt;<i> para inteiro ? O que ganhamos ou perdemos com isso ? Se a gente
+</I>&gt;<i> armazenar todas como int, mesmo assim teremos que ter a maioria das
+</I>&gt;<i> operações específicas para cada tipo de dado. Acho que só
+</I>&gt;<i> economizaríamos nas operações de set e get. Acho que não vale a
+</I>&gt;<i> pena....
+</I>&gt;<i>
+</I>&gt;<i> Acho bom aproximar, de qualquer forma.
+</I>
+
+Ok, podemos aproximar. A gente ganha porque não precisamos de operações
+de set e get para bool e char, mas precisamos de algumas outras operações de
+qualquer forma.
+
+Aliás, tá bagunçado esse wiki, eu sei, e logo que possível eu organizo
+hehehe.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/b2ae199f/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/b2ae199f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000167.html">[gpt-usuarios] Sobre as etapas do projeto
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000172.html">[gpt-usuarios] Novas modificações no repositório / teste no kubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe para conversão de dados
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_convers%3DE3o_de_dados%3F%3D&In-Reply-To=%3C92b9a8820710171607ia581838x2270c90b341d470b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000392.html">
+   <LINK REL="Next"  HREF="000411.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe para conversão de dados</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_convers%3DE3o_de_dados%3F%3D&In-Reply-To=%3C92b9a8820710171607ia581838x2270c90b341d470b%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe para conversão de dados">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 18 01:07:17 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000392.html">[gpt-usuarios] Sintaxe para conversão de dados
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000411.html">[gpt-usuarios] Sintaxe para conversão de dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#410">[ date ]</a>
+              <a href="thread.html#410">[ thread ]</a>
+              <a href="subject.html#410">[ subject ]</a>
+              <a href="author.html#410">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Eu só discarto o estilo C... =)
+Também proporia o estilo C++ [inteiro(x)], mas concordo que não seja
+tão claro, e meio que funcionaria como uma função interna.
+
+Eu gostei da versão  &quot;inteiro_para_literal( x )&quot;, pois acho que ela
+pode ser implementada a nível de biblioteca. Mas proponho que o nome
+seja encurtado. &quot;para_literal()&quot; pra mim tá ótimo.
+
+função para_literal(i : inteiro) : literal
+função para_literal(r : real) : literal
+função para_literal(b : lógico) : literal
+
+m : matriz[1] de inteiros;
+
+para_literal(m);
+//erro de compilação. Não foi encontrado
+//a função para_literal(matriz[10] de inteiros)
+
+
+On 10/17/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> Eu prefiro a funcao.
+</I>&gt;<i> É mais claro o q ela tá fazendo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 10/17/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Oi pessoal.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Em portugol, como será a sintaxe para conversão de dados ???
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Uma sugestão seria algo no estilo função como:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; variáveis
+</I>&gt;<i> &gt;     x: inteiro;
+</I>&gt;<i> &gt;     y: literal;
+</I>&gt;<i> &gt; fim-variáveis
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt;     ...
+</I>&gt;<i> &gt;     y := inteiro_para_literal( x );
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Outra abordagem seria, como em C/C++, indicar o tipo antes do dado:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; variáveis
+</I>&gt;<i> &gt;     x: inteiro;
+</I>&gt;<i> &gt;     y: literal;
+</I>&gt;<i> &gt; fim-variáveis
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt;     ...
+</I>&gt;<i> &gt;     y := (literal) x;
+</I>&gt;<i> &gt;     ou
+</I>&gt;<i> &gt;     y := literal( x );
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu prefiro a abordagem C++ (literal(x)) mas gosto é gosto hehehe.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sugestões ? Dicas ???
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; []'s
+</I>&gt;<i> &gt; Alex Sandro Garzão
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Gpt-usuarios mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Adorilson Bezerra
+</I>&gt;<i> Organização do III EPSL: &quot;Além das Redes de Colaboração&quot;
+</I>&gt;<i> 07 a 10 de novembro de 2007 - CEFET-RN (Unidade Sede)
+</I>&gt;<i> <A HREF="http://rn.softwarelivre.org">http://rn.softwarelivre.org</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000392.html">[gpt-usuarios] Sintaxe para conversão de dados
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000411.html">[gpt-usuarios] Sintaxe para conversão de dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#410">[ date ]</a>
+              <a href="thread.html#410">[ thread ]</a>
+              <a href="subject.html#410">[ subject ]</a>
+              <a href="author.html#410">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

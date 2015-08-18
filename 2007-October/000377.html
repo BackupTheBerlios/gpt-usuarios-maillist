@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170355p7e1ebc1auea12e64fad37f4dc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000375.html">
+   <LINK REL="Next"  HREF="000379.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170355p7e1ebc1auea12e64fad37f4dc%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Outubro 17 12:55:26 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000375.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000379.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; Não, não é necessário. Mas tbm me pergunto se é necessário ter um cadd
+</I>&gt;<i> &gt; (desculpe, ainda não entendi). Por que não um iadd, apenas? Seria um
+</I>&gt;<i> &gt; opcode que valeria para todos os estes tipos...
+</I>&gt;<i>
+</I>&gt;<i>  Não é que precise, mas, no meu entendimento (que obviamente pode estar bem
+</I>&gt;<i> desatualizado), caractere varia de 0 a 255. Ou seja, se c1 tem 0 e você
+</I>&gt;<i> decrementar ele em 1, ele passa a ter 255, e não o tamanho máximo de um
+</I>&gt;<i> inteiro. Um opcode iadd não tem condições de saber que o dado era caracter e
+</I>&gt;<i> que os limites dele estão entre 0 e 255.
+</I>
+Não podemos ter caracteres no range 0-255. Caracteres precisam de, no
+mínimo, 4 bytes. A letra &quot;á&quot;, em utf-8, ocupa 16 bits, vai muito além
+do valor 255. Por isso, acho que tratar todas essas coisas com iadd
+está bom.
+
+&gt;<i> &gt; &gt; &gt; == Literais ==
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; E são proibidos de participar em operações relacionais de grandeza:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; &quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; A VM está planejada com suporte a isso.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Ok, mas acho que o compilador não deve deixar isso passar.
+</I>&gt;<i>
+</I>&gt;<i> Você poderia aprofundar mais isso ? Para mim comparar duas strings para
+</I>&gt;<i> identificar qual é maior ou menor do que outra é um recurso bem útil. Qual o
+</I>&gt;<i> problema que você vê nisso ??
+</I>
+É, concordo...quando escrevi isso pensei em duas coisas:
+1) Essa operação, para strings, não é tão clara: estamos comparando o
+tamanho, ou comparando ordem alfabética? Eu imagino que estamos
+comparando o tamanho, mas o operador não é óbvio, na minha opinião.
+2) Meu lado &quot;não faça a linguagem fazer muita coisa que bibliotecas
+poderiam fazer também&quot; apitou.
+
+Mas ok...se a VM tem suporte pra isso, what the hell :)
+
+Quanto às matrizes, vou responder jájá..
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000375.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000379.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

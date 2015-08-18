@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] v2 acesso ao kernel (ressurreição)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C9a3912af0710180548h2f1abae9l4f30357722f5fec2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000313.html">
+   <LINK REL="Next"  HREF="000446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] v2 acesso ao kernel (ressurreição)</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C9a3912af0710180548h2f1abae9l4f30357722f5fec2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] v2 acesso ao kernel (ressurreição)">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 18 14:48:38 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000313.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000446.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#441">[ date ]</a>
+              <a href="thread.html#441">[ thread ]</a>
+              <a href="subject.html#441">[ subject ]</a>
+              <a href="author.html#441">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Voltando a pendência do acesso ao kernel, gostaria de solucionar isso.
+</I>&gt;<i>
+</I>&gt;<i> Utilizando a função leia(literal) como exemplo, vejo as seguintes
+</I>&gt;<i> opções para implementá-la:
+</I>&gt;<i>
+</I>&gt;<i> -Nota: para evitar maiores confusões, suponha, para este email, que
+</I>&gt;<i> início-asm seja inline assembly, e início-gasm seja inline
+</I>&gt;<i> gptassembly.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> #1 - inline assembly
+</I>&gt;<i>
+</I>&gt;<i> função leia(ref lit : literal)
+</I>&gt;<i> tam : inteiro
+</I>&gt;<i> início
+</I>&gt;<i> início-asm
+</I>&gt;<i>    mov eax, 3
+</I>&gt;<i>    mov ebx, 0
+</I>&gt;<i>    mov ecx, [lit]
+</I>&gt;<i>    mov edx, [tam]
+</I>&gt;<i>    int 80h
+</I>&gt;<i>
+</I>&gt;<i>    mov ebx, [lit]
+</I>&gt;<i>    mov [ebx+eax-1], byte 0
+</I>&gt;<i> fim-asm
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> Implicações que observo:
+</I>&gt;<i>
+</I>&gt;<i> a) a VM teria que ser um pouco esperta na emissão de código para lidar
+</I>&gt;<i> com as referências à variáveis como &quot;lit&quot;, especialmente considerando
+</I>&gt;<i> que um literal provavelmente não seja mapeável diretamente para um
+</I>&gt;<i> char*.
+</I>
+
+É verdade...
+
+b) Acho que o código e a VM ficam muito sensíveis. Tem que se conhecer
+&gt;<i> bem assembly, gptassembly e o casamento das duas para funcionar.
+</I>
+
+Isso eu acho ruim, principalmente em questão a portabilidade de código. Com
+uma VM o que se imagina é que o bytecode seja portável tendo a implementação
+da VM em outra arquitetura.
+
+c) Acho que colocar assembly direto pode impedir otimizações a nível
+&gt;<i> de opcode, quando blocos de código asm estiverem envolvidos...
+</I>
+
+Isso é verdade também...
+
+Enfim, não estou muito certo dessa abordagem, embora seja a minha
+&gt;<i> preferida no diz respeito a mostrar para o usuário a implementação de
+</I>&gt;<i> uma função &quot;até o talo&quot;.
+</I>
+
+Entendo o ponto de vista do mostrar &quot;até o talo&quot;, mas não poderíamos fazer
+isso em GptAssembly ???
+
+#2 - Sugestão anterior do Alex
+&gt;<i>
+</I>&gt;<i> Num email anterior, vc tinha escrito isso:
+</I>&gt;<i>
+</I>&gt;<i> push &quot;cria&quot; // função
+</I>&gt;<i> push &quot;thread&quot; // &quot;classe&quot;
+</I>&gt;<i> libcall
+</I>&gt;<i>
+</I>&gt;<i> Poderia elaborar mais?
+</I>
+
+Acho que a gente já chegou a conversar um pouco sobre isso em outra thread.
+
+Mas a idéia é que libcall faça chamada a funções de bibliotecas do S.O. Com
+esse suporte a gente conseguiria implementar teoricamente qualquer coisa em
+g-portugol e, consequentemente, em GptAssembly.
+
+Se implementamos em GptAssembly, além da portabilidade, podemos mostrar para
+o usuário como a coisa for implementada &quot;por baixo dos panos&quot;...
+
+#3 - Biblioteca de runtime
+&gt;<i>
+</I>&gt;<i> Acho que é minha interpretação/entendimento da opção #2.
+</I>&gt;<i>
+</I>&gt;<i> Suponha a existência de uma biblioteca, libgptruntime.so, escrita em
+</I>&gt;<i> C, com as seguintes funções:
+</I>&gt;<i>
+</I>&gt;<i> readline
+</I>&gt;<i> getuid
+</I>&gt;<i> mkdir
+</I>&gt;<i> connect
+</I>&gt;<i> ...etc
+</I>&gt;<i>
+</I>&gt;<i> (se em inglês, ou português, e que nomes serão, decidiriamos depois)
+</I>&gt;<i>
+</I>&gt;<i> A implementação (em C) de readline, por exemplo, poderia ser assim:
+</I>&gt;<i>
+</I>&gt;<i> gpt_literal readline(gpt_inteiro fd) {
+</I>&gt;<i> //.....
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Então, poderiamos escrever leia(literal), em g-portugol, da seguinte
+</I>&gt;<i> forma:
+</I>&gt;<i>
+</I>&gt;<i> função leia( ref lit : literal)
+</I>&gt;<i> início
+</I>&gt;<i> início-gasm
+</I>&gt;<i>     push_int STDIN //constante declarada em algum lugar...
+</I>&gt;<i>     libcall libgptruntime.so, readline
+</I>&gt;<i>     pop lit
+</I>&gt;<i> fim-gasm
+</I>&gt;<i> fim
+</I>
+
+Isso mesmo. Seria algo similiar (pra não dizer igual) a isso que você
+escreveu.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071018/de844005/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071018/de844005/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000313.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000446.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#441">[ date ]</a>
+              <a href="thread.html#441">[ thread ]</a>
+              <a href="subject.html#441">[ subject ]</a>
+              <a href="author.html#441">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

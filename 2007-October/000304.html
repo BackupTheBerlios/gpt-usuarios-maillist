@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710121823n72cc10e0t588e87dc3b38c2fb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000305.html">
+   <LINK REL="Next"  HREF="000308.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710121823n72cc10e0t588e87dc3b38c2fb%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Outubro 13 03:23:15 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000305.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000308.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Usando essa idéia de sempre mapear para o maior tipo disponível, como
+</I>&gt;<i> seria
+</I>&gt;<i> &gt; o nosso mapeamento atual baseado nos nossos tipos primitivos atuais ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Atualmente, caractere e lógico são &quot;promovidos&quot; para inteiro. Mas, de
+</I>&gt;<i> &gt; qualquer forma, existem alguns opcodes específicos para caractere como
+</I>&gt;<i> add.
+</I>&gt;<i> &gt; Isso para termos os limites &quot;reais&quot; de um char, mesmo que mapeado para
+</I>&gt;<i> um
+</I>&gt;<i> &gt; int.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Teremos que ver com mais detalhes isso. Por exemplo, devemos mapear
+</I>&gt;<i> &quot;real&quot; para &quot;long double&quot;?
+</I>
+
+Teoricamente, usando essa idéia, sim.
+
+Acho que não entendi muito bem seu email. Porque temos um &quot;add&quot;
+&gt;<i> especifico para caractere?
+</I>
+
+Você não entendeu porque eu não fui claro rsrsrs.
+
+Vamos a um exemplo melhor. Vou assumir que o nosso int tem 16 bits no
+exemplo, o que não será verdade na VM.
+
+Caractere, no meu entendimento, pode variar de 0 a 255. Int varia de 0 a
+65536 (16 bits).
+
+Ambos são armazenados como um int.
+
+Agora, se tivermos o seguinte código em portugol:
+
+algoritmo exemplo;
+variáveis
+    c: caractere;
+    i: inteiro;
+fim-variáveis
+início
+    c := 255;
+    i := 255;
+    c := c + 1; // c deve ser 0 agora
+    i := i + 1; // i deve ser 256 agora
+fim
+
+Com isso eu quero dizer que, apesar de ambos serem armazenados como um
+inteiro, algumas operações tem que ser específicas conforme o tipo de dado.
+
+O código acima geraria o seguinte código em GptAssembly:
+
+program exemplo;
+
+var c char // internamente será um int no bytecode e durante a execução da
+VM
+var i int
+
+proc main
+    iset c, 255 // iset tanto para caractere como inteiro
+    iset i, 255
+    csum c, c, 1 // csum converte para char antes de somar
+    isum i, i, 1 // isum soma diretamente como um inteiro
+end-proc
+
+end-program
+
+Ficou mais claro ????
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071012/0a6219a2/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071012/0a6219a2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000305.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000308.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

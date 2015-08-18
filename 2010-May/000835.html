@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGPT_1%3D2E0%3D2E4_-_sinal_de_n%3DFAmeros_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Freais_decimais_maiores_que_zero_e_menores_que_um%3F%3D&In-Reply-To=%3CAANLkTinTVwciduHi1YVrlUd22QeWhlJAb75IB3ZdNpNN%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000834.html">
+   <LINK REL="Next"  HREF="000836.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGPT_1%3D2E0%3D2E4_-_sinal_de_n%3DFAmeros_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Freais_decimais_maiores_que_zero_e_menores_que_um%3F%3D&In-Reply-To=%3CAANLkTinTVwciduHi1YVrlUd22QeWhlJAb75IB3ZdNpNN%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Maio 24 17:54:16 CEST 2010</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000834.html">[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000836.html">[gpt-usuarios] Lançado a versão 1.1
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Rafael e demais,
+
+2010/4/30  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">rafael em ect.ufrn.br</A>&gt;:
+&gt;<i> Como teste, escrevi o código abaixo:
+</I>&gt;<i>
+</I>&gt;<i> algoritmo media;
+</I>&gt;<i>
+</I>&gt;<i> variáveis
+</I>&gt;<i>
+</I>&gt;<i> num1, num2, soma, media: real;
+</I>&gt;<i>
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i>        imprima(&quot;Digite o primeiro numero: &quot;);
+</I>&gt;<i>        num1 := leia();
+</I>&gt;<i>        imprima(&quot;Digite o segundo numero: &quot;);
+</I>&gt;<i>        num2 := leia();
+</I>&gt;<i>        soma := (num1 + num2);
+</I>&gt;<i>        imprima(&quot;a soma e &quot;, soma);
+</I>&gt;<i>        media := soma/2;
+</I>&gt;<i>        imprima(&quot;a media e &quot;, media);
+</I>&gt;<i>
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> O código acima foi compilado normalmente.
+</I>&gt;<i>
+</I>&gt;<i> Quando entro com os valores, por exemplo, 6.6 para num1, e 5.3 para num2,
+</I>&gt;<i> enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 11.90
+</I>&gt;<i> a media e: 5.95
+</I>&gt;<i>
+</I>&gt;<i> Até aí tudo bem. Mas quando entro com os valores, por exemplo: 0.7 para
+</I>&gt;<i> num1 e 2 para num2, enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 1.30
+</I>&gt;<i> a media e: 0.65
+</I>&gt;<i>
+</I>&gt;<i> (Ao invés de uma soma, ocorreu uma subtração...)
+</I>&gt;<i>
+</I>&gt;<i> Quando entro com os valores, por exemplo, 0.6 para num1, e 0.3 para num2,
+</I>&gt;<i> enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 0.90
+</I>&gt;<i> a media e: 0.45
+</I>&gt;<i>
+</I>&gt;<i> No caso acima, o resultado da soma foi menor que 1 (um), e a saída está
+</I>&gt;<i> correta;
+</I>&gt;<i>
+</I>&gt;<i> Porém, quando entro com os valores, por exemplo, 0.6 para num1, e 0.8 para
+</I>&gt;<i> num2, enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: -1.40
+</I>&gt;<i> a media e: 0.70
+</I>&gt;<i>
+</I>&gt;<i> Neste caso, o resultado da soma foi maior que 1 (um), e a saída está
+</I>&gt;<i> correta, porém com valor negativo.
+</I>&gt;<i>
+</I>&gt;<i> Diante do exposto, resolvi lhe encaminhar esta mensagem, pois acredito ter
+</I>&gt;<i> realizado a instalação do GPT 1.0.4 corretamente.
+</I>&gt;<i>
+</I>
+
+Acabei de fazer umas modificações no código, e acho que resolvi o bug.
+A solução ainda está no repositório, mas espero lançar a nova versão
+em breve.
+
+[]'s e obrigado,
+
+Thiago
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000834.html">[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000836.html">[gpt-usuarios] Lançado a versão 1.1
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

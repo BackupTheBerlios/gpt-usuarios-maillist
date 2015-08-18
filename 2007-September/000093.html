@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe do comando caso (case)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sintaxe%20do%20comando%20caso%20%28case%29&In-Reply-To=%3C9a3912af0709101126x4db3abl3b6b8340e53f9819%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000092.html">
+   <LINK REL="Next"  HREF="000095.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe do comando caso (case)</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sintaxe%20do%20comando%20caso%20%28case%29&In-Reply-To=%3C9a3912af0709101126x4db3abl3b6b8340e53f9819%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe do comando caso (case)">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Setembro 10 20:26:18 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000092.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000095.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#93">[ date ]</a>
+              <a href="thread.html#93">[ thread ]</a>
+              <a href="subject.html#93">[ subject ]</a>
+              <a href="author.html#93">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Como seria a sintaxe do caso ?
+
+Eu vi duas variantes até hoje (que eu lembro no momento). Na primeira forma
+o conteúdo da variável é avaliada no início do comando caso, e cada teste
+verifica se o conteúdo da variável é igual ao teste. Algo como:
+
+caso variavel faça
+     1: bloco_comandos...
+    2: bloco_comandos...
+    3: bloco_comandos...
+    default: bloco_comandos...
+fim-caso
+
+A outra forma não teria uma &quot;variável base&quot;, e cada teste contém uma
+expressão que será avaliada. Algo similar a:
+caso faça
+    se x &gt;= 20 e x &lt;= 30:
+        bloco_comandos...
+    se x &gt; 40 e y &lt; 30:
+        bloco_comandos...
+    senão
+        bloco_comandos...
+fim-caso
+
+Em alguns casos &quot;bloco_comandos&quot; tinha que estar entre { e }, em outros
+casos o bloco de comandos tinha que terminar com alguma instrução específica
+(break ou similar).
+
+Comentários ????
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/10d91804/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/10d91804/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000092.html">[gpt-usuarios] Sugestão sobre como organizar os exemplos de tradução
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000095.html">[gpt-usuarios] Sintaxe do comando caso (case)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#93">[ date ]</a>
+              <a href="thread.html#93">[ thread ]</a>
+              <a href="subject.html#93">[ subject ]</a>
+              <a href="author.html#93">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

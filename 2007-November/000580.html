@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] problemas com a estrutura repita/enquanto
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20problemas%20com%20a%20estrutura%20repita/enquanto&In-Reply-To=%3C9a3912af0711080356j96200aas3b964337807d3a0d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000577.html">
+   <LINK REL="Next"  HREF="000583.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] problemas com a estrutura repita/enquanto</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20problemas%20com%20a%20estrutura%20repita/enquanto&In-Reply-To=%3C9a3912af0711080356j96200aas3b964337807d3a0d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] problemas com a estrutura repita/enquanto">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Novembro  8 12:56:38 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000577.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000583.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#580">[ date ]</a>
+              <a href="thread.html#580">[ thread ]</a>
+              <a href="subject.html#580">[ subject ]</a>
+              <a href="author.html#580">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> A estrutura repita/enquanto tem uma armadilha que está me aborrecendo.
+</I>&gt;<i>
+</I>&gt;<i> O seguinte código gera um erro de sintaxe (underline == identação):
+</I>&gt;<i>
+</I>&gt;<i> repita
+</I>&gt;<i> __//enunciados...
+</I>&gt;<i> enquanto x &lt; 10
+</I>&gt;<i>
+</I>&gt;<i> Levando em consideração que temos uma esturutra &quot;enquanto&quot; na
+</I>&gt;<i> gramática, este código é analisado da seguinte forma:
+</I>&gt;<i>
+</I>&gt;<i> repita
+</I>&gt;<i> __//enunciados
+</I>&gt;<i> __enquanto x &lt; 10
+</I>&gt;<i>
+</I>&gt;<i> Portanto, o parser acusa falta do &quot;faça&quot; logo após o &quot;10&quot;. Ele não vê
+</I>&gt;<i> o &quot;enquanto&quot; como término da estrutura &quot;repita&quot;, mas como o início de
+</I>&gt;<i> outra estrutura de repetição.
+</I>
+
+Rsrsrs. Se você olhar a gramática que eu estava fazendo, vai ver que não
+tinha o repita..enquanto pelo mesmo motivo hehehe.
+
+Para resolver isso, imagino que temos que informar o parser para fazer
+&gt;<i> um &quot;teste&quot;, verificando se existe um &quot;faça&quot; após a expressão da
+</I>&gt;<i> condição, e devemos verificar se o contexto do código atual se
+</I>&gt;<i> encontra dentro de um laço &quot;repita&quot;. Mas isso não é tão trivial de se
+</I>&gt;<i> fazer (acho até que requer uma pilha, para casos de loops dentro de
+</I>&gt;<i> loops) e polui desagradavelmente o código do parser, que já é difícil
+</I>&gt;<i> de deixar limpo. Pior, eu não sei o quão complexo ficará para
+</I>&gt;<i> reportagem de erros (tanto o código quanto mensagens) para os N casos
+</I>&gt;<i> de erros envolvendo estas duas estruturas.
+</I>
+
+Eu lembro que, em alguns pontos do parser, dá para resolver a ambiguidade
+com algo como ( XXX YYY ) =&gt; REGRA...
+
+Seria algo como:
+
+(T_KW_ENQUANTO expr &quot;;&quot;) =&gt; fim_repita_enquanto
+(T_KW_ENQUANTO expr T_KW_FACA) =&gt; inicio_enquanto
+
+Eu só não sei onde seria colocado isso na gramática.... se der tempo vou
+tentar olhar isso na gramática antiga que eu tinha...
+
+Estou pensando em descartar esta estrutura, deixando apenas a repita/até.
+&gt;<i> Objeções?
+</I>
+
+A minha opinião é a seguinte. Se a gente não conseguir resolver facilmente,
+a gente descarta....
+
+Mas seria bom ter por motivos didáticos... mas não vamos se matar por causa
+disso ;-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071108/6e8052f1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071108/6e8052f1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000577.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000583.html">[gpt-usuarios] problemas com a estrutura repita/enquanto
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#580">[ date ]</a>
+              <a href="thread.html#580">[ thread ]</a>
+              <a href="subject.html#580">[ subject ]</a>
+              <a href="author.html#580">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

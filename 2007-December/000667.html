@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Libs dinâmicas em C++
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150518i4262a92fs21507f685458c157%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000666.html">
+   <LINK REL="Next"  HREF="000668.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Libs dinâmicas em C++</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150518i4262a92fs21507f685458c157%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Libs dinâmicas em C++">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 14:18:20 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000666.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000668.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#667">[ date ]</a>
+              <a href="thread.html#667">[ thread ]</a>
+              <a href="subject.html#667">[ subject ]</a>
+              <a href="author.html#667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Outra opção...
+
+<A HREF="http://www.linuxjournal.com/article/3687">http://www.linuxjournal.com/article/3687</A>
+
+Pelo que eu entendi o que ele faz é, no .so, ter um extern para um map onde
+ele registra os métodos. Esse map estaria no programa que carregou o .so.
+Com isso a gente teria que ter apenas uma função que registrasse todos os
+métodos de uma classe dentro do .so.
+
+Pareceu um pouco mais sociável...
+
+On 12/15/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Oi Thiago,
+</I>&gt;<i>
+</I>&gt;<i> Eu utilizei praticamente todo aquele código que você tinha para uso de
+</I>&gt;<i> syslibs. Adaptei alguma coisa na VM apenas.
+</I>&gt;<i>
+</I>&gt;<i> Para facilitar a nossa vida, a gente teria que desenvolver as libs
+</I>&gt;<i> dinâmicas (.so) em C++ porque aproveitamos todas as nossas classes. Mas aí
+</I>&gt;<i> já são outros 500...
+</I>&gt;<i>
+</I>&gt;<i> Um problema é que a gente não consegue invocar um construtor ou destrutor
+</I>&gt;<i> que esteja definido dentro de um .so. Para isso se resolve criando duas
+</I>&gt;<i> funções C com extern &quot;C&quot; que internamente elas invocam o construtor e o
+</I>&gt;<i> destrutor.
+</I>&gt;<i>
+</I>&gt;<i> Os métodos da classe dentro do .so, após isso, podem ser invocados
+</I>&gt;<i> normalmente.
+</I>&gt;<i>
+</I>&gt;<i> Bom, até onde eu sei, criar .so em C++ é isso. Se você souber uma forma
+</I>&gt;<i> melhor eu estou muito interessado em saber como :-)
+</I>&gt;<i>
+</I>&gt;<i> Essa abordagem é correta quando a gente carrega .so e sabe previamente
+</I>&gt;<i> quais os métodos que serão invocados. Porém, para nós, isso não elimina
+</I>&gt;<i> todos os problemas porque nós não sabemos previamente quais os métodos que
+</I>&gt;<i> serão invocados. O dlsym não consegue encontrar os métodos C++ (por isso das
+</I>&gt;<i> funções C para o construtor e destrutor). Uma forma seria, para cada método,
+</I>&gt;<i> criar uma função C equivalente.
+</I>&gt;<i>
+</I>&gt;<i> Apesar de uma ferramenta nossa ser responsável por gerar esse código, eu
+</I>&gt;<i> achei essa abordagem danadinha hehehe.
+</I>&gt;<i>
+</I>&gt;<i> Você conhece alguma forma descente de fazer isso ??? Tem como o dlsym
+</I>&gt;<i> encontrar os métodos de uma classe ?
+</I>&gt;<i>
+</I>&gt;<i> O rascunho de código para criar o .so que eu tenho até o momento é este:
+</I>&gt;<i>
+</I>&gt;<i> include &lt;stdio.h&gt;
+</I>&gt;<i>
+</I>&gt;<i> #include &quot;CBaseSyslib.hpp&quot;
+</I>&gt;<i>
+</I>&gt;<i> class teste : CBaseSyslib
+</I>&gt;<i> {
+</I>&gt;<i>    void imprime_hello(int i, int j)
+</I>&gt;<i>    {
+</I>&gt;<i>       puts (&quot;Hello !!!&quot;);
+</I>&gt;<i>    }
+</I>&gt;<i> };
+</I>&gt;<i>
+</I>&gt;<i> extern &quot;C&quot; {
+</I>&gt;<i>    CBaseSyslib* create_teste()
+</I>&gt;<i>    {
+</I>&gt;<i>       return new teste();
+</I>&gt;<i>    }
+</I>&gt;<i>    void destroy_teste(CBaseSyslib* obj)
+</I>&gt;<i>    {
+</I>&gt;<i>       delete obj;
+</I>&gt;<i>    }
+</I>&gt;<i>    void imprime_hello(CBaseSyslib* obj, int i, int j)
+</I>&gt;<i>    {
+</I>&gt;<i>       obj-&gt;imprime_hello(i, j);
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> []'s
+</I>&gt;<i> Alex Sandro Garzão
+</I>
+
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/ac1ce246/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/ac1ce246/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000666.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000668.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#667">[ date ]</a>
+              <a href="thread.html#667">[ thread ]</a>
+              <a href="subject.html#667">[ subject ]</a>
+              <a href="author.html#667">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

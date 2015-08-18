@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_V2_%3D28constantes_e_pass%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fagem_por_refer%3DEAncia%3D29%3F%3D&In-Reply-To=%3C92b9a8820710111242y353c2d6ana9212ebc70c23e0f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000320.html">
+   <LINK REL="Next"  HREF="000302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática V2 (constantes e passagem por referência)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_V2_%3D28constantes_e_pass%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fagem_por_refer%3DEAncia%3D29%3F%3D&In-Reply-To=%3C92b9a8820710111242y353c2d6ana9212ebc70c23e0f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática V2 (constantes e passagem por referência)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 11 21:42:25 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000320.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000302.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#296">[ date ]</a>
+              <a href="thread.html#296">[ thread ]</a>
+              <a href="subject.html#296">[ subject ]</a>
+              <a href="author.html#296">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; //Constantes também podem ser usadas para parâmetros-referência
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; função f( ref constante t: inteiro) ...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso seria equivalente ao &amp; na declaração de parâmetros em C++ ?
+</I>
+Isso.
+
+&gt;<i> Qual seria o objetivo de passar uma referência constante ? Evitar cópia de
+</I>&gt;<i> dados na passagem de parâmetros ?
+</I>
+Uma referência constante evitaria a cópia (por ser referência) e
+evitaria a modificação do valor dela.
+
+//Exemplo #1 - referência constante
+
+função f(ref constante i : inteiro)
+início
+ i := 2; //erro!
+fim
+
+função g(ref constante v : vetor[] de inteiros)
+início
+ v[0] := 2; //erro!
+fim
+
+função h( ref constante t : T)
+início
+  t.membro := 2; //erro!
+fim
+
+
+//Exemplo #2 - referência normal
+
+função f(ref t : inteiro)
+início
+ t := 2; //ok
+fim
+
+início
+ j := 1;
+ imprima(j); //1
+ f(j);
+ imprima(j)://2
+fim
+
+O mesmo para vetores e estruturas....
+
+-------
+
+A propósito, pensei agora em adotar a lista de inicialização para o
+bloco de variáveis, também:
+
+variáveis
+  t1 : inteiro = 2;
+  z : vetor[3] de inteiros = [1,2,3];
+fim-variáveis
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000320.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000302.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#296">[ date ]</a>
+              <a href="thread.html#296">[ thread ]</a>
+              <a href="subject.html#296">[ subject ]</a>
+              <a href="author.html#296">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

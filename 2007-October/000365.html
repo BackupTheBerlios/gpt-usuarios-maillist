@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fwindows-1252%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C76152eba0710161112w9830abhe150e23ea641255b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000358.html">
+   <LINK REL="Next"  HREF="000369.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fwindows-1252%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C76152eba0710161112w9830abhe150e23ea641255b%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">adorilson em gmail.com
+       </A><BR>
+    <I>Terça Outubro 16 20:12:57 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000358.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000369.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#365">[ date ]</a>
+              <a href="thread.html#365">[ thread ]</a>
+              <a href="subject.html#365">[ subject ]</a>
+              <a href="author.html#365">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On 10/15/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; 1) Matrizes e vetores.
+</I>&gt;<i> &gt; Nao concordo com tanto faz usar um ou outro. Chamar tudo de matriz não
+</I>&gt;<i> vejo
+</I>&gt;<i> &gt; problema, mas chamar tudo de vetor eh estranho. Deve continuar como está
+</I>&gt;<i> no
+</I>&gt;<i> &gt; v1.0. Ou, quem sabe, fazer uma distinção clara entre vetor e matriz.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; variaveis
+</I>&gt;<i> &gt;   v: vetor[10] de inteiro; // ok
+</I>&gt;<i> &gt;   m: matriz[4][4] de inteiro;  // ok
+</I>&gt;<i> &gt;   v1: vetor[2][3] de inteiro;  // erro de compilacao
+</I>&gt;<i> &gt;   m1: matriz[2] de inteiro; //erro de compilacao
+</I>&gt;<i> &gt; fim-variáveis
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; O que acham?
+</I>&gt;<i>
+</I>&gt;<i> Eu, particularmente, estava procurando algo mais simples. Pensei em
+</I>&gt;<i> outra abordagem enquanto esperava a lista de discussão normalizar (só
+</I>&gt;<i> para adicionar à discussão):
+</I>&gt;<i>
+</I>&gt;<i> variaveis
+</I>&gt;<i>   v: coleção[10] de inteiro;
+</I>&gt;<i>   m: coleção[4][4] de inteiro;
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i>
+</I>&gt;<i> Mas se matriz está bom pra tudo isso, pra mim tá ótimo.
+</I>
+
+Inclusive o  MANZANO introduz a parte de vetores/matriz se referindo a
+coleção, tb pensei em sugerir isso, mas ficaria muito fora da literatura.
+Assim, prefiro q seja matriz mesmo. Ou matriz e vetor, e acho q deviamos dar
+uma flexibilidade para o caso
+
+m1: matriz[2] de inteiro;
+
+Permitindo essa instrucao.
+
+
+&gt;<i> 3) Repita.
+</I>&gt;<i> &gt; Alienigina ficaram essas propostas do Alex :p
+</I>&gt;<i>
+</I>&gt;<i> Hahaha!
+</I>&gt;<i>
+</I>&gt;<i> &gt; Como ele mesmo disse, isso pode confundir e a ideia do repita é ter o
+</I>&gt;<i> &gt; controle ao final do bloco.
+</I>&gt;<i> &gt; Não vejo  problema alguma, e nem pq discutir, a ausencia de um
+</I>&gt;<i> &quot;fim-repita&quot;.
+</I>&gt;<i> &gt; O &quot;até&quot; ou &quot;enquanto&quot; no fim do bloco faz este papel.
+</I>&gt;<i>
+</I>&gt;<i> Ok.
+</I>&gt;<i>
+</I>&gt;<i> &gt; A discussao que caberia era se o laço deveria ser interrompido qd
+</I>&gt;<i> &lt;condicao&gt;
+</I>&gt;<i> &gt; fosse verdadeira &quot;Repita..até&lt;condicao&gt;&quot; , como em Pascal, ou falsa,
+</I>&gt;<i> como em
+</I>&gt;<i> &gt; Java e C, &quot;Repita...enquanto&lt;condicao&gt;&quot;
+</I>&gt;<i>
+</I>&gt;<i> Depende se utilizamos &quot;enquanto&quot; ou &quot;até&quot;...
+</I>&gt;<i>
+</I>&gt;<i> &gt; Fico com a primeira opção pois tratamos ela assim no início das
+</I>&gt;<i> discussoes e
+</I>&gt;<i> &gt; a literatura (MANZANO) tb trata assim.
+</I>&gt;<i>
+</I>&gt;<i> Ok...então é até! =)
+</I>&gt;<i> Mas é &quot;até que &lt;expr&gt; &quot; ou é só &quot;até &lt;expr&gt;&quot;?
+</I>&gt;<i>
+</I>&gt;<i> repita
+</I>&gt;<i>   ..
+</I>&gt;<i> até que x = 10
+</I>
+
+Só &quot;até &lt;expr&gt;&quot;.
+
+E deve haver &quot;;&quot; após o &quot;10&quot;? (eu imagino que não, mas quero confirmar)
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Apesar de ter vista agora na
+</I>&gt;<i> &gt; gramatica que foi definida com o &quot;enquanto&quot; :/
+</I>&gt;<i>
+</I>&gt;<i> Na dúvida, eu coloquei qualquer coisa :P
+</I>&gt;<i>
+</I>&gt;<i> &gt; Ou poderiamos até implementar as duas opções. Seria um recurso didático
+</I>&gt;<i> bem
+</I>&gt;<i> &gt; legal. :D O que acham?
+</I>&gt;<i>
+</I>&gt;<i> Bacana! gostei!
+</I>
+
+Que tenhamos os dois!
+
+&gt;<i> Uma coisa  q me veia na cabeça agora, é a possibilidade de
+</I>&gt;<i> &gt; reproduzirmos os conjuntos numericos. Numeros naturais, inteiros,
+</I>&gt;<i> reais...
+</I>&gt;<i> &gt; Viagem demais?
+</I>&gt;<i>
+</I>&gt;<i> O que quer dizer?
+</I>
+
+Teriamos os tipos:
+
+*1*- Naturais (IN)
+
+         N = {0,1,2,3,4,5...}
+
+*2*- Inteiros (Z)
+
+         Z = {...-3,-2,-1,0,1,2,3...}
+
+   2.1 inteiros positivos
+
+        Z*+ = {1,2,3,4...} (inteiros positivos)
+
+   2.2 inteiros negativos
+
+         Z*- = {-1,-2,-3,-4...} (inteiros negativos)
+
+*3*-Racionais (Q)
+
+         Q = {x tal que x = *a*/*b* (*a* sobre *b*) onde *a*Î (pertence) Z a
+*b* E Z* (Z menos o zero)}.
+
+*4*-Irracionais (I) &#8211; &#201; todo n&#250;mero decimal n&#227;o-exato e n&#227;o peri&#243;dico, bem
+como toda raiz não-exata.
+*5*-Reais (IR)
+
+
+Entendeu?
+
+&gt;<i> 5) Caso...Escolha
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Tenho uma certa tendencia a sugerir  a troca dos &quot;:&quot; por &quot;faça&quot;, mas
+</I>&gt;<i> seria
+</I>&gt;<i> &gt; escrever demais. Tá ótimo desse jeito.
+</I>&gt;<i>
+</I>&gt;<i> Ok, mas poderiamos colocar o faça, também. Acho que ficaria legal...
+</I>&gt;<i>
+</I>&gt;<i> caso x seja
+</I>&gt;<i>   2 faça
+</I>&gt;<i>     imprima(x)
+</I>&gt;<i>   fim-opção
+</I>&gt;<i> fim-caso
+</I>
+
+Rpz, sabe q vendo assim até q nao eh tão ruim. E ainda  resolveria uma coisa
+q nao me agrada: fechar bloco q
+
+&gt;<i> Outro questao é: quais os tipos permitivos para &lt;variavel&gt; ?
+</I>&gt;<i>
+</I>&gt;<i> A princípio, qualquer expressão cujo valor possa ser comparado (mais
+</I>&gt;<i> sobre isso no meu próximo email).
+</I>&gt;<i>
+</I>&gt;<i> caso x+k seja
+</I>&gt;<i>   y:
+</I>&gt;<i>     &lt;comandos&gt;
+</I>&gt;<i>   fim-opção
+</I>&gt;<i>   z:
+</I>&gt;<i>     &lt;comandos&gt;
+</I>&gt;<i>   fim-opção
+</I>&gt;<i> fim-caso
+</I>&gt;<i>
+</I>&gt;<i> Então, a única exigência é que todas as expressões envolvidas
+</I>&gt;<i> (x+k,y,z) avaliem para tipos compatíveis.
+</I>&gt;<i>
+</I>&gt;<i> &gt; 6) Literais.
+</I>&gt;<i> &gt; Para concatenacação, concordo com o Alex, sobre usar o bom e velho &quot;+&quot;.
+</I>&gt;<i> &gt; Acho q devemos permitir o acesso aos caracteres de um literal, sim. E
+</I>&gt;<i> nas
+</I>&gt;<i> &gt; duas versões. Alias, sempre q possível, e viavel, o q for feito em uma,
+</I>&gt;<i> &gt; fazer na outra tb.
+</I>&gt;<i>
+</I>&gt;<i> Ok.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Acho q eh só. Desculpem-me o atraso.
+</I>&gt;<i>
+</I>&gt;<i> Iihh, sem pressa :P
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Thiago Silva,
+</I>&gt;<i> mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+</I>&gt;<i> jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+</I>&gt;<i> <A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Adorilson Bezerra
+Organização do III EPSL: &quot;Além das Redes de Colaboração&quot;
+07 a 10 de novembro de 2007 - CEFET-RN (Unidade Sede)
+<A HREF="http://rn.softwarelivre.org">http://rn.softwarelivre.org</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/de365cc3/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/de365cc3/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000358.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000369.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#365">[ date ]</a>
+              <a href="thread.html#365">[ thread ]</a>
+              <a href="subject.html#365">[ subject ]</a>
+              <a href="author.html#365">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170450s1dfd6b02w7fc92674c21189d7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000382.html">
+   <LINK REL="Next"  HREF="000383.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C92b9a8820710170450s1dfd6b02w7fc92674c21189d7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Outubro 17 13:50:36 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000382.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000383.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Estou respondendo vcs dois abaixo...
+
+
+On 10/16/07, Adorilson Bezerra de Araujo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>&gt; wrote:
+&gt;<i> Sim, para a declaracao sim.
+</I>&gt;<i> Mas como ficará a instanciação?
+</I>&gt;<i> Qd e como serão definidos as dimensões?
+</I>&gt;<i> Teríamos um operador novo(a)?
+</I>&gt;<i>
+</I>&gt;<i> m3 := novo(a) inteiro(s)[3][5];
+</I>&gt;<i>
+</I>&gt;<i> ou, sendo bem verboso:
+</I>&gt;<i>
+</I>&gt;<i> m3 := nova matriz[3][5] de inteiros;
+</I>
+É, precisariamos de algo nesse sentido. Mas eu preferiria uma função
+do que um novo operador.
+
+
+On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; &gt; &gt; == Matrizes ==
+</I>&gt;<i> &gt; Esse assunto todo me fez parar para pensar melhor sobre tipos e
+</I>&gt;<i> &gt; matrizes. Cheguei a seguinte proposta:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Para as declarações:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; a : matriz[2] de inteiros;
+</I>&gt;<i> &gt; b : matriz[2][2] de inteiros;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Entendemos os tipos de &quot;a&quot; e &quot;b&quot; como:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; a -&gt; *(inteiro)
+</I>&gt;<i> &gt; b -&gt; *(*(inteiro))
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Onde * denota uma coleção, e *(T) denota uma coleção de valores do
+</I>&gt;<i> &gt; tipo T. Note que, aqui, o tamanho das dimensões não faz parte do tipo.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Então, poderiamos declarar mais umas variáveis:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; c : matriz[5] de inteiros;
+</I>&gt;<i> &gt; d : matriz[] de inteiros;
+</I>&gt;<i>
+</I>&gt;<i> Matriz sem tamanho definido, a essas alturas do campeonato, complica um
+</I>&gt;<i> pouco as coisas pelos motivos que conversamos em outro e-mail...
+</I>
+Ok. Então fica como plano para depois, pq acho que isso permitira a
+flexibilidade que estamos procurando...
+
+&gt;<i> &gt; E seus tipos seriam:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; c -&gt; *(inteiro)
+</I>&gt;<i> &gt; d -&gt; *(inteiro)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sabendo que uma atribuição só pode ser feita para tipos compatíveis,
+</I>&gt;<i> &gt; as seguintes atribuições são válidas:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; a := c;
+</I>&gt;<i> &gt;   -&gt; *(inteiro) := *(inteiro) // ok
+</I>&gt;<i>
+</I>&gt;<i> a tem 2 elementos e c tem 5. O que aconteceria nesse caso ???
+</I>
+O mesmo que aconteceria se 'a' e 'c' fossem literais, e 'a' tivesse 2
+caracteres e 'c' tivesse 5 caracteres.
+
+&gt;<i> &gt; d := b[1]
+</I>&gt;<i> &gt;   -&gt; *(inteiro) := *(inteiro) //ok
+</I>&gt;<i>
+</I>&gt;<i> d não tinha um tamanho inicial, e nesse caso vai ter que ser alocado durante
+</I>&gt;<i> a  execução...
+</I>
+Uma cópia de 'b[1]' será referenciada por 'd'. Da mesma forma que uma
+atribuição de literais.
+
+&gt;<i> &gt; Também, uma vez que um valor do tipo *(T) tenha tamanho N, ele não
+</I>&gt;<i> &gt; pode ser aumentado ou diminuido.
+</I>&gt;<i>
+</I>&gt;<i> A questão não é se ele muda ou não de tamanho, mas se ele tem um tamanho
+</I>&gt;<i> inicial ou não. Se ele não tem um tamanho inicial, quando ele receber um
+</I>&gt;<i> dado, é como se ele tivesse mudado de tamanho (de zero para alguma coisa).
+</I>
+Sim, assim como literais também. A variável apenas passa a referenciar
+um novo valor.
+
+&gt;<i> Se ele não tem um tamanho inicial definido, a gente tem que criar toda uma
+</I>&gt;<i> abstração (assim como para as strings) .
+</I>
+Exato.
+
+&gt;<i> O que faremos ???
+</I>&gt;<i>
+</I>
+Se for muito trabalho replanejar isso, proponho seguir com o que temos
+e depois, a gente reve tudo isso.
+
+E o que temos, por enquanto? Passagem de matrizes para funções que
+recebem &quot; m : matriz[] de ....&quot;? E atribuição de matrizes?
+Possibilitariamos isso?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000382.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000383.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

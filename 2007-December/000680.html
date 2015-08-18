@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Estrutura de diretórios para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712151023h54899506td597d869ad16555e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000677.html">
+   <LINK REL="Next"  HREF="000683.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Estrutura de diretórios para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FEstrutura_de_diret%3DF3rios_para_as_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fyslibs%3F%3D&In-Reply-To=%3C9a3912af0712151023h54899506td597d869ad16555e%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Estrutura de diretórios para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 19:23:18 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000677.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000683.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#680">[ date ]</a>
+              <a href="thread.html#680">[ thread ]</a>
+              <a href="subject.html#680">[ subject ]</a>
+              <a href="author.html#680">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi.
+
+Qual a estrutura de diretórios que vamos utilizar para syslibs ???
+
+Lembrando que temos os seguintes &quot;atores&quot; envolvidos nas syslibs:
+* aplicativo que, a partir de um .h, gera um .sld (ou outra extensão
+qualquer, enfim.);
+* um aplicativo (gerador de bindings realmente) que, a partir de um .sld,
+gera os arquivos que quando compilados gerarão o .so (.cpp, .hpp, Makefile,
+.glib);
+* acho que um diretório para cada binding (cada .sld) porque tudo no mesmo
+vai virar bagunça.
+
+Certamente tem mais coisas que esqueci agora.
+
+Eu imagino um diretório syslib com um subdiretório para cada um dos
+&quot;atores&quot;. Algo como:
+
+gpt2/syslib
+gpt2/syslib/gerador_sld (sei la qual o nome do aplicativo)
+gpt2/syslib/gerador_binding
+gpt2/syslib/bindings/
+gpt2/syslib/bindings/binding1
+gpt2/syslib/bindings/binding2
+...
+gpt2/syslib/bindings/bindingN
+
+Acho que dentro de cada binding ainda teremos algo como um .sld com um
+Makefile. Esse makefile, quando rodado, gera os arquivos em outro
+subdiretório e ai então compilados.
+
+O que vocês acham ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/9c67cefa/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/9c67cefa/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000677.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000683.html">[gpt-usuarios] Estrutura de diretórios para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#680">[ date ]</a>
+              <a href="thread.html#680">[ thread ]</a>
+              <a href="subject.html#680">[ subject ]</a>
+              <a href="author.html#680">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

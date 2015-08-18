@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712140550u588e258as8f9695a185e31808%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000651.html">
+   <LINK REL="Next"  HREF="000653.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712140550u588e258as8f9695a185e31808%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Dezembro 14 14:50:25 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000651.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000653.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#652">[ date ]</a>
+              <a href="thread.html#652">[ thread ]</a>
+              <a href="subject.html#652">[ subject ]</a>
+              <a href="author.html#652">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; A VM será linkada dinamicamente ao .so.
+</I>&gt;<i>
+</I>&gt;<i> Eu tava pensando em usar dlopen para não obrigar que certas
+</I>&gt;<i> bibliotecas estivessem disponíveis no momento da instalação da VM, e
+</I>&gt;<i> permitir que o usuário rode a VM com os bindings que desejar. Se a
+</I>&gt;<i> gente linkar um binding à VM, estáticamente ou não, a VM será
+</I>&gt;<i> carregada na memória com o binding junto de qualquer forma. Se a
+</I>&gt;<i> linkagem for dinâmica e o usuário não tiver o .so no sistema, a VM não
+</I>&gt;<i> é carregada, e o loader acusa erro.
+</I>
+
+É verdade. Eu não tinha lembrado disso...
+
+Com isso, se a gente fizer um binding de GTK+, o usuário vai ser
+&gt;<i> obrigado a instalar a GTK+ antes de instalar a VM. Uma vez que a VM
+</I>&gt;<i> está linkada ao binding, e o binding está linkado a GTK. Se a VM rodar
+</I>&gt;<i> sem que .so do binding ou sem que o .so do GTK esteja presente, ela
+</I>&gt;<i> não vai funcionar. Se fizermos bindings para a biblioteca do MySQL,
+</I>&gt;<i> mesma coisa. No fim, na medida em que aumentamos o acesso a
+</I>&gt;<i> bibliotecas externas, fazemos com que a VM seja dependente de todas
+</I>&gt;<i> delas, incondicionalmente.
+</I>
+
+Posso estar enganado, mas tem como resolver as dependências somente quando
+uma subrotina é invocada. Seria algo como &quot;se o usuário não invoca um opcode
+que use gkt, não vai ter problema...&quot;. Isso não obrigaria o usuário a
+instalar tudo.
+
+Mas, de qualquer forma, usar dlopen, da forma que você quer, vai ficar mais
+flexível, gerar menos problemas e vai ficar melhor para o usuário :-)
+
+A minha visão estava em sistemas &quot;estáticos&quot; onde você instala e não precisa
+mais carregar nada...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071214/7af26ff1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071214/7af26ff1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000651.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000653.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#652">[ date ]</a>
+              <a href="thread.html#652">[ thread ]</a>
+              <a href="subject.html#652">[ subject ]</a>
+              <a href="author.html#652">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

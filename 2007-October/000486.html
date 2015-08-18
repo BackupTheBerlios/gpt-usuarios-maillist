@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710191032n10e5a3f5n64cc1adb25449adc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000485.html">
+   <LINK REL="Next"  HREF="000510.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0710191032n10e5a3f5n64cc1adb25449adc%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Outubro 19 19:32:03 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000485.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000510.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#486">[ date ]</a>
+              <a href="thread.html#486">[ thread ]</a>
+              <a href="subject.html#486">[ subject ]</a>
+              <a href="author.html#486">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Complementando um pouco mais...
+
+Através do exemplo abaixo eu tentei criar o GptAssembly resultante
+utilizando as 2 abordagens citadas.
+
+
+estrutura est
+    x: inteiro;
+    y: inteiro;
+fim-estrutura
+variáveis
+    i: inteiro;
+    l: literal;
+    e: est;
+    m1: matriz[] de inteiros;
+    m2: matriz[5] de inteiros;
+fim-variáveis
+início
+    i := 10;
+    l := &quot;teste&quot;;
+    e.x := 1;
+    e.y := 2;
+    m2[0] := 10;
+    m2[2] := 20;
+    i := m2[2];
+    m1 := m2;
+fim
+
+A abordagem 1 gerou uma sequência confusa e cheia de detalhes (isso sem
+contar o que eu devo ter esquecido de colocar):
+
+// inicialização dos dados
+balloc l, 0 // aloca espaço para o literal
+balloc m1, 0 // aloca espaço para m1
+balloc m2, 20 // 5 * sizeof(int)
+balloc e, 8   // sizeof(est)
+
+iset i, 10           // i := 10;
+bcopy l, &quot;teste&quot;, 5  // l := &quot;teste&quot;;
+bset e:0, 1, 4       // e.x := 1;
+bset e:4, 2, 4       // e.y := 2;
+bset m2:0, 10, 4     // m2[0] := 10;
+bset m2:8, 20, 4     // m2[2] := 20;
+bget i, m2:8, 4      // i := m2[2];
+bcopy m1, m2, 20     // m1 := m2;
+
+// destruição dos dados
+bfree l
+bfree m1
+bfree m2
+bfree e
+Observações: bcopy verifica se o destino tem espaço para copiar os dados. Se
+não tiver ele aloca espaço antes de copiar. Se já estiver alocado algo, ele
+desaloca antes de alocar novamente.
+
+A abordagem 2 gerou uma sequência mais &quot;legível&quot;...
+
+m1alloc m1, 4, 0
+m1alloc m2, 4, 5
+
+iset i, 10       // i := 10;
+sset l, &quot;teste&quot;  // l := &quot;teste&quot;;
+isetv e:0, 1     // e.x := 1;
+isetv e:4, 2     // e.y := 2;
+m1set m2:0, 10   // m2[0] := 10;
+m1set m2:2, 20   // m2[2] := 20;
+m1get i, m2:2    // i := m2[2];
+m1copy m1, m2    // m1 := m2;
+
+m1free m1
+m1free m2
+
+
+
+Observações: malloc (matrix alloc) define que, para uma variável x, ela irá
+suportar um tipo de tamanho Y, com Z elementos iniciais. Teoricamente, com
+isso, podemos ter matriz composta de estruturas definidas pelo usuário.
+
+As minhas impressões sobre isso...
+
+Com a abordagem 1 (a que gerava mais opcodes) eu achei a geração &quot;chata&quot; e
+&quot;cheia de detalhes&quot;. O tipo da coisa que para alguém programar em
+GptAssembly depois vai ter que ter uma &quot;lista de regras&quot;.
+
+Já com a abordagem 2, o código gerado está mais legível para nós, meros
+mortais :-)
+
+Além do que, com a abordagem 2, podemos estender (teoricamente facilmente) o
+suporte para termos matrizes de tamanhos variáveis...
+
+Claro, m1 significa &quot;uma dimensão&quot;. Teríamos que ter o m2, m3, .... mas vou
+tentar ver alguma forma de simplificar isso... Se a gente não conseguir
+simplificar a gente limita o número máximo de dimensões (2 o 3).
+
+Bom, claramente o meu voto vai para a abordagem 2 :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071019/3fe10ac2/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071019/3fe10ac2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000485.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000510.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#486">[ date ]</a>
+              <a href="thread.html#486">[ thread ]</a>
+              <a href="subject.html#486">[ subject ]</a>
+              <a href="author.html#486">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Comentários sobre os códigos / planejamento
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C9a3912af0711060629q75ff235fy1e49fae2f38c027%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000567.html">
+   <LINK REL="Next"  HREF="000569.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Comentários sobre os códigos / planejamento</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C9a3912af0711060629q75ff235fy1e49fae2f38c027%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Comentários sobre os códigos / planejamento">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Novembro  6 15:29:26 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000567.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000569.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#568">[ date ]</a>
+              <a href="thread.html#568">[ thread ]</a>
+              <a href="subject.html#568">[ subject ]</a>
+              <a href="author.html#568">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi.
+
+Como disse anteriormente (e acho que discutimos há um tempo atrás),
+&gt;<i> acho melhor criarmos a AST.
+</I>
+
+A gente tinha conversado e, pelo que eu me lembre, a gente optou por criar a
+AST quando fosse necessário (visualização de fluxogramas ou outra ferramenta
+fora do escopo da V2). Como para a Gepeto isso não era necessário a gente
+cortou.
+
+
+&gt;<i> O modelo seguiria, grosso modo, o flow do
+</I>&gt;<i> gpt 1.0, onde o parser cria a árvore, e gramáticas de ast diversas
+</I>&gt;<i> recebem ela como parâmetro para fins diversos (como análise semântica,
+</I>&gt;<i> geração de código, etc).
+</I>
+
+Parece ser uma estrutura legal. Só fico chateado por colocar algumas horas
+de trabalho fora (+- 20 horas). Mas, se é para o bem geral do projeto,
+reorganizamos então :-)
+
+
+&gt;<i> Olhando o diretório do gpt2, penso que, em geral (e pessoalmente),
+</I>&gt;<i> prefiro começar do zero, de forma limpa, e ir copiando coisas
+</I>&gt;<i> existentes na medida do necessário.
+</I>
+
+Eu fiz o processo ao contrário. Eu copiei tudo da V1 e o código reutilizável
+da HoloVM. Estou retirando &quot;aos poucos&quot; o que não é necessário na Gepeto.
+Não que eu ache melhor essa abordagem (acho pior até) mas como eu não
+entendia quase nada de antlr e não entendo nada de automake e afins eu optei
+por copiar tudo e retirar o que eu não estava utilizando.
+
+Por isso, acho que o diretório
+&gt;<i> gpt2 está muito poluído e devemos excluir tudo o que é desnecessário
+</I>&gt;<i> no momento, possivelmente até excluindo o build system.
+</I>
+
+Eu deixei muitas coisas porque não sabia se devia ou não retirar (licenças e
+outras coisitas mais).
+
+Tem coisas que eu deixo de fazer por não entender nada do build system. Por
+mim ok.
+
+Esse mesmo
+&gt;<i> pensamento vale para códigos, especialmente no que diz respeito ao
+</I>&gt;<i> v1.0, pois boa parte do código dele é ad-hoc.
+</I>
+
+Boa parte do código da V1 já foi retirado. Aliás, sobrou pouca coisa da V1
+(main, inicialização do compilador, symbol, symboltable). Aos poucos eu
+estou retirando o que não preciso.
+
+Minha sugestão atual (e venho pensando isso há bastante tempo, mas não
+&gt;<i> tive oportunidade de elaborar melhor as idéias) é para dividirmos as
+</I>&gt;<i> tarefas. Pelo menos, estipularmos certas responsabilidades.
+</I>
+
+Por mim ok. Como aparentemente dos três (eu, você e o Adorilson) eu sou o
+que tem mais tempo livre, eu abracei o que deu hehehe.
+
+Alex, suponho que vc está mais motivado para trabalhar na VM e na
+&gt;<i> geração de código. Se for o caso, proponho que siga a linha
+</I>&gt;<i> &quot;bottom-up&quot;, produzindo o montador e a VM enquanto eu confecciono o
+</I>&gt;<i> parser e o analisador sintático (top-down). Com isso, nos
+</I>&gt;<i> encontraríamos no meio do caminho, com a geração do gptasm. Essa
+</I>&gt;<i> sugestão é minha resposta à proposta em Etapas_do_projeto.
+</I>
+
+Seria uma boa abordagem (acho).
+
+Eu só saliento que talvez seria uma boa você dar uma olhada na gramática da
+V2 por ela está quase completa. Pelo que eu me lembre falta o parser da
+inicialização de dados na declaração, matrizes e structs. Aliás, acho que
+para matrizes e structs o parser está ok, mas dá erro porque o compilador
+não tem suporte correto a isso. Eu acho que seria um desperdício colocar
+todo o parser da V2 fora :-)
+
+O build system do projeto ficaria pro final. Portanto, nada impede que
+&gt;<i> cada subprojeto tenha apenas simples makefiles, para começar.
+</I>
+
+Para mim seria ótimo :-)
+
+Mas peço
+&gt;<i> que sejam diligentes em relação à resíduos inutilizados na árvore do
+</I>&gt;<i> projeto e nos códigos. É mais fácil ver o que falta do que identificar
+</I>&gt;<i> o que sobra.
+</I>
+
+Pode deixar que da minha parte eu cuido hehehe. Muitas vezes eu prefiro
+comentar um código e deixar lá um tempo do que ter que refazê-lo
+posteriormente. Sim, eu sei que o svn guarda as versões antigas, mas nem
+sempre eu tenho acesso a internet...
+
+Quanto aos testes automatizados, acho que preciamos definir uma
+&gt;<i> infraestrutura antes de avançarmos o sinal.
+</I>
+
+Concordo sim. O que eu fiz é bem simples, mas funciona e já quebrou um galho
+hehehe. Cada alteração no compilador eu gastava uns 30 minutos para ver se a
+geração de código estava ok. Agora levo 30 segundos :-)
+
+Eu ouvi falar de pacotes de testes regressivos há um tempo atrás, mas não
+investiguei na época.
+
+No mais, estou replanejando aos poucos a estrutura do front-end em
+&gt;<i> relação ao v1.0. Pretendo, então, seguir as seguintes tarefas:
+</I>&gt;<i>
+</I>&gt;<i> -terminar o lexer/parser (que envolve as tarefas abaixo)
+</I>
+
+Teoricamente o lexer está ok. Falta implementar corretamente o asm..fim-asm
+que eu não consegui fazer sem inserir { e }. Além disso eu proponho
+começarmos a utilizar os identificadores em inglês quando possível.
+
+De qualquer forma seria bom rever os tokens para ver se há coisas que podem
+ser retiradas ou melhoradas.
+
+-avaliar o formato da AST (e os exemplos do wiki) para fechar o que
+&gt;<i> será produzido pelo front-end.
+</I>
+-Implementar a geração da AST
+
+
+A partir deste ponto eu posso começar a inserir código para gerar
+GptAssembly novamente.
+
+-planejar e implementar o analisador semântico
+&gt;<i> -Implementar a reportagem de erros
+</I>&gt;<i>
+</I>&gt;<i> Ao final, para o gptc, restará o módulo de emissão de bytecodes.
+</I>
+
+Para mim está perfeito :-)
+
+E temos boa parte das rotinas para emissão de mnemônicos (bytecodes) para o
+gptc. Quando você terminar a geração da AST eu já começo a inserir a geração
+dos mnemônicos novamente.
+
+Confesso que a abordagem que utilizei não era o que eu gostaria, mas
+sinceramente eu precisava ver algo funcional desse trabalho. Estamos na
+teoria e documentação há um bom tempo e eu precisava ver algo funcional para
+me motivar hehehe.
+
+Eu não pretendo manter (obviamente não tem mais porque manter) mas eu vou
+continuar utilizando o compilador da V2 que temos porque programar em
+GptAssembly diretamente dá bastante trabalho. Com isso eu uso o GptC atual
+(enquanto não temos a sua versão funcional) para gerar testes para o GptASM
+e GptVM.
+
+De qualquer forma, só fiquei com dúvida em relação a estrutura de
+diretórios...
+
+gpt2
+gpt2/gptc/src
+gpt2/gptc/tests
+gpt2/gptasm/src
+gpt2/gptasm/tests
+gpt2/gptvm/src
+gpt2/gptvm/tests
+gpt2/common/src
+gpt2/common/tests   &lt;-- testes unitários eu acho...
+
+Ou seria algo como:
+
+gpt2
+gpt2/src
+ gpt2/src/gptc
+gpt2/src/gptasm
+gpt2/src/gptvm
+gpt2/src/common
+gpt2/tests/
+gpt2/tests/gptc
+gpt2/tests/gptasm
+gpt2/tests/gptvm
+gpt2/tests/common
+
+Eu acho a segunda abordagem mais organizada, mas como disse antes, não sou
+muito bom em organizar essas coisas hehehe.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071106/e273f474/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071106/e273f474/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000567.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000569.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#568">[ date ]</a>
+              <a href="thread.html#568">[ thread ]</a>
+              <a href="subject.html#568">[ subject ]</a>
+              <a href="author.html#568">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

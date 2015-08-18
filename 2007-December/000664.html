@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C92b9a8820712150502o61ed80bclbb549ca4cf74737a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000660.html">
+   <LINK REL="Next"  HREF="000670.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Inserindo a tabela de simbolos no .gvm</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C92b9a8820712150502o61ed80bclbb549ca4cf74737a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Inserindo a tabela de simbolos no .gvm">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 14:02:09 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000660.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000670.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 7:33 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>  Eu acharia mais interessante a gente seguir uma abordagem tradicional onde
+</I>&gt;<i> o compilador gera código para o montador, e o montador gera o binário, e
+</I>&gt;<i> ambos são independentes. Com isso o usuário pode programar em portugol ou
+</I>&gt;<i> GptAssembly diretamente.
+</I>
+
+Certo. Mas vou tentar explicar melhor o problema.
+
+//lib.gpt
+constante x : inteiro := 10;
+
+estrutura T
+ x : inteiro;
+ y : real;
+fim-estrutura
+
+variável t : T;
+procedimento p(r:real)
+início
+  imprima(r);
+fim
+
+//teste.gpt
+use &quot;lib&quot;;
+
+estrutura Z
+ a : real;
+ b : inteiro;
+fim-estrutura
+
+variável z : Z;
+início
+ x := 4;
+ x := p();
+ t := z;
+fim
+-------------
+
+
+Pelo que eu entendi, a tabela de simbolos injetada no lib.gvm será
+correspondente aos tipos do gptassembly, correto?
+
+Com isso, se compilassemos o &quot;teste.gpt&quot;, e o compilador buscasse a
+tabela de simbolos de lib.gvm, o gptc saberia que &quot;x&quot; é inteiro, mas
+não saberia que é uma constante. O algoritmo acima modificaria seu
+valor sem discriminação. O compilador tbm saberia da existência de um
+procedimento &quot;p&quot;, e só conseguiria saber os tipos dos parâmetros
+destrinchando o nome de &quot;p&quot;, que é uma montagem da assinatura
+(&quot;_p_real&quot;). Mesmo assim, não saberia se &quot;p&quot; é uma função que retorna
+um valor, ou mesmo que retorna um inteiro.
+
+Finalmente, o gptc só poderia saber o tamanho da variável &quot;t&quot; na
+memória (&quot;data[12]&quot;), mas não sabe como esse tamanho é distribuído,
+qual o nome do tipo de &quot;t&quot;, e quais seus membros e respectivos tipos.
+Precisamos de informação para analizar o enunciado &quot;t := z;&quot;. E por
+não ser correto,  precisamos  de informações para explicar porque é
+inválido.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000660.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000670.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

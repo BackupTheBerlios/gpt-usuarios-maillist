@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Instalador para windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Instalador%20para%20windows&In-Reply-To=%3C92b9a8820803241146m778585b2k57733cc19dbfb555%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000789.html">
+   <LINK REL="Next"  HREF="000792.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Instalador para windows</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Instalador%20para%20windows&In-Reply-To=%3C92b9a8820803241146m778585b2k57733cc19dbfb555%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Instalador para windows">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Março 24 19:46:58 CET 2008</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000789.html">[gpt-usuarios] Instalador para windows
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000792.html">[gpt-usuarios] Instalador para windows
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#791">[ date ]</a>
+              <a href="thread.html#791">[ thread ]</a>
+              <a href="subject.html#791">[ subject ]</a>
+              <a href="author.html#791">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>2008/3/24 igorcemim &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-forum-noreply em mail.berlios.de</A>&gt;:
+&gt;<i> &gt; Por isso, se você portar o instalador atual (baseado no Inno Setup)
+</I>&gt;<i>  &gt; para o NSIS, fazendo o que ele faz atualmente, eu topo adotá-lo.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  Tudo bem :)
+</I>&gt;<i>  Você poderia me explicar detalhadamente o que o instalador atual faz?
+</I>&gt;<i>  Sei que ele coloca os arquivos do Gpt na pasta /gpt... mas e quanto a integração com o Notepad++... como o instalador faz isso?
+</I>&gt;<i>
+</I>
+O arquivo que gera o setup é o seguinte:
+
+<A HREF="http://svn.berlios.de/wsvn/gpt/trunk/gpt/packages/win_setup/setup.iss">http://svn.berlios.de/wsvn/gpt/trunk/gpt/packages/win_setup/setup.iss</A>
+
+Ele detalha todos os arquivos que são instalados, atalhos e mudanças
+no registro do windows.
+
+Mais fácil, porém é utilizar os arquivos instalados no diretório
+c:/gpt pelo instalador atual. Além dos arquivos instalados note:
+
+1) Os atalhos criados no menu iniciar;
+
+2) As variáveis de ambientes criadas/alteradas.
+
+Duas variáveis de ambiente são gravadas no registro do windows: PATH e
+GPT_INCLUDE. Em PATH, é adicionado o caminho c:\gpt\bin e o
+GPT_INCLUDE possui o valor &quot;c:\gpt\lib\base.gpt&quot; (claro, dependendo de
+onde o gpt foi instalado).
+
+Quanto ao notepad++, os arquivos se encontram em c:\gpt\notepad++. Se
+o usuário escolhe fazer a integração, o instalador copia esses
+arquivos para o diretório c:\Documents and Settings\&lt;fulano&gt;\Dados de
+Aplicativos\Notepad++ (isso está documentado no
+c:\gpt\notepad++\LEIAME.txt) se não me engano.
+
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000789.html">[gpt-usuarios] Instalador para windows
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000792.html">[gpt-usuarios] Instalador para windows
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#791">[ date ]</a>
+              <a href="thread.html#791">[ thread ]</a>
+              <a href="subject.html#791">[ subject ]</a>
+              <a href="author.html#791">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

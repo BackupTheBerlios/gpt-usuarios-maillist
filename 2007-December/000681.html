@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Tamanho dos dados
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C92b9a8820712151236h37c28c17y68b21ece5981f917%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000678.html">
+   <LINK REL="Next"  HREF="000658.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Tamanho dos dados</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C92b9a8820712151236h37c28c17y68b21ece5981f917%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Tamanho dos dados">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 21:36:38 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000678.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000658.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#681">[ date ]</a>
+              <a href="thread.html#681">[ thread ]</a>
+              <a href="subject.html#681">[ subject ]</a>
+              <a href="author.html#681">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 3:51 PM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>  Inicialmente não exisita. A proposta era ter um ponteiro para um tipo
+</I>&gt;<i> string (quando variável) ou ter a constante em si. Porém, dessa forma, não
+</I>&gt;<i> teria como saber se os 4 primeiros bytes do endereço da string são uma
+</I>&gt;<i> constante ou variável. Por isso foi inserido a flag. Quanto constantes temos
+</I>&gt;<i> a flag e mais a constante terminada em NULL. Quando variável temos a flag e
+</I>&gt;<i> um ponteiro para um tipo std::string (não estou prevendo UTF8 por enquanto).
+</I>&gt;<i>
+</I>&gt;<i>  Uma opção era diferenciar strings de constantes nos opcodes, mas achei que
+</I>&gt;<i> isso daria mais trabalho do que colocar a flag.
+</I>&gt;<i>
+</I>&gt;<i>  Pensei também em sempre utilizar um pointer, ou seja, mesmo os dados
+</I>&gt;<i> constantes seriam armazenados por um ponteiro. Mas daí a VM quando
+</I>&gt;<i> inicializasse teria que saber quem seriam as contantes para criar o
+</I>&gt;<i> ponteiro, etc e tal. Não gostei da idéia...
+</I>&gt;<i>
+</I>&gt;<i>  Se eu fiz uma boa escolha, bom, isso já é outra história hehehe.
+</I>&gt;<i>
+</I>
+Hmm. entendi.
+
+&gt;<i> &gt; Eu só consigo imaginar três alternativas para implementar o OR / AND
+</I>&gt;<i> lógico:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -Ou todos os dados na pilha tem 32 bits, e só precisamos dos dois
+</I>&gt;<i> &gt; opcodes: AND e OR lógico.
+</I>&gt;<i> &gt; -Ou a pilha armazena dados de tamanhos arbitrários, e precisamos de
+</I>&gt;<i> &gt; várias versões dos opcodes AND e OR lógicos, de acordo com os tipos
+</I>&gt;<i> &gt; dos operandos.
+</I>&gt;<i> &gt; -Ou todos os dados são &quot;tagueados&quot;, com um cabeçalho indicando seu
+</I>&gt;<i> &gt; tamanho na pilha.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Vc tem alguma idéia?
+</I>&gt;<i>
+</I>&gt;<i>  Você está falando de AND / OR bitwise ou lógico ?
+</I>
+lógico. Bitwise é simples, pois só é aplicado sobre inteiros.
+
+&gt;<i>  Se você está falando de AND / OR lógico, não esqueça que os opcodes de
+</I>&gt;<i> comparação, maior que, menos e afins, testam dois valores e retornam um
+</I>&gt;<i> inteiro com o resultado da comparação. Por isso só temos AND / OR lógico
+</I>&gt;<i> sobre inteiros.
+</I>&gt;<i>
+</I>
+Perfeito, o resultado pode ser um inteiro mesmo.
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000678.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000658.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#681">[ date ]</a>
+              <a href="thread.html#681">[ thread ]</a>
+              <a href="subject.html#681">[ subject ]</a>
+              <a href="author.html#681">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] v2 acesso ao kernel (ressurreição)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C92b9a8820710180631j201a5bb9kee47081a0c38365f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000441.html">
+   <LINK REL="Next"  HREF="000326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] v2 acesso ao kernel (ressurreição)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3Fv2_acesso_ao_kernel_%3D28ressurrei%3DE7%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3F%3D&In-Reply-To=%3C92b9a8820710180631j201a5bb9kee47081a0c38365f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] v2 acesso ao kernel (ressurreição)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 18 15:31:29 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000441.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000326.html">[gpt-usuarios] literais (v1 e v2)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#446">[ date ]</a>
+              <a href="thread.html#446">[ thread ]</a>
+              <a href="subject.html#446">[ subject ]</a>
+              <a href="author.html#446">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/18/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; #2 - Sugestão anterior do Alex
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Num email anterior, vc tinha escrito isso:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; push &quot;cria&quot; // função
+</I>&gt;<i> &gt; push &quot;thread&quot; // &quot;classe&quot;
+</I>&gt;<i> &gt; libcall
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Poderia elaborar mais?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Acho que a gente já chegou a conversar um pouco sobre isso em outra thread.
+</I>&gt;<i>
+</I>&gt;<i> Mas a idéia é que libcall faça chamada a funções de bibliotecas do S.O. Com
+</I>&gt;<i> esse suporte a gente conseguiria implementar teoricamente qualquer coisa em
+</I>&gt;<i> g-portugol e, consequentemente, em GptAssembly.
+</I>&gt;<i>
+</I>&gt;<i> Se implementamos em GptAssembly, além da portabilidade, podemos mostrar para
+</I>&gt;<i> o usuário como a coisa for implementada &quot;por baixo dos panos&quot;...
+</I>&gt;<i>
+</I>&gt;<i> &gt; #3 - Biblioteca de runtime
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Acho que é minha interpretação/entendimento da opção #2.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Suponha a existência de uma biblioteca, libgptruntime.so, escrita em
+</I>&gt;<i> &gt; C, com as seguintes funções:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; readline
+</I>&gt;<i> &gt; getuid
+</I>&gt;<i> &gt; mkdir
+</I>&gt;<i> &gt; connect
+</I>&gt;<i> &gt; ...etc
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; (se em inglês, ou português, e que nomes serão, decidiriamos depois)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A implementação (em C) de readline, por exemplo, poderia ser assim:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; gpt_literal readline(gpt_inteiro fd) {
+</I>&gt;<i> &gt; //.....
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Então, poderiamos escrever leia(literal), em g-portugol, da seguinte
+</I>&gt;<i> forma:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; função leia( ref lit : literal)
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt; início-gasm
+</I>&gt;<i> &gt;     push_int STDIN //constante declarada em algum lugar...
+</I>&gt;<i> &gt;     libcall libgptruntime.so, readline
+</I>&gt;<i> &gt;     pop lit
+</I>&gt;<i> &gt; fim-gasm
+</I>&gt;<i> &gt; fim
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso mesmo. Seria algo similiar (pra não dizer igual) a isso que você
+</I>&gt;<i> escreveu.
+</I>&gt;<i> []'s
+</I>
+Maravilha. É bastante razoável pra mim.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000441.html">[gpt-usuarios] v2 acesso ao kernel (ressurreição)
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000326.html">[gpt-usuarios] literais (v1 e v2)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#446">[ date ]</a>
+              <a href="thread.html#446">[ thread ]</a>
+              <a href="subject.html#446">[ subject ]</a>
+              <a href="author.html#446">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

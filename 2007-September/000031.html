@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709031256q2aa3f67eo41bda77ddad19f3d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000030.html">
+   <LINK REL="Next"  HREF="000032.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709031256q2aa3f67eo41bda77ddad19f3d%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Setembro  3 21:56:10 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000030.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000032.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#31">[ date ]</a>
+              <a href="thread.html#31">[ thread ]</a>
+              <a href="subject.html#31">[ subject ]</a>
+              <a href="author.html#31">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá Thiago,
+
+Ficou longo o e-mail...
+
+&gt;<i> Sim, a linguagem pode evoluir em alguns aspectos ainda. (...)
+</I>&gt;<i> Porém, hoje me pergunto se essas adições são
+</I>&gt;<i> significativas, em comparação com acesso aos serviços do sistema
+</I>&gt;<i> operacional (arquivos, sockets, etc), ou mesmo, utilizar bibliotecas
+</I>&gt;<i> existentes escritas em outras linguagens (acho que o primeiro
+</I>&gt;<i> benefício disso seria fazer um binding com o GTK para criar interfaces
+</I>&gt;<i> gráficas em portugol).
+</I>
+Entendo, e acho que tanto a linguagem como o acesso a bibliotecas do sistema
+deveriam evoluir. Eu trabalhei em um projeto de uma linguagem multiparadigma
+(hololinguagem) durante a minha graduação. Porém, mesmo em projetos
+simples, o que mais impactou (e impacta) o uso desta linguagem é a falta de
+bibliotecas.
+
+&gt;<i> Uma vez que o GPT opera em 3 modos (compilação, tradução e
+</I>&gt;<i> interpretação), os 3 devem gerar código (ou executar) um algorítimo de
+</I>&gt;<i> forma equivalente. Esse esforço pela equivalência é um pouco
+</I>&gt;<i> cansativo. Por exemplo, eu gastei 2 horas para implementar o operador
+</I>&gt;<i> de concatenação no módulo de tradução para C _e_ interpretação. Acho
+</I>&gt;<i> que eu gastaria bem mais para colocá-lo no módulo de compilação
+</I>&gt;<i> (escrever assembly é quase uma atividade cirurgica), sendo assim,
+</I>&gt;<i> ainda não tive tempo para fazer isso.
+</I>
+Talvez seria a hora de rever se esse recurso é realmente tão significativo.
+Talvez gerar algum tipo de código intermediário deixe o gpt mais simples e
+mais fácil de ser expandido. Vou divagar um pouco sobre isso depois.
+
+&gt;<i> Sem pensar muito a respeito, acho que seria um pouco complicado
+</I>&gt;<i> evoluir estes 3 módulos para acessar o kernel (possível, mas um pouco
+</I>&gt;<i> trabalhoso, imagino). Porém, mais complicado ainda, seria ter este
+</I>&gt;<i> &quot;novo GPT&quot; funcionando no Windows, também.
+</I>
+Quanto ao kernel e ao porte para windows, entendo e concordo com você em
+gênero, número e grau :-)
+
+Talvez uma solução seja gerar código para uma VM (Virtual Machine) que a
+gente vá desenvolver ou para uma VM já existente (mono, dotnet, jvm, ...).
+
+&gt;<i> Por falar em Windows, eu entendo que manter o port do Windows seja
+</I>&gt;<i> algo polêmico, na perspectiva mais relevante do software livre. Mas,
+</I>&gt;<i> tendo em vista as estatísticas de download do projeto, o maior número,
+</I>&gt;<i> é claro, corresponde ao pacote binário para Windows. Por oferecendo
+</I>&gt;<i> certas vantagens do GPT em sistemas GNU/Linux, eu me sinto confortável
+</I>&gt;<i> com este cenário. Hoje, eu vejo esta vantagem, em parte, como sendo o
+</I>&gt;<i> GPTEditor.
+</I>
+Bom, não vou entrar no mérito de software livre e windows (isso daria muita
+discussão rsrsrsrs) mas, se eu tivesse escolha, manteria o gpt tanto para
+linux como windows. Eu vejo o projeto como uma ferramenta útil para que os
+iniciantes entendam o que é programar e consigam desenvolver pequenos (ou
+talvez não tão pequenos) projetos. Agora, o sistema que eles estão
+utilizando deveria ser indiferente para o projeto (se possível, claro,
+porque as vezes as dificuldades técnicas são maiores que a &quot;boa vontade&quot;).
+Um cenário simples, onde uma escola ganhou da prefeitura vários computadores
+com windows (legalizado ou pirata, enfim), seria uma ótima oportunidade para
+os alunos aprenderem o que é programar um computador. Seria difícil o
+pessoal instalar linux só para rodar o GPT (eu acho).
+
+Antes que você pergunte, não sou nenhum especialista em linux, mas sou
+desenvolvedor C/C++ linux desde 2000. Desenvolvo muito pouca coisa para
+windows. Antes disso desenvolvia para DOS e outras coisinhas mais antigas
+(tô ficando velho rsrsrsrs).
+
+&gt;<i> Com tudo isso em mente, eu não hesitaria em abandonar, ou o compilador
+</I>&gt;<i> ou o interpretador (o tradutor, pra mim, tem a prioridade mais baixa),
+</I>&gt;<i> em prol de um avanço em apenas um destes módulos. E, também, acho que
+</I>&gt;<i> só me sentiria confortável em abandonar o port do Windows caso o GPT
+</I>&gt;<i> se torne um projeto maduro e com benefícios evidentes. Isso seria
+</I>&gt;<i> bastante interessante, mas hoje, acho que ainda não é o caso.
+</I>
+A gente poderia começar a pensar seriamente o que seria a próxima versão do
+gpt e tentar rever o projeto conforme essas novas metas. Eu achei muito
+legal o gpt, mas como você disse, eu também acho que para evoliur em alguns
+pontos nós teríamos que abandonar algumas coisas. Como comentei no outro
+e-mail, talvez tentar interagir mais com esse pessoal que trabalha com
+inclusão digital para ver a opinião deles.
+
+&gt;<i> Gostaria de dizer também que, na versão atual, o GPT 1.0, além de
+</I>&gt;<i> oferecer uma linguagem simples em português também deve ter algum
+</I>&gt;<i> valor em seu próprio código. Era algo que eu sentia falta (ter um
+</I>&gt;<i> compilador acessível que pudesse ser estudado), e foi uma das razões
+</I>&gt;<i> para ter escrito o módulo de compilação. Uma vez que o GPT não está na
+</I>&gt;<i> categoria de produção (que costuma conter todo tipo de ajuste e
+</I>&gt;<i> algoritmos avançados), seu código é menos alienígena e pode beneficiar
+</I>&gt;<i> quem quiser explorar as entranhas de um compilador (só não garanto que
+</I>&gt;<i> o código seja bonito :).
+</I>
+Eu acho que a gente poderia manter essas idéias. A gente poderia continuar
+mantendo o GPT como um compilador acessível para ser estudado e, de quebra,
+coloca um suporte na arquitetura do projeto para que ele possa ser expandido
+&quot;fácilmente&quot; com front-end para novas linguagens, etapas de otimização de
+código, back-end para novas arquiteturas, ...
+
+&gt;<i> Assim, penso que a versão 1.0 realizou os propósitos que eu buscava e,
+</I>&gt;<i> embora possa ser expandido da forma como está, não acho que vá muito
+</I>&gt;<i> longe. A partir daí, poderiamos procurar um novo passo, escolhendo
+</I>&gt;<i> apenas um &quot;modelo de execução&quot; (interpretado ou compilado) e colocando
+</I>&gt;<i> a linguagem com acesso mais abrangente ao sistema operacional. Acho
+</I>&gt;<i> que isso seria bem apelativo.
+</I>
+Concordo com as suas idéias, mas talvez a gente possa manter um modelo de
+execução híbrido onde o compilador gera um código intermediário que pode
+servir de entrada para uma VM (Virtual Machine). A VM, em termos, pode ser
+considerada um interpretador. Seguindo as idéias de uma VM, qualquer sistema
+que tenha o porte da VM pode executar os programas gerados para esta VM. Com
+isso, eu acho que a gente conseguiria manter a versão para windows existente
+hoje.
+
+Bom, vou &quot;brincar&quot; um pouco com as idéias então....
+
+A gente poderia, sem muitos problemas (dentro do meu conhecimento), gerar
+uma estrutura bem flexível, similar a utilizada pelo GCC. O GCC nada mais é
+que uma coleção com vários front-ends (um para cada linguagem), onde cada
+front-end gera um código intermediário (CI)específico do GCC que, após
+algumas etapas, é convertido para o binário final (seja ele uma biblioteca,
+ou executável, ....). Vou colocar a sequência um pouco mais completa abaixo:
+
+Front-end (C ou C++ ou ADA ou ...)  --&gt;  Código intermediário  --&gt;
+Otimizações no código intermediário  --&gt;  Geração do assembly para uma
+determinada arquitetura  --&gt;  Otimizações no assembly específicas de
+arquitetura --&gt; Geração do código final.
+
+A gente poderia ter uma estrutura similar com um CI indepente da linguagem
+de origem. Com isso a gente poderia ter um front-end para portugol, um
+front-end para aquela nova linguagem OO que estão nos seus posts, etc. Todos
+esses front-ends gerariam um CI definido por nós. Esse CI poderia ser
+executado por uma VM, traduzido para assembly, para C, para C++, para
+pascal, ... Claro que, na tradução, eu acho que o código não ficaria tão
+&quot;bonito&quot; como o código gerado pelo gpt atualmente.
+
+Claro que a gente teria uma meta para a próxima versão que, na minha
+opinião, seria especificar e desenvolver a arquitetura de tudo isso, e
+montar um front-end (para portugol) e um back-end (VM). Futuramente a gente
+poderia desenvolver outros front-ends, back-ends, tradutores, entre outros.
+Aliás, alguém poderia se interessar e ajudar a desenvolver o projeto também.
+
+O debugger poderia ficar acoplado à VM e o interpretador seria a VM
+propriamente dita.
+
+ Tanto o Front-end como o back-end seria bem definidos e independentes. Isso
+eu acho que daria bastante flexibilidade ao projeto.
+
+Utilizando as idéias do GCC a gente também estaria gerando um compilador
+muito didático (como o GPT), que poderia inclusive ser utilizado
+como exemplo nas disciplinas de compiladores, tradutores e afins.
+
+Os tradutores poderiam agir sobre o CI, o que poderia facilitar (e muito) a
+tradução para outras linguagens. Porém, acho que a tradução não ficaria tão
+clara como os exemplos que eu vi do GPT.
+
+O CI poderia ser o popular &quot;código de três endereços&quot;, ou algum outro que se
+encaixe nas nossas necessidades.
+
+Outra possibilidade seria gerar código para uma VM existente como a VM do
+mono (e dotnet), JVM, .... mas não sei dizer se seria uma boa idéia. Só sei
+dizer que gerar código para a JVM é um trabalho chato e, em muitos casos,
+quando você não tem um opcode apropriado, você acaba tendo que gerar
+bibliotecas só para facilitar a tradução, e programar em Java não é bem a
+minha praia. Bom, cada um com a sua opinião.
+
+No framework do mono (ou dotnet) nós estaríamos &quot;aproveitando&quot; todo o
+conjunto de bibliotecas disponíveis. Porém, pelo que eu saiba, a
+implementação das classes no Mono não estão completas, o que poderia
+gerar problemas para nós.
+
+Quanto as bibliotecas de sistema, se a idéia do Portugol é ser um ambiente
+para aprendizado, talvez a gente não precise fornecer ao usuário a
+possibilidade de utilizar qualquer biblioteca. Talvez seria mais
+interessante (e mais fácil também de ser desenvolvido) a gente
+disponibilizar as bibliotecas necessárias (sockets, threads, arquivos,
+interface, ...) através de uma API nossa. Algo como:
+
+    socket := criaSocket( &quot;x.x.x.x&quot; );
+
+Claro que, internamente, a gente poderia criar uma camada que facilite para
+nós o mapeamento de comandos do portugol para chamadas de bibliotecas do
+sistema.
+
+ Como a meta do projeto não é alto desempenho, poderíamos pensar em um bind
+dinâmico de bibliotecas, algo como carregar a biblioteca durante a execução,
+montar os parâmetros e interpretar a resposta, tudo durante a execução. Isso
+facilitaria a tradução para outras linguagens (acho).
+
+Muitas idéias hehehe.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070903/0eec478e/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070903/0eec478e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000030.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000032.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#31">[ date ]</a>
+              <a href="thread.html#31">[ thread ]</a>
+              <a href="subject.html#31">[ subject ]</a>
+              <a href="author.html#31">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

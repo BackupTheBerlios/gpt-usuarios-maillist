@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710111133s42221028ha825288dfd8332e2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000283.html">
+   <LINK REL="Next"  HREF="000288.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710111133s42221028ha825288dfd8332e2%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 11 20:33:38 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000283.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000288.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#285">[ date ]</a>
+              <a href="thread.html#285">[ thread ]</a>
+              <a href="subject.html#285">[ subject ]</a>
+              <a href="author.html#285">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; &gt; 1) Declaração_algorítmo é opcional ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sim.
+</I>&gt;<i>
+</I>&gt;<i> Eu colocaria como obrigatório, mas mais por uma questão &quot;estética&quot;. Mas
+</I>&gt;<i> deixamos como está porque ser ou não obrigatório já entra no quesito &quot;gosto
+</I>&gt;<i> pessoal&quot;.
+</I>&gt;<i>
+</I>
+Eu coloquei como opcional tendo em vista as unidades escritas para
+serem bibliotecas. Inicialmente, achei estranho obrigar a declaração
+de algoritmo em tais arquivos.
+
+&gt;<i> Entendi a questão do flexível.
+</I>&gt;<i>
+</I>&gt;<i> A minha dúvida seria a seguinte:
+</I>&gt;<i>
+</I>&gt;<i> // Trecho em portugol...
+</I>&gt;<i> variáveis
+</I>&gt;<i>     x : inteiro;
+</I>&gt;<i>     y : inteiro;
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i> início
+</I>&gt;<i>     x := 10;
+</I>&gt;<i>     y := 20;
+</I>&gt;<i>     x + y; // o que faria esse trecho de código ????
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>
+A principio, faria a soma. Em um segundo momento, o respectivo código
+seria descartado, por não ter efeito colateral. É o mesmo que na
+linguagem C, imagino.
+
+Por outro lado, para ilustrar um caso prático, isso seria interessante
+se fizessemos um REPL (read eval print loop), como os populares shells
+do ruby ou python. Permitir expressões como enunciados é interessante
+para mostrar o resultado das expresssões na medida em que o usuário as
+escreve. Mas para termos este benefício, teriamos que projetar a VM e
+a linguagem para se adequarem bem a modificação/adição de códigos em
+tempo de execução, algo que não sei se é viável pela natureza rígida
+da linguagem. Para fazer essas adequações, acho que sairíamos do
+&quot;portugol canônico&quot;.
+
+&gt;<i> Poderia ser um &quot;fim&quot; apenas, mas acho estranho porque sempre tem a seqüência
+</I>&gt;<i> &quot;estrutura...fim-estrutura&quot;.
+</I>
+Concordo.
+
+&gt;<i> Vou dar um bicão agora (pra variar hehehe):
+</I>&gt;<i>
+</I>&gt;<i> caso x faça
+</I>&gt;<i>     seja 1:
+</I>&gt;<i>         &lt;comandos&gt;
+</I>&gt;<i>     fim-seja
+</I>&gt;<i>     seja 2:
+</I>&gt;<i>         &lt;comandos&gt;
+</I>&gt;<i>     fim-seja
+</I>&gt;<i>     senão
+</I>&gt;<i>         &lt;comandos&gt;
+</I>&gt;<i>     fim-senão
+</I>&gt;<i> fim-caso
+</I>&gt;<i>
+</I>
+hehehe. Inspirado no seu bicão:
+
+caso x seja
+    1:
+        &lt;comandos&gt;
+    fim-opção
+    2:
+        &lt;comandos&gt;
+    fim-opção
+    senão
+        &lt;comandos&gt;
+    fim-opção
+fim-caso
+
+E mais um:
+
+caso x seja
+    1:
+        &lt;comandos&gt;
+    sair;
+    2:
+        &lt;comandos&gt;
+    sair;
+    senão
+        &lt;comandos&gt;
+    sair;
+fim-caso
+
+Poderiamos adicionar a palavra-chave &quot;sair&quot; como análoga ao &quot;break&quot;. E
+serviria para laços também. Mas, claro, o problema da (in)coerência em
+relação às outras estruturas ainda persiste.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000283.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000288.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#285">[ date ]</a>
+              <a href="thread.html#285">[ thread ]</a>
+              <a href="subject.html#285">[ subject ]</a>
+              <a href="author.html#285">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

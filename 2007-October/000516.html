@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Mapeamento%20entre%20tipos%20primitivos%20na%20VM%20e%20a%0A%09arquitetura&In-Reply-To=%3C92b9a8820710231758q4007b8cahf06542b904f68c82%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000512.html">
+   <LINK REL="Next"  HREF="000518.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Mapeamento%20entre%20tipos%20primitivos%20na%20VM%20e%20a%0A%09arquitetura&In-Reply-To=%3C92b9a8820710231758q4007b8cahf06542b904f68c82%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Outubro 24 02:58:59 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000512.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000518.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#516">[ date ]</a>
+              <a href="thread.html#516">[ thread ]</a>
+              <a href="subject.html#516">[ subject ]</a>
+              <a href="author.html#516">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/23/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Oi pessoal.
+</I>&gt;<i>
+</I>&gt;<i> A princípio os tipos primitivos da VM serão mapeados para os tipos da
+</I>&gt;<i> arquitetura em que está rodando. Um inteiro será um int32 ou int64 (conforme
+</I>&gt;<i> a arquitetura).
+</I>&gt;<i>
+</I>&gt;<i> Porém essa abordagem está me parecendo nada portável...
+</I>&gt;<i>
+</I>&gt;<i> Como fica a questão da portabilidade do gvm com os tipos primitivos ? Se o
+</I>&gt;<i> gvm foi gerado em uma arquitetura de 32 bits, cada inteiro foi gerado com 32
+</I>&gt;<i> bits. Mas quando a VM ler esse gvm em uma arquitetura de 64 bits ??? Se a
+</I>&gt;<i> gente usar um int nativo, a VM 64 bits vai ler cada int como 8 bytes...
+</I>&gt;<i>
+</I>&gt;<i> Para resolver isso eu pensei em armazenar no gvm o tamanho dos tipos
+</I>&gt;<i> primitivos dependente de arquitetura. Dessa forma a VM, quando executar a
+</I>&gt;<i> carga do arquivo, teria condições de mapear os dados corretamente. Só que
+</I>&gt;<i> isso daria um pouco de trabalho, e não seria uma solução perfeita...
+</I>&gt;<i>
+</I>&gt;<i> Outra forma seria a gente definir o que é o nosso int. Por exemplo, o nosso
+</I>&gt;<i> int tem 32 bits em qualquer arquitetura. Isso facilitaria muito as coisas
+</I>&gt;<i> para nós em vários pontos. Porém, também não é uma solução perfeita. Se uma
+</I>&gt;<i> lib do SO retornar um dado de 64 bits, o que aconteceria ??? Como mapear
+</I>&gt;<i> isso ???
+</I>&gt;<i>
+</I>
+Que tal fixar int em 32bits?
+Se levarmos em consideração que a grande maioria estará utilizando o
+gpt na arquitetura de 32bits, acho que estamos bem. As outras
+arquiteturas.......que pena...
+
+Não encontramos nenhuma solução ótima até agora, e acho que
+portabilidade é algo que concordamos ser secundário....pra mim tá bom
+fechar isso de forma simples.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000512.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000518.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#516">[ date ]</a>
+              <a href="thread.html#516">[ thread ]</a>
+              <a href="subject.html#516">[ subject ]</a>
+              <a href="author.html#516">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

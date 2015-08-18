@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] CI para uso de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C92b9a8820709121131y5716b78v70655fc79164fd1f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000130.html">
+   <LINK REL="Next"  HREF="000137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] CI para uso de estruturas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C92b9a8820709121131y5716b78v70655fc79164fd1f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] CI para uso de estruturas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Setembro 12 20:31:29 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000130.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000137.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#134">[ date ]</a>
+              <a href="thread.html#134">[ thread ]</a>
+              <a href="subject.html#134">[ subject ]</a>
+              <a href="author.html#134">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/12/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Os ponteiros não acessam nada que não esteja dentro da VM, ou seja, não
+</I>&gt;<i> acessam áreas do sistema operacional, de bibliotecas que não foram
+</I>&gt;<i> desenvolvidas em gpt e afins.
+</I>
+Humm, ok.
+
+&gt;<i> &gt; &gt; Como a gente geraria o &quot;deslocamento&quot; para acessar z ?
+</I>&gt;<i>
+</I>&gt;<i> Entendi sim. Se eu entendi bem, eu só faria uma correção no código acima
+</I>&gt;<i> porque *(*t1) não seria algo válido no CI atualmente:
+</I>&gt;<i>
+</I>&gt;<i> t1 := &amp;t
+</I>&gt;<i> t1 := t1 + 2 //pointer para o segundo elemento
+</I>&gt;<i> t1 := *t1
+</I>&gt;<i> *t1 := 10
+</I>&gt;<i>
+</I>&gt;<i> Aliás, t1 + 2 não estaria acessando o terceiro elemento ?
+</I>
+Isso. Foi mal :D
+
+&gt;<i> Eu só me preocupo porque, dessa forma, a gente teria que ter algum tipo de
+</I>&gt;<i> alocação dinâmica de memória para estruturas. Em uma VM simples, criar uma
+</I>&gt;<i> estrutura nada mais é do que alocar um espaço na sua área de dados com
+</I>&gt;<i> tamanho de sizeof(estrutura). Com indireção teríamos que alocar a área da
+</I>&gt;<i> estrutura e uma outra área para onde os ponteiros da estrutura estariam
+</I>&gt;<i> apontando. Acho que esse item entraria naquele requisito de dar mais
+</I>&gt;<i> inteligência na VM, o que talvez não seja o momento agora.
+</I>
+Tá certo. Agora, eu acho que tava viajando, pois estava com a cabeça
+em linguagens dinâmicas e misturei um pouco as coisas. Pensando em
+Java agora, que tem tipos estáticos e aloca objetos similarmente como
+alocariamos uma struct, eles definem de forma fixa o tamanho dos
+dados, para qualquer plataforma. Então é isso. Releve essa discussão
+:<i>)
+</I>
+&gt;<i> Sim, claro que ajuda. A diferença seria que, se você quer empilhar o
+</I>&gt;<i> endereço de t2, ao invés de invocar param *t2 ou &amp;t2, você divide em 2
+</I>&gt;<i> comandos:
+</I>&gt;<i>
+</I>&gt;<i> tt := &amp;t2 // tt é um inteiro
+</I>&gt;<i> param tt
+</I>&gt;<i>
+</I>
+Bom, fica a seu critério então. Os opcodes java tratam explicitamente
+de tipos ponteiro?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000130.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000137.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#134">[ date ]</a>
+              <a href="thread.html#134">[ thread ]</a>
+              <a href="subject.html#134">[ subject ]</a>
+              <a href="author.html#134">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

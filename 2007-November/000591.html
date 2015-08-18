@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0711120501v4492a62fl865afff6c9279e53%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000585.html">
+   <LINK REL="Next"  HREF="000598.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_a_implementa%3DE7%3DE3o_de_matriz%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fes_com_tamanho_indefinido%3F%3D&In-Reply-To=%3C9a3912af0711120501v4492a62fl865afff6c9279e53%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro 12 14:01:07 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000585.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000598.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#591">[ date ]</a>
+              <a href="thread.html#591">[ thread ]</a>
+              <a href="subject.html#591">[ subject ]</a>
+              <a href="author.html#591">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Pode mostrar um exemplo com matrizes com mais de uma dimensão?
+</I>
+
+Eu imaginei algo como:
+
+
+// Portugol
+
+algoritmo vetor_na_pilha;
+
+variável resultado: matriz[3][4] do tipo inteiro;
+
+início
+    resultado[0][0] := 10;
+    resultado[1][2] := 20;
+    resultado[2][3] := resultado[0][0] + resultado[1][2];
+fim
+
+
+
+// Exemplo em GptAssembly
+
+program vetor_na_pilha;
+
+var resultado matrix
+
+proc main
+    m2alloc resultado, 4, 12 // 4 bytes, 12 elementos
+
+    // resultado[0][0] := 10;
+    m2set resultado, 0, 0, 10
+
+    // resultado[1][2] := 20;
+    m2set resultado, 1, 2, 20
+
+    // resultado[2][3] := resultado[0][0] + resultado[1][2];
+    m2get t1, resultado, 0, 0
+    m2get t2, resultado, 1, 2
+    isum t3, t1, t2
+    m2set resultado, 2, 3, t3
+
+    mfree resultado
+    ret
+
+endproc
+
+endprogram
+
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/f1e5f596/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/f1e5f596/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000585.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000598.html">[gpt-usuarios] Sobre a implementação de matrizes com tamanho indefinido
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#591">[ date ]</a>
+              <a href="thread.html#591">[ thread ]</a>
+              <a href="subject.html#591">[ subject ]</a>
+              <a href="author.html#591">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

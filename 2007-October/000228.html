@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] tentativa de instalacao
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20tentativa%20de%20instalacao&In-Reply-To=%3C641cbbb40710041733p54314e39r3ee1b940d5600f94%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000246.html">
+   <LINK REL="Next"  HREF="000229.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] tentativa de instalacao</H1>
+    <B>rubens suhet</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20tentativa%20de%20instalacao&In-Reply-To=%3C641cbbb40710041733p54314e39r3ee1b940d5600f94%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] tentativa de instalacao">rubensadicto em gmail.com
+       </A><BR>
+    <I>Sexta Outubro  5 02:33:28 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000246.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000229.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Estou tentando instalar o gpt1.0 no ubuntu, no kurumin e por ultimo no
+pc-bsd.
+Preciso de acertar pois tenho que fazer o gpt e o gpteditor funcionarem nos
+PCs da faculdade, mas pra isso tenho que conseguir pelomenos no meu.
+
+No bc-bsd o resultado do ./configure eh:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em pcbsd</A> /usr/home/rubens/Desktop/gpt-1.0]# ./configure
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for g++... g++
+checking for C++ compiler default output file name... a.out
+checking whether the C++ compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...
+checking for suffix of object files... o
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for style of include used by make... GNU
+checking dependency style of g++... gcc3
+checking build system type... i386-unknown-freebsd6.2
+checking host system type... i386-unknown-freebsd6.2
+checking for gcc... gcc
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ANSI C... none needed
+checking dependency style of gcc... gcc3
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... grep -E
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for BSD-compatible nm... /usr/bin/nm -B
+checking whether ln -s works... yes
+checking how to recognise dependent libraries... pass_all
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking dlfcn.h usability... yes
+checking dlfcn.h presence... yes
+checking for dlfcn.h... yes
+checking how to run the C++ preprocessor... g++ -E
+checking for g77... no
+checking for f77... f77
+checking whether we are using the GNU Fortran 77 compiler... yes
+checking whether f77 accepts -g... yes
+checking the maximum length of command line arguments... 196608
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for objdir... .libs
+checking for ar... ar
+checking for ranlib... ranlib
+checking for strip... strip
+checking if gcc static flag  works... yes
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC
+checking if gcc PIC flag -fPIC works... yes
+checking if gcc supports -c -o file.o... yes
+checking whether the gcc linker (/usr/bin/ld) supports shared libraries...
+yes
+checking whether -lc should be explicitly linked in... yes
+checking dynamic linker characteristics... freebsd6.2 ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+configure: creating libtool
+appending configuration tag &quot;CXX&quot; to libtool
+checking for ld used by g++... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld) supports shared libraries...
+yes
+checking for g++ option to produce PIC... -fPIC
+checking if g++ PIC flag -fPIC works... yes
+checking if g++ supports -c -o file.o... yes
+checking whether the g++ linker (/usr/bin/ld) supports shared libraries...
+yes
+checking dynamic linker characteristics... freebsd6.2 ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+appending configuration tag &quot;F77&quot; to libtool
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for f77 option to produce PIC... -fPIC
+checking if f77 PIC flag -fPIC works... yes
+checking if f77 supports -c -o file.o... yes
+checking whether the f77 linker (/usr/bin/ld) supports shared libraries...
+yes
+checking dynamic linker characteristics... freebsd6.2 ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking for antlr... /usr/local/bin/antlr
+./configure: line 19748: antlr-config: command not found
+./configure: line 19749: antlr-config: command not found
+checking for pcre-config... yes
+Usage: pcre-config [--prefix] [--exec-prefix] [--version] [--libs]
+[--libs-posix] [--cflags] [--cflags-posix]
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating doc/Makefile
+config.status: creating doc/man/Makefile
+config.status: creating exemplos/Makefile
+config.status: creating lib/Makefile
+config.status: creating src/modules/Makefile
+config.status: creating src/modules/parser/Makefile
+config.status: creating src/modules/interpreter/Makefile
+config.status: creating src/modules/c_translator/Makefile
+config.status: creating src/modules/x86/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+configure:
+Sumario:
+        antlr           : antlr
+        antlr includes  :
+        antr lib        :
+
+        pcre includes   :
+        pcre lib        : -L/usr/local/lib -lpcrecpp
+
+        CXXFLAGS        : -O2
+        MS Windows      : no
+______________________________________//____________________________.
+Jah no make diz:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">root em pcbsd</A> /usr/home/rubens/Desktop/gpt-1.0]# make
+make  all-recursive
+Making all in src
+Making all in modules
+Making all in parser
+antlr ./lexer.g
+Antlr parser generator   Version 1.33MR33   1989-2001
+./lexer.g, line 22: syntax error at &quot;{&quot; missing { QuotedTerm PassAction ! \&lt;
+\&gt; : }
+./lexer.g, line 23: warning: unknown meta-op: #include
+./lexer.g, line 24: warning: unknown meta-op: #include
+./lexer.g, line 25: warning: unknown meta-op: #include
+./lexer.g, line 25: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 26: warning: unknown meta-op: #include
+./lexer.g, line 26: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 27: warning: unknown meta-op: #include
+./lexer.g, line 27: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 27: syntax error at &quot;.&quot; missing { QuotedTerm PassAction ! \&lt;
+\&gt; : }
+./lexer.g, line 28: warning: unknown meta-op: #include
+./lexer.g, line 28: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 28: lexical error: invalid token (text was '/')
+./lexer.g, line 28: syntax error at &quot;okenStreamSelector&quot; missing {
+QuotedTerm PassAction ! \&lt; \&gt; : }
+./lexer.g, line 28: syntax error at &quot;.&quot; missing { QuotedTerm PassAction ! \&lt;
+\&gt; : }
+./lexer.g, line 30: syntax error at &quot;using&quot; missing PassAction
+./lexer.g, line 30: syntax error at &quot;namespace&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 30: error: duplicate rule definition: 'antlr'
+./lexer.g, line 30: syntax error at &quot;;&quot; missing { QuotedTerm PassAction ! \&lt;
+\&gt; : }
+./lexer.g, line 31: error: duplicate rule definition: 'using'
+./lexer.g, line 31: syntax error at &quot;namespace&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 31: syntax error at &quot;std&quot; missing { QuotedTerm PassAction !
+\&lt; \&gt; : }
+./lexer.g, line 31: syntax error at &quot;;&quot; missing Eof
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 107: lexical error: invalid token (text was '&amp;')
+./lexer.g, line 107: lexical error: invalid token (text was ',')
+./lexer.g, line 108: lexical error: invalid token (text was ',')
+./lexer.g, line 108: lexical error: invalid token (text was ',')
+./lexer.g, line 116: lexical error: invalid token (text was '-')
+./lexer.g, line 117: lexical error: invalid token (text was '-')
+./lexer.g, line 118: lexical error: invalid token (text was '-')
+./lexer.g, line 137: lexical error: invalid token (text was ''')
+./lexer.g, line 137: lexical error: invalid token (text was ''')
+./lexer.g, line 143: lexical error: invalid token (text was ''')
+./lexer.g, line 143: lexical error: invalid token (text was ''')
+./lexer.g, line 149: lexical error: invalid token (text was ''')
+./lexer.g, line 149: lexical error: invalid token (text was ''')
+./lexer.g, line 155: lexical error: invalid token (text was ''')
+./lexer.g, line 155: lexical error: invalid token (text was ''')
+./lexer.g, line 161: lexical error: invalid token (text was ''')
+./lexer.g, line 161: lexical error: invalid token (text was ''')
+./lexer.g, line 174: lexical error: invalid token (text was ''')
+./lexer.g, line 174: lexical error: invalid token (text was ''')
+./lexer.g, line 180: lexical error: invalid token (text was ''')
+./lexer.g, line 180: lexical error: invalid token (text was ''')
+./lexer.g, line 200: lexical error: invalid token (text was ''')
+./lexer.g, line 200: lexical error: invalid token (text was ''')
+./lexer.g, line 206: lexical error: invalid token (text was ''')
+./lexer.g, line 206: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 218: lexical error: invalid token (text was ''')
+./lexer.g, line 218: lexical error: invalid token (text was ''')
+./lexer.g, line 224: lexical error: invalid token (text was ''')
+./lexer.g, line 224: lexical error: invalid token (text was ''')
+./lexer.g, line 230: lexical error: invalid token (text was ''')
+./lexer.g, line 230: lexical error: invalid token (text was ''')
+./lexer.g, line 236: lexical error: invalid token (text was ''')
+./lexer.g, line 236: lexical error: invalid token (text was ''')
+./lexer.g, line 242: lexical error: invalid token (text was ''')
+./lexer.g, line 242: lexical error: invalid token (text was ''')
+./lexer.g, line 248: lexical error: invalid token (text was ''')
+./lexer.g, line 248: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 262: lexical error: invalid token (text was ''')
+./lexer.g, line 262: lexical error: invalid token (text was ''')
+./lexer.g, line 263: lexical error: invalid token (text was '$')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 277: lexical error: invalid token (text was '$')
+./lexer.g, line 278: lexical error: invalid token (text was ',')
+./lexer.g, line 279: lexical error: invalid token (text was ',')
+./lexer.g, line 281: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 304: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 314: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 332: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 341: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 355: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 361: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 422: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 429: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 445: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 509: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 521: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 522: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 529: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 554: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 555: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 558: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 558: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 559: warning: $getText not parameter, return value,
+(defined) element label
+*** Error code 1
+
+Stop in /usr/home/rubens/Desktop/gpt-1.0/src/modules/parser.
+*** Error code 1
+
+Stop in /usr/home/rubens/Desktop/gpt-1.0/src/modules.
+*** Error code 1
+
+Stop in /usr/home/rubens/Desktop/gpt-1.0/src.
+*** Error code 1
+
+Stop in /usr/home/rubens/Desktop/gpt-1.0.
+*** Error code 1
+
+Stop in /usr/home/rubens/Desktop/gpt-1.0.
+
+Nao sei o que fazer para acertar. Me ajudem por favor!
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071004/577958c1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071004/577958c1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000246.html">[gpt-usuarios] O que seria acesso aos serviços do kernel ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000229.html">[gpt-usuarios] tentativa de instalacao
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

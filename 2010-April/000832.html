@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGPT_1%3D2E0%3D2E4_-_sinal_de_n%3DFAmeros_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Freais_decimais_maiores_que_zero_e_menores_que_um%3F%3D&In-Reply-To=%3Ch2h92b9a8821004301351r51c22f3eta67cc2f4bf526cd%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FGPT_1%3D2E0%3D2E4_-_sinal_de_n%3DFAmeros_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Freais_decimais_maiores_que_zero_e_menores_que_um%3F%3D&In-Reply-To=%3Ch2h92b9a8821004301351r51c22f3eta67cc2f4bf526cd%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT 1.0.4 - sinal de números reais decimais maiores que zero e menores que um">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Abril 30 22:51:24 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#832">[ date ]</a>
+              <a href="thread.html#832">[ thread ]</a>
+              <a href="subject.html#832">[ subject ]</a>
+              <a href="author.html#832">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá Rafael,
+
+2010/4/30  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">rafael em ect.ufrn.br</A>&gt;:
+&gt;<i> Prezado Thiago,
+</I>&gt;<i> Boa tarde!
+</I>&gt;<i>
+</I>&gt;<i> Primeiramente parabéns pelo Projeto!
+</I>&gt;<i>
+</I>
+obrigado!
+
+&gt;<i> Estamos estudando a possibilidade de utilizar o G-Portugol (GPT 1.0.4)
+</I>&gt;<i> durante as aulas práticas da disciplina de Informática Fundamental,
+</I>&gt;<i> componente da grade curricular do curso de Bacharelado em Ciências e
+</I>&gt;<i> Tecnologia da UFRN (www.ect.ufrn.br).
+</I>&gt;<i>
+</I>
+bacana!
+
+&gt;<i> Instalei o GPT 1.0.4 a partir do código fonte disponibilizado em
+</I>&gt;<i> <A HREF="http://developer.berlios.de/project/showfiles.php?group_id=5791&amp;release_id=15686">http://developer.berlios.de/project/showfiles.php?group_id=5791&amp;release_id=15686</A>
+</I>&gt;<i> numa distribuição XUbuntu 9.04, seguindo as instruções do arquivo
+</I>&gt;<i> /gpt-1.0.4/INSTALL.
+</I>&gt;<i>
+</I>&gt;<i> Como teste, escrevi o código abaixo:
+</I>&gt;<i>
+</I>&gt;<i> algoritmo media;
+</I>&gt;<i>
+</I>&gt;<i> variáveis
+</I>&gt;<i>
+</I>&gt;<i> num1, num2, soma, media: real;
+</I>&gt;<i>
+</I>&gt;<i> fim-variáveis
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i>        imprima(&quot;Digite o primeiro numero: &quot;);
+</I>&gt;<i>        num1 := leia();
+</I>&gt;<i>        imprima(&quot;Digite o segundo numero: &quot;);
+</I>&gt;<i>        num2 := leia();
+</I>&gt;<i>        soma := (num1 + num2);
+</I>&gt;<i>        imprima(&quot;a soma e &quot;, soma);
+</I>&gt;<i>        media := soma/2;
+</I>&gt;<i>        imprima(&quot;a media e &quot;, media);
+</I>&gt;<i>
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> O código acima foi compilado normalmente.
+</I>&gt;<i>
+</I>&gt;<i> Quando entro com os valores, por exemplo, 6.6 para num1, e 5.3 para num2,
+</I>&gt;<i> enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 11.90
+</I>&gt;<i> a media e: 5.95
+</I>&gt;<i>
+</I>&gt;<i> Até aí tudo bem. Mas quando entro com os valores, por exemplo: 0.7 para
+</I>&gt;<i> num1 e 2 para num2, enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 1.30
+</I>&gt;<i> a media e: 0.65
+</I>&gt;<i>
+</I>&gt;<i> (Ao invés de uma soma, ocorreu uma subtração...)
+</I>&gt;<i>
+</I>&gt;<i> Quando entro com os valores, por exemplo, 0.6 para num1, e 0.3 para num2,
+</I>&gt;<i> enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: 0.90
+</I>&gt;<i> a media e: 0.45
+</I>&gt;<i>
+</I>&gt;<i> No caso acima, o resultado da soma foi menor que 1 (um), e a saída está
+</I>&gt;<i> correta;
+</I>&gt;<i>
+</I>&gt;<i> Porém, quando entro com os valores, por exemplo, 0.6 para num1, e 0.8 para
+</I>&gt;<i> num2, enxergo a seguinte saída:
+</I>&gt;<i>
+</I>&gt;<i> a soma e: -1.40
+</I>&gt;<i> a media e: 0.70
+</I>&gt;<i>
+</I>&gt;<i> Neste caso, o resultado da soma foi maior que 1 (um), e a saída está
+</I>&gt;<i> correta, porém com valor negativo.
+</I>&gt;<i>
+</I>&gt;<i> Diante do exposto, resolvi lhe encaminhar esta mensagem, pois acredito ter
+</I>&gt;<i> realizado a instalação do GPT 1.0.4 corretamente.
+</I>&gt;<i>
+</I>
+realmente, eu consegui reproduzir esses erros aqui. O problema está na
+manipulação/representação de números em ponto flutuante, mas ainda
+estou procurando a origem do erro.
+
+Ainda, eu verifiquei que essas saídas incorretas não ocorrem ao
+interpretar o algoritmo (-i) ou traduzi-lo para C (-t). Acredito que o
+uso do gpt em modo interpretado seja mais confiável....
+
+Agradeço as informações,
+--
+Thiago Silva
+Computer Science
+M.Sc. Candidate at Federal University of Pernambuco
+jabber/gtalk: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber-br.org</A>
+<A HREF="http://blog.sourcecraft.info">http://blog.sourcecraft.info</A>
+
+
+
+&gt;<i> Peço desculpas antecipadas, caso esteja cometendo algum erro na utilização
+</I>&gt;<i> do GPT, e agradeço desde já a atenção.
+</I>&gt;<i>
+</I>&gt;<i> No aguardo de suas considerações.
+</I>&gt;<i> Atenciosamente,
+</I>&gt;<i> Rafael Prazeres.
+</I>&gt;<i> Técnico de Tecnologia da Informação
+</I>&gt;<i> Escola de Ciências e Tecnologia - UFRN.
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#832">[ date ]</a>
+              <a href="thread.html#832">[ thread ]</a>
+              <a href="subject.html#832">[ subject ]</a>
+              <a href="author.html#832">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] CI para uso de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C92b9a8820709111747l44c67b97i5e6adca10e3e6178%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000121.html">
+   <LINK REL="Next"  HREF="000130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] CI para uso de estruturas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C92b9a8820709111747l44c67b97i5e6adca10e3e6178%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] CI para uso de estruturas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Setembro 12 02:47:45 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000121.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000130.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Não sei dizer se seria uma boa
+</I>&gt;<i> idéia nós termos o tipo ponteiro explicitamente (mesmo que só para uso da
+</I>&gt;<i> VM).
+</I>
+Não sei. A ausência de ponteiro ajuda/atrapalha nos bindings com
+bibliotecas externas ou chamadas de sistema? A propósito, como estas
+coisas seriam feitas a nível de opcode?
+
+&gt;<i> Como a gente geraria o &quot;deslocamento&quot; para acessar z ?
+</I>
+Poderiamos adicionar um nível de indireção? Digamos que o formato de
+estruturas seja uniforme, independente do tipo de seus membros. Os
+indices da estrutura não contém o dado, e sim, um apontador para o
+dado. Dessa forma, os elementos internos da estrutura são ponteiros,
+com tamanho constante. Talvez isso preserve os opcodes de questões de
+endereçamento.
+
+//Releve as loucuras abaixo, pois é apenas uma ilustração:
+
+t1 := &amp;t
+t1 := t1 + 2 //pointer para o segundo elemento
+*(*t1) := 10
+
+Acima, o calculo de endereçamento foi abstraído.
+
+&gt;<i> param &lt;inteiro&gt; é um comando...
+</I>&gt;<i>
+</I>&gt;<i> Para termos param *t2, teriamos que ter uma outra variante de param que
+</I>&gt;<i> aceitasse ponteiros.
+</I>&gt;<i> [...]
+</I>
+Ah, entendi! Ajuda se tratarmos como o mesmo tipo um ponteiro e um inteiro?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000121.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000130.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

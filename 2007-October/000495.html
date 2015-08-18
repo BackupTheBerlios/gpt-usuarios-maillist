@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C92b9a8820710210846i6ed9f07ds30d5be1d5b183f27%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000489.html">
+   <LINK REL="Next"  HREF="000496.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSintaxe_para_defini%3DE7%3DE3o_de_const%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fantes_e_vari%3DE1veis_locais%3F%3D&In-Reply-To=%3C92b9a8820710210846i6ed9f07ds30d5be1d5b183f27%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Domingo Outubro 21 17:46:27 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000489.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000496.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#495">[ date ]</a>
+              <a href="thread.html#495">[ thread ]</a>
+              <a href="subject.html#495">[ subject ]</a>
+              <a href="author.html#495">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/20/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Atualmente, pelo que eu me lembre, temos a seguinte sintaxe para
+</I>&gt;<i> definição de constantes e variáveis locais:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt; &gt;     y: inteiro;
+</I>&gt;<i> &gt; &gt;     constante z: inteiro = 99;
+</I>&gt;<i> &gt; &gt; início
+</I>&gt;<i> &gt; &gt; fim
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Vocês não acham que fica um pouco estranho explicitar as constantes mas
+</I>&gt;<i> não as variáveis ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sim, é estranho. Já tá certo a utilizacao do := para inicialização, né?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Ops, tá sim. Errei no exemplo :-)
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Eu sugiro algo bem simples para uniformizar isso:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt; &gt;     variável y: inteiro;
+</I>&gt;<i> &gt; &gt;     constante z: inteiro = 99;
+</I>&gt;<i> &gt; &gt; início
+</I>&gt;<i> &gt; &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Neste caso, teria q escrever variavel ou constante para cada uma?
+</I>&gt;<i>
+</I>&gt;<i> Neste caso sim.
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Ou ainda utilizar a mesma sintaxe para definição de constantes e
+</I>&gt;<i> variáveis globais:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; procedimento p1( x: inteiro )
+</I>&gt;<i> &gt; &gt;     variáveis
+</I>&gt;<i> &gt; &gt;         y: inteiro;
+</I>&gt;<i> &gt; &gt;     fim-variáveis
+</I>&gt;<i> &gt; &gt;     constantes
+</I>&gt;<i> &gt; &gt;         z: inteiro = 99;
+</I>&gt;<i> &gt; &gt;     fim-constantes
+</I>&gt;<i> &gt; &gt; início
+</I>&gt;<i> &gt; &gt; fim
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Isso. Apesar de escrever muito, pelo menos o sujeito nao tem q ter duas
+</I>&gt;<i> formas de declaracao em mente.
+</I>&gt;<i>
+</I>&gt;<i> Concordo... sintaxe que o cara tem que pensar muito é só para complicar a
+</I>&gt;<i> vida :-)
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Eu optaria por deixar as duas últimas sintaxes, ou seja, ele tanto pode
+</I>&gt;<i> utilizar variável e constante como variáveis..fim-variáveis e
+</I>&gt;<i> constantes..fim-constantes. Com isso o usuário usa a que mais lhe agradar ou
+</I>&gt;<i> for conveniente.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sim, sim. Concordo. Ele passaria a escrever variavel e constante qd
+</I>&gt;<i> tivesse a outra forma bem fixada, e cheio dela tb. :D
+</I>&gt;<i>
+</I>&gt;<i> Isso.
+</I>&gt;<i>
+</I>&gt;<i> O que você acha Thiago ?
+</I>
+Dois contra um ;)
+
+Brincadeiras à parte, pra mim tá bom.
+Vou atualizar a gramática.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000489.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000496.html">[gpt-usuarios] Sintaxe para definição de constantes e variáveis locais
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#495">[ date ]</a>
+              <a href="thread.html#495">[ thread ]</a>
+              <a href="subject.html#495">[ subject ]</a>
+              <a href="author.html#495">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

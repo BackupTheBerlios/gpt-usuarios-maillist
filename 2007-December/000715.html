@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Build System
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C92b9a8820712190717r4b3849abk5aec729a7b4e623c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000714.html">
+   <LINK REL="Next"  HREF="000718.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Build System</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Build%20System&In-Reply-To=%3C92b9a8820712190717r4b3849abk5aec729a7b4e623c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Build System">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Dezembro 19 16:17:28 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000714.html">[gpt-usuarios] Build System
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000718.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#715">[ date ]</a>
+              <a href="thread.html#715">[ thread ]</a>
+              <a href="subject.html#715">[ subject ]</a>
+              <a href="author.html#715">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Acabei de adicionar --with-common aos scripts &quot;configure&quot; dos
+subprojetos que dependem de &quot;common&quot;.
+
+Com a integração, ficou meio chato focar em um projeto em particular,
+então adicionei essa variável. Sem ela, eramos obrigados a construir a
+arvore inteira do gpt2 em um diretório raiz, para que os subprojetos
+encontrassem a libgptcommon.la, ou teriamos que modificar os
+Makefile.am.
+
+Agora, para trabalhar, por exemplo, na gptvm de forma independente,
+basta construir o common antes:
+
+$ mkdir -p common/_build
+$ cd common/_build
+$ ../configure &amp;&amp; make
+
+E depois, configurar e construir a VM localmente, indicando o caminho
+relativo para a libgptcommon.la:
+
+$ mkdir gptvm/_build
+$ cd gptvm/_build
+$ ../configure --with-common=../../_build/common/src/libgptcommon.la
+$ make
+
+Foi o melhor que consegui pensar, por enquanto. Se tiverem problemas
+ou melhores idéias, por favor :)
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000714.html">[gpt-usuarios] Build System
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000718.html">[gpt-usuarios] Build System
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#715">[ date ]</a>
+              <a href="thread.html#715">[ thread ]</a>
+              <a href="subject.html#715">[ subject ]</a>
+              <a href="author.html#715">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

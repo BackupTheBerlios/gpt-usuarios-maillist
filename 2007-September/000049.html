@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C92b9a8820709052124p25b2b27dw88645c55890d196a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000046.html">
+   <LINK REL="Next"  HREF="000052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20v2.0&In-Reply-To=%3C92b9a8820709052124p25b2b27dw88645c55890d196a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Setembro  6 06:24:37 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000046.html">[gpt-usuarios] GPT v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000052.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/5/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Um outro ponto que levanto aqui é que, talvez, seja mais interessante a
+</I>&gt;<i> gente gerar um IC próprio, antes de gerar o assembly java. Com isso a gente
+</I>&gt;<i> ganha a possibilidade de criar um IC em português (assim como o gpt), e esse
+</I>&gt;<i> IC pode ser traduzido para bytecode java, dotnet, C, C++, Pascal,
+</I>
+Gostei muito da idéia de criar o IC em português :)
+
+&gt;<i> ... Esse
+</I>&gt;<i> IC pode ser considerado o nosso assembly, ou seja, poderíamos ter um
+</I>&gt;<i> assembly em português que, se necessário, poderia ser inserido diretamente
+</I>&gt;<i> dentro do código gpt. O fator negativo é que temos mais uma etapa no
+</I>&gt;<i> processo de compilação.
+</I>
+Realmente. Mas é um fator negativo pequeno próximo aos benefícios, ao meu ver.
+
+&gt;<i> Eu já fiz isso em um projeto anterior e, apesar do
+</I>&gt;<i> &quot;trabalho extra&quot;, valeu a pena, porque como eu tenho um montador assembly
+</I>&gt;<i> para a minha VM, outras linguagens podem gerar bytecode para a minha VM.
+</I>&gt;<i> Dessa forma a gente gera a possibilidade de utilizarmos a jvm, o dotnet, ou
+</I>&gt;<i> gerar bytecode para uma VM própria. Arquitetura bem mais flexível, porém, um
+</I>&gt;<i> pouco mais complexa. Se bem que expandir uma arquitetura não necessariamente
+</I>&gt;<i> a deixa mais complexa e, no nosso caso, estaremos dividindo mais as etapas
+</I>&gt;<i> do compilador, o que deixaria cada etapa um pouco menos complexa.
+</I>
+Concordo.
+
+&gt;<i> &gt; b) desenvolver wrappers em português/g-portugol para a API do Java.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Acho que é possível automatizar bem essa tarefa,
+</I>
+É, entendo que muitas pessoas utilizam geradores, por outro lado,
+existe a etapa de tradução de inglês para portugês :(
+
+&gt;<i> Concordo com você sim. Só não sei como ficaria a questão de utilizar libs em
+</I>&gt;<i> que não fosse possível ver código em português, mas milagre a gente também
+</I>&gt;<i> não consegue fazer rsrsrs.
+</I>
+Haha. É, essa parte de exibir código de libs em inglês não há muito o
+que a gente possa fazer (a não ser que você queira pirar e aplicar o
+gettext aos códigos fontes, por ex.). Se utilizamos a biblioteca XYZ,
+paciência...não vamos implementá-la em português. O melhor que podemos
+fazer seriam wrappers em pt_BR para a API.
+
+
+&gt;<i> Eu acho que também pesa a falta de controle que a gente teria sobre a VM.
+</I>&gt;<i> Se, futuramente, a gente alterar algo na linguagem, e acharmos conveniente
+</I>&gt;<i> colocar um suporte direto na VM, a gente altera e pronto. Com a jvm a gente
+</I>&gt;<i> dança conforme a música da SUN e era isso :-)
+</I>
+Concordo.
+
+&gt;<i> &gt; Sobre a outra opção (uma nova VM), eis os benefícios levantados:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -Mais divertido de se implementar;
+</I>&gt;<i> &gt; -Maior controle sobre a arquitetura;
+</I>&gt;<i> &gt; -Permite oferecer uma plataforma para experiência e aprendizado;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Nem tinha lembrado desse item. A VM em si já é um projeto didático. Tem
+</I>&gt;<i> algumas faculdades que usam VM's desenvolvidas em projetos de pesquisa para
+</I>&gt;<i> ensinar o básico sobre arquitetura de sistemas e de máquinas.
+</I>
+Ta aí, se fizermos um bom trabalho.....teremos outra gama de alunos se
+debruçando sobre o código.
+
+&gt;<i> &gt; -Se for viável, permitir assembly inline.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Isso é totalmente viável. Eu só não coloquei isso no trabalho que desenvolvi
+</I>&gt;<i> porque ninguém pediu. Seria algo para ser feito em poucas horas. Alias, o
+</I>&gt;<i> pessoal que usava a minha VM (holovm) utilizava o compilador e era isso.
+</I>&gt;<i> Eles não estavam muito interessados em ver o assembly por trás de tudo isso.
+</I>
+Perfeito.
+
+&gt;<i> Teria também o fato de ser bem mais fácil criar um debugger sobre uma VM que
+</I>&gt;<i> a gente desenvolveu, e integrá-lo com um editor de textos. A gente também
+</I>&gt;<i> poderia desenvolver um ambiente de visualização interno da VM onde, durante
+</I>&gt;<i> a execução, opcode a opcode, o usuário poderia ver o que estaria acontecendo
+</I>&gt;<i> nas &quot;entranhas&quot; da VM (situação da pilha, próximo opcode a ser executado,
+</I>&gt;<i> conteúdo de variáveis, entre outros).
+</I>
+Excelente.
+
+&gt;<i> De qualquer forma imagino que seja viável desde que a gente escolha uma
+</I>&gt;<i> biblioteca para GUI e pronto. Nada de deixar o usuário escolher qual
+</I>&gt;<i> biblioteca ele quer. Não que isso não possa ser feito posteriormente, mas a
+</I>&gt;<i> nossa meta seria a biblioteca X. Quem quer outra sinta-se a vontade de
+</I>&gt;<i> alterar hehehe.
+</I>
+Eu não sei se fariamos isso a nível de bindings. Supondo que sim,
+creio que a coisa fica mais fácil, neste aspecto. Podemos investigar
+melhor, posteriormente.
+
+&gt;<i> Eu tentei ser o mais imparcial possível, mas certamente vou &quot;tender&quot; sobre
+</I>&gt;<i> nós implementarmos a nossa própria VM :-)
+</I>
+Depois desta discussão eu estou convencido a ir nesta linha, também.
+
+&gt;<i> Como eu já tenho a implementação de uma VM (holovm) funcional, com mais
+</I>&gt;<i> recursos do que o gpt tem hoje, e portável entre Linux, Windows e MAC, nada
+</I>&gt;<i> impede que a gente remodele os opcodes, acrescente, etc e tal, e utilize o
+</I>&gt;<i> código dela como base. Ela é GPL então não teria problemas de fazermos isso.
+</I>&gt;<i> Claro, trocaríamos o nome também, sem problemas, e retiraríamos muito lixo
+</I>&gt;<i> que tem por lá :-)
+</I>&gt;<i>
+</I>&gt;<i> Também podemos iniciar uma &quot;from scratch&quot;, mas certamente eu copiaria um ou
+</I>&gt;<i> outro código da holovm para podermos ter algo funcional mais rapidamente.
+</I>
+Ok.
+
+&gt;<i> De forma alguma estou querendo dizer que não vou contribuir se você decidir
+</I>&gt;<i> por outro caminho, ou que uma ou outra idéia que dei é melhor que outra.
+</I>&gt;<i> Como lhe disse antes, só estou naquele conflito do &quot;mais certo&quot; e o &quot;mais
+</I>&gt;<i> legal&quot; hehehe.
+</I>&gt;<i>
+</I>
+Entendo. Bom, acho que já podemos ir para o próximo passo. Vou
+instalar um wikki no site do gpt e colocar um sumário das atividades
+propostas e discutidas aqui. Organizando isso, a gente pode decompor e
+discutir demais tópicos e subtópicos à medida do necessário. Adianto
+que serão dois branches independentes de atividades (mas com
+interceções, visto que o projeto &quot;v2.0&quot; depende de aspectos do
+&quot;v1.5&quot;).
+
+Tendo em vista a dualidade das áreas de trabalho, o pequeno número de
+voluntários e a &quot;fragilidade&quot; do comprometimento que temos para com a
+realização das tarefas e do projeto como um todo, penso que o melhor
+que posso fazer é oferecer um menu de atividades para todos nós. A
+justificativa e importância de cada trabalho está razoavelmente
+justificada e debatida (e podemos voltar a elas a qualquer momento,
+bastando gritar), então deixo a cargo de todos nós escolhermos com
+nosso próprio juízo aquilo que estaremos trabalhando e ajudando,
+afinal, ninguém melhor para gerenciar nosso tempo livre e no que
+podemos ser úteis do que nós mesmos.
+
+Fora isso, não há responsabilidade sobre esta ou aquela atividade*, o
+que temos é apenas uma &quot;flat list&quot; de afazeres. Óbviamente, ajudas e
+cross-development são sempre bem vindos, basta gritar.
+
+
+* Quanto as suas atividades, Adorilson, eu gostaria de ter algum input
+sobre a exclusividade ou não da implementação delas por vc, visto que
+são parte do seu tcc (estou um pouco perdido a este respeito).
+Gostaria de saber com qual liberdade podemos te ajudar ou não nestas
+tarefas e, se a implementação dos itens fosse feito por terceiros,
+isso te prejudicaria. No caso mais estreito, onde fosse exigido que
+estas tarefas sejam desempenhadas por você, exclusivamente, é você
+quem estaria como responsável sobre o branch 1.5.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000046.html">[gpt-usuarios] GPT v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000052.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

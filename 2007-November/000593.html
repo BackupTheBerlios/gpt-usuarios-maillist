@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sistema de tipos
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C9a3912af0711120529xd3b7536va0a4e613df5f5794%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000587.html">
+   <LINK REL="Next"  HREF="000594.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sistema de tipos</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sistema%20de%20tipos&In-Reply-To=%3C9a3912af0711120529xd3b7536va0a4e613df5f5794%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sistema de tipos">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Novembro 12 14:29:39 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000587.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000594.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#593">[ date ]</a>
+              <a href="thread.html#593">[ thread ]</a>
+              <a href="subject.html#593">[ subject ]</a>
+              <a href="author.html#593">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Acabei de criar uma página no wiki para descrever o sistema de tipos e
+</I>&gt;<i> operações da v2:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://gpt.berlios.de/wikki/index.php/Sistema_de_Tipos">http://gpt.berlios.de/wikki/index.php/Sistema_de_Tipos</A>
+</I>
+
+ Sobre o trecho no wikki:
+
+
+p : P(inteiro, matriz(T)))
+p : P(matriz(T), inteiro)
+
+f : F(matriz(K), literal) -&gt; lógico
+f : F(literal, matriz(K)) -&gt; real
+
+Ali diz que P é sobrecarregada  e F é ambígua... P ok, mas F eu não
+entendi...
+
+
+Se puderem, gostaria que avaliassem e comentassem, em especial ao que
+&gt;<i> se refere a matrizes, pois ainda não está claro pra mim quais os
+</I>&gt;<i> limites de operações e, atualmente, de que forma podemos fazer
+</I>&gt;<i> atribuições entre matrizes, declarar matrizes sem definir o tamanho
+</I>&gt;<i> das dimensões e onde podemos fazer isso (area global? local? lista
+</I>&gt;<i> parâmetros? qualquer lugar?). Vi exemplos de omissão do tamanho da
+</I>&gt;<i> dimensão em lista de parâmetros, mas gostaria de ter uma idéia melhor
+</I>&gt;<i> do é possível e do que não é.
+</I>
+
+Pelo que temos definido no wikki, matrizes podem ser passadas para
+subrotinas, com ou sem tamanho definido. Matrizes podem ser criadas com ou
+sem tamanho definido, tanto na área local como na global. A única coisa que
+não está flexível no momento é que, quando definido uma matriz, o número de
+dimensões que ela tem deve ser informado e, consequentemente, não é possível
+mudar o seu número de dimensões durante a execução.
+
+Por exemplo, gostaria de saber se os seguintes casos são validos,
+&gt;<i> atualmente:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> //#1 - atribuição de matrizes
+</I>&gt;<i>
+</I>&gt;<i> m1 : matriz[10] de inteiros;
+</I>&gt;<i> m2 : matriz[10] de inteiros;
+</I>&gt;<i>
+</I>&gt;<i> m1 := m2; //erro?
+</I>
+
+Funciona.
+
+//#2 - atribuição de &quot;dimensões&quot;
+&gt;<i>
+</I>&gt;<i> m1 : matriz[10][10] de inteiros;
+</I>&gt;<i> m2 : matriz[10] de inteiros;
+</I>&gt;<i>
+</I>&gt;<i> m1[3] := m2; //erro?
+</I>
+
+Não tem opcode para isso, mas tendo o opcode isso poderia ser implementado
+sem problemas. Existe apenas o opcode para copiar de uma matriz para outra,
+assumindo que ambas tem o mesmo número de dimensões (indifere o número de
+elementos).
+
+m2      :=  m1[0]; //erro?
+
+
+Mesmo caso acima. Atualmente só temos um opcode que copia de uma matriz para
+outra, e este opcode assume que as duas matrizes tem a mesma dimensão
+(tamanho não importa).
+
+//#3 - omissão do tamanho das dimensões na declaração
+&gt;<i>
+</I>&gt;<i> m1 : matriz[][] de inteiros; //...ou só nos parâmetros?
+</I>&gt;<i>
+</I>&gt;<i> //----
+</I>
+
+Ok, funciona.
+
+Julgo essa parte de atribuições bastante importante. Especialmente no
+&gt;<i> seguinte caso:
+</I>&gt;<i>
+</I>&gt;<i> estrutura T
+</I>&gt;<i> i : inteiro;
+</I>&gt;<i> fim-estrutura
+</I>&gt;<i>
+</I>&gt;<i> estrutura T2
+</I>&gt;<i> m : matriz[10] do tipo inteiro;
+</I>&gt;<i> fim-estrutura
+</I>&gt;<i>
+</I>&gt;<i> e1 : T;
+</I>&gt;<i> e2 : T;
+</I>&gt;<i>
+</I>&gt;<i> e1 := e2; //ok.
+</I>
+
+Isso funciona, sem, problemas. Tem um opode para copiar de uma área de
+memória para outra.
+
+e3 : T2;
+&gt;<i> e4 : T2;
+</I>&gt;<i>
+</I>&gt;<i> e3 := e4; //se não pudermos fazer atribuição de matrizes, isso não
+</I>&gt;<i> funcionará!
+</I>
+
+ Isso funciona, mas tem um porém que eu não tinha notado antes. Nessa
+atribuição o opcode copia a área de e4 para e3. Porém m é um ponteiro
+internamente em e4 e o opcode copiará o ponteiro, sem duplicar a área de
+memória de m. Isso tem que ser revisto...
+
+Uma solução (sem pensar muito) seria o compilador gerar código para copiar
+e4 e código para copiar a matriz de um lugar para outro. Isso implicaria em
+1 opcode a mais na geração de código (impacto pequeno). Salietando que a
+GptVM não tem muita consciência dos dados que está manipulando. Por exemplo,
+uma estrutura é, para a GptVM, uma sequência de bytes...
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/7e82720a/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071112/7e82720a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000587.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000594.html">[gpt-usuarios] Sistema de tipos
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#593">[ date ]</a>
+              <a href="thread.html#593">[ thread ]</a>
+              <a href="subject.html#593">[ subject ]</a>
+              <a href="author.html#593">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] CI para uso de estruturas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709111225g7878ada4m210c11c1bc79d2c5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000116.html">
+   <LINK REL="Next"  HREF="000127.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] CI para uso de estruturas</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20CI%20para%20uso%20de%20estruturas&In-Reply-To=%3C9a3912af0709111225g7878ada4m210c11c1bc79d2c5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] CI para uso de estruturas">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Setembro 11 21:25:45 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000116.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000127.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Oi.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu coloquei um exemplo no wikki (exemplo 15) que seria a tradução de gpt
+</I>&gt;<i> &gt; para CI.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Neste CI fica claro o porque das instruções como x := &amp;y, x := *y, e
+</I>&gt;<i> afins.
+</I>&gt;<i>
+</I>&gt;<i> Perfeito. Apenas um detalhe, no exemplo do deslocamento com 4 bytes, a
+</I>&gt;<i> gente colocaria algo simbolico, como 1 word correto?
+</I>
+
+Eu entendi o que você quer, mas não consegui &quot;enquadrar&quot; as idéias. Na
+teoria, para utilizarmos 1 ao invés do sizeof do tipo, t1 (no exemplo) teria
+que ser um tipo ponteiro de int (como em C). Não sei dizer se seria uma boa
+idéia nós termos o tipo ponteiro explicitamente (mesmo que só para uso da
+VM). A idéia inicial seria enquadrar ponteiros internos da VM como inteiros.
+
+Além disso, imagine a seguinte estrutura:
+
+estrutura teste
+    x : inteiro;
+    y : caractere;
+    z : inteiro;
+fim-estrutura
+
+...
+
+t: teste;
+
+...
+
+t.z := 10;
+
+...
+
+Como a gente geraria o &quot;deslocamento&quot; para acessar z ? Eu não consegui
+visualizar outra forma (não quer dizer que não tenha, claro) de acessar
+estruturas com tipos de dados diferentes do que gerar algo como:
+
+t1 := &amp;t
+t1 := t1 + 5 // sizeof(inteiro) + sizeof(caractere)
+*t1 := 10
+
+Resumindo, eu &quot;acho&quot; que os deslocamentos teriam que ser feitos conforme o
+tamanho do tipo de dado porque dai a gente consegue resolver vários
+problemas com esse deslocamento, e t1 (no exemplo) poderia ser um tipo
+inteiro internamente.
+
+Talvez a sua regra seja válida para vetores, porque cada elemento sempre tem
+o mesmo tamanho...
+
+&gt;<i> Estou tentando gerar um conjunto reduzido de instruções. Exemplo:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; param *t1 // não existe
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; O correto seria
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; t2 := *t1
+</I>&gt;<i> &gt; param t2
+</I>&gt;<i>
+</I>&gt;<i> Este eu não entendi...
+</I>
+
+param &lt;inteiro&gt; é um comando...
+
+Para termos param *t2, teriamos que ter uma outra variante de param que
+aceitasse ponteiros.
+
+Se a gente necessitar de algo como param &amp;t1, teríamos que implementar outra
+variante de param. E assim sucessivamente.
+
+Agora, se param só aceitar os tipos primitivos da linguagem, a gente só
+precisa ter as variantes de param para os tipos primitivos, e nada mais.
+Quando necessário empilhar algo diferente disso, terá que atribuir o valor
+ou endereço para uma variável temporária (inteiro, por exemplo), e empilhar
+esse inteiro.
+
+É algo como as restrições que temos em assembly em várias arquiteturas.
+Para multiplicar é preciso colocar o valor em tal local (registrador,
+normalmente), para obter o resultado em tal local.
+
+Claro que a gente pode gerar várias instruções se quiser, mas quanto mais
+instruções maior o número de opcodes e consequentemente mais trabalhoso será
+de criar e manter a VM. Poderíamos dizer que a gente está tentando gerar uma
+VM RISC, e não uma CISC.
+
+Talvez eu tenha mais complicado do que explicado hehehe.
+
+Mas avisa que tento explicar melhor, sem problemas.
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070911/449ed195/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070911/449ed195/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000116.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000127.html">[gpt-usuarios] CI para uso de estruturas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

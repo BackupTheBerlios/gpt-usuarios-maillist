@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] ANTLR v3 - linguagem alvo
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710160706l470ddc57sde5feb57934c5117%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000355.html">
+   <LINK REL="Next"  HREF="000359.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] ANTLR v3 - linguagem alvo</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20ANTLR%20v3%20-%20linguagem%20alvo&In-Reply-To=%3C92b9a8820710160706l470ddc57sde5feb57934c5117%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] ANTLR v3 - linguagem alvo">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 16:06:55 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000355.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000359.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#356">[ date ]</a>
+              <a href="thread.html#356">[ thread ]</a>
+              <a href="subject.html#356">[ subject ]</a>
+              <a href="author.html#356">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Eu prefiro tentar &quot;dar um gás&quot; e usar o antlr. Eu gostei muito da gramática
+</I>&gt;<i> e dos recursos desse bichinho :-)
+</I>
+Massa :)
+
+&gt;<i> Acho que eu perdi algo.... isso não era para depois da V2 ???
+</I>&gt;<i>
+</I>
+Uops....eu que me adiante, foi mal :) to pirando nesse fim de ano. Sério....
+
+Fazendo um rollback mental, então...
+
+Vamos esquecer o antlr com python. Para o compilador oficial, acho que
+todos concordam que não é uma dependência interessante.
+
+O que nos resta, então, é o antlr v3 com C, ou antlr v2 com C++.
+
+Eu fiz uns poucos testes aqui com o v3/C e UTF-8 ontem, e a coisa
+pareceu funcionar sem maiores problemas. Mas, eis minhas impressões
+iniciais:
+
+1) O código C não é dos mais bonitos (nomeclatura, estilo, etc)...mas
+td bem, eu tenho estômago...
+
+2) Falta documentação do target C. Acho que tem api gerada pelo
+doxygen, mas não tive tempo de dar uma lida. Algumas coisas básicas eu
+tive que sacar por tentativa e erro, inspecionando o código gerado.
+
+3) Ainda não consegui entender e utilizar direito o mecanismo de
+excessão. Pelo que me lembro, essa é uma parte importante do
+compilador e quero estar certo de que está funcionando bem (afinal, C
+não tem excessões).
+
+Apesar de tudo, pelo menos os exemplos de código são abarrotados de
+comentários explicando o que está acontencendo.
+
+Mas senti falta de uma boa documentação do próprio antlr. Talvez eu
+esteja com problemas em navegar no wiki, então não vou assumir muita
+coisa por enquanto. Mas estou achando difícil encontrar explicações
+para vários recursos.
+
+No mais, estou esperando meu livro chegar (sim, comprei o livro do antlr).
+
+Quanto a tradução dirigida pela sintaxe, não sei. Talvez possamos
+utilizá-la para gerar código rapidamente, mas no fim das contas, acho
+que será interessante termos a AST, especialmente para fazermos coisas
+como o fluxograma do algoritmo do usuário, de forma rápida.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000355.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000359.html">[gpt-usuarios] ANTLR v3 - linguagem alvo
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#356">[ date ]</a>
+              <a href="thread.html#356">[ thread ]</a>
+              <a href="subject.html#356">[ subject ]</a>
+              <a href="author.html#356">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

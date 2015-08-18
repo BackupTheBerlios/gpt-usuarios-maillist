@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_V2_%3D28constantes_e_pass%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fagem_por_refer%3DEAncia%3D29%3F%3D&In-Reply-To=%3C92b9a8820710111145s14730677t48b1e4538bf5151c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000294.html">
+   <LINK REL="Next"  HREF="000290.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática V2 (constantes e passagem por referência)</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_V2_%3D28constantes_e_pass%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fagem_por_refer%3DEAncia%3D29%3F%3D&In-Reply-To=%3C92b9a8820710111145s14730677t48b1e4538bf5151c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática V2 (constantes e passagem por referência)">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 11 20:45:11 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000294.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000290.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Adicionei à gramática regras para definição de constantes e
+parâmetros-referência.
+
+Exemplos:
+
+constantes
+  PI : real = 3.141592653589793238;
+fim-constantes
+
+//Proponho, também, uma regra para inicialização de tipos compostos,
+//como vetores/matrizes e estruturas:
+
+estrutura T
+  a: literal;
+  b: vetor[3] de inteiros;
+fim-estrutura
+
+constantes
+  v1 : T = [a: &quot;teste&quot;, b: [9,8,7]];
+fim-constantes
+
+//Constantes também podem ser usadas para parâmetros-referência
+
+função f( ref constante t: inteiro) ...
+
+//E podem ser declarados localmente:
+
+função f()
+ v1: inteiro;
+ constante v2 : inteiro = 10;
+início
+//...
+fim
+
+
+Comentários?
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000294.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000290.html">[gpt-usuarios] Gramática V2 (constantes e passagem por referência)
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

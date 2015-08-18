@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710111200k6ac0e0fmcd478fe588fb65f4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000286.html">
+   <LINK REL="Next"  HREF="000291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C92b9a8820710111200k6ac0e0fmcd478fe588fb65f4%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Outubro 11 21:00:39 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000286.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000291.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#289">[ date ]</a>
+              <a href="thread.html#289">[ thread ]</a>
+              <a href="subject.html#289">[ subject ]</a>
+              <a href="author.html#289">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/11/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Pensando rapidamento sobre isso, eu acho teria implicações sobre a VM sim,
+</I>&gt;<i> mas não sei dizer o quanto agora sem uma análise maior.
+</I>&gt;<i>
+</I>&gt;<i> Saliento que a área de dados é uma estrutura simples, apenas uma sequência
+</I>&gt;<i> de bytes, similar a área de dados de um processador real. Por exemplo, se
+</I>&gt;<i> tivermos 1 variável caractere (c1) e duas variáveis inteiras (i1 e i2),
+</I>&gt;<i> teríamos  a seguinte representação na área de dados:
+</I>&gt;<i>
+</I>&gt;<i> 0000: 00 // Endereço 0000, um byte, alocado para c1
+</I>&gt;<i> 0001: 00 00 00 00 // Endereço 0001, 4 bytes, alocados para i1
+</I>&gt;<i> 0005: 00 00 00 00 // Endereço 0005, 4 bytes, alocados para i2
+</I>&gt;<i>
+</I>&gt;<i> Por isso essa questão de tamanhos dinâmicos pode impactar bastante no que já
+</I>&gt;<i> está definido para a versão 2, tanto em termos de armazenamento como
+</I>&gt;<i> opcodes.
+</I>
+Certo.
+
+&gt;<i> Pensando um pouquinho mais, haveria algum problema se a gente sempre
+</I>&gt;<i> utilizasse o maior tipo disponível na arquitetura para armazenar uma
+</I>&gt;<i> determinada informação ? Por exemplo, real utilizaria double, int usaria
+</I>&gt;<i> int64, ...
+</I>
+É uma. Acho que isso resolve.
+
+&gt;<i> Eu só não sei dizer se isso resolveria completamente o problema que você
+</I>&gt;<i> relatou porque a minha solução só resolve para os casos onde seja possível
+</I>&gt;<i> mapear a informação para um tipo nativo da máquina.
+</I>&gt;<i>
+</I>&gt;<i> O 983758604983758604983758604983758604983758604983758604
+</I>&gt;<i> que você colocou acima não dá pra mapear em um int64...
+</I>
+Realmente. Mas como o número gigante aí só seria um benefício
+colateral de ter variáveis com tamanho arbitrário, não possibilitar
+este tipo de número não terá nenhum impacto relevante.
+
+
+&gt;<i> []'s
+</I>&gt;<i> Alex Sandro Garzão
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000286.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000291.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#289">[ date ]</a>
+              <a href="thread.html#289">[ thread ]</a>
+              <a href="subject.html#289">[ subject ]</a>
+              <a href="author.html#289">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

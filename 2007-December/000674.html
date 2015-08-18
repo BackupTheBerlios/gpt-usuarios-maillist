@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Tamanho dos dados
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C92b9a8820712150632j697d871fs4144875a3fb5f17f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000665.html">
+   <LINK REL="Next"  HREF="000678.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Tamanho dos dados</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Tamanho%20dos%20dados&In-Reply-To=%3C92b9a8820712150632j697d871fs4144875a3fb5f17f%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Tamanho dos dados">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Dezembro 15 15:32:16 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000665.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000678.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#674">[ date ]</a>
+              <a href="thread.html#674">[ thread ]</a>
+              <a href="subject.html#674">[ subject ]</a>
+              <a href="author.html#674">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 15, 2007 7:40 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> &gt; Qual o tamanho dos dados/tipos?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Todos são 32 bits, e só o o tipo real é 64?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  Não exatamente.
+</I>&gt;<i>
+</I>&gt;<i> Para INT, CHAR e BOOL: sizeof(int);
+</I>&gt;<i>  Para REAL: sizeof(double);
+</I>&gt;<i>  Para STRING: sizeof(char)+sizeof(void*);
+</I>&gt;<i>  Para MATRIX: sizeof(void*);
+</I>&gt;<i>  Para DATA: tamanho definido pelo usuário.
+</I>&gt;<i>
+</I>
+Algumas dúvidas:
+
+-Qual o motivo do flag no tipo string?
+-Quando um &quot;data&quot; é empilhado, só o endereço é empilhado certo
+(verifiquei em pushdrOpcode)?
+-E quando uma matriz é empilhada?
+
+Eu só consigo imaginar três alternativas para implementar o OR / AND lógico:
+
+-Ou todos os dados na pilha tem 32 bits, e só precisamos dos dois
+opcodes: AND e OR lógico.
+-Ou a pilha armazena dados de tamanhos arbitrários, e precisamos de
+várias versões dos opcodes AND e OR lógicos, de acordo com os tipos
+dos operandos.
+-Ou todos os dados são &quot;tagueados&quot;, com um cabeçalho indicando seu
+tamanho na pilha.
+
+Vc tem alguma idéia?
+
+-- 
+Thiago Silva,
+mailto: tsilva at sourcecraft info
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000665.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000678.html">[gpt-usuarios] Tamanho dos dados
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#674">[ date ]</a>
+              <a href="thread.html#674">[ thread ]</a>
+              <a href="subject.html#674">[ subject ]</a>
+              <a href="author.html#674">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

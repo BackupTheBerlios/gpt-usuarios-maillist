@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709041311i56a5bd90u127c7982882861eb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000043.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C9a3912af0709041311i56a5bd90u127c7982882861eb%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Setembro  4 22:11:52 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000039.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000043.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi....
+
+Quando necessário vou utilizar as abreviaturas AG (Alex Garzão), TS (Thiago
+Silva) e AB (Adorilson Bezerra) para identificar quem escreveu os
+parágrafos....
+
+Quanto a questão de traduzir para outras linguagens, bom, pelo que entendi,
+acho que todo mundo (Thiago e Adorilson, por enquanto) concordam em não se
+preocupar mais com isso. Se todo mundo concordar com algum tipo de CI (ou
+algo similar) eu imagino que a gente até pode investir em tradução novamente
+no futuro, mas não seria o foco no momento.
+
+&gt;&gt;<i> &lt;AG&gt; Talvez uma solução seja gerar código para uma VM (Virtual Machine)
+</I>que a
+&gt;&gt;<i> gente vá desenvolver ou para uma VM já existente (mono, dotnet, jvm,
+</I>...).
+
+&gt;<i> &lt;TS&gt; É algo que também estou investigando. Semana passada estava à procura
+</I>&gt;<i> de máquinas virtuais e runtimes/hosts que pudessem ser um &quot;novo lar&quot;.
+</I>
+Eu também sou partidário de uma VM (ambientes que não exigem alto
+desempenho, claro). Claro, não estou dizendo que uma VM é a solução para
+todos os problemas, mas me pareceu ser algo viável dentro dos recursos de
+tempo e necessidades atuais, além de simplificar a nossa vida em alguns
+pontos. Gerar código para uma VM baseada em pilha, por exemplo, é MUITO mais
+fácil se comparado a outras abordagens. E como a gente quer algo prático
+para desenvolver, acho uma idéia viável.
+
+Só para deixar claro, uma VM baseada em pilha seria uma VM que,
+internamente, não possui registradores de uso geral. Com isso, todas as
+operações aritméticas e lógicas são executadas na pilha de dados.
+Registrador mesmo talvez só exista o PC (program counter), mas um programa
+rodando na VM não pode alterar o PC de qualquer forma.
+
+Com isso, para executarmos uma expressão matemática como A = 10 + 5,
+teríamos instruções assembly dessa máquina similares a:
+
+LD 10
+LD 5
+SUM
+ST A
+
+Onde LD carrega um valor na pilha, SUM retira os dois últimos valores da
+pilha e coloca a soma na pilha, e ST armazena o último valor da pilha (em
+uma variável, normalmente).
+
+&gt;<i> &lt;TS&gt; Concordo. Mesmo sem pretender prejudicar os usuários e alunos que
+</I>&gt;<i> utilizam o dito sistema proprietário, eu me sinto tentado a dar mais
+</I>&gt;<i> brilho e suporte ao sistema livre, hehe
+</I>
+Eu te entendo hehehe. De qualquer forma, dependendo de como montarmos o
+projeto, o porte para windows será bem tranquilo. No geral o que dá problema
+para portar de Linux para Windows são as bibliotecas, em especial a
+biblioteca de threads, sockets e GUI. Existem algumas bibliotecas de threads
+e sockets portáveis, então isso não é problema para nós. Com GUI eu tenho
+pouquíssima experiência, mas já ouvi falar de algumas bibliotecas portáveis
+entre Linux e Windows que a gente poderia avaliar como a
+<A HREF="http://www.wxwidgets.org/.">http://www.wxwidgets.org/.</A>
+
+&gt;&gt;<i> &lt;AG&gt; Antes que você pergunte, não sou nenhum especialista em linux, mas
+</I>sou
+&gt;&gt;<i> desenvolvedor C/C++ linux desde 2000. Desenvolvo muito pouca coisa para
+</I>&gt;&gt;<i> windows. Antes disso desenvolvia para DOS e outras coisinhas mais antigas
+</I>&gt;&gt;<i> (tô ficando velho rsrsrsrs).
+</I>
+&gt;<i> &lt;TS&gt; Ótimo! Temos bastante a aprender com o Sr.
+</I>
+Rsrssrrs. Tempo não equivale a grande conhecimento, sabedoria ou
+experiência. Se assim fosse eu já estaria rico ou teria revolucionado o
+mundo rssrrssr. Além do mais eu não devo ser muito mais velho que vocês
+(tenho 32 anos). Mas dispenso o Sr, de qualquer forma hehehe.
+
+&gt;<i> &lt;TS&gt; É, está na hora de descobrir que novas metas são estas.
+</I>
+Eu acho que você Thiago e o Adorilson já deram várias idéias de como o
+projeto deveria evoluir. Resumindo seriam evoluções na linguagem (Repita,
+caso, estruturas), uso de módulos externos e uso de bibliotecas de sistema.
+
+Alguém teria mais algum item a acrescentar ? Ou podemos evoluir as idéias
+nesse escopo então ?
+
+&gt;<i> &lt;TS&gt; Eu vou ver se consigo discutir isso com alguém que possa contribuir
+</I>&gt;<i> com alguns insights. Infelizmente, parte das referências que mais me
+</I>&gt;<i> influenciam estão em vídeo. Particularmente, o vídeo &quot;Doing with
+</I>&gt;<i> Images Makes Symbols&quot; do Alan Kay e &quot;Talking Turtle&quot; do Seymour Papert
+</I>&gt;<i> (estou sem a URL deles no momento, mas podem ser encontrados no google
+</I>&gt;<i> videos).
+</I>
+Ok.
+
+&gt;&gt;<i> &lt;AG&gt; Eu acho que a gente poderia manter essas idéias. A gente poderia
+</I>continuar
+&gt;&gt;<i> mantendo o GPT como um compilador acessível para ser estudado e, de
+</I>quebra,
+&gt;&gt;<i> coloca um suporte na arquitetura do projeto para que ele possa ser
+</I>expandido
+&gt;&gt;<i> &quot;fácilmente&quot; com front-end para novas linguagens, etapas de otimização de
+</I>&gt;&gt;<i> código, back-end para novas arquiteturas, ...
+</I>
+&gt;<i> &lt;TS&gt; Gostaria de ler mais sobre suas idéias a este respeito. E também, as
+</I>&gt;<i> do Adorilson, porque eu acho que ele gostaria de abandonar o ato de
+</I>&gt;<i> &quot;compilar&quot; (espero que ele encontre tempo de colocar as idéias dele
+</I>&gt;<i> por aqui).
+</I>
+Quanto as minhas idéias, bom, se a gente tiver um CI bem definido e
+especificado, com rotinas de front-end organizadas e documentadas
+(documentação pra desenvolvedor, claro), seria &quot;fácil&quot; para alguém pegar
+essa documentação e gerar um novo front-end para outra linguagem que gera o
+nosso CI. Após gerar CI, essa nova linguagem poderia usufruir de todo o
+nosso ambiente de execução como a nossa VM,  nosso debug, ...
+
+Imagine também que alguém quer explorar técnicas de otimização de código
+(eu, por exemplo hehehe). Se eu bolar um otimizador que trabalhe sobre o
+código intermediário, qualquer linguagem que gerar o nosso CI será
+beneficiada.
+
+Se alguém fizer um tradutor de CI para C ou pascal, qualquer CI poderá ser
+convertido, independente da linguagem de origem.
+
+Alguém também pode gerar assembly de máquina a partir do CI. Com isso
+teríamos binários nativos para uma ou mais arquiteturas. Não que isso seja a
+meta do projeto agora, mas uma arquitetura aberta, bem especificada,
+proporciona uma variedade de idéias como algumas que citei. Claro que devem
+existir mais uma dúzia de idéias que nem imaginei :-)
+
+Quanto ao ato de compilar, talvez eu tenha me expressado erroneamente, mas a
+idéia não é abandonar o ato de compilar. Comparando com o ambiente do Java,
+o javac é um compilador, e a tarefa dele é compilar código java e gerar
+bytecode java (java assembly) para a jvm executar. Se a gente fizer um
+compilador que leia portugol e gere CI, o gpt continua sendo um compilador,
+com a diferença que o nosso processo final gera um assembly para uma máquina
+virtual (máquina de alto nível), mas continua tendo os processos de análise
+léxica, sintática, semântica, ..., assim como o javac. Na minha opinião não
+é porque a gente não tá gerando assembly de uma máquina &quot;real&quot; que o gpt não
+pode ser considerado um compilador.
+
+&gt;<i> &lt;TS&gt; Engraçado, pois eu cheguei a pensar, tempos atrás, em desenvolver o
+</I>&gt;<i> GPT como um front-end para o GCC. Fazendo isso, creio que
+</I>&gt;<i> aproveitariamos toda uma infraestrutura estabelecida. De qualquer
+</I>&gt;<i> forma, o que mais me preocupa é o relatório do erros. No GPT existe um
+</I>&gt;<i> grande esforço para identificar e exibir corretamente os erros de
+</I>&gt;<i> parsing.
+</I>
+Bom, eu citei o GCC como exemplo. Eu já pensei em gerar um front-end para o
+gcc da hololinguagem, mas não foi algo que se enquadrava com o que eu
+gostaria de explorar/aprender na época. Eu, sempre que possível, gosto de
+criar ao contrário de utilizar tecnologias existentes. Não me importo de
+aprender com o gcc, mas não de ter que utilizá-lo como parte da nossa
+infraestrutura.
+
+Quanto aos erros de parsing, não tenho essa experiência com o GCC para
+saber, mas certamente se a gente desenvolver toda a arquitetura, certamente
+será como a gente precisa. Nada contra utilizar o GCC, mas como o gpt é um
+projeto acadêmico e para acadêmicos, não sei se a gente teria tanta vantagem
+assim de utilizar o GCC. Bom, cada um com a sua opinião :-)
+
+&gt;<i> &lt;TS&gt; Uma vez que a disponibilidade de um compilador simples já não é uma
+</I>&gt;<i> preocupação minha, eu estaria disposto a optar por uma abordagem como
+</I>&gt;<i> esta.
+</I>
+Entendo. Mas eu, por exemplo, acharia muito mais divertido criar uma VM
+nossa, o CI, projetar os recursos da linguagem e as ferramentas
+relacionadas. Como esse é um projeto educacional, eu acho que seria bem mais
+legal (para mim, pelo menos) criar toda uma arquitetura (aprendendo com as
+já existentes, claro). Além do que a gente teria controle total sobre o
+projeto.
+
+&gt;&gt;<i> &lt;AG&gt; A gente poderia ter uma estrutura similar com um CI indepente da
+</I>linguagem
+&gt;&gt;<i> de origem. Com isso a gente poderia ter um front-end para portugol, um
+</I>&gt;&gt;<i> front-end para aquela nova linguagem OO que estão nos seus posts, etc.
+</I>Todos
+&gt;&gt;<i> esses front-ends gerariam um CI definido por nós. Esse CI poderia ser
+</I>&gt;&gt;<i> executado por uma VM, traduzido para assembly, para C, para C++, para
+</I>&gt;&gt;<i> pascal, ... Claro que, na tradução, eu acho que o código não ficaria tão
+</I>&gt;&gt;<i> &quot;bonito&quot; como o código gerado pelo gpt atualmente.
+</I>
+&gt;<i> &lt;TS&gt; Que acha de utilizar a infraestrutura do GCC? Ou tens em mente algum
+</I>&gt;<i> benefício em particular com a sugestão acima, em contraste com o uso
+</I>&gt;<i> do GCC?
+</I>
+Tecnicamente falando, eu acho que utilizar o GCC seria mais sensato. Porém,
+eu que gosto de brincar com linguagens, compiladores, máquinas virtuais e
+afins, acho que seria um pouco chato usar o GCC para isso. Acho que aqui
+entra aquele conflito entre o &quot;mais correto&quot; e o que o cara quer fazer
+rsrsrsrs.
+
+Os poucos benefícios que vejo na abordagem de não utilizar o GCC seria ter
+um projeto mais didático, mais simples, que a gente tenha domínio total do
+seu funcionamento. De resto, acho que fazer um front-end para o GCC seria o
+mais correto.
+
+Como disse antes, eu ficaria frustado em utilizar o GCC porque eu adoraria
+poder abrir o livro do Aho e implementar uma a uma das otimizações de código
+que lá existem. Mas isso tudo já está implementado no GCC, e mil vezes
+melhor do que eu teria capacidade de implementar ;-)
+
+&gt;<i> &lt;TS&gt; Acho que é um bom momento para especificar o que seria a nova
+</I>&gt;<i> linguagem. Especialmente no que se refere a inclusão de módulos e
+</I>&gt;<i> utilização de bibliotecas externas. Talvez, rever também os tipos (e
+</I>&gt;<i> incluir tipos heterogêneos) e suas semânticas, e abrir um breve espaço
+</I>&gt;<i> para sugestões.
+</I>
+Concordo.
+
+&gt;<i> &lt;TS&gt; Seria bom, também, ter alguns cases, por exemplo, alguns trechos de
+</I>&gt;<i> código em portugol utilizando janelas, sockets, threads e demais. Isso
+</I>&gt;<i> poderia ajudar a ver o que falta na linguagem, propriamente dita. E é
+</I>&gt;<i> um bom momento para decidir se incorporariamos outros tipos de
+</I>&gt;<i> construções de linguagens (experimentais ou não), ou fariamos um
+</I>&gt;<i> &quot;portugol canonico&quot;.
+</I>
+Concordo quanto a questão dos cases, mas acho que o portugol canônico seria
+melhor no momento.
+
+&gt;<i> &lt;TS&gt; Particularmente, acho que deveriamos continuar com o &quot;portugol
+</I>&gt;<i> canonico&quot;, adicionando somente o que for necessário (em termos de
+</I>&gt;<i> sintaxe) para que ela utilize os recursos do host/SO em que estiver
+</I>&gt;<i> rodando. Experiências com um portugol diferente, poderiamos fazer
+</I>&gt;<i> separadamentem, se for desejável.
+</I>
+Acho que dessa forma seria mais viável.
+
+&gt;&gt;<i> &lt;AG&gt; Utilizando as idéias do GCC a gente também estaria gerando um
+</I>compilador
+&gt;&gt;<i> muito didático (como o GPT), que poderia inclusive ser utilizado como
+</I>&gt;&gt;<i> exemplo nas disciplinas de compiladores, tradutores e afins.
+</I>
+&gt;<i> &lt;TS&gt; Tenho minhas dúvidas se conseguiriamos fazer algo didático nesta área
+</I>;)
+&gt;<i> Acho que os aspectos da arquitetura ficariam complexos muito rápido.
+</I>
+É possível mesmo. De qualquer forma, não custa a gente tentar. Há tempos
+atrás eu queria fazer um pequeno projeto; porém as minhas alternativas, na
+época, eram ou fazer todo o compilador o utilizar o GCC. Fazer todo o
+compilador não dava tempo, e aprender sobre a arquitetura do GCC para poder
+fazer um pequeno item eu achei que não daria tempo também. Acabei trocando
+de trabalho hehehe.
+
+&gt;<i> &lt;TS&gt; De fato mas, particularmente, acho que a tradução é uma thread de
+</I>&gt;<i> baixa prioridade.
+</I>
+Concordo.
+
+&gt;&gt;<i> &lt;AG&gt; Outra possibilidade seria gerar código para uma VM existente como a
+</I>VM do
+&gt;<i> &gt; mono (e dotnet), JVM, .... mas não sei dizer se seria uma boa idéia.
+</I>
+&gt;<i> &lt;TS&gt; Eu não conheço os opcodes deles. Talvez, implementar o interpretador
+</I>&gt;<i> nesses ambientes fosse mais fácil.
+</I>
+A VM é um interpretador, só que ao invés de interpretar código de alto nível
+(portugol, por exemplo), ela interpreta bytecodes. Claro que implementar um
+VM para dotnet ou java não é muito fácil, até porque o número de opcodes (e
+a complexidade deles) é muito maior do que implementar uma VM para uma
+linguagem simples como a Hololinguagem ou o Portugol.
+
+&gt;&gt;<i> &lt;AG&gt; Só sei
+</I>&gt;&gt;<i> dizer que gerar código para a JVM é um trabalho chato e, em muitos casos,
+</I>&gt;&gt;<i> quando você não tem um opcode apropriado, você acaba tendo que gerar
+</I>&gt;&gt;<i> bibliotecas só para facilitar a tradução, e programar em Java não é bem a
+</I>&gt;&gt;<i> minha praia. Bom, cada um com a sua opinião.
+</I>
+&gt;<i> &lt;TS&gt; Também não é a minha, sinceramente. Mas, acho que o trabalho não
+</I>seria
+&gt;<i> tão complexo quanto poderia ser. A linguagem portugol está mais para
+</I>&gt;<i> um subconjunto do Java. Sequer tem um modelo de objetos. Não haveria
+</I>&gt;<i> incompatibilidade aqui, a meu ver, o que ajudaria bastante. Creio que
+</I>&gt;<i> não exigiria voodoo, ou massas de base de código de apoio de runtime.
+</I>
+Isso é verdade. Há tempos atrás eu tive que fazer um trabalho acadêmico que
+era compilar um subset de pascal e gerar o .class para a JVM executar. Na
+época (+- 1999), o mais complicado do trabalho foi gerar o arquivo class
+porque a gente não podia utilizar montadores para java assembly. Como a
+gente não tinha a definição do arquivo class muito claramente, a dificuldade
+do trabalho foi gerar um arquivo class válido. O chato era que, em muitos
+casos, quando a gente não sabia como fazer determinado código em bytecode
+java, a gente criava um programa de teste em java, compilava, e dai
+desassemblava o bytecode gerado para ver qual biblioteca ou opcode ele
+estava invocando.
+
+Na época, para um subset similar ao que o gpt utiliza, eu não utilizei nem
+10% dos opcodes da JVM.
+
+&gt;&gt;<i> &lt;TS&gt; Se eu tivesse que escolher uma VM, infelizmente, eu iria com a JVM.
+</I>
+Apesar de não gostar de java, acho que eu também. Apesar de ter gostado dos
+poucos recursos que li sobre a VM do dotnet, tenho a impressão que ela não
+está muito estável (especificação e o porte para linux).
+
+&gt;&gt;<i> &lt;AG&gt;    socket := criaSocket( &quot;x.x.x.x&quot; );
+</I>
+&gt;<i> &lt;TS&gt; Definitivamente. Porém, contudo e todavia, é aí que outra preocupação
+</I>&gt;<i> minha aparece. É muito frustrante a experiência de querer saber o que
+</I>&gt;<i> &quot;criaSocket&quot; faz e, ao abrir o arquivo que a contém, ver uma série de
+</I>&gt;<i> códigos (ou uma pequena linha críptica) que não estão escritos em
+</I>&gt;<i> portugol (ou assembly, que seria bem melhor).
+</I>
+Não tinha pensado nisso antes. Acho que a gente consegue evoluir bastante
+nisso. De qualquer forma as libs de sistema também não conseguem ser
+implementadas totalmente em uma linguagem de alto nível como C, e parte
+delas acabam sendo implementadas em assembly. Bom, podemos fazer o que for
+possível, e ir melhorando com o tempo. Talvez no melhor caso a gente consiga
+implementar em portugol, e no pior caso em C. Acho que com assembly a gente
+não precisa se preocupar :-)
+
+[]'s
+Alex Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070904/2043b819/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070904/2043b819/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000039.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000043.html">[gpt-usuarios] GPT v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

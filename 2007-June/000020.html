@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Instalação no Ubuntu 7.04
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FInstala%3DE7%3DE3o_no_Ubuntu_7%3D2E04%3F%3D&In-Reply-To=%3C1181191136.6527.11.camel%40a64%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Instalação no Ubuntu 7.04</H1>
+    <B>nandu</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FInstala%3DE7%3DE3o_no_Ubuntu_7%3D2E04%3F%3D&In-Reply-To=%3C1181191136.6527.11.camel%40a64%3E"
+       TITLE="[gpt-usuarios] Instalação no Ubuntu 7.04">nandu88 em gmail.com
+       </A><BR>
+    <I>Quinta Junho  7 06:38:56 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Próxima mensagem: <A HREF="000021.html">[gpt-usuarios] Instalação no Ubuntu 7.04
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bom dia a todos!
+
+Meus amigos, estou tentanto instalar o GPT 1.0 em minha máquina, na qual
+rodo o Ubuntu 7.04 (Feitsy Fawn), sobre o kernel 2.6, mas sem sucesso.
+Antes de tudo, instalei via APT os seguintes pacotes: antrl,
+libantlr-dev, libpcre3,
+libpcre3-dev, libpcrecpp0 e nasm.
+
+Ao dar o ./configure, recebo no fim o sumário:
+---------
+Sumario:
+        antlr           : antlr
+        antlr includes  : -I/usr/include
+        antr lib        : /usr/lib/libantlr.a
+
+        pcre includes   : 
+        pcre lib        : -L/usr/local/lib -lpcrecpp
+
+        CXXFLAGS        : -O2 
+        MS Windows      : no
+--------
+
+Parece que falta algo relativo ao PCRE, mas não encontrei mais pacotes
+relacionados além dos que eu instalei. Se eu der $ make mesmo assim,
+retornam os erros (redirecionei com o 2&gt; pra ficar menor):
+
+-------------------------------
+Antlr parser generator   Version 1.33MR33   1989-2001
+./lexer.g, line 22: syntax error at &quot;{&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 23: warning: unknown meta-op: #include
+./lexer.g, line 24: warning: unknown meta-op: #include
+./lexer.g, line 25: warning: unknown meta-op: #include
+./lexer.g, line 25: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 26: warning: unknown meta-op: #include
+./lexer.g, line 26: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 27: warning: unknown meta-op: #include
+./lexer.g, line 27: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 27: syntax error at &quot;.&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 28: warning: unknown meta-op: #include
+./lexer.g, line 28: syntax error at &quot;&lt;&quot; missing PassAction
+./lexer.g, line 28: lexical error: invalid token (text was '/')
+./lexer.g, line 28: syntax error at &quot;okenStreamSelector&quot; missing
+{ QuotedTerm PassAction ! \&lt; \&gt; : }
+./lexer.g, line 28: syntax error at &quot;.&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 30: syntax error at &quot;using&quot; missing PassAction
+./lexer.g, line 30: syntax error at &quot;namespace&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 30: error: duplicate rule definition: 'antlr'
+./lexer.g, line 30: syntax error at &quot;;&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 31: error: duplicate rule definition: 'using'
+./lexer.g, line 31: syntax error at &quot;namespace&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 31: syntax error at &quot;std&quot; missing { QuotedTerm
+PassAction ! \&lt; \&gt; : }
+./lexer.g, line 31: syntax error at &quot;;&quot; missing Eof
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 41: lexical error: invalid token (text was ''')
+./lexer.g, line 107: lexical error: invalid token (text was '&amp;')
+./lexer.g, line 107: lexical error: invalid token (text was ',')
+./lexer.g, line 108: lexical error: invalid token (text was ',')
+./lexer.g, line 108: lexical error: invalid token (text was ',')
+./lexer.g, line 116: lexical error: invalid token (text was '-')
+./lexer.g, line 117: lexical error: invalid token (text was '-')
+./lexer.g, line 118: lexical error: invalid token (text was '-')
+./lexer.g, line 137: lexical error: invalid token (text was ''')
+./lexer.g, line 137: lexical error: invalid token (text was ''')
+./lexer.g, line 143: lexical error: invalid token (text was ''')
+./lexer.g, line 143: lexical error: invalid token (text was ''')
+./lexer.g, line 149: lexical error: invalid token (text was ''')
+./lexer.g, line 149: lexical error: invalid token (text was ''')
+./lexer.g, line 155: lexical error: invalid token (text was ''')
+./lexer.g, line 155: lexical error: invalid token (text was ''')
+./lexer.g, line 161: lexical error: invalid token (text was ''')
+./lexer.g, line 161: lexical error: invalid token (text was ''')
+./lexer.g, line 174: lexical error: invalid token (text was ''')
+./lexer.g, line 174: lexical error: invalid token (text was ''')
+./lexer.g, line 180: lexical error: invalid token (text was ''')
+./lexer.g, line 180: lexical error: invalid token (text was ''')
+./lexer.g, line 200: lexical error: invalid token (text was ''')
+./lexer.g, line 200: lexical error: invalid token (text was ''')
+./lexer.g, line 206: lexical error: invalid token (text was ''')
+./lexer.g, line 206: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 212: lexical error: invalid token (text was ''')
+./lexer.g, line 218: lexical error: invalid token (text was ''')
+./lexer.g, line 218: lexical error: invalid token (text was ''')
+./lexer.g, line 224: lexical error: invalid token (text was ''')
+./lexer.g, line 224: lexical error: invalid token (text was ''')
+./lexer.g, line 230: lexical error: invalid token (text was ''')
+./lexer.g, line 230: lexical error: invalid token (text was ''')
+./lexer.g, line 236: lexical error: invalid token (text was ''')
+./lexer.g, line 236: lexical error: invalid token (text was ''')
+./lexer.g, line 242: lexical error: invalid token (text was ''')
+./lexer.g, line 242: lexical error: invalid token (text was ''')
+./lexer.g, line 248: lexical error: invalid token (text was ''')
+./lexer.g, line 248: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 257: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 258: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 259: lexical error: invalid token (text was ''')
+./lexer.g, line 262: lexical error: invalid token (text was ''')
+./lexer.g, line 262: lexical error: invalid token (text was ''')
+./lexer.g, line 263: lexical error: invalid token (text was '$')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 274: lexical error: invalid token (text was ''')
+./lexer.g, line 277: lexical error: invalid token (text was '$')
+./lexer.g, line 278: lexical error: invalid token (text was ',')
+./lexer.g, line 279: lexical error: invalid token (text was ',')
+./lexer.g, line 281: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 304: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 314: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 332: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 341: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 355: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 361: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 422: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 429: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 445: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 509: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 521: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 522: warning: $setText not parameter, return value,
+(defined) element label
+./lexer.g, line 529: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 554: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 555: warning: $setType not parameter, return value,
+(defined) element label
+./lexer.g, line 558: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 558: warning: $getText not parameter, return value,
+(defined) element label
+./lexer.g, line 559: warning: $getText not parameter, return value,
+(defined) element label
+make[4]: ** [PortugolLexer.cpp] Erro 1
+make[3]: ** [all-recursive] Erro 1
+make[2]: ** [all-recursive] Erro 1
+make[1]: ** [all-recursive] Erro 1
+make: ** [all] Erro 2
+-------------------------------
+
+Também tentei remover os pacotes instalados via APT e compilar um a um
+(antlr, pcre e nasm) mas também não deu certo.
+
+Alguma sugestão?
+
+Atenciosamente,
+Fernando Pinheiro
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Próxima mensagem: <A HREF="000021.html">[gpt-usuarios] Instalação no Ubuntu 7.04
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

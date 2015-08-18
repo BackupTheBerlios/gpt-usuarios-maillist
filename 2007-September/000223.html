@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Discussao sobre duvidas no wikki
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C92b9a8820709281557m3c8b85abtcd14152e5cdc77a9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000221.html">
+   <LINK REL="Next"  HREF="000224.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Discussao sobre duvidas no wikki</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Discussao%20sobre%20duvidas%20no%20wikki&In-Reply-To=%3C92b9a8820709281557m3c8b85abtcd14152e5cdc77a9%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Discussao sobre duvidas no wikki">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Setembro 29 00:57:38 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000221.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000224.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/28/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> &gt; Primeiro, devemos decidir se imprima() continuará recebendo uma lista
+</I>&gt;<i> &gt; variável de argumentos.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Não vejo problema nisso. A questão que levantei quanto a gerar um pcall
+</I>&gt;<i> imprima para cada parêmetro é que, no CI (ou CTE), tudo tem que ser
+</I>&gt;<i> extremamente simples, nada de construções de linguagens complexas. O
+</I>&gt;<i> agravante, claro, é que o imprima, além de ter uma lista de argumentos
+</I>&gt;<i> variáveis, podem ser de tipos diferentes. Mas enfim, no caso do CTE, um
+</I>&gt;<i> pcall para cada argumento resolve o problema (minha opinião, claro).
+</I>&gt;<i>
+</I>
+Nós até podemos permitir argumentos variáveis, mas temos que ter o
+design disso bem definido, ao contrário do que é hoje. Isso implica
+em adotar uma sintaxe e determinar o mecanismo de acesso à lista de
+argumentos em termos de g-portugol.
+
+&gt;<i> Exato. Só que a gente pode deixar o usuário passar um número de parâmetros
+</I>&gt;<i> variáveis no imprima. O problema é resolvido invocando a função imprima para
+</I>&gt;<i> cada um dos argumentos.
+</I>
+Isso não é diferente do que acontece hoje [1], e meio que me
+desagrada, porque faz da função &quot;imprima&quot; uma função especial.
+
+Se o usuário quiser fazer uma função nos mesmos moldes, terá que mexer
+na implementação do ambiente. Em outras palavras, não poderá
+facilmente.
+
+&gt;<i> Talvez não tenha ficado claro, mas o usuário do gpt não teria que invocar
+</I>&gt;<i> leia_literal, leia_inteiro, ... Ele invoca apenas leia, e durante a geração
+</I>&gt;<i> do CTE (ou assembly) a função leia é convertida para a função com seu tipo.
+</I>
+Mesmo problema que disse, acima, sobre &quot;imprima&quot;. Esta função,
+atualmente, também é implementada assim [1], o que faz dela uma função
+especial.
+
+&gt;<i> &gt; Algumas notas: para o v2 eu gostaria de ter as funções imprima() e
+</I>&gt;<i> &gt; leia() implementadas em portugol (fazendo uso de código inline em
+</I>&gt;<i> &gt; baixo nível para acesso ao kernel). Dessa forma, elas precisam ser
+</I>&gt;<i> &gt; revistas.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Você poderia explicar melhor ? Ou tentar criar um exemplo, mesmo que
+</I>&gt;<i> rudimentar ?
+</I>
+Agora, explicando como eu gostaria de oferecer a &quot;libc&quot; do G-Portugol:
+
+//Abordagem #1
+//Supondo que os bytecodes abstraem os serviços do SO
+//oferecendo pcodes para estes.
+//Neste caso, deve haver bytecodes para IO, threads,
+//processos, e tudo o mais.
+
+função imprima(i : inteiro)
+início
+  @bytecode-início
+    push i
+    pcall print_integer
+  @bytecode-fim
+fim
+
+função imprima(l : literal)
+início
+  @bytecode-início
+    push l
+    pcall print_literal
+  @bytecode-fim
+fim
+
+//Abordagem #2
+//Supondo que os bytecodes não oferecem os serviços oferecidos
+//pelo SO. Poderiamos utilizar inline assembly para ter acesso direto:
+
+função imprima(texto : literal)
+  tam : inteiro;
+início
+  tam := tamanho_literal(texto);
+
+  @início-asm
+    mov edx, [tam]
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, [texto] //texto
+    int 80h
+  @fim-asm
+fim
+
+função imprima(numero : inteiro)
+  texto : literal;
+início
+  texto := inteiro_para_literal(numero);
+  imprima(texto);
+fim
+
+função imprima(numero : real) ...
+função imprima(lógico : real) ...
+função inteiro_para_literal(i: inteiro) ...
+função literal_para_inteiro(l: literal) ...
+
+função leia(ref i : inteiro)
+  texto : literal;
+início
+  leia(texto);
+  i := literal_para_inteiro(texto)
+fim
+
+//exemplo rudimentar com limite de buffer
+função leia(ref texto : literal)
+  buffer : vetor[1024] de caracteres;
+início
+  @início-asm
+    mov eax, 3
+    mov ebx, 0
+    mov ecx, [buffer]
+    mov edx, [1024] //size do buffer
+    int 80h
+
+    mov ebx, [buffer]
+    mov [ebx-eax-1], byte 0 //adiciona \0
+  @fim-asm
+
+  texto := vetor_para_literal(buffer);
+fim
+
+função vetor_para_literal(v : vetor[] de caracteres) : literal
+  i : inteiro;
+  texto : literal;
+início
+  i := 0;
+  enquanto v[i] &lt;&gt; 0 faça
+    texto := texto &gt;&gt; v[i]; //concatenação de caracteres
+  fim-enquanto
+
+  retorne texto;
+fim
+
+A abordagem #2  era o que eu tinha planejado antes da máquina virtual
+ser sugerida. Isso é, eu queria implementar algo análogo a libc.
+&lt;brincadeira&gt;Quem sabe, até, POSIX compliant&lt;/brincadeira&gt;
+
+
+PS: Em Smalltalk, o &quot;operador de concatenação&quot; é a vírgula (,). Isso
+resolveria alguns problemas de forma bastante elegante, mantendo um
+pouco da compatibilidade com a literatura.
+
+[1] <A HREF="http://gpt.berlios.de/manual_nodes/node5.html#SECTION00550000000000000000">http://gpt.berlios.de/manual_nodes/node5.html#SECTION00550000000000000000</A>
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000221.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000224.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

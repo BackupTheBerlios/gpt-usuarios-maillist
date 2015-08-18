@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Mapeamento%20entre%20tipos%20primitivos%20na%20VM%20e%20a%0A%09arquitetura&In-Reply-To=%3C9a3912af0710230700w2a060689g89f909cddf9e67cb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000519.html">
+   <LINK REL="Next"  HREF="000516.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Mapeamento%20entre%20tipos%20primitivos%20na%20VM%20e%20a%0A%09arquitetura&In-Reply-To=%3C9a3912af0710230700w2a060689g89f909cddf9e67cb%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Outubro 23 16:00:37 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000519.html">[gpt-usuarios] Sobre a sentença &quot;caso&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000516.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#512">[ date ]</a>
+              <a href="thread.html#512">[ thread ]</a>
+              <a href="subject.html#512">[ subject ]</a>
+              <a href="author.html#512">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+A princípio os tipos primitivos da VM serão mapeados para os tipos da
+arquitetura em que está rodando. Um inteiro será um int32 ou int64 (conforme
+a arquitetura).
+
+Porém essa abordagem está me parecendo nada portável...
+
+Como fica a questão da portabilidade do gvm com os tipos primitivos ? Se o
+gvm foi gerado em uma arquitetura de 32 bits, cada inteiro foi gerado com 32
+bits. Mas quando a VM ler esse gvm em uma arquitetura de 64 bits ??? Se a
+gente usar um int nativo, a VM 64 bits vai ler cada int como 8 bytes...
+
+Para resolver isso eu pensei em armazenar no gvm o tamanho dos tipos
+primitivos dependente de arquitetura. Dessa forma a VM, quando executar a
+carga do arquivo, teria condições de mapear os dados corretamente. Só que
+isso daria um pouco de trabalho, e não seria uma solução perfeita...
+
+Outra forma seria a gente definir o que é o nosso int. Por exemplo, o nosso
+int tem 32 bits em qualquer arquitetura. Isso facilitaria muito as coisas
+para nós em vários pontos. Porém, também não é uma solução perfeita. Se uma
+lib do SO retornar um dado de 64 bits, o que aconteceria ??? Como mapear
+isso ???
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071023/e4f945b1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071023/e4f945b1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000519.html">[gpt-usuarios] Sobre a sentença &quot;caso&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000516.html">[gpt-usuarios] Mapeamento entre tipos primitivos na VM e a	arquitetura
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#512">[ date ]</a>
+              <a href="thread.html#512">[ thread ]</a>
+              <a href="subject.html#512">[ subject ]</a>
+              <a href="author.html#512">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

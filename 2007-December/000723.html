@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0712210431p5a804eebo4f71d16560446908%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000722.html">
+   <LINK REL="Next"  HREF="000724.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Teste de bind para fopen, fwrite e fclose</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Teste%20de%20bind%20para%20fopen%2C%20fwrite%20e%20fclose&In-Reply-To=%3C9a3912af0712210431p5a804eebo4f71d16560446908%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Teste de bind para fopen, fwrite e fclose">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Dezembro 21 13:31:50 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000722.html">[gpt-usuarios] Dúvida sobre a geração de código GptAssembly no GptC
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000724.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#723">[ date ]</a>
+              <a href="thread.html#723">[ thread ]</a>
+              <a href="subject.html#723">[ subject ]</a>
+              <a href="author.html#723">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal,
+
+Só para avisar que foi criado um teste de bind onde um programa em
+GptAssembly invoca fopen, fwrite e fclose. Um exemplo simples, mas demonstra
+que as coisas estão começando a se encaixar :-)
+
+$ cat chamada_sistema_5.gasm
+program exemplo
+// use file // nao esta funcional o &quot;use&quot; por enquanto...
+
+var f pointer
+var result int
+
+proc main
+    pushsv &quot;w+&quot;
+    pushsv &quot;arquivo.txt&quot;
+    lcall file, fopen
+    popiv f
+
+    pushiv f
+    pushsv &quot;Uma linha !!!&quot;
+    lcall file, fputs
+    popiv result
+
+    pushiv f
+    lcall file, fclose
+    popiv result
+
+    exit 0
+endproc
+
+endprogram
+
+
+Bom, para gerar corretamente o bind, tive que adicionar mais uma informação
+no .sld. Além de saber que um determinado tipo de dado é um pointer, é
+necessário saber também qual o tipo do pointer. Isso porque, quando a VM
+está em execução, pointers são convertidos para int. E um código como:
+
+void* arquivo = dataStack.popInt();
+
+arquivo = fopen(...); // erro, precisaria de um cast...
+
+Como agora o .sld tem a informação do tipo do ponteiro, o código é gerado
+corretamente:
+
+FILE* arquivo = (FILE*) dataStack.popInt();
+
+arquivo = fopen(...);
+
+...
+
+Aproveitando, provavelmente eu vou tentar melhorar a sintaxe do sld para
+indicar pointer...
+
+Segue abaixo o sld e os arquivos gerados pelo GptBind a partir deste sld:
+
+$ cat file.sld
+////
+options {
+}
+
+headers {
+   &quot;stdio.h&quot;;
+}
+
+function fopen(string name, string mode) : pointer &quot;FILE*&quot; ::= fopen(name,
+mode);
+
+function fputs(string text, pointer &quot;FILE*&quot; file) : int ::= fputs(text,
+file);
+
+function fclose(pointer &quot;FILE*&quot; file) : int ::= fclose(file);
+////
+
+$ cat Makefile.file
+////
+COMMON_DIR=../../../common/src/
+INCLUDE_DIR=-I$(COMMON_DIR)
+CC=g++
+CCFLAGS=-g -Wall
+LIBS=
+
+objects = file.o $(COMMON_DIR)/CDataStack.o $(COMMON_DIR)/CBinString.o
+$(COMMON_DIR)/Tools.o
+
+all: $(objects)
+        g++ -shared $(objects) $(LIBS) -o libfile.so
+
+%.o: %.cpp %.hpp
+        $(CC) -shared $(CCFLAGS) -c $(INCLUDE_DIR) $&lt; -o $@
+
+%.o: %.cpp
+        $(CC) -shared $(CCFLAGS) -c $(INCLUDE_DIR) $&lt; -o $@
+
+clean:
+        rm -f *.o libfile.so
+////
+
+
+
+
+$ cat file.hpp
+////
+#ifndef GPTBIND_file_HPP
+#define GPTBIND_file_HPP
+
+#include &lt;stdio.h&gt;
+
+#include &quot;CDataStack.hpp&quot;
+
+extern &quot;C&quot; {
+        void gsl_fopen( CDataStack &amp;dataStack );
+        void gsl_fputs( CDataStack &amp;dataStack );
+        void gsl_fclose( CDataStack &amp;dataStack );
+}
+
+#endif
+////
+
+
+
+$ cat file.cpp
+////
+#include &quot;file.hpp&quot;
+
+#include &quot;CSymbol.hpp&quot;
+
+
+void gsl_fopen( CDataStack &amp;dataStack )
+{
+        const char * cname=dataStack.popString().c_str();
+        const char * cmode=dataStack.popString().c_str();
+        FILE* result;
+
+        result=fopen(cname, cmode);
+
+        dataStack.pushInt((int)result);
+}
+
+void gsl_fputs( CDataStack &amp;dataStack )
+{
+        const char * ctext=dataStack.popString().c_str();
+        FILE* cfile=(FILE*)dataStack.popInt();
+        int result;
+
+        result=fputs(ctext, cfile);
+
+        dataStack.pushInt(result);
+}
+
+void gsl_fclose( CDataStack &amp;dataStack )
+{
+        FILE* cfile=(FILE*)dataStack.popInt();
+        int result;
+
+        result=fclose(cfile);
+
+        dataStack.pushInt(result);
+}
+////
+
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071221/9e8fe1ff/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071221/9e8fe1ff/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000722.html">[gpt-usuarios] Dúvida sobre a geração de código GptAssembly no GptC
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000724.html">[gpt-usuarios] Teste de bind para fopen, fwrite e fclose
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#723">[ date ]</a>
+              <a href="thread.html#723">[ thread ]</a>
+              <a href="subject.html#723">[ subject ]</a>
+              <a href="author.html#723">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

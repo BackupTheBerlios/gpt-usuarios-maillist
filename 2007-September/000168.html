@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FD%3DFAvidas_sobre_gpt%3D2C_c%3DF3digo_int%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fermedi%3DE1rio%3D2C_assembly_e_afins%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0709191153g4cd41db8x7e4147eb40539e97%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000166.html">
+   <LINK REL="Next"  HREF="000169.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FD%3DFAvidas_sobre_gpt%3D2C_c%3DF3digo_int%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fermedi%3DE1rio%3D2C_assembly_e_afins%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0709191153g4cd41db8x7e4147eb40539e97%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Setembro 19 20:53:21 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000166.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000169.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Vou tentar explicar hehehe.
+
+// Exemplo em g-portugol
+algoritmo exemplo;
+variáveis
+	v1: inteiro;
+fim-variáveis
+início
+	v1 := 10;
+	v1 := v1;
+	v1 := 10 + 20;
+	v1 := v1 + 20;
+	v1 := 30 + v1;
+	v1 := v1 + v1;
+	imprima( 10 );
+	imprima( v1 );
+fim
+
+
+// Exemplo traduzido para CI
+vars
+	v1 int
+end-vars
+proc main
+	v1 := 10
+	v1 := v1
+	v1 := 10 + 20
+	v1 := v1 + 20
+	v1 := 30 + v1
+	v1 := v1 + v1
+	push 10
+	pcall imprima_i
+	push v1
+	pcall imprima_i
+end-proc
+
+
+
+Até o CI, sem problemas, porque os comandos do CI independem do tipo de
+dado.
+
+Porém, para a VM, o tipo de dado importa. Para converter para bytecode,
+temos
+que ter um set, get, add, sub, mul, div, ... para cada tipo de dado.
+
+Para o tipo inteiro, teríamos as seguintes instruções (tentando gerar
+instruções
+equivalentes aos comandos do CI):
+
+* setic (inicializa variável inteira com uma constante) para instruções como
+x := 10, y := 20, ...
+* setiv (inicializa variável inteira com o conteúdo de outra variável) para
+instruções como x := y, z := t, ...
+* addicc (soma duas constantes inteiras) para instruções como x := 10 + 20,
+...
+* addivv (soma duas variáveis inteiras) para instruções como x := y + z, ...
+* addivc (soma variável e constante) para instruções como x := y + 10, ...
+* addicv (soma constante e variável) para instruções como x := 10 + y, ...
+* + 4 instruções para sub, 4 para mul, 4 para div e 2 para neg.
+
+Essas instruções foram apenas para o tipo int. Ainda temos os tipos real,
+string, char e bool.
+
+É isso que eu quis dizer com &quot;inchado&quot;. Para refletir o CI diretamente sobre
+o bytecode,
+só inchando o número de opcodes, o que eu acho que não seria legal...
+
+O que os processadores &quot;reais&quot; fazem (e acredito que várias VM's também)
+é não deixar as possíveis operações (no nosso caso, opcodes) tão &quot;flexíveis&quot;
+assim.
+
+Para minimizar um pouco a gente poderia converter instruções como v1 := v2 +
+v3 para algo como:
+
+setiv v1 v2
+addiv v1 v3
+
+Instruções como v1 := 10 + v2 para algo como:
+
+setic v1 10
+addiv v1 v2
+
+Instruções como v1 := v2 + 10 para algo como:
+
+setiv v1 v2
+addic v1 10
+
+Instruções como v1 := v2 para algo como:
+
+setiv v1 v2
+
+Instruções como v1 := 10 para algo como:
+
+setic v1 10
+
+Note que nestes exemplos eu utilizei praticamente as mesmas instruções em
+todos os exemplos (setiv, setic, addiv e addic).
+
+Além disso talvez seja possível reduzir ainda mais alguns opcodes. Tenho
+algumas
+idéias mas tenho que pensar nisso &quot;com calma&quot;...
+
+Não sei se consegui esclarecer as coisas ou piorar hehehe. O meu cérebro tá
+&quot;batendo pino&quot; hoje hehehe.
+
+[]'s
+
+On 9/19/07, Thiago Silva &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>&gt; wrote
+
+:<i>
+</I>
+&gt;<i> Eu não sei se entendi bem o porquê do dilema...Por que o set de opcodes
+</I>&gt;<i> inchou?
+</I>&gt;<i> De qualquer forma, eu voto pelo CI.
+</I>&gt;<i>
+</I>&gt;<i> On 9/18/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Oi pessoal.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Atualmente eu estou num dilema sobre a versão 2. A questão é se devemos
+</I>&gt;<i> ou
+</I>&gt;<i> &gt; não gerar código intermediário.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu tentei ao máximo deixar o código intermediário equivalente ao
+</I>&gt;<i> assembly
+</I>&gt;<i> &gt; (bytecode) da VM. Porém, para fazer isso, a variedade de opcodes seria
+</I>&gt;<i> bem
+</I>&gt;<i> &gt; grande, o que deixaria a VM muito &quot;inchada&quot;.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Isso se deve ao fato de que, no CI, não existe a noção clara de tipos de
+</I>&gt;<i> &gt; dados. Por exemplo, o seguinte comando em gpt (x := 1) geraria em CI um
+</I>&gt;<i> &gt; comando equivalente (x := 1). Porém, no assembly da VM, não adianta a
+</I>&gt;<i> gente
+</I>&gt;<i> &gt; ter um SET X 1 porque o opcode que deve ser executado depende do tipo de
+</I>&gt;<i> &gt; dado. Com isso teríamos um SETI, SETR, SETS, ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Para o caso ( x := y + z ) a situação fica mais grave porque teríamos um
+</I>&gt;<i> &gt; conjunto grande de variantes (y e z podem ser constantes ou variáveis,
+</I>&gt;<i> podem
+</I>&gt;<i> &gt; ter 5 tipos de dados diferente, ...). E por ai vai.... Mesmo que a gente
+</I>&gt;<i> &gt; &quot;aproxime&quot; os tipos inteiro, caractere e lógico para inteiro, em vários
+</I>&gt;<i> &gt; casos temos que ter opcode específico conforme o tipo de dado. Por
+</I>&gt;<i> exemplo,
+</I>&gt;<i> &gt; somar 1 em caractere não é o mesmo que somar 1 em inteiro (overflow).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Resumo da ópera, o assembly da VM não ficou tão equivalente assim ao CI
+</I>&gt;<i> como
+</I>&gt;<i> &gt; eu gostaria :-(
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A dúvida agora é se a gente mantém a geração do CI ou não.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Se a gente gerar CI as etapas de compilação ficam mais simples de serem
+</I>&gt;<i> &gt; implementadas, testadas e melhoradas, possibilitamos que outras
+</I>&gt;<i> linguagens
+</I>&gt;<i> &gt; gerem CI e utilizem o nosso ambiente de execução (montador, VM, ...),
+</I>&gt;<i> além
+</I>&gt;<i> &gt; de possibilitarmos possíveis trabalhos em otimização de código
+</I>&gt;<i> &gt; intermediário. O GCC usa uma estrutura similar conforme mencionei
+</I>&gt;<i> &gt; anteriormente.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Se a gente não gerar CI diminuímos uma etapa na compilação, mas
+</I>&gt;<i> complicamos
+</I>&gt;<i> &gt; a etapa de geração de código porque é bem mais complexo gerar o assembly
+</I>&gt;<i> &gt; direto a partir da linguagem gpt do que converter de CI para assembly.
+</I>&gt;<i> &gt; Digamos que converter de gpt para CI é uma transição &quot;suave&quot;, enquanto
+</I>&gt;<i> que
+</I>&gt;<i> &gt; converter de gpt para assembly da VM não é nada suave...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Se a gente não gerar CI eu acho que estaremos fechando algumas portas
+</I>&gt;<i> &gt; futuras. Eu votaria por gerar o CI.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; E vocês, o que acham ???
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; []'s
+</I>&gt;<i> &gt; Alex Sandro Garzão
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; gpt-usuarios mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Thiago Silva,
+</I>&gt;<i> mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+</I>&gt;<i> jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+</I>&gt;<i> <A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> gpt-usuarios mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">gpt-usuarios em lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">https://lists.berlios.de/mailman/listinfo/gpt-usuarios</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/0854eae4/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070919/0854eae4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000166.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000169.html">[gpt-usuarios] Dúvidas sobre gpt, código intermediário, assembly e afins...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a lista de instruções que farão parte do CI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_a_lista_de_instru%3DE7%3DF5es_que%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_far%3DE3o_parte_do_CI%3F%3D&In-Reply-To=%3C9a3912af0709100954g86c6658i130070ddc71597b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000091.html">
+   <LINK REL="Next"  HREF="000088.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a lista de instruções que farão parte do CI</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FSobre_a_lista_de_instru%3DE7%3DF5es_que%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F_far%3DE3o_parte_do_CI%3F%3D&In-Reply-To=%3C9a3912af0709100954g86c6658i130070ddc71597b%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a lista de instruções que farão parte do CI">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Segunda Setembro 10 18:54:31 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000091.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000088.html">[gpt-usuarios] Sobre a lista de instruções que farão parte do CI
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá pessoal...
+
+Eu coloquei no wiki alguns exemplos de CI gerados a partir de exemplos (bem
+simples) em g-portugol. Além disso eu coloquei uma tabela (atualmente sem a
+descrição) do que seriam os comandos existentes no nosso CI.
+
+Esse CI é na verdade um TAC (Three address code). TACs existem há muito
+tempo (pelo que eu saiba). Eu adaptei alguns detalhes. Se vocês procurarem
+por TAC no google devem achar algum bem equivalente a este que coloquei no
+wiki.
+
+Quanto ao comando &quot;if&quot;, alguns TAC possuem o comando:
+
+if x relop y goto label
+
+Eu optei por não utilizar esse formato por 2 motivos:
+1) ele dificulta um pouco a geração do CI para instruções condicionais com
+vários operandos e operadores;
+2) caso a gente venha a implementar um otimizador futuramente, esse tipo de
+instrução só complica o otimizador porque a idéia do CI é ter comandos bem
+&quot;elementares&quot;, nada de um comando fazer muitas coisas.
+
+Para definir labels, alguns usam a seguinte sintaxe:
+
+if x goto meulabel
+...
+label meulabel
+
+Eu acho esse formato ruim porque os labels não ficam muito visíveis quando
+estamos olhando um CI com várias linhas. Ao invés disso eu optei por
+
+meulabel:
+
+Também podemos optar por
+
+:<i>meulabel
+</I>
+Pelas variantes de TAC que encontrei &quot;meulabel:&quot; é BEM mais comum do que
+&quot;:meulabel&quot;.
+
+Sugestões ? Comentários ???
+
+[]'s
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/d81ccef1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070910/d81ccef1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000091.html">[gpt-usuarios] Precisamos de AST no compilador ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000088.html">[gpt-usuarios] Sobre a lista de instruções que farão parte do CI
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

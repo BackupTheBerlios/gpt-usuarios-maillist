@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712140525p17282bc3g5cdaa4abb065530a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000649.html">
+   <LINK REL="Next"  HREF="000651.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C9a3912af0712140525p17282bc3g5cdaa4abb065530a%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Dezembro 14 14:25:30 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000649.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000651.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#650">[ date ]</a>
+              <a href="thread.html#650">[ thread ]</a>
+              <a href="subject.html#650">[ subject ]</a>
+              <a href="author.html#650">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> &gt; Eu não tinha pensado em linkagem estática agora. Pelo que eu me lembre
+</I>&gt;<i> tem
+</I>&gt;<i> &gt; como exportar os símbolos de um .so de forma que, para invocar uma
+</I>&gt;<i> &gt; subrotina, a forma de chamada é a mesma de uma subrotina que não esteja
+</I>&gt;<i> em
+</I>&gt;<i> &gt; um .so, ou seja, a gente não precisa de dlopen e afins.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Aiai, falei besteira sobre as linkagens. Mas, vc quer dizer que a VM
+</I>&gt;<i> não será linkada ao .so? E existe um meio, que não utiliza dlopen, de
+</I>&gt;<i> chamar as subrotinas do .so, sem usar dlopen e sem ter a VM linkada ao
+</I>&gt;<i> .so?
+</I>
+
+A VM será linkada dinamicamente ao .so. Sim, existe um meio de invocar as
+rotinas sem o dlopen, mas não lembro agora. Tenho um fonte em casa que faz
+isso. &quot;Acho&quot; que é uma diretiva de compilação &quot;-export&quot; ou algo
+assemelhado...
+
+&gt;<i> &gt; Eu acho que este código é necessário para a análise sintática e
+</I>&gt;<i> &gt; &gt; semântica. Se não houver esse código, o gptc vai acusar que &quot;pow&quot; não
+</I>&gt;<i> &gt; &gt; foi declarada.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Não necessariamente. Durante a geração dos bindings pode ser gerado um
+</I>&gt;<i> &gt; arquivo que contenha os bindings, quase como um .h. Algo como o pascal
+</I>&gt;<i> fazia
+</I>&gt;<i> &gt; com as units. Seria interessante a gente criar um arquivo de lib com
+</I>&gt;<i> todas
+</I>&gt;<i> &gt; as informações necessárias para o GptC, GptASM e GptVM. Gerar vários
+</I>&gt;<i> &gt; arquivos pode ser um tiro no pé hehehe.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Na minha opinião, tanto os bindings quanto as libs em portugol devem
+</I>&gt;<i> gerar
+</I>&gt;<i> &gt; um arquivo (.glib, por exemplo) que o usuário explicitamente diz que vai
+</I>&gt;<i> &gt; utilizar através do &quot;use lib1;&quot;. Assim, com o use, o GptC popula a
+</I>&gt;<i> tabela de
+</I>&gt;<i> &gt; símbolos e sabe como invocar cada subrotina (pcall ou lcall).
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Eu estava imaginando que o &quot;use lib&quot; abriria um arquivo .gvm e
+</I>&gt;<i> carregaria a tabela de simbolos. Assim, posso ter dois algoritmos em
+</I>&gt;<i> um diretório, e um deles pode ter um &quot;use XXX&quot; que carregaria o outro
+</I>&gt;<i> algoritmo. Bastante simples.
+</I>
+
+Pode ser sim o gvm. Aliás, o gvm tem a tabela de símbolos. Bola fora minha
+hehehe.
+
+Se precisarmos diferenciar um algoritmo de uma lib, criando um novo
+&gt;<i> arquivo (.glib por exemplo), acho que isso vai aumentar os
+</I>&gt;<i> pre-requisitos para utilizar &quot;use&quot;. A não ser que &quot;use&quot; faça uma busca
+</I>&gt;<i> a procura de .gvm e .glib. Pra mim, um .glib está bom para bindings.
+</I>&gt;<i> Mas para bibliotecas em portugol, não estou certo.
+</I>
+
+Deixa prá lá que a gente não precisa de mais um arquivo :-)
+
+&gt;<i> Acho que a gente deveria pensar melhor sobre isso porque o código vai
+</I>&gt;<i> ficar
+</I>&gt;<i> &gt; &quot;massante&quot; eu acho. Por exemplo, para invocar a função pow em gpt a
+</I>&gt;<i> gente
+</I>&gt;<i> &gt; vai ter que empilhar os parâmetros e desempinhar o retorno. A função pow
+</I>&gt;<i> &gt; também fará a mesma coisa para invocar a pow do sistema, só que com
+</I>&gt;<i> &gt; conversão dos dados. O código me parece estar só duplicado.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Realmente...
+</I>&gt;<i>
+</I>&gt;<i> &gt; A minha sugestão seria simplificar as coisas agora (gerar o menor código
+</I>&gt;<i> &gt; possível) e quando possível a gente reformula isso. Eu acho que para
+</I>&gt;<i> mostrar
+</I>&gt;<i> &gt; as &quot;entranhas&quot; do troço a gente precisa de uma libc feita em g-portugol,
+</I>&gt;<i> e
+</I>&gt;<i> &gt; ai implementar as funções em portugol usando essa &quot;nossa&quot; libc. O código
+</I>&gt;<i> &gt; acima para mim só parece ser redundante.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Ok. &quot;use&quot; pra mim já é bom o suficiente para mostrar para o usuário,
+</I>&gt;<i> caso se trate de um binding, de onde a função vem. O que eu julgava
+</I>&gt;<i> importante naquele código que coloquei era o primeiro operando do
+</I>&gt;<i> lcall, justamente o nome do .so. Mas o &quot;use matematica&quot; já está bom,
+</I>&gt;<i> se o usuário pode ver que existe um &quot;matematica.so&quot; ou coisa do tipo.
+</I>
+
+Ok.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071214/601b1321/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071214/601b1321/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000649.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000651.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#650">[ date ]</a>
+              <a href="thread.html#650">[ thread ]</a>
+              <a href="subject.html#650">[ subject ]</a>
+              <a href="author.html#650">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

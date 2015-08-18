@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712140536p24d0a352w9bbe5a23665128a5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000650.html">
+   <LINK REL="Next"  HREF="000652.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712140536p24d0a352w9bbe5a23665128a5%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sexta Dezembro 14 14:36:06 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000650.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000652.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#651">[ date ]</a>
+              <a href="thread.html#651">[ thread ]</a>
+              <a href="subject.html#651">[ subject ]</a>
+              <a href="author.html#651">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> A VM será linkada dinamicamente ao .so.
+</I>
+Eu tava pensando em usar dlopen para não obrigar que certas
+bibliotecas estivessem disponíveis no momento da instalação da VM, e
+permitir que o usuário rode a VM com os bindings que desejar. Se a
+gente linkar um binding à VM, estáticamente ou não, a VM será
+carregada na memória com o binding junto de qualquer forma. Se a
+linkagem for dinâmica e o usuário não tiver o .so no sistema, a VM não
+é carregada, e o loader acusa erro.
+
+Com isso, se a gente fizer um binding de GTK+, o usuário vai ser
+obrigado a instalar a GTK+ antes de instalar a VM. Uma vez que a VM
+está linkada ao binding, e o binding está linkado a GTK. Se a VM rodar
+sem que .so do binding ou sem que o .so do GTK esteja presente, ela
+não vai funcionar. Se fizermos bindings para a biblioteca do MySQL,
+mesma coisa. No fim, na medida em que aumentamos o acesso a
+bibliotecas externas, fazemos com que a VM seja dependente de todas
+delas, incondicionalmente.
+
+Por outro lado, se usarmos dlopen, o usuário pode, incrementalmente,
+instalar os bindings que ele gostaria de usar, e a VM não teria
+dependência nenhuma. Os algoritmos, estes sim, seriam dependentes (ou
+não) de bindings.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000650.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000652.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#651">[ date ]</a>
+              <a href="thread.html#651">[ thread ]</a>
+              <a href="subject.html#651">[ subject ]</a>
+              <a href="author.html#651">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

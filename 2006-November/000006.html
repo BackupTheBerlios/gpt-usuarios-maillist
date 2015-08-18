@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] GPT no Ubuntu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C76152eba0611101622m36a5cf82n8872e14ff18a8554%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] GPT no Ubuntu</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20GPT%20no%20Ubuntu&In-Reply-To=%3C76152eba0611101622m36a5cf82n8872e14ff18a8554%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] GPT no Ubuntu">adorilson em gmail.com
+       </A><BR>
+    <I>Sábado Novembro 11 01:22:29 CET 2006</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000005.html">[gpt-usuarios] Erro na compilação gpt
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000007.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá Tiago,
+
+fantástica sua ferramenta, era algo assim mesmo que está procurando.
+
+No Windows executei o gpt sem problemas, mas estou tendo dificuldade em
+instalar no Ubuntu.
+
+Na execucao do ./configure ele nao encontrou o antlr
+
+checking for antlr... no
+./configure: line 19748: antlr-config: command not found
+./configure: line 19749: antlr-config: command not found
+configure: error:
+    O programa &quot;antlr&quot; nao foi encontrado no seu sistema (PATH).
+    GPT precisa do ANTLR (versao 2.7.5) instalado.
+    Baixe em: <A HREF="http://www.antlr.org">http://www.antlr.org</A>
+
+então instalei diretamente do repositorio do Ubuntu, mas o erro continuou.
+Por algum motivo q desconheço, ele cria um arquivo runantlr em /usr/bin, qd
+o padrao seria antlr, entao apenas criei um link q funcionou. Talvez vc
+pudesse documentar isso em algum lugar.
+Na verdade, pra ser mais exato, a saída depois de criado o link foi essa:
+
+checking for antlr... /usr/bin/antlr
+./configure: line 19748: antlr-config: command not found
+./configure: line 19749: antlr-config: command not found
+checking for pcre-config... yes
+Usage: pcre-config [--prefix] [--exec-prefix] [--version] [--libs]
+[--libs-posix] [--cflags] [--cflags-posix]
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating doc/Makefile
+config.status: creating doc/man/Makefile
+config.status: creating exemplos/Makefile
+config.status: creating lib/Makefile
+config.status: creating src/modules/Makefile
+config.status: creating src/modules/parser/Makefile
+config.status: creating src/modules/interpreter/Makefile
+config.status: creating src/modules/c_translator/Makefile
+config.status: creating src/modules/x86/Makefile
+config.status: creating config.h
+config.status: config.h is unchanged
+config.status: executing depfiles commands
+configure:
+Sumario:
+        antlr           : antlr
+        antlr includes  :
+        antr lib        :
+
+        pcre includes   :
+        pcre lib        : -L/usr/lib -lpcrecpp
+
+        CXXFLAGS        : -O2
+        MS Windows      : no
+
+Tudo certo? Ou temos problemas?
+
+Considerando q está certo, executo o make, e tenho a seguinte saida:
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em cti5</A>:~/uern/7_periodo/estudo_individualizado/gpt-1.0$ make
+make  all-recursive
+make[1]: Entrando no diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0'
+Making all in src
+make[2]: Entrando no diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src'
+Making all in modules
+make[3]: Entrando no diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src/modules'
+Making all in parser
+make[4]: Entrando no diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0
+/src/modules/parser'
+antlr ./lexer.g
+Running java antlr.Tool $* with /usr/share/java/antlr.jar appended to the
+CLASSPATH variable
+ANTLR Parser Generator   Version 2.7.6 (20060511)   1989-2005
+error: Token stream error reading grammar(s):
+./lexer.g:52:10: unexpected char: 'r'
+TokenStreamException: unexpected char: 0xFFFD
+make[4]: ** [PortugolLexer.cpp] Erro 1
+make[4]: Saindo do diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0
+/src/modules/parser'
+make[3]: ** [all-recursive] Erro 1
+make[3]: Saindo do diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src/modules'
+make[2]: ** [all-recursive] Erro 1
+make[2]: Saindo do diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0/src'
+make[1]: ** [all-recursive] Erro 1
+make[1]: Saindo do diretório
+`/home/adorilson/uern/7_periodo/estudo_individualizado/gpt-1.0'
+make: ** [all] Erro 2
+
+
+Esses erros tem relacao com o antlr, ou algum coisa no código?
+
+Parabéns pelo projeto. Tem tudo para ser um sucesso.
+-- 
+Adorilson Bezerra
+Email/Google Talk/MSN: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">adorilson em gmail.com</A>
+Celular: 9922-2544
+Fone com: 4005-2603
+Fone res: 3614-4794
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061110/ba567420/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20061110/ba567420/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000005.html">[gpt-usuarios] Erro na compilação gpt
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000007.html">[gpt-usuarios] GPT no Ubuntu
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

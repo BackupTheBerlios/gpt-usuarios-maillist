@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C92b9a8820709061108l1b9da56eia8cdea6b3610da2c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000053.html">
+   <LINK REL="Next"  HREF="000064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FUm_opcode_ou_N_para_invocar_uma_fun%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE7%3DE3o_de_uma_lib_na_VM_%3D3F%3F%3D&In-Reply-To=%3C92b9a8820709061108l1b9da56eia8cdea6b3610da2c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Setembro  6 20:08:26 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000053.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000064.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/6/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Já que eu mencionei sobre um ou N opcodes para invocar uma função no outro
+</I>&gt;<i> e-mail, vou esboçar aqui duas alternativas:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> algoritmo teste;
+</I>&gt;<i> use B1,B2; // chutei uma sintaxe
+</I>&gt;<i> início
+</I>&gt;<i>     F1( ); // Essa função está na biblioteca B1
+</I>&gt;<i>     F2( ); // Essa função está na biblioteca B2
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> Utilizando sempre um opcode para invocar qualquer função de qualquer
+</I>&gt;<i> biblioteca, teríamos o seguinte trecho em assembly:
+</I>
+Só para constar, o que chamas de &quot;biblioteca&quot; aqui, é uma lib externa?
+Então, B1, por exemplo, poderia ser pthread? E F1, poderia ser
+pthread_create? É isso?
+
+&gt;<i> ld &quot;B1&quot;
+</I>&gt;<i> ld &quot;F1&quot;
+</I>&gt;<i> call
+</I>
+
+Perdoe se meu raciocínio for falho:
+&quot;ld&quot; expandiria para algo, efetivamente, como &quot;dlopen&quot;, correto? A
+unica diferença, então, entre as duas abordagens seria apenas o número
+de opcodes para realizar a operação (1 x 2), é isso?
+
+De fato, acho melhor ter opcodes enxutos. Com um pequeno conjunto,
+fica fácil aprender e brincar na VM, em todos os aspectos. Para
+performance, acho razoável deixar a cargo dos otimizadores, jitter,
+inlining, etc. E de qualquer forma, não acho que teriamos necessidade
+de criar opcodes para otimizar certas operações.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000053.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000064.html">[gpt-usuarios] Um opcode ou N para invocar uma função de uma lib na VM ?
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

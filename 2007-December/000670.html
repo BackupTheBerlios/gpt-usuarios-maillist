@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C9a3912af0712150545j2ce050c6yb8059a3c09529ab%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000664.html">
+   <LINK REL="Next"  HREF="000659.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Inserindo a tabela de simbolos no .gvm</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Inserindo%20a%20tabela%20de%20simbolos%20no%20.gvm&In-Reply-To=%3C9a3912af0712150545j2ce050c6yb8059a3c09529ab%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Inserindo a tabela de simbolos no .gvm">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 14:45:32 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000664.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000659.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#670">[ date ]</a>
+              <a href="thread.html#670">[ thread ]</a>
+              <a href="subject.html#670">[ subject ]</a>
+              <a href="author.html#670">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> //lib.gpt
+</I>&gt;<i> constante x : inteiro := 10;
+</I>&gt;<i>
+</I>&gt;<i> estrutura T
+</I>&gt;<i> x : inteiro;
+</I>&gt;<i> y : real;
+</I>&gt;<i> fim-estrutura
+</I>&gt;<i>
+</I>&gt;<i> variável t : T;
+</I>&gt;<i> procedimento p(r:real)
+</I>&gt;<i> início
+</I>&gt;<i>   imprima(r);
+</I>&gt;<i> fim
+</I>&gt;<i>
+</I>&gt;<i> //teste.gpt
+</I>&gt;<i> use &quot;lib&quot;;
+</I>&gt;<i>
+</I>&gt;<i> estrutura Z
+</I>&gt;<i> a : real;
+</I>&gt;<i> b : inteiro;
+</I>&gt;<i> fim-estrutura
+</I>&gt;<i>
+</I>&gt;<i> variável z : Z;
+</I>&gt;<i> início
+</I>&gt;<i> x := 4;
+</I>&gt;<i> x := p();
+</I>&gt;<i> t := z;
+</I>&gt;<i> fim
+</I>&gt;<i> -------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Pelo que eu entendi, a tabela de simbolos injetada no lib.gvm será
+</I>&gt;<i> correspondente aos tipos do gptassembly, correto?
+</I>
+
+Essa é a idéia...
+
+Com isso, se compilassemos o &quot;teste.gpt&quot;, e o compilador buscasse a
+&gt;<i> tabela de simbolos de lib.gvm, o gptc saberia que &quot;x&quot; é inteiro, mas
+</I>&gt;<i> não saberia que é uma constante.
+</I>
+
+Inicialmente eu tinha pensado que, para dados constantes,  o compilador e/ou
+montador transformariam no código pelo seu valor correto. Se x é constante,
+qualquer referência a x seria trocado pelo seu valor, e a definição de x não
+constaria no gvm. Porém lembrei agora que isso só é válido para dados que
+não tenham escopo global. Eu não estava prevendo vários gvm ainda...
+
+O algoritmo acima modificaria seu
+&gt;<i> valor sem discriminação. O compilador tbm saberia da existência de um
+</I>&gt;<i> procedimento &quot;p&quot;, e só conseguiria saber os tipos dos parâmetros
+</I>&gt;<i> destrinchando o nome de &quot;p&quot;, que é uma montagem da assinatura
+</I>&gt;<i> (&quot;_p_real&quot;). Mesmo assim, não saberia se &quot;p&quot; é uma função que retorna
+</I>&gt;<i> um valor, ou mesmo que retorna um inteiro.
+</I>
+
+Entendi o ponto...
+
+Acho que não está completo no gvm, mas a documentação prevê isso (
+<A HREF="http://gpt.berlios.de/wikki/index.php/Vers%C3%A3o_para_impress%C3%A3o#Arquivo_GVM">http://gpt.berlios.de/wikki/index.php/Vers%C3%A3o_para_impress%C3%A3o#Arquivo_GVM</A>
+).
+
+No GVM constará se é constante ou não, procedimento e seus parâmetros, tipo
+de retorno do procedimento, ...
+
+Finalmente, o gptc só poderia saber o tamanho da variável &quot;t&quot; na
+&gt;<i> memória (&quot;data[12]&quot;), mas não sabe como esse tamanho é distribuído,
+</I>&gt;<i> qual o nome do tipo de &quot;t&quot;, e quais seus membros e respectivos tipos.
+</I>
+
+Quanto a structs, realmente  está em algum TODO para ser colocado na
+documentação, mas ainda não foi colocado. Aliás, acho que a definição para
+procedimentos também não está completa ainda.
+
+Precisamos de informação para analizar o enunciado &quot;t := z;&quot;. E por
+&gt;<i> não ser correto,  precisamos  de informações para explicar porque é
+</I>&gt;<i> inválido.
+</I>
+
+Entendi sim. Isso foi parcialmente implementado. Eu não estava preocupado
+com vários gvm. Isso só estava no escopo lá para o final.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/689f58a8/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/689f58a8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000664.html">[gpt-usuarios] Inserindo a tabela de simbolos no .gvm
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000659.html">[gpt-usuarios] Alguns probleminhas
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#670">[ date ]</a>
+              <a href="thread.html#670">[ thread ]</a>
+              <a href="subject.html#670">[ subject ]</a>
+              <a href="author.html#670">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

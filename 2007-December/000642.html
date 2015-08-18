@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Proposta inicial para as syslibs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712131457h4da076c8x50eda9832bec21f7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000639.html">
+   <LINK REL="Next"  HREF="000646.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Proposta inicial para as syslibs</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Proposta%20inicial%20para%20as%20syslibs&In-Reply-To=%3C92b9a8820712131457h4da076c8x50eda9832bec21f7%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Proposta inicial para as syslibs">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quinta Dezembro 13 23:57:04 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000639.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000646.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#642">[ date ]</a>
+              <a href="thread.html#642">[ thread ]</a>
+              <a href="subject.html#642">[ subject ]</a>
+              <a href="author.html#642">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Dec 13, 2007 10:26 AM, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Quanto a como as coisas iriam funcionar, eu imagino que, para cada subrotina
+</I>&gt;<i> que será feito o binding, o gerador de bindings teria que gerar código C++
+</I>&gt;<i> que desempilhasse os parâmetros, convertesse para o tipo correto C++,
+</I>&gt;<i> invocasse a subrotina (lib do sitema), recuperasse o retorno e convertesse o
+</I>&gt;<i> retorno para o tipo em G-Portugol. Esse código gerado seria compilado e
+</I>&gt;<i> &quot;anexado&quot; a VM através de um .so. Acho que, se bem configurado durante a
+</I>&gt;<i> compilação, a gente nem precisa do dlopen e podemos utilizar as funções
+</I>&gt;<i> diretamente (acho que é a opção export no compilador ou algo semelhante...)
+</I>&gt;<i> mesmo sendo um .so.
+</I>&gt;<i>
+</I>
+Acho que podemos ter as duas formas (linkagem dinamica e estatica das
+libs). Eu pensei na linkagem dinamica porque possibilitaria a
+distribuição de bindings em pacotes separados, independentes.
+
+&gt;<i> Vou tentar montar algo. Meu tempo anda curto, mas vou dar um jeito :-)
+</I>
+Joia
+
+&gt;<i> O gerador de bindings gera, para cada binding em uma syslib, código que será
+</I>&gt;<i> compilado junto com a VM. O gerador gera os seguintes trechos de código:
+</I>&gt;<i> * Insere um mapeamento &quot;nome_lib + nome_funcao&quot; para um ponteiro de função
+</I>&gt;<i> que tratará essa chamada de sistema. Esse mapeamento será utilizado no
+</I>&gt;<i> opcode lcall.
+</I>&gt;<i> * Em outro arquivo (nome_lib.cpp e .hpp) gera a classe com métodos
+</I>&gt;<i> estáticos, onde todos os métodos tem a mesma assinatura (Parameters e
+</I>&gt;<i> Return).
+</I>&gt;<i> * Gera os métodos estáticos onde os parâmetros são convertidos para tipos
+</I>&gt;<i> nativos de C e o retorno é convertido para o tipo nativo da VM. Claro,
+</I>&gt;<i> invoca a função da libsys.
+</I>&gt;<i>
+</I>
+Ainda assim, acho que precisamos gerar código portugol. Mais sobre isso adiante.
+
+&gt;<i> &gt; 1) escreveriamos uma .so que faria a ponte entre o mundo C e o mundo GPT:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ------
+</I>&gt;<i> &gt; //gpt_pow.c
+</I>&gt;<i> &gt; #include &quot;gpt.h&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; gpt_real gpt_pow(gpt_real base, gpt_real expoente) {
+</I>&gt;<i> &gt; double native_base     = real_to_double(base);
+</I>&gt;<i> &gt; double native_expoente = real_to_double(expoente);
+</I>&gt;<i> &gt; double native_return   = pow(native_base, native_expoente);
+</I>&gt;<i> &gt; return double_to_real(native_return);
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt; ------
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Não sei se eu entendi direito, mas codificar esse arquivo, para cada
+</I>&gt;<i> binding, daria muito trabalho.
+</I>&gt;<i>
+</I>
+Isso seria automatico, com certeza :)
+
+
+&gt;<i> &gt; 2) Com a libgptpow.so criada, escreveriamos a biblioteca gpt:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ------
+</I>&gt;<i> &gt; //pow.gpt
+</I>&gt;<i> &gt; função pow(base: real, expoente:real) : real
+</I>&gt;<i> &gt; início
+</I>&gt;<i> &gt; asm
+</I>&gt;<i> &gt;    pushrr
+</I>&gt;<i> &gt;    pushrv expoente
+</I>&gt;<i> &gt;    pushrv base
+</I>&gt;<i> &gt;    libcall libgptpow.so, gpt_pow
+</I>&gt;<i> &gt;    poprv __result
+</I>&gt;<i> &gt; fim-asm
+</I>&gt;<i> &gt; fim
+</I>&gt;<i> &gt; ------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Acho que esse trecho só seria necessário se o usuário quiser modificar a
+</I>&gt;<i> assinatura da subrotina.
+</I>&gt;<i>
+</I>
+Eu acho que este código é necessário para a análise sintática e
+semântica. Se não houver esse código, o gptc vai acusar que &quot;pow&quot; não
+foi declarada. Sem esse código, e para que tudo funcione, eu imagino
+que a tabela de símbolos teria que ser carregada com essas
+funções/estruturas &quot;externas&quot; antes de iniciar a análise, e deve
+existir uma forma de marcar simbolos como &quot;pow&quot; para serem expandidos
+por &quot;lcall&quot; ao invés de &quot;pcall&quot;.
+
+Além de tudo, eu acho que não ter o código gpt faria com que certas
+funções ficassem, de certa forma, ocultas. Algo que eu queria evitar
+para esta versão. Não que esse código em gptassembly acima seja
+informativo para alguém que quer saber o que &quot;pow&quot; faz, mas ao menos
+aponta para onde o usuário deve ir se quiser saber mais.
+
+Finalmente, se o binding já está sendo gerado automaticamente, gerar
+um código como este é batata, pois ele só usa as informações que já
+estão sendo processadas pelo gerador.
+
+
+&gt;<i> Isso sim. Internamente o compilador poderia gerar um lcall e invocar
+</I>&gt;<i> potência diretamente. Lembre que, nos métodos estáticos que mapeiam dados e
+</I>&gt;<i> invocam a libsys, o nome dos métodos pode ser qualquer um (conforme o
+</I>&gt;<i> mapeamento), ou seja, você pode ter um mapeamento de &quot;potência&quot; para o
+</I>&gt;<i> método &quot;potencia&quot; que, internamente, invoca &quot;pow&quot;.
+</I>&gt;<i>
+</I>
+Joia!
+
+&gt;<i> &gt; No fim, imagino que teriamos, a principio, um gerador que recebe duas
+</I>&gt;<i> &gt; informações como entrada: as informações dos protótipos de funções
+</I>&gt;<i> &gt; alvo (math.h, por ex) e o mapeamento dos dados entre as linguagens C e
+</I>&gt;<i> &gt; gpt. Ele seria responsável, então, por criar as funções-ponte em C (o
+</I>&gt;<i> &gt; binding.so), escrevendo as conversões nescessarias nas funções, e
+</I>&gt;<i> &gt; seria responsável por criar os stubs portugol que apenas teriam código
+</I>&gt;<i> &gt; asm para chamar libcall.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Quanto a ler diretamente o .h, meu receio fica em, ao ler um .h, o gerador
+</I>&gt;<i> não conseguir identificar o tipo de um parâmetro (typedef ou qualquer outra
+</I>&gt;<i> coisa que possa estar em outro arquivo). Eu tenho a impressão que usando um
+</I>&gt;<i> .h diretamente a gente fica vulnerável a vários problemas. Mas claro que
+</I>&gt;<i> posso estar errado :-)
+</I>&gt;<i>
+</I>
+Eu estou brincando aqui com algumas ferramentas que extraem
+informações de código C. Vou ver no que vai dar.
+
+&gt;<i> Uma sugestão seria termos um passo intermediário onde um utilitário nosso lê
+</I>&gt;<i> um .h e gera um .sld. Nesse .sld a gente corrige o que está errado e roda o
+</I>&gt;<i> gerador de bindings. Assim a gente tem mais controle do que está
+</I>&gt;<i> acontecendo. Talvez nesse utilitário seja interessante ter o mapeamento
+</I>&gt;<i> entre tipos de dados, se necessário.
+</I>&gt;<i>
+</I>
+Hmm. Vc me convenceu. O sld realmente facilitaria para modificarmos
+uma tradução que não é tão direta, e teriamos essas modificações
+explícitas em um arquivo.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000639.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000646.html">[gpt-usuarios] Proposta inicial para as syslibs
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#642">[ date ]</a>
+              <a href="thread.html#642">[ thread ]</a>
+              <a href="subject.html#642">[ subject ]</a>
+              <a href="author.html#642">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

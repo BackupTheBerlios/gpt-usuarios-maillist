@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3F%3D28V2%3D29_An%3DE1lise_Sem%3DE2ntica%3D2C_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Ftatus%3D2C_planos%3D2C_etc_--_%3D22relat%3DF3rio%3D22%3F%3D&In-Reply-To=%3C92b9a8820712050452t449fded7gd04190a21d840d8e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000647.html">
+   <LINK REL="Next"  HREF="000617.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3F%3D28V2%3D29_An%3DE1lise_Sem%3DE2ntica%3D2C_s%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Ftatus%3D2C_planos%3D2C_etc_--_%3D22relat%3DF3rio%3D22%3F%3D&In-Reply-To=%3C92b9a8820712050452t449fded7gd04190a21d840d8e%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Dezembro  5 13:52:37 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000647.html">[gpt-usuarios] g-portugol submission
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000617.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#615">[ date ]</a>
+              <a href="thread.html#615">[ thread ]</a>
+              <a href="subject.html#615">[ subject ]</a>
+              <a href="author.html#615">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok,
+
+eu acabei de &quot;concluir&quot; o código geral da análise semântica. Por
+&quot;concluir&quot;, eu quero dizer que eu espero que o código esteja cobrindo
+todos ou a maior parte dos aspectos da linguagem. Se está correto ou
+não e se está bem feito, isso já são outros quinhentos :)
+
+Como eu estava absorvido em uma intensa experimentação de códigos :D ,
+acabei não parando muito para conversar por aqui, então vou aproveitar
+este momento para levantar alguns pontos.
+
+Em primeiro lugar, eu sofri bastante com a organização geral das
+classes. O aspecto que mais me insultou foi a elaboração das classes
+que cuidam dos tipos da linguagem. Eu iniciei minhas experimentações
+fazendo uma hierarquia de tipos, como:
+
+class Type;
+class PrimitiveType : Type;
+class Matrixtype : Type;
+class StructType : Type;
+class SubprogramType : Type;
+
+Com o tempo, acabei aceitando que isso foi uma péssima idéia, pois
+toda a manipulação dos tipos por parte dos módulos ficaria a cargo de
+métodos polimórficos da hierarquia Type. Qualquer pergunta que se
+tenha sobre um objeto Type exige que a classe ancestral e todas as
+subclasses tenham o método virtual implementado, quer isso faça
+sentido ou não. A coisa se complicou ainda mais quando muitos dos
+métodos precisaram ser usados para &quot;redescobrir&quot; o tipo da instância
+original do parâmetro (um monte de métodos passando &quot;this&quot; como
+argumento). Depois, fiquei preocupado com o módulo de geração de
+código. Tentei ainda usar templates mas um detalhe me passou
+despercebido: templates de funções virtuais não fazem sentido....
+
+Então, minha segunda abordagem (a que está no repositório), foi fundir
+a hierarquia em apenas uma classe: Type. Grosso modo, os métodos que
+precisam ser &quot;virtuais&quot; chamam um método especifico de acordo com um
+atributo typeId, que indica se o objeto é um tipo primitivo, matriz,
+estrutura, subprograma ou erro.
+
+O segundo ponto que batalhei um pouco foi no design da tabela de
+simbolos. No inicio ela estava bem descuidada. Agora, a interface
+geral dela faz mais sentido, mas ainda não me parece muito boa. Dei
+uma pesquisada e a literatura, quando fala deste aspecto, é muito
+vaga, dizendo que o design varia muito de acordo com o projeto geral
+do compilador. No fim, acaba por descrever uma implementação de
+tabelas hash. Também, sugere a utilização de várias tabelas de
+símbolos de acordo com o escopo, etc.
+
+O que eu fiz foi uma tabela de simbolos geral para registro de IDs
+(variáveis/constantes e procedimentos/funções) e tipos (estruturas, na
+verdade). Procurei facilitar a busca de simbolos, mas pelo que lembro,
+acho que essa parte não está tão tranquilo quanto eu gostaria.
+
+Agora, para a análise semântica eu fiz uma gramática de ASTs
+(treewalker) para percorrer os nós, e a classe BaseSemanticWalker,
+para a avaliação de tipos. Eu acho que completei a gramática, mas não
+me surpreenderia se algo estiver faltando. Várias coisas ainda
+precisam ser implementadas (com uns TODOs espalhados), como a
+verificação de valores repetidos na estrutura &quot;caso&quot;. Ainda, adicionei
+um campo na classe PortugolAST para armazenar o tipo do nó, mas fiz
+isso sem nenhuma disciplina, pois não pensei tão a fundo ainda nos
+requisitos do módulo de emissão de código.
+
+No geral, eu fiz o possível para deixar as gramáticas (parser.g e
+semantic.g, especialmente) limpas no que tange à carga de código. Eu
+estava bastante satisfeito com a parser.g porque ela está com bastante
+espaço para respirar, e pensei que isso seria importante na hora de
+implementar a reportagem de erros, pois será algo que, possívelmente,
+exigirá bastante código. Porém, a parser.g, por hora, está com a
+reportagem de erros do próprio antlr.
+
+Com a semantic.g procurei fazer o mesmo, mas ela exige mais que as
+produções se comuniquem com retorno de valores e parâmetros. A coisa
+vai complicar na reportagem de erros semânticos porque semantic.g
+opera sobre a AST, e não sobre o texto. Fica mais difícil recuperar,
+por exemplo, o texto completo de um lvalue como &quot;a.b[3].c&quot;, pois só
+temos informações dos nós e tipos. Neste momento, por exemplo, um erro
+de atribuição tem a seguinte mensagem:
+
+linha 10 - ilegal: inteiro := real.
+
+Da forma como está, ela falta em informar os termos léxicos. Então,
+acho que vai ser um problema montar um reporter como eu gostaria, como
+o javac do jdk da Sun, por exemplo, e de forma disciplinada, o que
+julgaria bastante importante. No fim, eu estou procurando experimentar
+várias abordagens para manter ao máximo o código limpo e bem isolado.
+É um luxo que temos [não nos preocuparmos com performance], e queria
+aproveitar.
+
+Falando em reportagem de erros, não estou focando nisso ainda, mas
+demorei um pouco em commitar minhas modificações porque queria
+conhecer as implicações de algumas abordagens. Também, o código pode
+estar deixando a desejar em relação as convenções que discutimos, e
+com certeza tem uma panela de memory leaks, mas é algo que decidi
+deixar para esta etapa seguinte, com mais calma, enquanto eu volto a
+me focar nos testes automatizados.
+
+
+Além desse blá blá blá todo, queria obter algum feedback sobre a
+estrutura/modelagem do código do front-end que participa na geração de
+código, especialmente a classe Type/TypeList e Symbol/SymbolTable. Eu
+procurei fazer algo bem estúpido para a SymbolTable, e estou receoso
+de que, de fato, tenha feito um código estúpido :)
+
+
+Finalmente, estou de férias e praticamente graduado :)
+Existem algumas pendências que preciso resolver em relação à outros
+projetos, mas espero poder dividir tranquilamente o tempo com o
+desenvolvimento do gpt. Não lembro se mencionei, mas vou estar
+disponível até o dia 2 de janeiro, pois vou viajar, só voltando 15
+dias depois.
+
+Nesse espaço de um mês, eu vou procurar dar um gás não só nos códigos
+como também ver o lance dos pacotes, arrumar o site e explorá-lo
+melhor. Por exemplo, além de procurar integrar os meios de comunicação
+e melhorar a cara geral, estava pensando em oferecer um repositório de
+códigos onde as pessoas pudessem submeter seus snippets, programas,
+etc. Coisas como esta, que aproximassem mais os usuários. Acho que
+eles já foram afastados e amedrontados de mais :)
+
+
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000647.html">[gpt-usuarios] g-portugol submission
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000617.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#615">[ date ]</a>
+              <a href="thread.html#615">[ thread ]</a>
+              <a href="subject.html#615">[ subject ]</a>
+              <a href="author.html#615">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

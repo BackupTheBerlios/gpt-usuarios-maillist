@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre tipos (revisão e discussão)...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710161018n400882ddi62b142f7bcb5113c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000361.html">
+   <LINK REL="Next"  HREF="000368.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre tipos (revisão e discussão)...</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FSobre_tipos_%3D28revis%3DE3o_e_discuss%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3F%3DE3o%3D29%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C9a3912af0710161018n400882ddi62b142f7bcb5113c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre tipos (revisão e discussão)...">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Terça Outubro 16 19:18:41 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000361.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000368.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#364">[ date ]</a>
+              <a href="thread.html#364">[ thread ]</a>
+              <a href="subject.html#364">[ subject ]</a>
+              <a href="author.html#364">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Algumas coisas que eu andei fazendo em tirei &quot;por base&quot; a v1 do gpt e não
+questionei se seria ou não a mesma coisa na v2. Essa burrada foi minha :-)
+
+Bom, vamos corrigir a especificação da v2. Antes tarde do que nunca :-)
+
+
+== Números ==
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Por trás dos panos, inteiro, caractere e lógico são números inteiros.
+</I>&gt;<i> Então, todos os operadores aritméticos e relacionais, assim como
+</I>&gt;<i> atribuições são válidos entre esses tipos.
+</I>
+
+Pela definição atual, inteiro, caractere e lógico são armazenados como
+inteiro, mas, quando necessário, possuem opcodes específicos para
+determinadas operações.
+
+Por exemplo, existe um iadd (integer add) e um cadd (char add). Porém, só
+existe o iset. A gente chegou a conversar sobre isso em outro e-mail, até
+que entrou a questão do UTF-8.
+
+Não existe opcode para somar um bool, nem para verificar se um booleano é ou
+não maior que outro. Isso é necessário ????
+
+O mesmo vale para o tipo
+&gt;<i> real, exceto que sua participação em operações com estes tipos implica
+</I>&gt;<i> na transformação do valor para inteiro (truncando).
+</I>
+
+Truncagem eu tinha até esquecido, mas truncar nada mais é do que invocar uma
+função da linguagem que faça isso, que no final das contas pode ser um
+opcode. Sem problemas.
+
+Eu adicionei o tipo &quot;coringa&quot;, na v2, para armazenar ponteiros e
+&gt;<i> ajudar a trabalhar com &quot;mundo a fora&quot;. Como trata de números, está
+</I>&gt;<i> sujeitos as mesmas regras.
+</I>
+
+Vamos adicionar o suporte ao tipo coringa.
+
+== Literais ==
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Literais são proibidos de participar de operações aritméticas:
+</I>&gt;<i>
+</I>&gt;<i> &quot;ola&quot; * &quot;oi&quot;; //erro
+</I>
+
+Correto.
+
+E são proibidos de participar em operações relacionais de grandeza:
+&gt;<i>
+</I>&gt;<i> &quot;ola&quot; &gt; &quot;oi&quot;; //erro no v2
+</I>
+
+A VM está planejada com suporte a isso.
+
+// exemplo em GptAssembly
+sset v1, &quot;ola&quot;
+sset v2, &quot;oi&quot;
+sgt t1, v1, v2
+if t1 ...
+
+Mas podem ser comparados por igualdade:
+&gt;<i>
+</I>&gt;<i> &quot;ola&quot; = &quot;oi&quot;; //ok
+</I>&gt;<i> &quot;ola&quot; &lt;&gt; &quot;oi&quot;; //ok
+</I>
+
+Isso também está planejado.
+
+Seus caracteres podem ser acessados:
+&gt;<i>
+</I>&gt;<i> a := &quot;texto&quot;;
+</I>&gt;<i> a[0] //t
+</I>
+
+A gente conversou mas a documentação da v2 ainda não reflete isso. Vamos
+alterar :-)
+
+...atribuições geram cópias:
+&gt;<i>
+</I>&gt;<i> a := &quot;soma&quot;;
+</I>&gt;<i> b := a;
+</I>&gt;<i> a[0] = &quot;t&quot;;
+</I>&gt;<i>
+</I>&gt;<i> imprima(a); //toma
+</I>&gt;<i> imprima(b); //soma
+</I>
+
+Isso está previsto.
+
+...e o operador &quot;+&quot; concatena, como discutimos, gerando um terceiro literal.
+&gt;<i>
+</I>&gt;<i> s := &quot;ola &quot; + &quot;mundo&quot;;
+</I>&gt;<i> imprima(s); //ola mundo
+</I>
+
+Isso está ok também.
+
+== Matrizes ==
+&gt;<i>
+</I>&gt;<i> Como discutimos, omitir o tamanho das dimensões é altamente desejável
+</I>&gt;<i> em parâmetros de funções. Poderiamos, naturalmente, extender isso para
+</I>&gt;<i> retornos também:
+</I>&gt;<i>
+</I>&gt;<i> função f(k : matriz[][] de inteiros) : matriz[] de inteiros  ...
+</I>
+
+Isso seria legal. A questão é: o que acontece se as matrizes tem tamanhos
+diferentes ?
+
+O tamanho das dimensões pode ser adquirido em tempo de execução,
+&gt;<i> acessando opcodes especificos:
+</I>&gt;<i>
+</I>&gt;<i> tamanho_matriz(k);
+</I>&gt;<i> tamanho_matriz(k[0]);
+</I>
+
+Ok.
+
+Quanto às operações, matrizes não participam de operações aritméticas
+&gt;<i> nem relacionais:
+</I>&gt;<i>
+</I>&gt;<i> m1 * m2; //erro de compilação
+</I>&gt;<i> m1 &gt; m2; //erro de compilação
+</I>
+
+Não tinha pensado nisso. Eu até estava pensando agora em propor suporte para
+isso, mas como g-portugol é para ser algo para os iniciantes aprenderem a
+programar, acho que o suporte a isso iria deixar tudo fácil demais hehehe.
+Se necessário a gente implementa com bibliotecas bem didáticas.
+
+Atribuições também implicam em cópias de elementos.
+
+
+Ok.
+
+Agora, algo mais importante: o Alex havia sugerido que pudessemos
+&gt;<i> declarar uma matriz da seguinte forma:
+</I>
+
+
+ Eu só queria confirmar se vamos ou não investir nisso. Não sei se você
+enviou isso antes ou depois de ter lido o nosso último e-mail sobre a
+questão de matrizes de tamanhos indefinidos...
+
+
+&gt;<i> == Estruturas ==
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Como as matrizes, estruturas não podem participar de operações
+</I>&gt;<i> aritméticas ou relacionais e atribuições implicam em cópia dos
+</I>&gt;<i> elementos.
+</I>
+
+Ok.
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/d1dd5ab9/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071016/d1dd5ab9/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000361.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000368.html">[gpt-usuarios] Sobre tipos (revisão e discussão)...
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#364">[ date ]</a>
+              <a href="thread.html#364">[ thread ]</a>
+              <a href="subject.html#364">[ subject ]</a>
+              <a href="author.html#364">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

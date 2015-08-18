@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FPesquisa_%3D22r%3DE1pida%3D22_sobre_algum%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fas_VM%3D27s_existentes%3F%3D&In-Reply-To=%3C9a3912af0709280821i74141b37n9f4cf096bc7d7c17%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000224.html">
+   <LINK REL="Next"  HREF="000225.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FPesquisa_%3D22r%3DE1pida%3D22_sobre_algum%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fas_VM%3D27s_existentes%3F%3D&In-Reply-To=%3C9a3912af0709280821i74141b37n9f4cf096bc7d7c17%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sexta Setembro 28 17:21:04 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000224.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000225.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi pessoal.
+
+Fiz uma pesquisa rápida (4 horas) sobre algumas VM's existentes. A intenção
+desta pesquisa era averiguar o que está sendo desenvolvido atualmente.
+
+Quanto a tipagem, existem 2 tipos de VM's:
+* Fortemente tipadas, geralmente utilizadas para gerar código a partir
+de linguagens tipadas como pascal, java, C;
+* Fracamente tipadas, geralmente utilizadas por linguagens fracamente
+tipadas ou que possuem tipagem dinâmica como as linguagens scripts.
+
+Em geral, todas as VM's tem algum suporte a pilha de dados para poderem ter
+funções recursivas, passagem de parâmetros, entre outras coisas.
+
+Existe uma divisão clara entre as VM's stack-based (baseada em pilha) e as
+register-based (baseada em registradores). Atualmente parece haver uma
+tendência no desenvolvimento de VM's baseada em registradores. Os motivos
+basicamente são porque geram um bytecode menor e são mais eficientes. Porém,
+o número de opcodes dessas VM tende a ser maior.
+
+Outro ponto em que eu subdividiria as VM's é entre as que tem consciência
+dos tipos de dados que manipulam e as que não tem consciência disso. As que
+sabem os tipos de dados que manipulam são a maioria dentre as que olhei.
+Geralmente, as que tem consciência dos dados, tendem a ter um conjunto de
+operações (opcodes) maior.
+
+Quanto a utilizar código intermediário, pelo que notei, são poucas que
+utilizam. Em geral ou se gera o arquivo contendo o bytecode (processo mais
+trabalhoso) ou se gera um arquivo texto contendo assembly da VM e um
+montador (assemblador) transforma o assembly em bytecode.
+
+As VM's que eu vi utilizando código intermediário são projetos que tem, como
+meta, serem uma VM &quot;universal&quot; (talvez tenha exagerado na palavra). Nesses
+projetos a idéia é que outros compiladores, de variadas linguagens, poderiam
+gerar um CI e, a partir deste CI, as ferramentas disponibilizadas junto com
+a VM traduziriam esse CI para assembly e bytecode.
+
+Quanto a nossa VM, pelo que temos hoje, podemos dizer que:
+* Ela é parcialmente baseada em registradores (vamos ampliar isso, eu acho);
+* Tem pilha apenas para gerenciamento de funções e procedures;
+* Não tem consciência &quot;absoluta&quot; dos tipos de dados que está manipulando; a
+VM sabe o que é um int, mas se for gerado um código que tente atribuir um
+int para um tipo de dado string, ela vai executar;
+* Temo um CI definido.
+
+Vou colocar abaixo alguns itens para discussão:
+
+1) Provavelmente o CI será retirado do projeto (minha opinião) porque não
+temos como meta, não que eu saiba, sermos uma VM &quot;universal&quot;. A gente quer
+dar suporte ao gpt apenas;
+2) Quanto ao uso de registradores, provavelmente vamos ampliar isso para que
+o bytecode fique mais &quot;limpo&quot;;
+3) Quanto a nossa VM ter ou não consciência dos dados que está manipulando,
+eu diria que inicialmente ela foi desenvolvida para ser uma VM sem
+consciência dos dados, mas atualmente não sei dizer se essa seria a melhor
+abordagem. Talvez seja interessante colocarmos um pouco mais de inteligência
+na VM.
+
+Por enquanto era isso :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/f8b39b2c/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20070928/f8b39b2c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000224.html">[gpt-usuarios] Discussao sobre duvidas no wikki
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000225.html">[gpt-usuarios] Pesquisa &quot;rápida&quot; sobre algumas VM's existentes
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Libs dinâmicas em C++
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150529v3871bc5bm74e285661426e5f6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000667.html">
+   <LINK REL="Next"  HREF="000669.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Libs dinâmicas em C++</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FLibs_din%3DE2micas_em_C%2B%2B%3F%3D&In-Reply-To=%3C9a3912af0712150529v3871bc5bm74e285661426e5f6%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Libs dinâmicas em C++">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Sábado Dezembro 15 14:29:58 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000667.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000669.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#668">[ date ]</a>
+              <a href="thread.html#668">[ thread ]</a>
+              <a href="subject.html#668">[ subject ]</a>
+              <a href="author.html#668">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Também falaram eu usar a libiberty. Mas não achei nada interessante...
+<A HREF="http://gcc.gnu.org/ml/gcc-help/2000-07/msg00014.html">http://gcc.gnu.org/ml/gcc-help/2000-07/msg00014.html</A>
+
+On 12/15/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Outra opção...
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.linuxjournal.com/article/3687">http://www.linuxjournal.com/article/3687</A>
+</I>&gt;<i>
+</I>&gt;<i> Pelo que eu entendi o que ele faz é, no .so, ter um extern para um map
+</I>&gt;<i> onde ele registra os métodos. Esse map estaria no programa que carregou o
+</I>&gt;<i> .so. Com isso a gente teria que ter apenas uma função que registrasse todos
+</I>&gt;<i> os métodos de uma classe dentro do .so.
+</I>&gt;<i>
+</I>&gt;<i> Pareceu um pouco mais sociável...
+</I>&gt;<i>
+</I>&gt;<i> On 12/15/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Oi Thiago,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu utilizei praticamente todo aquele código que você tinha para uso de
+</I>&gt;<i> &gt; syslibs. Adaptei alguma coisa na VM apenas.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Para facilitar a nossa vida, a gente teria que desenvolver as libs
+</I>&gt;<i> &gt; dinâmicas (.so) em C++ porque aproveitamos todas as nossas classes. Mas aí
+</I>&gt;<i> &gt; já são outros 500...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Um problema é que a gente não consegue invocar um construtor ou
+</I>&gt;<i> &gt; destrutor que esteja definido dentro de um .so. Para isso se resolve criando
+</I>&gt;<i> &gt; duas funções C com extern &quot;C&quot; que internamente elas invocam o construtor e o
+</I>&gt;<i> &gt; destrutor.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Os métodos da classe dentro do .so, após isso, podem ser invocados
+</I>&gt;<i> &gt; normalmente.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Bom, até onde eu sei, criar .so em C++ é isso. Se você souber uma forma
+</I>&gt;<i> &gt; melhor eu estou muito interessado em saber como :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Essa abordagem é correta quando a gente carrega .so e sabe previamente
+</I>&gt;<i> &gt; quais os métodos que serão invocados. Porém, para nós, isso não elimina
+</I>&gt;<i> &gt; todos os problemas porque nós não sabemos previamente quais os métodos que
+</I>&gt;<i> &gt; serão invocados. O dlsym não consegue encontrar os métodos C++ (por isso das
+</I>&gt;<i> &gt; funções C para o construtor e destrutor). Uma forma seria, para cada método,
+</I>&gt;<i> &gt; criar uma função C equivalente.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Apesar de uma ferramenta nossa ser responsável por gerar esse código, eu
+</I>&gt;<i> &gt; achei essa abordagem danadinha hehehe.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Você conhece alguma forma descente de fazer isso ??? Tem como o dlsym
+</I>&gt;<i> &gt; encontrar os métodos de uma classe ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; O rascunho de código para criar o .so que eu tenho até o momento é este:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; include &lt;stdio.h&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; #include &quot;CBaseSyslib.hpp&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; class teste : CBaseSyslib
+</I>&gt;<i> &gt; {
+</I>&gt;<i> &gt;    void imprime_hello(int i, int j)
+</I>&gt;<i> &gt;    {
+</I>&gt;<i> &gt;       puts (&quot;Hello !!!&quot;);
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt; };
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; extern &quot;C&quot; {
+</I>&gt;<i> &gt;    CBaseSyslib* create_teste()
+</I>&gt;<i> &gt;    {
+</I>&gt;<i> &gt;       return new teste();
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt;    void destroy_teste(CBaseSyslib* obj)
+</I>&gt;<i> &gt;    {
+</I>&gt;<i> &gt;       delete obj;
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt;    void imprime_hello(CBaseSyslib* obj, int i, int j)
+</I>&gt;<i> &gt;    {
+</I>&gt;<i> &gt;       obj-&gt;imprime_hello(i, j);
+</I>&gt;<i> &gt;    }
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; []'s
+</I>&gt;<i> &gt; Alex Sandro Garzão
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> []'s
+</I>&gt;<i> Alex Sandro Garzão
+</I>
+
+
+
+-- 
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/e1213c14/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071215/e1213c14/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000667.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000669.html">[gpt-usuarios] Libs dinâmicas em C++
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#668">[ date ]</a>
+              <a href="thread.html#668">[ thread ]</a>
+              <a href="subject.html#668">[ subject ]</a>
+              <a href="author.html#668">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

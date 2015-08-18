@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Comentários sobre os códigos / planejamento
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C9a3912af0711070335w4a9dc014i599bb6447eebd9a4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000569.html">
+   <LINK REL="Next"  HREF="000572.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Comentários sobre os códigos / planejamento</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FComent%3DE1rios_sobre_os_c%3DF3digos_/_%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fplanejamento%3F%3D&In-Reply-To=%3C9a3912af0711070335w4a9dc014i599bb6447eebd9a4%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Comentários sobre os códigos / planejamento">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quarta Novembro  7 12:35:56 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000569.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000572.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#570">[ date ]</a>
+              <a href="thread.html#570">[ thread ]</a>
+              <a href="subject.html#570">[ subject ]</a>
+              <a href="author.html#570">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Depois, acho que vc comentou que queria deixar claro que geração de
+</I>&gt;<i> código não precisava de ast e eu respondi &quot;blz&quot;. Talvez esse &quot;blz&quot;
+</I>&gt;<i> tenha sido ambiguo.
+</I>
+
+Acho que foi ai que eu entendi errado hehehe.
+
+&gt;<i> Concordo sim. O que eu fiz é bem simples, mas funciona e já quebrou um
+</I>&gt;<i> galho
+</I>&gt;<i> &gt; hehehe. Cada alteração no compilador eu gastava uns 30 minutos para ver
+</I>&gt;<i> se a
+</I>&gt;<i> &gt; geração de código estava ok. Agora levo 30 segundos :-)
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Ok. Eu vou dar uma olhada assim que puder em como algumas
+</I>&gt;<i> implementações de linguagens (PHP, spidermonkey, etc) utilizam e criam
+</I>&gt;<i> testes.
+</I>
+
+O GCC também deve ter uma estrutura bem interessante. Se der um tempinho vou
+dar uma olhada...
+
+&gt;<i> Teoricamente o lexer está ok. Falta implementar corretamente o
+</I>&gt;<i> asm..fim-asm
+</I>&gt;<i> &gt; que eu não consegui fazer sem inserir { e }. Além disso eu proponho
+</I>&gt;<i> &gt; começarmos a utilizar os identificadores em inglês quando possível.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Que identificadores? Variáveis C++?
+</I>
+
+Ops, falei errado hehehe. Ao invés de T_NUMERO, T_NUMBER por exemplo... isso
+facilita o porte para outras línguas.
+
+&gt;<i> De qualquer forma, só fiquei com dúvida em relação a estrutura de
+</I>&gt;<i> &gt; diretórios...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; gpt2
+</I>&gt;<i> &gt; gpt2/gptc/src
+</I>&gt;<i> &gt; gpt2/gptc/tests
+</I>&gt;<i> &gt; gpt2/gptasm/src
+</I>&gt;<i> &gt; gpt2/gptasm/tests
+</I>&gt;<i> &gt; gpt2/gptvm/src
+</I>&gt;<i> &gt; gpt2/gptvm/tests
+</I>&gt;<i> &gt; gpt2/common/src
+</I>&gt;<i> &gt; gpt2/common/tests   &lt;-- testes unitários eu acho...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Ou seria algo como:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; gpt2
+</I>&gt;<i> &gt; gpt2/src
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; gpt2/src/gptc
+</I>&gt;<i> &gt; gpt2/src/gptasm
+</I>&gt;<i> &gt; gpt2/src/gptvm
+</I>&gt;<i> &gt; gpt2/src/commongpt2/tests/
+</I>&gt;<i> &gt; gpt2/tests/gptc
+</I>&gt;<i> &gt; gpt2/tests/gptasm
+</I>&gt;<i> &gt; gpt2/tests/gptvm
+</I>&gt;<i> &gt; gpt2/tests/common
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Eu acho a segunda abordagem mais organizada, mas como disse antes, não
+</I>&gt;<i> sou
+</I>&gt;<i> &gt; muito bom em organizar essas coisas hehehe.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Não sei. Por mim tanto faz. Se o que escolhermos der dor de cabeça
+</I>&gt;<i> mais pra frente, a gente tenta outra coisa.
+</I>&gt;<i>
+</I>&gt;<i> Ainda, teriamos diretórios como &quot;doc&quot;, e precisariamos de um lugar
+</I>&gt;<i> para códigos fontes g-portugol (ex. gptlib).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> gpt2
+</I>&gt;<i> gpt2/gptc/src
+</I>&gt;<i> gpt2/gptc/doc
+</I>&gt;<i> gpt2/gptc/tests
+</I>&gt;<i> gpt2/gptasm/src
+</I>&gt;<i> gpt2/gptasm/doc
+</I>&gt;<i> gpt2/gptasm/tests
+</I>&gt;<i> gpt2/gptvm/src
+</I>&gt;<i> gpt2/gptvm/tests
+</I>&gt;<i> gpt2/gptlib/src
+</I>&gt;<i> gpt2/gptlib/doc
+</I>&gt;<i> gpt2/gptlib/tests
+</I>&gt;<i> gpt2/common/src
+</I>&gt;<i> gpt2/common/tests
+</I>
+
+Essa árvore parece demonstrar um diretório onde foram colocados vários
+projetos separados.
+
+ou
+&gt;<i>
+</I>&gt;<i> gpt2
+</I>&gt;<i> gpt2/src
+</I>&gt;<i> gpt2/src/gptc
+</I>&gt;<i> gpt2/src/gptasm
+</I>&gt;<i> gpt2/src/gptvm
+</I>&gt;<i> gpt2/src/gptlib
+</I>&gt;<i> gpt2/src/common
+</I>&gt;<i> gpt2/doc/
+</I>&gt;<i> gpt2/doc/gptc
+</I>&gt;<i> gpt2/doc/gptasm
+</I>&gt;<i> gpt2/doc/gptvm
+</I>&gt;<i> gpt2/doc/gptlib
+</I>&gt;<i> gpt2/tests/gptc
+</I>&gt;<i> gpt2/tests/gptasm
+</I>&gt;<i> gpt2/tests/gptvm
+</I>&gt;<i> gpt2/tests/gptlib
+</I>&gt;<i> gpt2/tests/common
+</I>
+
+Essa árvore parece relatar um projeto apenas.
+
+Bom, como você disse, a gente opta por um e troca se necessário. Eu semprei
+usei CVS por isso tenho traumas em começar as coisas e ter que mudar depois
+hehehe (cvs não tem move, rename, ...).
+
+Eu opto pela 2a opção :-)
+
+[]'s
+Alex Sandro Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071107/786ad23d/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071107/786ad23d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000569.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000572.html">[gpt-usuarios] Comentários sobre os códigos / planejamento
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#570">[ date ]</a>
+              <a href="thread.html#570">[ thread ]</a>
+              <a href="subject.html#570">[ subject ]</a>
+              <a href="author.html#570">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

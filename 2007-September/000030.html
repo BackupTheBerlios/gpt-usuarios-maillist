@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C92b9a8820708311642q87ed6dbj38dcedb2637eb791%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <LINK REL="Next"  HREF="000031.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20Sobre%20a%20thread%20%22o%20que%20pode%20ser%20feito%20com%20o%20GPT%22&In-Reply-To=%3C92b9a8820708311642q87ed6dbj38dcedb2637eb791%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Sábado Setembro  1 01:42:13 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Próxima mensagem: <A HREF="000031.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Olá Alex,
+
+On 8/31/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i> Olá para todos.
+</I>&gt;<i>
+</I>&gt;<i> Eu não sou nenhum especialista na área de linguagens, compiladores e afins,
+</I>&gt;<i> mas gostaria de ajudar em possíveis melhorias nesse projeto.
+</I>
+Que ótimo! Seja bem vindo :)
+
+&gt;<i> Antes de tudo eu gostaria de salientar que, se algum comentário meu for
+</I>&gt;<i> percebido como ofensivo, desculpe-me, garanto que não era a intenção :-)
+</I>
+Não se preocupe, seu e-mail é inofensivo :)
+
+&gt;<i> Eu li as mensagens do archive da lista e vi algumas coisas que o pessoal
+</I>&gt;<i> gostaria que existisse nesse projeto. Vi também algumas ponderações do
+</I>&gt;<i> Thiago em que, o acréscimo de algumas funções, pode quebrar recursos
+</I>&gt;<i> existentens como debug, tradução para C ou assembly, entre outros.
+</I>
+Sim, a linguagem pode evoluir em alguns aspectos ainda. Por exemplo, o
+Adorilson já tinha conversado comigo sobre adicionar estruturas de
+dados mais complexas (a lá structs do C). Isso é bem viável.
+Recentemente, ainda, estive adicionando um novo operador, para
+concatenar literais. Porém, hoje me pergunto se essas adições são
+significativas, em comparação com acesso aos serviços do sistema
+operacional (arquivos, sockets, etc), ou mesmo, utilizar bibliotecas
+existentes escritas em outras linguagens (acho que o primeiro
+benefício disso seria fazer um binding com o GTK para criar interfaces
+gráficas em portugol).
+
+Uma vez que o GPT opera em 3 modos (compilação, tradução e
+interpretação), os 3 devem gerar código (ou executar) um algorítimo de
+forma equivalente. Esse esforço pela equivalência é um pouco
+cansativo. Por exemplo, eu gastei 2 horas para implementar o operador
+de concatenação no módulo de tradução para C _e_ interpretação. Acho
+que eu gastaria bem mais para colocá-lo no módulo de compilação
+(escrever assembly é quase uma atividade cirurgica), sendo assim,
+ainda não tive tempo para fazer isso.
+
+Sem pensar muito a respeito, acho que seria um pouco complicado
+evoluir estes 3 módulos para acessar o kernel (possível, mas um pouco
+trabalhoso, imagino). Porém, mais complicado ainda, seria ter este
+&quot;novo GPT&quot; funcionando no Windows, também.
+
+Por falar em Windows, eu entendo que manter o port do Windows seja
+algo polêmico, na perspectiva mais relevante do software livre. Mas,
+tendo em vista as estatísticas de download do projeto, o maior número,
+é claro, corresponde ao pacote binário para Windows. Por oferecendo
+certas vantagens do GPT em sistemas GNU/Linux, eu me sinto confortável
+com este cenário. Hoje, eu vejo esta vantagem, em parte, como sendo o
+GPTEditor.
+
+Com tudo isso em mente, eu não hesitaria em abandonar, ou o compilador
+ou o interpretador (o tradutor, pra mim, tem a prioridade mais baixa),
+em prol de um avanço em apenas um destes módulos. E, também, acho que
+só me sentiria confortável em abandonar o port do Windows caso o GPT
+se torne um projeto maduro e com benefícios evidentes. Isso seria
+bastante interessante, mas hoje, acho que ainda não é o caso.
+
+Gostaria de dizer também que, na versão atual, o GPT 1.0, além de
+oferecer uma linguagem simples em português também deve ter algum
+valor em seu próprio código. Era algo que eu sentia falta (ter um
+compilador acessível que pudesse ser estudado), e foi uma das razões
+para ter escrito o módulo de compilação. Uma vez que o GPT não está na
+categoria de produção (que costuma conter todo tipo de ajuste e
+algoritmos avançados), seu código é menos alienígena e pode beneficiar
+quem quiser explorar as entranhas de um compilador (só não garanto que
+o código seja bonito :).
+
+Assim, penso que a versão 1.0 realizou os propósitos que eu buscava e,
+embora possa ser expandido da forma como está, não acho que vá muito
+longe. A partir daí, poderiamos procurar um novo passo, escolhendo
+apenas um &quot;modelo de execução&quot; (interpretado ou compilado) e colocando
+a linguagem com acesso mais abrangente ao sistema operacional. Acho
+que isso seria bem apelativo.
+
+
+&gt;<i> Eu li também os últimos posts do Thiago sobre algumas idéias de uma possível
+</I>&gt;<i> nova linguagem. Me parece que você está querendo colocar seus esforços no
+</I>&gt;<i> desenvolvimento de uma nova linguagem.
+</I>
+Não, não. Aqueles posts [2] foram mais uma brincadeira do que um novo projeto :)
+Para colocar meus esforços em uma nova linguagem, a idéia teria que
+estar mais madura e bem experimentada. Não é o caso, visto que aqueles
+comentários são apenas exercícios.
+
+
+&gt;<i> Não tenho nada contra (aliás, quem
+</I>&gt;<i> nunca pensou em criar a sua própria linguagem ?) mas a primeira pergunta que
+</I>&gt;<i> lhe faço é: Você continua tendo interesse em encontrar pessoas que estejam
+</I>&gt;<i> dispostas a lhe ajudar no GPT ?
+</I>
+Sim, certamente!
+
+&gt;<i> Ou você quer focar seu tempo livre
+</I>&gt;<i> integralmente nesse proposta de uma nova linguagem ?
+</I>
+Não, como disse acima, a questão da nova linguagem é mais uma
+brincadeira ou um exercício (independente da possibilidade de se
+tornar séria com o passar do tempo).
+
+&gt;<i> Tá, sei que a resposta
+</I>&gt;<i> pode ser &quot;é GPL, encara e toca o baile sozinho&quot;, mas como eu não tenho muito
+</I>&gt;<i> tempo disponível, acho que eu não teria nem tempo (e talvez nem capacidade
+</I>&gt;<i> técnica) para tocar o projeto sozinho.
+</I>
+Não se preocupe. Eu, até agora, estou por aqui :)
+
+&gt;<i> Bom, vou continuar com as minhas idéias, assumindo que a gente poderia tocar
+</I>&gt;<i> o projeto em conjunto...
+</I>
+Ótimo.
+
+&gt;<i> Em algumas das mensagens o Thiago comentou sobre ter tido contato com alguém
+</I>&gt;<i> que trabalha com inclusão digital. Achei interessante esse contato porque
+</I>&gt;<i> esse pessoal, que tem convívio direto com quem está começando na área da
+</I>&gt;<i> informática, certamente possuem idéias &quot;preciosas&quot; sobre o que seria
+</I>&gt;<i> importante ter em um ambiente para aprendizado de programação.
+</I>&gt;<i>
+</I>&gt;<i> Talvez Thiago seria interessante avaliar o que realmente importa nesse
+</I>&gt;<i> contexto com essa turma de inclusão digital, e talvez retirar algum recurso
+</I>&gt;<i> do GPT feito com muita paixão [1] e que talvez não seja assim tao utilizado
+</I>&gt;<i> ou útil (sem ofensas).
+</I>
+Imagina! Se uma idéia não traz valor algum , não vejo porque insistir
+nela. Falando po mim, eu não hesitaria em jogar fora uma porção de
+código que suei para desenvolver, se esse código não sentido ou
+propósito prático. Mais ainda, eu não me incomodaria de voltar o
+projeto do começo e replanejá-lo. A versão 1.0 está aí para quaisquer
+efeitos.
+
+&gt;<i> Eu, por exemplo, tenho paixão pela área de otimização
+</I>&gt;<i> de código intermediário, mas mesmo que eu implementasse algo assim no GPT,
+</I>&gt;<i> qual seria a utilidade prática para quem está começando a programar ????
+</I>&gt;<i> Acho que nenhuma hehehe.
+</I>
+Como este projeto pode ser caracterizado como um exercício contínuo,
+suas explorações são bem vindas. Eu aposto que muito do que fiz no GPT
+não deve ter servido há ninguém. Porém, eu realmente queria aprender a
+fazer certas coisas. Acho que é uma ótima justificativa, e este é o
+tipo de projeto para fazer estas coisas.
+
+&gt;<i>
+</I>&gt;<i> [1] Eu te entendo porque também sou apaixonado pela área de compiladores,
+</I>&gt;<i> linguagens, parsers, máquinas virtuais e afins, e muitas coisas, apesar de
+</I>&gt;<i> não serem muito úteis, a gente quer fazer e pronto, mesmo que seja para
+</I>&gt;<i> aprender hehehehe :-)
+</I>&gt;<i>
+</I>
+Bom saber ;)
+Abraços,
+
+
+[2] <A HREF="http://sourcecraft.info/blog/?p=82">http://sourcecraft.info/blog/?p=82</A>
+      <A HREF="http://sourcecraft.info/blog/?p=83">http://sourcecraft.info/blog/?p=83</A>
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Próxima mensagem: <A HREF="000031.html">[gpt-usuarios] Sobre a thread &quot;o que pode ser feito com o GPT&quot;
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

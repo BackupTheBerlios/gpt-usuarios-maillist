@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] (v2) reportagem de erros
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%28v2%29%20reportagem%20de%20erros&In-Reply-To=%3C92b9a8820712051024v49349904p8973c06f4f21fa90%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000630.html">
+   <LINK REL="Next"  HREF="000618.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] (v2) reportagem de erros</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%28v2%29%20reportagem%20de%20erros&In-Reply-To=%3C92b9a8820712051024v49349904p8973c06f4f21fa90%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] (v2) reportagem de erros">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Quarta Dezembro  5 19:24:08 CET 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000630.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000618.html">[gpt-usuarios] (v2) reportagem de erros
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#616">[ date ]</a>
+              <a href="thread.html#616">[ thread ]</a>
+              <a href="subject.html#616">[ subject ]</a>
+              <a href="author.html#616">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Só para constar,
+
+acabei de fazer uns testes aqui com a reportagem de erros semânticos,
+e a coisa ficou muito mais simples do que eu esperava. Copiei o modelo
+das mensagens do javac e notei que,  por exibir o trecho do código (e
+uma seta) onde o erro foi encontrado, não há muita necessidade de
+explicitar os termos que causaram o erro na mensagem. Eis alguns
+exemplos de erros copiados:
+
+//nota: a seta só vai apontar para o local correto se a fonte do email
+for monospace
+
+../tmp/sem_teste.gpt:59: valores da matriz não podem ter dimensões diferentes
+                  b : matriz[] do tipo Z := [{x:=1,k:=[3,1,[1]]}];
+                                                                    ^
+../tmp/sem_teste.gpt:18: variável do tipo 'inteiro' não pode receber
+valor do tipo 'literal'
+                  k.c[1].a := b;
+                           ^
+
+O último erro foi o que mais me animou, por não precisar ter que
+reconstruir o lvalue a partir da ast. Com informação de linha e coluna
+nos nós da ast, podemos exibir a linha onde o erro ocorre e apontar
+para um lugar sugestivo, e a combinação disso com a mensagem de erro
+me parece bastante satisfatório.
+
+Enfim. Acho que vai dar pra fazer mais do que eu esperava até janeiro.
+
+Eu vou dar uma olhada agora nos códigos do gptasm e gptvm pra ver se
+brinco e me intero no funcionamento deles ;)
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000630.html">[gpt-usuarios] (V2) Análise Semântica, status, planos, etc -- &quot;relatório&quot;
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000618.html">[gpt-usuarios] (v2) reportagem de erros
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#616">[ date ]</a>
+              <a href="thread.html#616">[ thread ]</a>
+              <a href="subject.html#616">[ subject ]</a>
+              <a href="author.html#616">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

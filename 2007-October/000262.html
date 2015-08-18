@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Discussão sobre algumas dúvidas
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FDiscuss%3DE3o_sobre_algumas_d%3DFAvidas%3F%3D&In-Reply-To=%3C92b9a8820710080236k18ed3ed5s20ba3205a8d4c1f4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000254.html">
+   <LINK REL="Next"  HREF="000271.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Discussão sobre algumas dúvidas</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FDiscuss%3DE3o_sobre_algumas_d%3DFAvidas%3F%3D&In-Reply-To=%3C92b9a8820710080236k18ed3ed5s20ba3205a8d4c1f4%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Discussão sobre algumas dúvidas">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Segunda Outubro  8 11:36:40 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000254.html">[gpt-usuarios] Associação Software Livre.org faz convite à comunidade de software livre
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000271.html">[gpt-usuarios] pós configuração
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#262">[ date ]</a>
+              <a href="thread.html#262">[ thread ]</a>
+              <a href="subject.html#262">[ subject ]</a>
+              <a href="author.html#262">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* A função imprima recebe argumentos variáveis. E a função leia também ?
+
+Humm, não sei. Uma vez que é a lista de parâmetros (e não a de
+argumentos) que indica o tipo de passagem (por valor ou referência),
+teriamos que definir uma sintaxe diferenciada para funções com número
+variável de parâmetros por referência. Por exemplo:
+
+função leia( ref ... )
+
+Pensando um pouco à respeito, acho que a implementação disso seria
+trivial, então, acho que apoio.
+
+
+* libcall (ou call) consegue invocar tanto bibliotecas de sistema como
+bibliotecas desenvolvidas em gpt ?
+
+Acho que não. A princípio, creio que deveriamos ter dois tipos de
+call: um para chamar rotinas nativas à VM, e a outra para chamar
+rotinas externas. A segunda faria, internamente, um dlopen.
+
+Supondo que call faz uma chamada nativa da VM e libcall uma chamada
+externa, eis um exemplo de GptAssembly baseado na manpage do dlopen
+(utilizando a função &quot;cos&quot; da biblioteca math (libm.so)):
+
+//Chama cos(2.0) da biblioteca math
+//e imprime o resultado
+
+push 2.0
+libcall libm.so, &quot;cos&quot;
+push real
+push 1
+call imprima
+
+Notas:
+
+-A não ser que o tipo &quot;real&quot; mapeie para um double, este exemplo pode
+apresentar um valor errado ou impreciso. Outra coisa que me preocupa é
+o mapeamento literal -&gt; char*&quot; e vice-versa.
+
+-Acho que libcall seria mais complexo que call, pois deve fazer por
+baixo dos panos o dlopen, dlsym, dlclose, etc.
+
+-Estou supondo que o resultado das chamadas ficaria no topo da pilha.
+Assim, &quot;imprima&quot; exibe o resultado de &quot;cos&quot;.
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000254.html">[gpt-usuarios] Associação Software Livre.org faz convite à comunidade de software livre
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000271.html">[gpt-usuarios] pós configuração
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#262">[ date ]</a>
+              <a href="thread.html#262">[ thread ]</a>
+              <a href="subject.html#262">[ subject ]</a>
+              <a href="author.html#262">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

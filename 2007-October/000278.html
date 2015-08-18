@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710110739o274ca4ban801d938fe993e1e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000276.html">
+   <LINK REL="Next"  HREF="000280.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Alex Garzao</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C9a3912af0710110739o274ca4ban801d938fe993e1e%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">alexgarzaol em gmail.com
+       </A><BR>
+    <I>Quinta Outubro 11 16:39:29 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000276.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000280.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Oi Thiago.
+
+Que bom que você iniciou a gramática. Ótimo trabalho :-)
+
+Quanto aos seus comentários...
+
+1) &quot;Ainda não foi definido a gramática para opcodes (gptassembly)&quot;
+
+Posso estar enganado, mas acho que a gente poderia tratar o código em
+assembly como uma &quot;string&quot; (bloco de texto). O compilador simplesmente copia
+e cola isso no arquivo assembly que está sendo gerado (tirando o
+asm..fim-asm, claro). O montador, quando for executado, faz as validações
+necessárias.
+
+Claro que, com isso, se o usuário digitar coisas erradas no assembly dentro
+de um programa em g-portugol, o compilador não vai sinalizar os erros, mas o
+montador sim.
+
+A única ressalva para essa abordagem é se, dentro do código assembly, a
+gente precise fazer alguma manipulação antes de inserir no assembly.
+
+2) Como sempre me confundi e nunca decidi entre &quot;matriz&quot; e &quot;vetor&quot; para
+arrays, resolvi utilizar apenas &quot;vetor&quot;, em contraste com a v1.0
+
+A meu ver, vetor tem uma dimensão apenas, e matriz mais de uma dimensão.
+Pelo certo seriam duas definições, mas eu acho que ficaria horrível hehehe.
+O que algumas linguagens fazem é encarar os vetores como uma matriz de uma
+dimensão, ou seja, adotam matriz sempre.
+
+Mas para mim indifere. Se você achar melhor vetor ou matriz, tanto faz :-)
+
+3) Eu não sei se devemos ter &quot;procedimento&quot; e &quot;função&quot; ou apenas &quot;função&quot;.
+
+Em termos de geração de código, assembly, e durante a execução na VM, tanto
+faz. A VM em si não tem consciência do que é um procedimento ou função.
+Aliás, nem o montador tem consciência disso.
+
+Porém, em termos didáticos, eu acharia interessante termos procedimentos e
+funções porque qualquer livro para iniciante sempre aborda os dois
+conceitos. Eu mesmo (sabe como é burro véio rsrsrs) se estou utilizando uma
+linguagem que não tem procedures fico com a sensação de que &quot;está faltando
+algo&quot;...
+
+4) A produção &quot;en_repita&quot; está um pouco alienígena em relação às outras
+construções da linguagem (não tem &quot;fim-repita&quot;, por exemplo).
+
+Logo que começamos a falar sobre as novas estruturas da V2 eu pensei sobre
+isso mas não achei nenhuma abordagem legal também. O que outras linguagens
+que utilizam essa idéia de &quot;if..end-if&quot; utilizam para a sentença repeat ???
+
+Uma abordagem que pensei agora:
+
+repita enquanto x &lt;= 10
+...
+fim-repita
+
+e
+
+repita até x &gt; 10
+...
+fim-repita
+
+Porém eu acho que isso pode confundir o usuário porque, em uma sentença
+repita, o teste é feito no final, mas no código aparece no início...
+
+5) Acho que temos que incorporar outros tipos, como double, long, short,
+byte, etc.
+
+Interessante seria, mas você pensou nisso por algum motivo em especial ?
+
+[]'s
+Alex S. Garzão
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/b1f414e1/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071011/b1f414e1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000276.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000280.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

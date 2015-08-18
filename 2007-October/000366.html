@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Algumas dúvidas sobre a gramática
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C92b9a8820710161219g5425659fx2543423fa7625ffa%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000363.html">
+   <LINK REL="Next"  HREF="000376.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Algumas dúvidas sobre a gramática</H1>
+    <B>Thiago Silva</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%0A%09%3D%3Fiso-8859-1%3Fq%3FAlgumas_d%3DFAvidas_sobre_a_gram%3DE1ti%3F%3D%0A%09%3D%3Fiso-8859-1%3Fq%3Fca%3F%3D&In-Reply-To=%3C92b9a8820710161219g5425659fx2543423fa7625ffa%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Algumas dúvidas sobre a gramática">tsilva em sourcecraft.info
+       </A><BR>
+    <I>Terça Outubro 16 21:19:22 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000363.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000376.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/16/07, Alex Garzao &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">alexgarzaol em gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> 1) A definição &quot;(bloco_variáveis|bloco_constantes)?&quot; está
+</I>&gt;<i> correta ?
+</I>
+Nope...ta errado.
+
+&gt;<i> Teoricamente isso gera uma ou outra, mas podemos ter as duas.
+</I>&gt;<i>
+</I>&gt;<i> A minha sugestão é que a gente &quot;imponha&quot; uma ordem como, por exemplos,
+</I>&gt;<i> constantes e depois variáveis, até porque as constantes podem ser utilizadas
+</I>&gt;<i> para inicializar as variáveis.
+</I>
+Hmm, não sou muito fã de impor ordem. Acho que estariamos adicionando
+dores de cabeça em potencial para algumas pessoas :)
+
+&gt;<i> 2) Em &quot;definições&quot;, ela deriva por definição_função ou definição_estrutura.
+</I>&gt;<i> Com isso a gente pode ter definição de estruturas em vários pontos do
+</I>&gt;<i> programa. Não seria melhor delimitar isso no início do programa ou
+</I>&gt;<i> procedimento ???
+</I>
+Concordo...poderiamos colocar junto com as declarações de variáveis e
+constantes.
+
+&gt;<i> 3) Enunciado pode derivar em &quot;;&quot; ? Com isso a gente pode ter algo como
+</I>&gt;<i> &quot;início
+</I>&gt;<i>     ;
+</I>&gt;<i> fim&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Era essa a idéia ???
+</I>
+Sim.
+
+
+&gt;<i> 4) Tem outro ponto que cheguei a comentar algo, pelo que eu me lembre. Se
+</I>&gt;<i> enunciado deriva por expressão, e expressão deriva, entre outras coisas, em
+</I>&gt;<i> &quot;expressão ou expressão&quot;, isso quer dizer que o usuário pode digitar algo
+</I>&gt;<i> como:
+</I>&gt;<i>
+</I>&gt;<i> início
+</I>&gt;<i>     v1 ou v2;
+</I>&gt;<i> fim.
+</I>&gt;<i>
+</I>&gt;<i> Acho que, atualmente, isso não seria válido. Ou seria ???
+</I>
+Tive que garimpar minha resposta sobre isso :P
+
+&quot;Sim. Agora, eu não lembro se tive alguma justificativa forte pra fazer
+isso. No v1.0, a unica expressão que pode ser avaliada como enunciado
+é chamada de função (fcall). É mais rídigo, nesse sentido. Como não sou muito
+fã de restringir, acho que poderia ser uma boa idéia ser mais flexível.&quot;
+
+E poderiamos fazer algo como:
+
+início
+  abrir_socket() e iniciar_loop();
+fim
+
+-- 
+Thiago Silva,
+mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em sourcecraft.info</A>
+jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">tsilva em jabber.org</A>
+<A HREF="http://sourcecraft.info/blog">http://sourcecraft.info/blog</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000363.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000376.html">[gpt-usuarios] Algumas dúvidas sobre a gramática
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>

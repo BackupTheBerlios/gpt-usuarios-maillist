@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [gpt-usuarios] Gramática v2.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/gpt-usuarios/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C76152eba0710151001s645f87ecx1880834d515e537c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000325.html">
+   <LINK REL="Next"  HREF="000344.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[gpt-usuarios] Gramática v2.0</H1>
+    <B>Adorilson Bezerra de Araujo</B> 
+    <A HREF="mailto:gpt-usuarios%40lists.berlios.de?Subject=Re%3A%20%5Bgpt-usuarios%5D%20%3D%3Fiso-8859-1%3Fq%3FGram%3DE1tica_v2%3D2E0%3F%3D&In-Reply-To=%3C76152eba0710151001s645f87ecx1880834d515e537c%40mail.gmail.com%3E"
+       TITLE="[gpt-usuarios] Gramática v2.0">adorilson em gmail.com
+       </A><BR>
+    <I>Segunda Outubro 15 19:01:50 CEST 2007</I>
+    <P><UL>
+        <LI>Mensagem anterior: <A HREF="000325.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+        <LI>Próxima mensagem: <A HREF="000344.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Como estou chegando muito atrasado, irei fazer todas as considerações em um
+unico email, lendo os emails de Thiago e Alex na sequencia de recebimento e
+a gramatica proposta no wiki.
+
+1) Matrizes e vetores.
+Nao concordo com tanto faz usar um ou outro. Chamar tudo de matriz não vejo
+problema, mas chamar tudo de vetor eh estranho. Deve continuar como está no
+v1.0. Ou, quem sabe, fazer uma distinção clara entre vetor e matriz.
+
+variaveis
+  v: vetor[10] de inteiro; // ok
+  m: matriz[4][4] de inteiro;  // ok
+  v1: vetor[2][3] de inteiro;  // erro de compilacao
+  m1: matriz[2] de inteiro; / /erro de compilacao
+fim-variáveis
+
+O que acham?
+
+2) Procedimentos e funcoes.
+Concordo com Alex.
+
+3) Repita.
+Alienigina ficaram essas propostas do Alex :p
+
+repita enquanto x &lt;= 10
+...
+fim-repita
+
+  repita até x &gt; 10
+...
+fim-repita
+
+
+repita
+    &lt;comandos&gt;
+fim-repita quando &lt;condição&gt;
+
+
+Como ele mesmo disse, isso pode confundir e a ideia do repita é ter o
+controle ao final do bloco.
+Não vejo  problema alguma, e nem pq discutir, a ausencia de um &quot;fim-repita&quot;.
+O &quot;até&quot; ou &quot;enquanto&quot; no fim do bloco faz este papel.
+A discussao que caberia era se o laço deveria ser interrompido qd &lt;condicao&gt;
+fosse verdadeira &quot;Repita..até&lt;condicao&gt;&quot; , como em Pascal, ou falsa, como em
+Java e C, &quot;Repita...enquanto&lt;condicao&gt;&quot;
+
+Fico com a primeira opção pois tratamos ela assim no início das discussoes e
+a literatura (MANZANO) tb trata assim. Apesar de ter vista agora na
+gramatica que foi definida com o &quot;enquanto&quot; :/
+Ou poderiamos até implementar as duas opções. Seria um recurso didático bem
+legal. :D O que acham?
+
+4) Tamanho dinamico de tipos.
+Gostei da possibilidate de uma variavel inteira ter &quot;99 ou
+983758604983758604983758604983758604983758604983758604&quot;. Esse negocio de ter
+byte, short, int, long... Mais atrapalha do q ajuda. Para os humanos, tanto
+faz 99 ou 983758604983758604983758604983758604983758604983758604, é tudo
+inteiro. Uma coisa  q me veia na cabeça agora, é a possibilidade de
+reproduzirmos os conjuntos numericos. Numeros naturais, inteiros, reais...
+Viagem demais?
+
+5) Caso...Escolha
+Nao gosto da obrigação do &quot;break/sair&quot;, isso atrapalha muito, para o caso do
+&quot;Caso&quot;, mas é valido ter esse recurso para sair de um bloco qq.
+O que mais me agrada é:
+
+caso &lt;variavel&gt; seja
+   1:
+       &lt;comandos&gt;
+   fim-opção
+   2:
+       &lt;comandos&gt;
+
+
+   fim-opção
+   senão
+       &lt;comandos&gt;
+   fim-opção
+fim-caso
+
+
+Tenho uma certa tendencia a sugerir  a troca dos &quot;:&quot; por &quot;faça&quot;, mas seria
+escrever demais. Tá ótimo desse jeito.
+
+Outro questao é: quais os tipos permitivos para &lt;variavel&gt; ?
+
+6) Literais.
+Para concatenacação, concordo com o Alex, sobre usar o bom e velho &quot;+&quot;.
+Acho q devemos permitir o acesso aos caracteres de um literal, sim. E nas
+duas versões. Alias, sempre q possível, e viavel, o q for feito em uma,
+fazer na outra tb.
+
+
+7) Estruturas.
+OK, qt a declaracao e inicializacao.
+
+
+Acho q eh só. Desculpem-me o atraso.
+
+-- 
+Adorilson Bezerra
+Organização do III EPSL: &quot;Além das Redes de Colaboração&quot;
+07 a 10 de novembro de 2007 - CEFET-RN (Unidade Sede)
+<A HREF="http://rn.softwarelivre.org">http://rn.softwarelivre.org</A>
+-------------- Próxima Parte ----------
+Um anexo em HTML foi limpo...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071015/8d508c4d/attachment.html">https://lists.berlios.de/pipermail/gpt-usuarios/attachments/20071015/8d508c4d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Mensagem anterior: <A HREF="000325.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+	<LI>Próxima mensagem: <A HREF="000344.html">[gpt-usuarios] Gramática v2.0
+</A></li>
+         <LI> <B>Mensagens classificadas por:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/gpt-usuarios">Mais detalhes sobre a lista de discuss&atilde;o Gpt-usuarios
+</a><br>
+</body></html>
